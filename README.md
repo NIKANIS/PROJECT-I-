@@ -1,6 +1,10 @@
+<<<<<<< HEAD
 # Project Name Bernat
+=======
+# Project Name Nikos
+>>>>>>> f299ed74274c10f463699d86e42c3affa0e929d8
 
-TODO: Write a program description
+AAAAAAAAAAAAAAAAAH
 
 ## Installation
 
