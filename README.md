@@ -1,4 +1,8 @@
-david kalbo lel
+<<<<<<< HEAD
+david kalbo 
+=======
+david kalbo x2 x8
+>>>>>>> 1d2cdf6c9138188da9939d53359985371113149c
 
 <<<<<<< HEAD
 # Projeclelellelet Name
