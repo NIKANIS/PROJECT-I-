@@ -1,7 +1,13 @@
+<<<<<<< HEAD deeeeeeeefvgdafgf
 <<<<<<< HEAD
 david kalbo 
 =======
-david kalbo x2 x8
+david kalbo x2 
+=======
+# david kalbo
+=======
+david kalbo x2
+>>>>>>> 8c61f16e00bf75dace4d7a4b2580ffa80cdcd9f4
 >>>>>>> 1d2cdf6c9138188da9939d53359985371113149c
 
 <<<<<<< HEAD
