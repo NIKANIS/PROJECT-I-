@@ -1,10 +1,14 @@
 david kalbo x2
 
 <<<<<<< HEAD
+# Projeclelellelet Name
+=======
+<<<<<<< HEAD
 # Project Name Bernat
 =======
 # Project Name Nikos
 >>>>>>> f299ed74274c10f463699d86e42c3affa0e929d8
+>>>>>>> f7ca678f6ccc211fb3f7803b7cad719ef1b4e906
 
 AAAAAAAAAAAAAAAAAH
 
