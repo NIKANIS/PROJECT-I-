@@ -1,4 +1,4 @@
-# Project Name
+# Project Name Bernat
 
 TODO: Write a program description
 
