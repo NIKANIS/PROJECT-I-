@@ -4,7 +4,7 @@ Test
 
 ## Installation
 
-TODO: DEscribe the installation process
+TODO: Describe the installation process
 
 ## Usage
 
