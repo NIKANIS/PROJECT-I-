@@ -9,5 +9,6 @@ David Goméz, Nikos Rodriguez, Bernat Moreno and David Rami
 
 ## Contact:
 nikosrb213@gmail.com
+ramidavidR2@gmail.com
 
 ## Updates
