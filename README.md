@@ -1,4 +1,4 @@
-# PROJECT-I-
+# PROJECT-I
 
 ## RandomCali Studio
 Fatal Fury Project
