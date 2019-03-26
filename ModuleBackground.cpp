@@ -34,7 +34,8 @@ ModuleBackground::ModuleBackground()
 	girl.PushBack({ 624, 144, 34, 63 });
 	girl.PushBack({ 624, 80, 34, 63 });
 	girl.PushBack({ 624, 16, 34, 63 });
-	girl.speed = 0.08f;
+	girl.PushBack({ 624, 80, 34, 63 });
+	girl.speed = 0.06f;
 }
 
 ModuleBackground::~ModuleBackground()
