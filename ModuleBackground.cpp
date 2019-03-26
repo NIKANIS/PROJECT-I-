@@ -53,23 +53,23 @@ update_status ModuleBackground::Update()
 	// TODO 2: Draw the ship from the sprite sheet with some parallax effect
 	App->render->Blit(graphics, 0, shipH, &ship, 0.75F); // ship
 	// TODO 3: Animate the girl on the ship (see the sprite sheet)
-	int moveShip = 1;
-	if (moveShip == 1)
+
+	if (moveShip = true)
 	{
 		shipH++;
 	}
-	if (shipH == 20)
+	if (moveShip = false)
 	{
-		moveShip = 0;
-	}
-	if (moveShip == 0)
-	{
-		if (shipH == 0)
-		{
-			moveShip == 1;
-		}
 		shipH--;
 
+	}
+	if (shipH == 20)
+	{
+		moveShip = false;
+	}
+	if (shipH == 0)
+	{
+		moveShip = true;
 	}
 
 
