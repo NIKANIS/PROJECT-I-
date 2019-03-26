@@ -29,6 +29,12 @@ ModuleBackground::ModuleBackground()
 	flag.PushBack({848, 256, 40, 40});
 	flag.PushBack({848, 304, 40, 40});
 	flag.speed = 0.08f;
+
+	// girl animation
+	girl.PushBack({ 624, 144, 34, 63 });
+	girl.PushBack({ 624, 80, 34, 63 });
+	girl.PushBack({ 624, 16, 34, 63 });
+	girl.speed = 0.08f;
 }
 
 ModuleBackground::~ModuleBackground()
@@ -52,25 +58,25 @@ update_status ModuleBackground::Update()
 
 	// TODO 2: Draw the ship from the sprite sheet with some parallax effect
 	App->render->Blit(graphics, 0, shipH, &ship, 0.75F); // ship
+	//if (shipH = 0)
+	//{
+	//	moveShip = true;
+	//}
+	//if (moveShip = true)
+	//{
+	//	shipH++;
+	//}
+	//if (moveShip = false)
+	//{
+	//	shipH--;
+	//}
+	//if (shipH = 8)
+	//{
+	//	moveShip = false;
+	//}
 	// TODO 3: Animate the girl on the ship (see the sprite sheet)
 
-	if (moveShip = true)
-	{
-		shipH++;
-	}
-	if (moveShip = false)
-	{
-		shipH--;
-
-	}
-	if (shipH == 20)
-	{
-		moveShip = false;
-	}
-	if (shipH == 0)
-	{
-		moveShip = true;
-	}
+	App->render->Blit(graphics, 180, 103, &(girl.GetCurrentFrame()), 0.75f); // flag animation
 
 
 	App->render->Blit(graphics, 0, 170, &ground);

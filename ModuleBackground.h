@@ -23,8 +23,9 @@ public:
 	SDL_Rect background;
 	SDL_Rect ship;
 	int shipH = 0;
-	bool moveShip = true;
+	bool moveShip = NULL;
 	Animation flag;
+	Animation girl;
 
 };
 
