@@ -5,6 +5,7 @@
 #include "ModuleRender.h"
 #include "SDL/include/SDL_render.h"
 #include "SDL/include/SDL_timer.h"
+#include "Module.h"
 
 ModuleFadeToBlack::ModuleFadeToBlack()
 {
@@ -37,8 +38,9 @@ update_status ModuleFadeToBlack::Update()
 		{
 			if(now >= total_time)
 			{
-				// TODO 3: enable / disable the modules received when FadeToBlacks() gets called
-				
+				// TODO 2: enable / disable the modules received when FadeToBlacks() gets called
+				module_off->Disable();
+				module_on->Enable();
 				// ---
 				total_time += total_time;
 				start_time = SDL_GetTicks();
