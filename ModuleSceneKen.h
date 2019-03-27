@@ -1,5 +1,5 @@
-#ifndef __ModuleBackground_H__
-#define __ModuleBackground_H__
+#ifndef __MODULESCENEKEN_H__
+#define __MODULESCENEKEN_H__
 
 #include "Module.h"
 #include "Animation.h"
@@ -7,27 +7,28 @@
 
 struct SDL_Texture;
 
-class ModuleBackground : public Module
+class ModuleSceneKen : public Module
 {
 public:
-	ModuleBackground();
-	~ModuleBackground();
+	ModuleSceneKen();
+	~ModuleSceneKen();
 
 	bool Start();
 	update_status Update();
+	bool CleanUp();
 
 public:
 	
 	SDL_Texture* graphics = nullptr;
 	SDL_Rect ground;
+	SDL_Rect foreground;
 	SDL_Rect background;
-	SDL_Rect ship;
-	int shipH = 0;
-	bool moveShip = NULL;
-
 	Animation flag;
 	Animation girl;
+	Animation hijoputa;
 
+	float foreground_pos;
+	bool forward;
 };
 
-#endif
+#endif // __MODULESCENEKEN_H__

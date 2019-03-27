@@ -59,7 +59,7 @@ update_status ModuleBackground::Update()
 
 	// TODO 2: Draw the ship from the sprite sheet with some parallax effect
 	App->render->Blit(graphics, 0, shipH, &ship, 0.75F); // ship
-	//if (shipH = 0)
+	//if (shipH = -1)
 	//{
 	//	moveShip = true;
 	//}
@@ -77,7 +77,7 @@ update_status ModuleBackground::Update()
 	//}
 	// TODO 3: Animate the girl on the ship (see the sprite sheet)
 
-	App->render->Blit(graphics, 180, 103, &(girl.GetCurrentFrame()), 0.75f); // flag animation
+	App->render->Blit(graphics, 180, 103, &(girl.GetCurrentFrame()), 0.75f); // girl animation
 
 
 	App->render->Blit(graphics, 0, 170, &ground);

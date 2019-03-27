@@ -28,8 +28,6 @@ ModulePlayer::ModulePlayer()
 	forward.PushBack({352, 128, 54, 91});
 	forward.PushBack({432, 131, 50, 89});
 	forward.speed = 0.1f;
-
-	// TODO 4: Make ryu walk backwards with the correct animations
 }
 
 ModulePlayer::~ModulePlayer()
