@@ -94,7 +94,7 @@ update_status ModuleSceneKen::Update()
 
 	App->render->Blit(graphics, 0, (int)foreground_pos, &foreground, 0.92f);
 	App->render->Blit(graphics, 192, 104 + (int)foreground_pos, &(girl.GetCurrentFrame()), 0.92f); // girl animation
-	App->render->Blit(graphics, 288, 96+ (int)foreground_pos, &(hijoputa.GetCurrentFrame()), 0.75f); //hijoputa animation
+	App->render->Blit(graphics, 288, 96+ (int)foreground_pos, &(hijoputa.GetCurrentFrame()), 0.92f); //hijoputa animation
 	
 	App->render->Blit(graphics, 0, 170, &ground);
 
