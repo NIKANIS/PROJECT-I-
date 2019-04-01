@@ -1,0 +1,7 @@
+#include "Globals.h"
+#include "Application.h"
+#include "ModuleRender.h"
+#include "ModuleWindow.h"
+#include "ModuleInput.h"
+#include "ModuleAudio.h"
+#include "SDL/include/SDL.h"
