@@ -28,6 +28,37 @@ ModulePlayer::ModulePlayer()
 	forward.PushBack({352, 128, 54, 91});
 	forward.PushBack({432, 131, 50, 89});
 	forward.speed = 0.1f;
+
+	// walk backward animation (arcade sprite sheet)
+//forward.frames.PushBack({9, 136, 53, 83});
+	backward.PushBack({ 78, 131, 60, 88 });
+	backward.PushBack({ 162, 128, 64, 92 });
+	backward.PushBack({ 259, 128, 63, 90 });
+	backward.PushBack({ 352, 128, 54, 91 });
+	backward.PushBack({ 432, 131, 50, 89 });
+	backward.speed = 0.1f;
+
+	//punch
+	punch.PushBack({ 16, 270, 80, 95 });
+	punch.PushBack({ 110, 265, 94, 95});
+	punch.speed = 0.1f;
+
+	//kick
+	kick.PushBack({ 600, 265, 70, 96 });
+	kick.PushBack({ 690, 265, 75, 95 });
+	kick.PushBack({ 770, 265, 125, 95 });
+	kick.speed = 0.1f;
+
+	//jump
+	jump.PushBack({ 16, 846, 58, 88 });
+	jump.PushBack({ 99, 822, 58, 108 });
+	jump.PushBack({ 173, 804, 54, 90 });
+	jump.PushBack({ 250, 797, 56, 79 });
+	jump.PushBack({ 326, 812, 51, 91 });
+	jump.PushBack({ 395, 809, 50, 90 });
+	jump.PushBack({ 462, 818, 58, 109 });
+	jump.PushBack({ 16, 846, 58, 88 });
+	jump.speed = 0.1f;
 }
 
 ModulePlayer::~ModulePlayer()
@@ -53,6 +84,27 @@ update_status ModulePlayer::Update()
 	{
 		current_animation = &forward;
 		position.x += speed;
+	}
+
+	if (App->input->keyboard[SDL_SCANCODE_A] == 1)
+	{
+		current_animation = &backward;
+		position.x -= speed;
+	}
+
+	if (App->input->keyboard[SDL_SCANCODE_Q] == 1)
+	{
+		current_animation = &punch;
+	}
+
+	if (App->input->keyboard[SDL_SCANCODE_E] == 1)
+	{
+		current_animation = &kick;
+	}
+
+	if (App->input->keyboard[SDL_SCANCODE_W] == 1)
+	{
+		current_animation = &jump;
 	}
 
 	// Draw everything --------------------------------------

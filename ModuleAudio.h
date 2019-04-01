@@ -2,7 +2,7 @@
 #define __ModuleAudio_H__
 
 #include "Module.h"
-#include "SDL\include\SDL_rect.h"
+#include "Globals.h"
 
 class ModuleAudio : public Module
 {
@@ -11,11 +11,11 @@ public:
 	ModuleAudio();
 
 	// Destructor
-	virtual ~ModuleAudio();
+	~ModuleAudio();
 
-	// Called before quitting
+	// Called before starting
 	bool Init();
-
+	update_status Update();
 	// Called before quitting
 	bool CleanUp();
 
