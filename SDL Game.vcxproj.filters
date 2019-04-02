@@ -53,10 +53,10 @@
     <ClInclude Include="ModuleSceneHonda.h">
       <Filter>Modules</Filter>
     </ClInclude>
-    <ClInclude Include="ModuleSceneKen.h">
+    <ClInclude Include="ModuleAudio.h">
       <Filter>Modules</Filter>
     </ClInclude>
-    <ClInclude Include="ModuleAudio.h">
+    <ClInclude Include="ModuleSceneTerry.h">
       <Filter>Modules</Filter>
     </ClInclude>
   </ItemGroup>
@@ -91,10 +91,10 @@
     <ClCompile Include="ModuleSceneHonda.cpp">
       <Filter>Modules</Filter>
     </ClCompile>
-    <ClCompile Include="ModuleSceneKen.cpp">
+    <ClCompile Include="ModuleAudio.cpp">
       <Filter>Modules</Filter>
     </ClCompile>
-    <ClCompile Include="ModuleAudio.cpp">
+    <ClCompile Include="ModuleSceneTerry.cpp">
       <Filter>Modules</Filter>
     </ClCompile>
   </ItemGroup>

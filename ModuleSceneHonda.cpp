@@ -1,7 +1,7 @@
 #include "Globals.h"
 #include "Application.h"
 #include "ModuleSceneHonda.h"
-#include "ModuleSceneKen.h"
+#include "ModuleSceneTerry.h"
 #include "ModuleTextures.h"
 #include "ModuleRender.h"
 #include "ModulePlayer.h"
@@ -71,7 +71,7 @@ update_status ModuleSceneHonda::Update()
 	// TODO 3: make so pressing SPACE the KEN stage is loaded
 	if (App->input->keyboard[SDL_SCANCODE_SPACE])
 	{
-		App->fade->FadeToBlack(App->scene_honda, App->scene_ken);
+		App->fade->FadeToBlack(App->scene_honda, App->scene_terry);
 	}
 
 	return UPDATE_CONTINUE;

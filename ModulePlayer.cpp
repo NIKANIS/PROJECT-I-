@@ -13,41 +13,41 @@ ModulePlayer::ModulePlayer()
 	position.y = 220;
 
 	// idle animation (arcade sprite sheet)
-	idle.PushBack({7, 14, 60, 90});
-	idle.PushBack({95, 15, 60, 89});
-	idle.PushBack({184, 14, 60, 90});
-	idle.PushBack({276, 11, 60, 93});
-	idle.PushBack({366, 12, 60, 92});
-	idle.speed = 0.2f;
+	idle.PushBack({27, 914, 60, 105});
+	idle.PushBack({95, 916, 61, 104});
+	idle.PushBack({164, 916, 60, 103});
+	idle.speed = 0.1f;
 
-	// walk forward animation (arcade sprite sheet)
-	//forward.frames.PushBack({9, 136, 53, 83});
-	forward.PushBack({78, 131, 60, 88});
-	forward.PushBack({162, 128, 64, 92});
-	forward.PushBack({259, 128, 63, 90});
-	forward.PushBack({352, 128, 54, 91});
-	forward.PushBack({432, 131, 50, 89});
-	forward.speed = 0.1f;
+	//// walk forward animation (arcade sprite sheet)
+	////forward.frames.PushBack({9, 136, 53, 83});
+	//forward.PushBack({78, 131, 60, 88});
+	//forward.PushBack({162, 128, 64, 92});
+	//forward.PushBack({259, 128, 63, 90});
+	//forward.PushBack({352, 128, 54, 91});
+	//forward.PushBack({432, 131, 50, 89});
+	//forward.speed = 0.1f;
 
-	// walk backward animation (arcade sprite sheet)
-//forward.frames.PushBack({9, 136, 53, 83});
-	backward.PushBack({ 78, 131, 60, 88 });
-	backward.PushBack({ 162, 128, 64, 92 });
-	backward.PushBack({ 259, 128, 63, 90 });
-	backward.PushBack({ 352, 128, 54, 91 });
-	backward.PushBack({ 432, 131, 50, 89 });
-	backward.speed = 0.1f;
+	//// walk backward animation (arcade sprite sheet)
+ //   //forward.frames.PushBack({9, 136, 53, 83});
+	//backward.PushBack({ 78, 131, 60, 88 });
+	//backward.PushBack({ 162, 128, 64, 92 });
+	//backward.PushBack({ 259, 128, 63, 90 });
+	//backward.PushBack({ 352, 128, 54, 91 });
+	//backward.PushBack({ 432, 131, 50, 89 });
+	//backward.speed = 0.1f;
 
 	//punch
-	punch.PushBack({ 16, 270, 80, 95 });
-	punch.PushBack({ 110, 265, 94, 95});
+	punch.PushBack({ 434, 918, 73, 101 });
+	punch.PushBack({ 506, 918, 64, 102});
+	punch.PushBack({ 574, 916, 97, 104 }); 
+	punch.PushBack({ 434, 918, 73, 101 });
 	punch.speed = 0.1f;
 
 	//kick
-	kick.PushBack({ 600, 265, 70, 96 });
-	kick.PushBack({ 690, 265, 75, 95 });
-	kick.PushBack({ 770, 265, 125, 95 });
-	kick.speed = 0.1f;
+	kick.PushBack({ 448, 805, 61, 105 });
+	kick.PushBack({ 512, 802, 49, 108 });
+	kick.PushBack({ 565, 812, 81, 99 });
+	kick.speed = 0.08f;
 
 	//jump
 	jump.PushBack({ 16, 846, 58, 88 });
@@ -69,7 +69,7 @@ bool ModulePlayer::Start()
 {
 	LOG("Loading player textures");
 	bool ret = true;
-	graphics = App->textures->Load("ryu.png"); // arcade version
+	graphics = App->textures->Load("SPRITES FATAL FURY/CHARACTERS/1-Terry Bogard/spritesTerryBogard.png"); // arcade version
 	return ret;
 }
 
