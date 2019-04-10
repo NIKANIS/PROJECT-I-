@@ -50,16 +50,16 @@ ModulePlayer::ModulePlayer()
 	kick.PushBack({ 565, 812, 81, 99 });
 	kick.speed = 0.08f;
 
-	//jump
-	jump.PushBack({ 16, 846, 58, 88 });
-	jump.PushBack({ 99, 822, 58, 108 });
-	jump.PushBack({ 173, 804, 54, 90 });
-	jump.PushBack({ 250, 797, 56, 79 });
-	jump.PushBack({ 326, 812, 51, 91 });
-	jump.PushBack({ 395, 809, 50, 90 });
-	jump.PushBack({ 462, 818, 58, 109 });
-	jump.PushBack({ 16, 846, 58, 88 });
-	jump.speed = 0.1f;
+//	//jump
+//	jump.PushBack({ 16, 846, 58, 88 });
+//	jump.PushBack({ 99, 822, 58, 108 });
+//	jump.PushBack({ 173, 804, 54, 90 });
+//	jump.PushBack({ 250, 797, 56, 79 });
+//	jump.PushBack({ 326, 812, 51, 91 });
+//	jump.PushBack({ 395, 809, 50, 90 });
+//	jump.PushBack({ 462, 818, 58, 109 });
+//	jump.PushBack({ 16, 846, 58, 88 });
+//	jump.speed = 0.1f;
 }
 
 ModulePlayer::~ModulePlayer()
@@ -110,9 +110,9 @@ update_status ModulePlayer::Update()
 
 	if (App->input->keyboard[SDL_SCANCODE_X] == 1)
 	{
-		//App->particles->skill.life = 1000;
-		//App->particles->skill.speed.x = 1;
-		App->particles->AddParticle(App->particles->skill, position.x- 20, position.y);
+		App->particles->skill.life = 1000;
+		App->particles->skill.speed.x = 1;
+		App->particles->AddParticle(App->particles->skill, position.x+50, position.y-75);
 	}
 	// Draw everything --------------------------------------
 	SDL_Rect r = current_animation->GetCurrentFrame();

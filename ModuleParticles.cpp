@@ -22,10 +22,10 @@ bool ModuleParticles::Start()
 	LOG("Loading particles");
 	graphics = App->textures->Load("SPRITES FATAL FURY/CHARACTERS/1-Terry Bogard/spritesTerryBogard.png");
 
-	// TODO 2: Create the template for a new particle "laser"
-	skill.anim.PushBack({ 577, 247, 180, 420 });
-	skill.anim.PushBack({ 611, 274, 180, 690 });
-	skill.anim.PushBack({ 645, 219, 180, 970 });
+	// TODO 2: Create the template for a new particle
+	skill.anim.PushBack({ 611, 274, 18, 42 });
+	skill.anim.PushBack({ 577, 247, 18, 69 });
+	skill.anim.PushBack({ 645, 219, 18, 97 });
 	skill.anim.loop = false;
 	skill.anim.speed = 0.1f;
 
@@ -86,7 +86,7 @@ void ModuleParticles::AddParticle(const Particle& particle, int x, int y, Uint32
 	p->position.x = x;
 	p->position.y = y;
 
-	active[last_particle++] = p;
+	active[last_particle++] = p++;
 }
 
 // -------------------------------------------------------------
