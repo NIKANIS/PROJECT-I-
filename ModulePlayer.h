@@ -16,8 +16,9 @@ public:
 
 	bool Start();
 	update_status Update();
+	int Health();
 
-public:
+private:
 
 	SDL_Texture* graphics = nullptr;
 	Animation idle;
@@ -27,6 +28,7 @@ public:
 	Animation kick;
 	Animation jump;
 	iPoint position;
+	int health;
 
 };
 

@@ -8,8 +8,15 @@
 
 // Reference at https://www.youtube.com/watch?v=OEhmUuehGOA
 
+int ModulePlayer::Health() 
+{
+	return health;
+}
+
 ModulePlayer::ModulePlayer()
 {
+	health = 100;
+
 	position.x = 100;
 	position.y = 220;
 
@@ -79,7 +86,15 @@ update_status ModulePlayer::Update()
 {
 	Animation* current_animation = &idle;
 
+	if (health < 0)
+		health = 0;
+
 	int speed = 1;
+
+	if (App->input->keyboard[SDL_SCANCODE_L] == 1)
+	{
+		health =- 10;
+	}
 
 	if(App->input->keyboard[SDL_SCANCODE_D] == 1)
 	{
