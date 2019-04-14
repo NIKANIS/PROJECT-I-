@@ -40,6 +40,7 @@ bool Application::Init()
 	player->Disable();
 	// Disable the map that you do not start with
 	scene_honda->Disable();
+	lifebar->Disable();
 
 	for(int i = 0; i < NUM_MODULES && ret == true; ++i)
 		ret = modules[i]->Init();

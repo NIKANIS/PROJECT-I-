@@ -5,6 +5,7 @@
 #include "ModuleRender.h"
 #include "ModulePlayer.h"
 #include "ModuleParticles.h"
+#include "ModuleLifeBar.h"
 
 // Reference at https://www.youtube.com/watch?v=OEhmUuehGOA
 
@@ -76,9 +77,17 @@ ModulePlayer::~ModulePlayer()
 bool ModulePlayer::Start()
 {
 	LOG("Loading player textures");
+	App->lifebar->Enable();
 	bool ret = true;
 	graphics = App->textures->Load("SPRITES FATAL FURY/CHARACTERS/1-Terry Bogard/spritesTerryBogard.png"); // arcade version
 	return ret;
+}
+
+bool ModulePlayer::CleanUp()
+{
+	App->lifebar->Disable();
+
+	return true;
 }
 
 // Update: draw background
@@ -93,7 +102,7 @@ update_status ModulePlayer::Update()
 
 	if (App->input->keyboard[SDL_SCANCODE_L] == 1)
 	{
-		health =- 10;
+		health -= 10;
 	}
 
 	if(App->input->keyboard[SDL_SCANCODE_D] == 1)

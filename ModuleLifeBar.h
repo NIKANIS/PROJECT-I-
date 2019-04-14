@@ -21,6 +21,7 @@ private:
 
 	SDL_Texture* graphics = nullptr;
 	SDL_Rect P1photo;
+	SDL_Rect health;
 	Animation healthy;
 	Animation lowhealth;
 	iPoint position;
