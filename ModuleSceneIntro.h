@@ -7,11 +7,11 @@
 
 struct SDL_Texture;
 
-class ModuleSceneHonda : public Module
+class ModuleSceneIntro : public Module
 {
 public:
-	ModuleSceneHonda();
-	~ModuleSceneHonda();
+	ModuleSceneIntro();
+	~ModuleSceneIntro();
 
 	bool Start();
 	update_status Update();
@@ -20,9 +20,6 @@ public:
 public:
 
 	SDL_Texture* graphics = nullptr;
-	SDL_Rect ground;
-	SDL_Rect roof;
-	SDL_Rect foreground;
 	SDL_Rect background;
 	Animation water;
 };

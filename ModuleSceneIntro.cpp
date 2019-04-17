@@ -1,0 +1,56 @@
+#include "Globals.h"
+#include "Application.h"
+#include "ModuleSceneIntro.h"
+#include "ModuleScenePaoPao.h"
+#include "ModuleTextures.h"
+#include "ModuleRender.h"
+#include "ModulePlayer.h"
+#include "ModuleInput.h"
+#include "ModuleFadeToBlack.h"
+
+// Reference at https://youtu.be/6OlenbCC4WI?t=382
+
+ModuleSceneIntro::ModuleSceneIntro()
+{
+
+	background = {0, 0, 304, 224};
+
+}
+
+ModuleSceneIntro::~ModuleSceneIntro()
+{}
+
+// Load assets
+bool ModuleSceneIntro::Start()
+{
+	LOG("Loading background assets");
+	bool ret = true;
+	graphics = App->textures->Load("SPRITES FATAL FURY/UI/3.Start_Screen_FF/fatfury1011.png");
+
+	return ret;
+}
+
+// Load assets
+bool ModuleSceneIntro::CleanUp()
+{
+	// TODO 5: Remove all memory leaks
+	LOG("Unloading honda stage");
+	App->player->Disable();
+
+	return true;
+}
+
+// Update: draw background
+update_status ModuleSceneIntro::Update()
+{
+	// Draw everything --------------------------------------	
+
+	App->render->Blit(graphics, 0, 0, &background, 0.0f);
+
+	if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN)
+	{
+		App->fade->FadeToBlack(App->scene_intro, App->scene_paopao);
+	}
+
+	return UPDATE_CONTINUE;
+}

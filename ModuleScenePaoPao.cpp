@@ -1,7 +1,7 @@
 #include "Globals.h"
 #include "Application.h"
-#include "ModuleSceneHonda.h"
-#include "ModuleSceneTerry.h"
+#include "ModuleSceneIntro.h"
+#include "ModuleScenePaoPao.h"
 #include "ModuleTextures.h"
 #include "ModuleRender.h"
 #include "ModulePlayer.h"
@@ -10,7 +10,7 @@
 
 // Reference at https://www.youtube.com/watch?v=OEhmUuehGOA
 
-ModuleSceneTerry::ModuleSceneTerry()
+ModuleScenePaoPao::ModuleScenePaoPao()
 {
 	// ground
 	ground.x = 0;
@@ -19,11 +19,11 @@ ModuleSceneTerry::ModuleSceneTerry()
 	ground.h = 224;
 }
 
-ModuleSceneTerry::~ModuleSceneTerry()
+ModuleScenePaoPao::~ModuleScenePaoPao()
 {}
 
 // Load assets
-bool ModuleSceneTerry::Start()
+bool ModuleScenePaoPao::Start()
 {
 	LOG("Loading ken scene");
 	
@@ -36,7 +36,7 @@ bool ModuleSceneTerry::Start()
 }
 
 // UnLoad assets
-bool ModuleSceneTerry::CleanUp()
+bool ModuleScenePaoPao::CleanUp()
 {
 	LOG("Unloading ken scene");
 	App->player->Disable();
@@ -45,7 +45,7 @@ bool ModuleSceneTerry::CleanUp()
 }
 
 // Update: draw background
-update_status ModuleSceneTerry::Update()
+update_status ModuleScenePaoPao::Update()
 {
 
 	// Draw everything --------------------------------------
@@ -53,7 +53,7 @@ update_status ModuleSceneTerry::Update()
 	// TODO 3: make so pressing O the HONDA stage is loaded
 	if (App->input->keyboard[SDL_SCANCODE_O] == KEY_STATE::KEY_DOWN)
 	{
-		App->fade->FadeToBlack(App->scene_terry, App->scene_honda);
+		App->fade->FadeToBlack(App->scene_paopao, App->scene_intro);
 	}
 
 	return UPDATE_CONTINUE;

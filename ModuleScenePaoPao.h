@@ -7,11 +7,11 @@
 
 struct SDL_Texture;
 
-class ModuleSceneTerry : public Module
+class ModuleScenePaoPao : public Module
 {
 public:
-	ModuleSceneTerry();
-	~ModuleSceneTerry();
+	ModuleScenePaoPao();
+	~ModuleScenePaoPao();
 
 	bool Start();
 	update_status Update();
