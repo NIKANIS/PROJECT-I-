@@ -9,6 +9,27 @@
 
 // Reference at https://www.youtube.com/watch?v=OEhmUuehGOA
 
+void ModulePlayer::Jump() {
+	if (jumping) {
+		t++;
+		position.y = 220 - 7 * t + 0.12*(t*t);
+		vy = -7 + 0.24*t;
+		if (position.y >= 220) {
+			jumping = false;
+			position.y = 220;
+		}
+		if (vy > 0) {
+			if (current_animation != &jumpidown)
+			{
+				jumpidown.Reset();
+				current_animation = &jumpidown;
+			}
+		}
+
+	}
+}
+
+
 int ModulePlayer::Health() 
 {
 	return health;
@@ -21,53 +42,53 @@ ModulePlayer::ModulePlayer()
 	position.x = 100;
 	position.y = 220;
 
-	// idle animation (arcade sprite sheet)
-	idle.PushBack({27, 914, 60, 105});
-	idle.PushBack({95, 916, 61, 104});
-	idle.PushBack({164, 916, 60, 103});
-	idle.speed = 0.1f;
+	// idle animation
+	idle.PushBack({ 0, 19, 48, 90 });
+	idle.PushBack({ 49, 18, 49, 91 });
+	idle.PushBack({ 98, 17, 48, 92 });
+	idle.PushBack({ 49, 18, 49, 91 });
+	idle.loop = true;
+	idle.speed = 0.13f;
 
-	//// walk forward animation (arcade sprite sheet)
-	////forward.frames.PushBack({9, 136, 53, 83});
-	//forward.PushBack({78, 131, 60, 88});
-	//forward.PushBack({162, 128, 64, 92});
-	//forward.PushBack({259, 128, 63, 90});
-	//forward.PushBack({352, 128, 54, 91});
-	//forward.PushBack({432, 131, 50, 89});
-	//forward.speed = 0.1f;
+	// jump idle up
+	jumpiup.PushBack({ 146, 0, 43, 109 });
 
-	//// walk backward animation (arcade sprite sheet)
- //   //forward.frames.PushBack({9, 136, 53, 83});
-	//backward.PushBack({ 78, 131, 60, 88 });
-	//backward.PushBack({ 162, 128, 64, 92 });
-	//backward.PushBack({ 259, 128, 63, 90 });
-	//backward.PushBack({ 352, 128, 54, 91 });
-	//backward.PushBack({ 432, 131, 50, 89 });
-	//backward.speed = 0.1f;
+	// jump idle down
+	jumpidown.PushBack({ 189,27,48,82 });
 
-	//punch
-	punch.PushBack({ 434, 918, 73, 101 });
-	punch.PushBack({ 506, 918, 64, 102});
-	punch.PushBack({ 574, 916, 97, 104 }); 
-	punch.PushBack({ 434, 918, 73, 101 });
-	punch.speed = 0.1f;
+	//jump while moving
+	jump.PushBack({ 309,18,47,91 });
 
-	//kick
-	kick.PushBack({ 448, 805, 61, 105 });
-	kick.PushBack({ 512, 802, 49, 108 });
-	kick.PushBack({ 565, 812, 81, 99 });
-	kick.speed = 0.08f;
+	//go forward
+	forward.PushBack({ 356,15,57,94 });
+	forward.PushBack({ 413,16,49,93 });
+	forward.PushBack({ 462,19,50,90 });
+	forward.PushBack({ 512,19,48,90 });
+	forward.speed = 0.13f;
+	forward.loop = true;
 
-//	//jump
-//	jump.PushBack({ 16, 846, 58, 88 });
-//	jump.PushBack({ 99, 822, 58, 108 });
-//	jump.PushBack({ 173, 804, 54, 90 });
-//	jump.PushBack({ 250, 797, 56, 79 });
-//	jump.PushBack({ 326, 812, 51, 91 });
-//	jump.PushBack({ 395, 809, 50, 90 });
-//	jump.PushBack({ 462, 818, 58, 109 });
-//	jump.PushBack({ 16, 846, 58, 88 });
-//	jump.speed = 0.1f;
+	//go backwards
+	backward.PushBack({ 560,18,51,91 });
+	backward.PushBack({ 611,16,47,93 });
+	backward.PushBack({ 658,15,47,94 });
+	backward.PushBack({ 705,16,45,93 });
+	backward.speed = 0.13f;
+	backward.loop = true;
+
+	// crowch
+	crowch.PushBack({ 750,16,44,92 });
+
+	// crowch while going backwards and viceversa
+	crowchprotecc.PushBack({ 839,17,44,92 });
+
+	//punch while standing
+	punchstanding.PushBack({ 0,114,58,88 });
+	punchstanding.PushBack({ 59,114,45,88 });
+	punchstanding.PushBack({ 103,111,79,91 });
+	punchstanding.PushBack({ 59,114,45,88 });
+	punchstanding.PushBack({ 0,114,58,88 });
+	punchstanding.speed = 0.13f;
+	punchstanding.loop = false;
 }
 
 ModulePlayer::~ModulePlayer()
@@ -79,13 +100,14 @@ bool ModulePlayer::Start()
 	LOG("Loading player textures");
 	App->lifebar->Enable();
 	bool ret = true;
-	graphics = App->textures->Load("SPRITES FATAL FURY/CHARACTERS/1-Terry Bogard/spritesTerryBogard.png"); // arcade version
+	graphics = App->textures->Load("SPRITES FATAL FURY/CHARACTERS/1-Terry Bogard/Terry Bogard.gif"); // arcade version
 	return ret;
 }
 
 bool ModulePlayer::CleanUp()
 {
 	App->lifebar->Disable();
+	App->textures->Unload(graphics);
 
 	return true;
 }
@@ -93,51 +115,94 @@ bool ModulePlayer::CleanUp()
 // Update: draw background
 update_status ModulePlayer::Update()
 {
-	Animation* current_animation = &idle;
-
+	if (punching == true) {
+		at++;
+		if (at == 35)
+		{
+			//current_animation = &idle;
+			punching = false;
+		}
+	}
 	if (health < 0)
 		health = 0;
 
 	int speed = 1;
 
-	if (App->input->keyboard[SDL_SCANCODE_L] == 1)
+	Jump();
+	if (App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT && !lockX && !punching)
 	{
-		health -= 10;
-	}
-
-	if(App->input->keyboard[SDL_SCANCODE_D] == 1)
-	{
-		current_animation = &forward;
-		position.x += speed;
-	}
-
-	if (App->input->keyboard[SDL_SCANCODE_A] == 1)
-	{
-		current_animation = &backward;
 		position.x -= speed;
+
+		if (current_animation != &backward && !jumping && current_animation != &crowch)
+		{
+			backward.Reset();
+			current_animation = &backward;
+		}
+
 	}
 
-	if (App->input->keyboard[SDL_SCANCODE_Q] == 1)
+	if (App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT && !lockX && !punching)
 	{
-		current_animation = &punch;
+		position.x += speed;
+		if (current_animation != &forward && !jumping)
+		{
+			forward.Reset();
+			current_animation = &forward;
+		}
+
 	}
 
-	if (App->input->keyboard[SDL_SCANCODE_E] == 1)
+	if (App->input->keyboard[SDL_SCANCODE_S] == KEY_STATE::KEY_REPEAT && !jumping && !punching)
 	{
-		current_animation = &kick;
+		if (current_animation != &crowch)
+		{
+			lockX = true;
+			crowch.Reset();
+			current_animation = &crowch;
+		}
+		if (App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT && !punching)
+		{
+			if (current_animation != &crowchprotecc)
+			{
+				crowchprotecc.Reset();
+				current_animation = &crowchprotecc;
+			}
+		}
+	}
+	if (App->input->keyboard[SDL_SCANCODE_S] == KEY_STATE::KEY_UP && !punching) {
+		lockX = false;
 	}
 
-	if (App->input->keyboard[SDL_SCANCODE_W] == 1)
+	if (App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_DOWN && !jumping && !punching)
 	{
-		current_animation = &jump;
+		if (current_animation != &jumpiup)
+		{
+			jumping = true;
+			t = 0;
+			jumpiup.Reset();
+			current_animation = &jumpiup;
+		}
+	}
+	if (App->input->keyboard[SDL_SCANCODE_H] == KEY_STATE::KEY_DOWN && !punching) {
+		if (current_animation != &punchstanding && !jumping)
+		{
+			punching = true;
+			at = 0;
+			punchstanding.Reset();
+			current_animation = &punchstanding;
+		}
 	}
 
-	if (App->input->keyboard[SDL_SCANCODE_X] == 1)
-	{
-		App->particles->skill.life = 1000;
-		App->particles->skill.speed.x = 1;
-		App->particles->AddParticle(App->particles->skill, position.x+50, position.y-75);
-	}
+	if (App->input->keyboard[SDL_SCANCODE_S] == KEY_STATE::KEY_IDLE
+		&& App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_IDLE
+		&& App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_IDLE
+		&& !jumping && !punching)
+		current_animation = &idle;
+	if (App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT
+		&& App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT
+		&& App->input->keyboard[SDL_SCANCODE_S] == KEY_STATE::KEY_IDLE
+		&& !jumping && !punching)
+		current_animation = &idle;
 	// Draw everything --------------------------------------
 	SDL_Rect r = current_animation->GetCurrentFrame();
 

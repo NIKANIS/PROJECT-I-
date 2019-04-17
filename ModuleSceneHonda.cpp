@@ -68,8 +68,8 @@ update_status ModuleSceneHonda::Update()
 	App->render->Blit(graphics, 305, 136, &(water.GetCurrentFrame())); // water animation
 	App->render->Blit(graphics, 0, -16, &roof, 0.75f);
 
-	// TODO 3: make so pressing SPACE the KEN stage is loaded
-	if (App->input->keyboard[SDL_SCANCODE_SPACE])
+	// TODO 3: make so pressing O the KEN stage is loaded
+	if (App->input->keyboard[SDL_SCANCODE_O] == KEY_STATE::KEY_DOWN)
 	{
 		App->fade->FadeToBlack(App->scene_honda, App->scene_terry);
 	}

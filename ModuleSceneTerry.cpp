@@ -50,8 +50,8 @@ update_status ModuleSceneTerry::Update()
 
 	// Draw everything --------------------------------------
 	App->render->Blit(back_graphics, 0, 0, &ground, 0.75f); // sea and sky
-	// TODO 3: make so pressing SPACE the HONDA stage is loaded
-	if (App->input->keyboard[SDL_SCANCODE_SPACE])
+	// TODO 3: make so pressing O the HONDA stage is loaded
+	if (App->input->keyboard[SDL_SCANCODE_O] == KEY_STATE::KEY_DOWN)
 	{
 		App->fade->FadeToBlack(App->scene_terry, App->scene_honda);
 	}

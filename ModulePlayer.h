@@ -21,15 +21,26 @@ public:
 
 private:
 
+	void Jump();
 	SDL_Texture* graphics = nullptr;
+	Animation* current_animation = nullptr;
 	Animation idle;
+	Animation jumpiup;
+	Animation jumpidown;
+	Animation jump;
+	Animation crowch;
+	Animation crowchprotecc;
 	Animation forward;
 	Animation backward;
-	Animation punch;
-	Animation kick;
-	Animation jump;
+	Animation punchstanding;
 	iPoint position;
 	int health;
+	bool lockX = false; //locks the sideways movement
+	bool jumping = false; //true while jumping
+	bool punching = false; //true while punching
+	int t = 0; //jumping coldown time
+	int at = 0; //attack coldown time
+	int vy = 0; //velocity y
 
 };
 
