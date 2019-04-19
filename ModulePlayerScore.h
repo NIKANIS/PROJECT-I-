@@ -30,7 +30,6 @@ private:
 	SDL_Rect eight;
 	SDL_Rect nine;
 	iPoint position;
-	int score;
 	int n[5];
 	SDL_Rect r[5];
 	int pastscore;

@@ -24,7 +24,6 @@ ModulePlayerScore::ModulePlayerScore()
 	eight = { 31,296,9,9 };
 	nine = { 41,296,9,9 };
 
-	score = 0;
 	pastscore = 1;
 }
 
@@ -45,38 +44,18 @@ bool ModulePlayerScore::Start()
 
 update_status ModulePlayerScore::Update()
 {
-	/*if (App->input->keyboard[SDL_SCANCODE_I] == KEY_STATE::KEY_DOWN)
+	int s = App->player->Score();
+	if (s > 99999)
 	{
-		score++;
-	}
-	if (App->input->keyboard[SDL_SCANCODE_U] == KEY_STATE::KEY_DOWN)
-	{
-		score+= 10;
-	}
-	if (App->input->keyboard[SDL_SCANCODE_Y] == KEY_STATE::KEY_DOWN)
-	{
-		score += 100;
-	}
-	if (App->input->keyboard[SDL_SCANCODE_T] == KEY_STATE::KEY_DOWN)
-	{
-		score += 1000;
-	}
-	if (App->input->keyboard[SDL_SCANCODE_R] == KEY_STATE::KEY_DOWN)
-	{
-		score += 10000;
-	}*/
-
-	if (score > 99999)
-	{
-		score = 99999;
+		s = 99999;
 	}
 		
-	if (pastscore != score) {
-		n[4] = (int)score / 10000;
-		n[3] = (int)(score - n[4] * 10000) / 1000;
-		n[2] = (int)(score - n[4] * 10000 - n[3] * 1000) / 100;
-		n[1] = (int)(score - n[4] * 10000 - n[3] * 1000 - n[2] * 100) / 10;
-		n[0] = score - n[4] * 10000 - n[3] * 1000 - n[2] * 100 - n[1] * 10;
+	if (pastscore != s) {
+		n[4] = (int)s / 10000;
+		n[3] = (int)(s - n[4] * 10000) / 1000;
+		n[2] = (int)(s - n[4] * 10000 - n[3] * 1000) / 100;
+		n[1] = (int)(s - n[4] * 10000 - n[3] * 1000 - n[2] * 100) / 10;
+		n[0] = s - n[4] * 10000 - n[3] * 1000 - n[2] * 100 - n[1] * 10;
 
 		for (int i = 0; i < MAX_SCORE_D; i++)
 		{
@@ -127,7 +106,7 @@ update_status ModulePlayerScore::Update()
 			}
 		}
 	}
-	pastscore = score;
+	pastscore = s;
 
 	App->render->Blit(graphics, position.x, position.y, &r[4], 0.0f);
 	App->render->Blit(graphics, position.x + 8, position.y, &r[3], 0.0f);

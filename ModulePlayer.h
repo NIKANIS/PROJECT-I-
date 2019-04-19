@@ -17,6 +17,7 @@ public:
 	bool Start();
 	update_status Update();
 	int Health();
+	int Score();
 	bool CleanUp();
 
 private:
@@ -35,6 +36,7 @@ private:
 	Animation punchstanding;
 	iPoint position;
 	int health;
+	int score;
 	bool lockX = false; //locks the sideways movement
 	bool jumping = false; //true while jumping
 	bool punching = false; //true while punching

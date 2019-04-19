@@ -36,6 +36,11 @@ int ModulePlayer::Health()
 	return health;
 }
 
+int ModulePlayer::Score()
+{
+	return score;
+}
+
 ModulePlayer::ModulePlayer()
 {
 	health = 100;
@@ -117,6 +122,7 @@ bool ModulePlayer::CleanUp()
 // Update: draw background
 update_status ModulePlayer::Update()
 {
+
 	if (punching == true) {
 		at++;
 		if (at == 35)
