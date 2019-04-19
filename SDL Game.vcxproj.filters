@@ -12,12 +12,21 @@
     <Filter Include="Containers">
       <UniqueIdentifier>{78a7f487-1d77-4fdc-9f51-f067eccd6239}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Modules\Image Modules">
+      <UniqueIdentifier>{6ebdd7cc-efaa-41e7-8681-d0678c1ec439}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\BackGround Modules">
+      <UniqueIdentifier>{d782893a-bf9d-4030-86f5-69f1731389fd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Utility Modules">
+      <UniqueIdentifier>{62f55bff-5dea-4a6b-977a-fe6d4dcad87c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Fight Modules">
+      <UniqueIdentifier>{5315882b-d4c4-4b47-b69c-40cd3b034ace}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Module.h">
-      <Filter>Modules</Filter>
-    </ClInclude>
-    <ClInclude Include="ModuleWindow.h">
       <Filter>Modules</Filter>
     </ClInclude>
     <ClInclude Include="MemLeaks.h">
@@ -29,44 +38,47 @@
     <ClInclude Include="Application.h">
       <Filter>Core</Filter>
     </ClInclude>
-    <ClInclude Include="ModuleInput.h">
-      <Filter>Modules</Filter>
-    </ClInclude>
-    <ClInclude Include="ModuleRender.h">
-      <Filter>Modules</Filter>
-    </ClInclude>
-    <ClInclude Include="ModuleTextures.h">
-      <Filter>Modules</Filter>
-    </ClInclude>
-    <ClInclude Include="ModulePlayer.h">
-      <Filter>Modules</Filter>
-    </ClInclude>
     <ClInclude Include="p2Point.h">
       <Filter>Containers</Filter>
     </ClInclude>
     <ClInclude Include="Animation.h">
       <Filter>Containers</Filter>
     </ClInclude>
-    <ClInclude Include="ModuleFadeToBlack.h">
-      <Filter>Modules</Filter>
-    </ClInclude>
     <ClInclude Include="ModuleAudio.h">
       <Filter>Modules</Filter>
     </ClInclude>
-    <ClInclude Include="ModuleParticles.h">
-      <Filter>Modules</Filter>
+    <ClInclude Include="ModuleWindow.h">
+      <Filter>Modules\Image Modules</Filter>
     </ClInclude>
-    <ClInclude Include="ModuleLifeBar.h">
-      <Filter>Modules</Filter>
+    <ClInclude Include="ModuleTextures.h">
+      <Filter>Modules\Image Modules</Filter>
     </ClInclude>
-    <ClInclude Include="ModuleSceneIntro.h">
-      <Filter>Modules</Filter>
+    <ClInclude Include="ModuleRender.h">
+      <Filter>Modules\Image Modules</Filter>
     </ClInclude>
     <ClInclude Include="ModuleScenePaoPao.h">
-      <Filter>Modules</Filter>
+      <Filter>Modules\BackGround Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleSceneIntro.h">
+      <Filter>Modules\BackGround Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleFadeToBlack.h">
+      <Filter>Modules\Utility Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleInput.h">
+      <Filter>Modules\Utility Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleParticles.h">
+      <Filter>Modules\Utility Modules</Filter>
     </ClInclude>
     <ClInclude Include="ModulePlayerScore.h">
-      <Filter>Modules</Filter>
+      <Filter>Modules\Fight Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="ModulePlayer.h">
+      <Filter>Modules\Fight Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleLifeBar.h">
+      <Filter>Modules\Fight Modules</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -76,44 +88,44 @@
     <ClCompile Include="Application.cpp">
       <Filter>Core</Filter>
     </ClCompile>
-    <ClCompile Include="ModuleWindow.cpp">
-      <Filter>Modules</Filter>
-    </ClCompile>
-    <ClCompile Include="ModuleInput.cpp">
-      <Filter>Modules</Filter>
-    </ClCompile>
-    <ClCompile Include="ModuleRender.cpp">
-      <Filter>Modules</Filter>
-    </ClCompile>
-    <ClCompile Include="ModuleTextures.cpp">
-      <Filter>Modules</Filter>
-    </ClCompile>
     <ClCompile Include="Globals.cpp">
       <Filter>Core</Filter>
-    </ClCompile>
-    <ClCompile Include="ModulePlayer.cpp">
-      <Filter>Modules</Filter>
-    </ClCompile>
-    <ClCompile Include="ModuleFadeToBlack.cpp">
-      <Filter>Modules</Filter>
     </ClCompile>
     <ClCompile Include="ModuleAudio.cpp">
       <Filter>Modules</Filter>
     </ClCompile>
-    <ClCompile Include="ModuleParticles.cpp">
-      <Filter>Modules</Filter>
+    <ClCompile Include="ModuleWindow.cpp">
+      <Filter>Modules\Image Modules</Filter>
     </ClCompile>
-    <ClCompile Include="ModuleLifeBar.cpp">
-      <Filter>Modules</Filter>
+    <ClCompile Include="ModuleTextures.cpp">
+      <Filter>Modules\Image Modules</Filter>
     </ClCompile>
-    <ClCompile Include="ModuleSceneIntro.cpp">
-      <Filter>Modules</Filter>
+    <ClCompile Include="ModuleRender.cpp">
+      <Filter>Modules\Image Modules</Filter>
     </ClCompile>
     <ClCompile Include="ModuleScenePaoPao.cpp">
-      <Filter>Modules</Filter>
+      <Filter>Modules\BackGround Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleSceneIntro.cpp">
+      <Filter>Modules\BackGround Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleFadeToBlack.cpp">
+      <Filter>Modules\Utility Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleInput.cpp">
+      <Filter>Modules\Utility Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleParticles.cpp">
+      <Filter>Modules\Utility Modules</Filter>
     </ClCompile>
     <ClCompile Include="ModulePlayerScore.cpp">
-      <Filter>Modules</Filter>
+      <Filter>Modules\Fight Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="ModulePlayer.cpp">
+      <Filter>Modules\Fight Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleLifeBar.cpp">
+      <Filter>Modules\Fight Modules</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
