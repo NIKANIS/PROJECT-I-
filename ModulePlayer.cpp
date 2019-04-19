@@ -6,6 +6,7 @@
 #include "ModulePlayer.h"
 #include "ModuleParticles.h"
 #include "ModuleLifeBar.h"
+#include "ModulePlayerScore.h"
 
 // Reference at https://www.youtube.com/watch?v=OEhmUuehGOA
 
@@ -99,6 +100,7 @@ bool ModulePlayer::Start()
 {
 	LOG("Loading player textures");
 	App->lifebar->Enable();
+	App->plscore->Enable();
 	bool ret = true;
 	graphics = App->textures->Load("SPRITES FATAL FURY/CHARACTERS/1-Terry Bogard/Terry Bogard.gif"); // arcade version
 	return ret;

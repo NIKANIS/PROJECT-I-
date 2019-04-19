@@ -10,6 +10,7 @@
 #include "ModuleAudio.h"
 #include "ModuleParticles.h"
 #include "ModuleLifeBar.h"
+#include "ModulePlayerScore.h"
 
 Application::Application()
 {
@@ -24,6 +25,7 @@ Application::Application()
 	modules[8] = audio = new ModuleAudio();
 	modules[9] = particles = new ModuleParticles();
 	modules[10] = lifebar = new ModuleLifeBar();
+	modules[11] = plscore = new ModulePlayerScore();
 }	
 
 Application::~Application()
@@ -38,9 +40,9 @@ bool Application::Init()
 
 	// Player will be enabled on the first update of a new scene
 	player->Disable();
-	// Disable the map that you do not start with
 	scene_paopao->Disable();
 	lifebar->Disable();
+	plscore->Disable();
 
 	for(int i = 0; i < NUM_MODULES && ret == true; ++i)
 		ret = modules[i]->Init();

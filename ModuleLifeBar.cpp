@@ -10,8 +10,8 @@
 
 ModuleLifeBar::ModuleLifeBar()
 {
-	position.x = 16;
-	position.y = 30;
+	position.x = HUD_X;
+	position.y = HUD_Y;
 
 	P1photo = {1,144,15,15};
 
@@ -42,8 +42,6 @@ update_status ModuleLifeBar::Update()
 {
 	Animation* current_animation = &healthy;
 
-	position.x = 16;
-	position.y = 30;
 	health = { 1,72,App->player->Health(),7 };
 
 	if (App->player->Health() <= 20)

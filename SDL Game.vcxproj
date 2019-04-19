@@ -81,6 +81,7 @@
     <ClInclude Include="ModuleLifeBar.h" />
     <ClInclude Include="ModuleParticles.h" />
     <ClInclude Include="ModulePlayer.h" />
+    <ClInclude Include="ModulePlayerScore.h" />
     <ClInclude Include="ModuleRender.h" />
     <ClInclude Include="ModuleSceneIntro.h" />
     <ClInclude Include="ModuleScenePaoPao.h" />
@@ -98,6 +99,7 @@
     <ClCompile Include="ModuleLifeBar.cpp" />
     <ClCompile Include="ModuleParticles.cpp" />
     <ClCompile Include="ModulePlayer.cpp" />
+    <ClCompile Include="ModulePlayerScore.cpp" />
     <ClCompile Include="ModuleRender.cpp" />
     <ClCompile Include="ModuleSceneIntro.cpp" />
     <ClCompile Include="ModuleScenePaoPao.cpp" />
