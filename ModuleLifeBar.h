@@ -11,7 +11,7 @@ struct SDL_Texture;
 class ModuleLifeBar : public Module
 {
 public:
-	ModuleLifeBar();
+	ModuleLifeBar(int player);
 	~ModuleLifeBar();
 
 	bool Start();
@@ -25,6 +25,7 @@ private:
 	Animation healthy;
 	Animation lowhealth;
 	iPoint position;
+	int player; //0 = P1 , 1 = P2
 
 };
 

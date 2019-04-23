@@ -9,7 +9,7 @@ struct SDL_Texture;
 class ModulePlayerScore : public Module
 {
 public:
-	ModulePlayerScore();
+	ModulePlayerScore(int player);
 	~ModulePlayerScore();
 
 	bool Start();
@@ -33,6 +33,7 @@ private:
 	int n[5];
 	SDL_Rect r[5];
 	int pastscore;
+	int player;
 };
 
 #endif

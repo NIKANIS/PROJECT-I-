@@ -11,7 +11,7 @@ struct SDL_Texture;
 class ModulePlayer : public Module
 {
 public:
-	ModulePlayer();
+	ModulePlayer(int player);
 	~ModulePlayer();
 
 	bool Start();
@@ -46,6 +46,7 @@ private:
 	int t = 0; //jumping coldown time
 	int at = 0; //attack coldown time
 	int vy = 0; //velocity y
+	int player;
 };
 
 #endif

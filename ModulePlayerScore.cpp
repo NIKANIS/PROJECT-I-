@@ -8,10 +8,16 @@
 
 #define MAX_SCORE_D 5
 
-ModulePlayerScore::ModulePlayerScore()
+ModulePlayerScore::ModulePlayerScore(int player)
 {
 	position.x = HUD_X + 72;
 	position.y = HUD_Y - 17;
+
+	if (player == 0)
+		this->player = 0;
+	
+	if (player != 0)
+		this->player = 1;
 
 	zero = {1,286,9,9};
 	one = {11,286,7,9};
@@ -44,7 +50,13 @@ bool ModulePlayerScore::Start()
 
 update_status ModulePlayerScore::Update()
 {
-	int s = App->player->Score();
+	int s;
+	if (player == 0)
+		s = App->player->Score();
+
+	if (player == 1)
+		s = App->enemy->Score();
+
 	if (s > 99999)
 	{
 		s = 99999;
@@ -108,11 +120,11 @@ update_status ModulePlayerScore::Update()
 	}
 	pastscore = s;
 
-	App->render->Blit(graphics, position.x, position.y, &r[4], 0.0f);
-	App->render->Blit(graphics, position.x + 8, position.y, &r[3], 0.0f);
-	App->render->Blit(graphics, position.x + 8*2, position.y, &r[2], 0.0f);
-	App->render->Blit(graphics, position.x + 8*3, position.y, &r[1], 0.0f);
-	App->render->Blit(graphics, position.x + 8*4, position.y, &r[0], 0.0f);
+	App->render->Blit(graphics, position.x + (88*player), position.y, &r[4], 0.0f);
+	App->render->Blit(graphics, position.x + 8 + (88 * player), position.y, &r[3], 0.0f);
+	App->render->Blit(graphics, position.x + 8*2 + (88 * player), position.y, &r[2], 0.0f);
+	App->render->Blit(graphics, position.x + 8*3 + (88 * player), position.y, &r[1], 0.0f);
+	App->render->Blit(graphics, position.x + 8*4 + (88 * player), position.y, &r[0], 0.0f);
 
 	return UPDATE_CONTINUE;
 }

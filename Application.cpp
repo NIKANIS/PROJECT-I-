@@ -22,13 +22,16 @@ Application::Application()
 	modules[3] = textures = new ModuleTextures();
 	modules[4] = scene_intro = new ModuleSceneIntro();
 	modules[5] = scene_paopao = new ModuleScenePaoPao();
-	modules[6] = player = new ModulePlayer();
-	modules[7] = fade = new ModuleFadeToBlack();
-	modules[8] = audio = new ModuleAudio();
-	modules[9] = particles = new ModuleParticles();
-	modules[10] = lifebar = new ModuleLifeBar();
-	modules[11] = plscore = new ModulePlayerScore();
-	modules[12] = fight_timer = new ModuleFightTimer();
+	modules[6] = player = new ModulePlayer(0);
+	modules[7] = enemy = new ModulePlayer(1);
+	modules[8] = fade = new ModuleFadeToBlack();
+	modules[9] = audio = new ModuleAudio();
+	modules[10] = particles = new ModuleParticles();
+	modules[11] = lifebar = new ModuleLifeBar(0);
+	modules[12] = lifebar2 = new ModuleLifeBar(1);
+	modules[13] = plscore = new ModulePlayerScore(0);
+	modules[14] = enscore = new ModulePlayerScore(1);
+	modules[15] = fight_timer = new ModuleFightTimer();
 }	
 
 Application::~Application()
@@ -43,9 +46,12 @@ bool Application::Init()
 
 	// Player will be enabled on the first update of a new scene
 	player->Disable();
+	enemy->Disable();
 	scene_paopao->Disable();
 	lifebar->Disable();
+	lifebar2->Disable();
 	plscore->Disable();
+	enscore->Disable();
 	fight_timer->Disable();
 
 	for(int i = 0; i < NUM_MODULES && ret == true; ++i)

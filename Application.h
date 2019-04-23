@@ -3,7 +3,7 @@
 
 #include "Globals.h"
 
-#define NUM_MODULES 13
+#define NUM_MODULES 16
 
 class ModuleWindow;
 class ModuleInput;
@@ -32,11 +32,14 @@ public:
 	ModuleScenePaoPao* scene_paopao;
 	ModuleSceneIntro* scene_intro;
 	ModulePlayer* player;
+	ModulePlayer* enemy;
 	ModuleFadeToBlack* fade;
 	ModuleAudio* audio;
 	ModuleParticles* particles;
 	ModuleLifeBar* lifebar;
+	ModuleLifeBar* lifebar2;
 	ModulePlayerScore* plscore;
+	ModulePlayerScore* enscore;
 	ModuleFightTimer* fight_timer;
 
 public:

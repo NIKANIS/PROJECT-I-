@@ -40,13 +40,21 @@ int ModulePlayer::Score()
 	return score;
 }
 
-ModulePlayer::ModulePlayer()
+ModulePlayer::ModulePlayer(int player)
 {
 	health = 100;
-
-	position.x = 100;
-	position.y = 220;
-
+	if (player == 0)
+	{
+		this->player = 0;
+		position.x = 100;
+		position.y = 220;
+	}
+	if (player != 0)
+	{
+		this->player = 1;
+		position.x = 200;
+		position.y = 220;
+	}
 	// idle animation
 	idle.PushBack({ 0, 19, 48, 90 });
 	idle.PushBack({ 49, 18, 49, 91 });
@@ -109,8 +117,16 @@ ModulePlayer::~ModulePlayer()
 bool ModulePlayer::Start()
 {
 	LOG("Loading player textures");
-	App->lifebar->Enable();
-	App->plscore->Enable();
+	if (player == 0) 
+	{
+		App->lifebar->Enable();
+		App->plscore->Enable();
+	}
+	if (player == 1) 
+	{
+		App->lifebar2->Enable();
+		App->enscore->Enable();
+	}
 	bool ret = true;
 	graphics = App->textures->Load("SPRITES FATAL FURY/CHARACTERS/1-Terry Bogard/Terry Bogard.gif"); // arcade version
 	return ret;
@@ -118,8 +134,16 @@ bool ModulePlayer::Start()
 
 bool ModulePlayer::CleanUp()
 {
-	App->lifebar->Disable();
-	App->plscore->Disable();
+	if (player == 0)
+	{
+		App->lifebar->Disable();
+		App->plscore->Disable();
+	}
+	if (player == 1)
+	{
+		App->lifebar2->Disable();
+		App->enscore->Disable();
+	}
 	App->textures->Unload(graphics);
 
 	return true;
@@ -132,7 +156,6 @@ update_status ModulePlayer::Update()
 		at++;
 		if (at == 35)
 		{
-			//current_animation = &idle;
 			punching = false;
 		}
 	}
@@ -146,101 +169,199 @@ update_status ModulePlayer::Update()
 		at++;
 		if (at == 35)
 		{
-			//current_animation = &idle;
 			kicking = false;
 		}
 	}
+	if (App->input->keyboard[SDL_SCANCODE_E] == KEY_STATE::KEY_REPEAT)
+		score += 10000;
 
 	Jump();
-	if (App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT && !lockX && !punching && !kicking)
+	if (player == 0)
 	{
-		position.x -= speed;
 
-		if (current_animation != &backward && !jumping && current_animation != &crowch)
+		if (App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT && !lockX && !punching && !kicking)
 		{
-			backward.Reset();
-			current_animation = &backward;
-		}
+			position.x -= speed;
 
-	}
-
-	if (App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT && !lockX && !punching && !kicking)
-	{
-		position.x += speed;
-		if (current_animation != &forward && !jumping)
-		{
-			forward.Reset();
-			current_animation = &forward;
-		}
-
-	}
-
-	if (App->input->keyboard[SDL_SCANCODE_S] == KEY_STATE::KEY_REPEAT && !jumping && !punching && !kicking)
-	{
-		if (current_animation != &crowch)
-		{
-			lockX = true;
-			crowchaction = true;
-			crowch.Reset();
-			current_animation = &crowch;
-		}
-		if (App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT && !punching && !kicking)
-		{
-			if (current_animation != &crowchprotecc)
+			if (current_animation != &backward && !jumping && current_animation != &crowch)
 			{
-				crowchprotecc.Reset();
-				current_animation = &crowchprotecc;
+				backward.Reset();
+				current_animation = &backward;
 			}
-		}		
+
+		}
+
+		if (App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT && !lockX && !punching && !kicking)
+		{
+			position.x += speed;
+			if (current_animation != &forward && !jumping)
+			{
+				forward.Reset();
+				current_animation = &forward;
+			}
+
+		}
+
+		if (App->input->keyboard[SDL_SCANCODE_S] == KEY_STATE::KEY_REPEAT && !jumping && !punching && !kicking)
+		{
+			if (current_animation != &crowch)
+			{
+				lockX = true;
+				crowchaction = true;
+				crowch.Reset();
+				current_animation = &crowch;
+			}
+			if (App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT && !punching && !kicking)
+			{
+				if (current_animation != &crowchprotecc)
+				{
+					crowchprotecc.Reset();
+					current_animation = &crowchprotecc;
+				}
+			}
+		}
+
+		if (App->input->keyboard[SDL_SCANCODE_S] == KEY_STATE::KEY_UP) {
+			lockX = false;
+			crowchaction = false;
+		}
+
+		if (App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_DOWN && !jumping && !punching && !kicking)
+		{
+			if (current_animation != &jumpiup)
+			{
+				jumping = true;
+				t = 0;
+				jumpiup.Reset();
+				current_animation = &jumpiup;
+			}
+		}
+
+		if (App->input->keyboard[SDL_SCANCODE_H] == KEY_STATE::KEY_DOWN && !punching && !kicking && !crowchaction) {
+			if (current_animation != &punchstanding && !jumping)
+			{
+				punching = true;
+				at = 0;
+				punchstanding.Reset();
+				current_animation = &punchstanding;
+			}
+		}
+
+		if (App->input->keyboard[SDL_SCANCODE_J] == KEY_STATE::KEY_DOWN && !punching && !jumping && !crowchaction) {
+			if (current_animation != &kickingstanding && !jumping && !crowchaction)
+			{
+				kicking = true;
+				at = 0;
+				kickingstanding.Reset();
+				current_animation = &kickingstanding;
+			}
+		}
+
+		if (App->input->keyboard[SDL_SCANCODE_S] == KEY_STATE::KEY_IDLE
+			&& App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_IDLE
+			&& App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_IDLE
+			&& !jumping && !punching && !kicking)
+			current_animation = &idle;
+		if (App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT
+			&& App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT
+			&& App->input->keyboard[SDL_SCANCODE_S] == KEY_STATE::KEY_IDLE
+			&& !jumping && !punching && !kicking)
+			current_animation = &idle;
 	}
 
-	if (App->input->keyboard[SDL_SCANCODE_S] == KEY_STATE::KEY_UP) {
-		lockX = false;
-		crowchaction = false;
-	}
-
-	if (App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_DOWN && !jumping && !punching && !kicking)
+	if (player == 1)
 	{
-		if (current_animation != &jumpiup)
+
+		if (App->input->keyboard[SDL_SCANCODE_LEFT] == KEY_STATE::KEY_REPEAT && !lockX && !punching && !kicking)
 		{
-			jumping = true;
-			t = 0;
-			jumpiup.Reset();
-			current_animation = &jumpiup;
+			position.x -= speed;
+
+			if (current_animation != &backward && !jumping && current_animation != &crowch)
+			{
+				backward.Reset();
+				current_animation = &backward;
+			}
+
 		}
+
+		if (App->input->keyboard[SDL_SCANCODE_RIGHT] == KEY_STATE::KEY_REPEAT && !lockX && !punching && !kicking)
+		{
+			position.x += speed;
+			if (current_animation != &forward && !jumping)
+			{
+				forward.Reset();
+				current_animation = &forward;
+			}
+
+		}
+
+		if (App->input->keyboard[SDL_SCANCODE_DOWN] == KEY_STATE::KEY_REPEAT && !jumping && !punching && !kicking)
+		{
+			if (current_animation != &crowch)
+			{
+				lockX = true;
+				crowchaction = true;
+				crowch.Reset();
+				current_animation = &crowch;
+			}
+			if (App->input->keyboard[SDL_SCANCODE_LEFT] == KEY_STATE::KEY_REPEAT && !punching && !kicking)
+			{
+				if (current_animation != &crowchprotecc)
+				{
+					crowchprotecc.Reset();
+					current_animation = &crowchprotecc;
+				}
+			}
+		}
+
+		if (App->input->keyboard[SDL_SCANCODE_DOWN] == KEY_STATE::KEY_UP) {
+			lockX = false;
+			crowchaction = false;
+		}
+
+		if (App->input->keyboard[SDL_SCANCODE_UP] == KEY_STATE::KEY_DOWN && !jumping && !punching && !kicking)
+		{
+			if (current_animation != &jumpiup)
+			{
+				jumping = true;
+				t = 0;
+				jumpiup.Reset();
+				current_animation = &jumpiup;
+			}
+		}
+
+		if (App->input->keyboard[SDL_SCANCODE_O] == KEY_STATE::KEY_DOWN && !punching && !kicking && !crowchaction) {
+			if (current_animation != &punchstanding && !jumping)
+			{
+				punching = true;
+				at = 0;
+				punchstanding.Reset();
+				current_animation = &punchstanding;
+			}
+		}
+
+		if (App->input->keyboard[SDL_SCANCODE_P] == KEY_STATE::KEY_DOWN && !punching && !jumping && !crowchaction) {
+			if (current_animation != &kickingstanding && !jumping && !crowchaction)
+			{
+				kicking = true;
+				at = 0;
+				kickingstanding.Reset();
+				current_animation = &kickingstanding;
+			}
+		}
+
+		if (App->input->keyboard[SDL_SCANCODE_DOWN] == KEY_STATE::KEY_IDLE
+			&& App->input->keyboard[SDL_SCANCODE_LEFT] == KEY_STATE::KEY_IDLE
+			&& App->input->keyboard[SDL_SCANCODE_RIGHT] == KEY_STATE::KEY_IDLE
+			&& !jumping && !punching && !kicking)
+			current_animation = &idle;
+		if (App->input->keyboard[SDL_SCANCODE_RIGHT] == KEY_STATE::KEY_REPEAT
+			&& App->input->keyboard[SDL_SCANCODE_LEFT] == KEY_STATE::KEY_REPEAT
+			&& App->input->keyboard[SDL_SCANCODE_DOWN] == KEY_STATE::KEY_IDLE
+			&& !jumping && !punching && !kicking)
+			current_animation = &idle;
 	}
 
-	if (App->input->keyboard[SDL_SCANCODE_H] == KEY_STATE::KEY_DOWN && !punching && !kicking && !crowchaction) {
-		if (current_animation != &punchstanding && !jumping)
-		{
-			punching = true;
-			at = 0;
-			punchstanding.Reset();
-			current_animation = &punchstanding;
-		}
-	}
-
-	if (App->input->keyboard[SDL_SCANCODE_J] == KEY_STATE::KEY_DOWN && !punching && !jumping && !crowchaction) {
-		if (current_animation != &kickingstanding && !jumping && !crowchaction)
-		{
-			kicking = true;
-			at = 0;
-			kickingstanding.Reset();
-			current_animation = &kickingstanding;
-		}
-	}	
-
-	if (App->input->keyboard[SDL_SCANCODE_S] == KEY_STATE::KEY_IDLE
-		&& App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_IDLE
-		&& App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_IDLE
-		&& !jumping && !punching && !kicking)
-		current_animation = &idle;
-	if (App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT
-		&& App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT
-		&& App->input->keyboard[SDL_SCANCODE_S] == KEY_STATE::KEY_IDLE
-		&& !jumping && !punching && !kicking)
-		current_animation = &idle;
-	// Draw everything --------------------------------------
 	SDL_Rect r = current_animation->GetCurrentFrame();
 
 	App->render->Blit(graphics, position.x, position.y - r.h, &r);

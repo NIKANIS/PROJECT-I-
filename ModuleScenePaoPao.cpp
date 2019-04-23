@@ -33,6 +33,7 @@ bool ModuleScenePaoPao::Start()
 
 	// TODO 1: Enable (and properly disable) the player module
 	App->player->Enable();
+	App->enemy->Enable();
 	App->fight_timer->Enable();
 
 	return true;
@@ -43,6 +44,7 @@ bool ModuleScenePaoPao::CleanUp()
 {
 	LOG("Unloading ken scene");
 	App->player->Disable();
+	App->enemy->Disable();
 	App->fight_timer->Disable();
 
 	return true;
@@ -56,7 +58,7 @@ update_status ModuleScenePaoPao::Update()
 	App->render->Blit(back_graphics, 0, 0, &ground, 0.75f); // background
 
 	// pressing O game is restarted
-	if (App->input->keyboard[SDL_SCANCODE_O] == KEY_STATE::KEY_DOWN)
+	if (App->input->keyboard[SDL_SCANCODE_Q] == KEY_STATE::KEY_DOWN)
 	{
 		App->fade->FadeToBlack(App->scene_paopao, App->scene_intro);
 	}
