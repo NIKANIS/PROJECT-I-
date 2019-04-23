@@ -189,10 +189,12 @@ update_status ModulePlayer::Update()
 				crowchprotecc.Reset();
 				current_animation = &crowchprotecc;
 			}
-		}
+		}		
 	}
+
 	if (App->input->keyboard[SDL_SCANCODE_S] == KEY_STATE::KEY_UP) {
-		lockX = false;		
+		lockX = false;
+		crowchaction = false;
 	}
 
 	if (App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_DOWN && !jumping && !punching && !kicking)
@@ -217,7 +219,7 @@ update_status ModulePlayer::Update()
 	}
 
 	if (App->input->keyboard[SDL_SCANCODE_J] == KEY_STATE::KEY_DOWN && !punching && !jumping && !crowchaction) {
-		if (current_animation != &kickingstanding && !jumping)
+		if (current_animation != &kickingstanding && !jumping && !crowchaction)
 		{
 			kicking = true;
 			at = 0;
