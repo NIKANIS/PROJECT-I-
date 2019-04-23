@@ -34,16 +34,18 @@ private:
 	Animation forward;
 	Animation backward;
 	Animation punchstanding;
+	Animation kickingstanding;
 	iPoint position;
 	int health;
 	int score;
 	bool lockX = false; //locks the sideways movement
 	bool jumping = false; //true while jumping
 	bool punching = false; //true while punching
+	bool kicking = false; //true while kicking
+	bool crowchaction = false; //true while crowching
 	int t = 0; //jumping coldown time
 	int at = 0; //attack coldown time
 	int vy = 0; //velocity y
-
 };
 
 #endif
