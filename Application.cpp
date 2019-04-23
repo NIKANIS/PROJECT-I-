@@ -12,6 +12,7 @@
 #include "ModuleParticles.h"
 #include "ModuleLifeBar.h"
 #include "ModulePlayerScore.h"
+#include "ModuleFightTimer.h"
 
 Application::Application()
 {
@@ -27,6 +28,7 @@ Application::Application()
 	modules[9] = particles = new ModuleParticles();
 	modules[10] = lifebar = new ModuleLifeBar();
 	modules[11] = plscore = new ModulePlayerScore();
+	modules[12] = fight_timer = new ModuleFightTimer();
 }	
 
 Application::~Application()
@@ -44,6 +46,7 @@ bool Application::Init()
 	scene_paopao->Disable();
 	lifebar->Disable();
 	plscore->Disable();
+	fight_timer->Disable();
 
 	for(int i = 0; i < NUM_MODULES && ret == true; ++i)
 		ret = modules[i]->Init();

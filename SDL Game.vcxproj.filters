@@ -80,6 +80,9 @@
     <ClInclude Include="ModuleAudio.h">
       <Filter>Modules\Utility Modules</Filter>
     </ClInclude>
+    <ClInclude Include="ModuleFightTimer.h">
+      <Filter>Modules\Fight Modules</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -126,6 +129,9 @@
     </ClCompile>
     <ClCompile Include="ModuleAudio.cpp">
       <Filter>Modules\Utility Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleFightTimer.cpp">
+      <Filter>Modules\Fight Modules</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

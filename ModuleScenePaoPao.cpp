@@ -7,6 +7,7 @@
 #include "ModulePlayer.h"
 #include "ModuleInput.h"
 #include "ModuleFadeToBlack.h"
+#include "ModuleFightTimer.h"
 
 // Reference at https://www.youtube.com/watch?v=OEhmUuehGOA
 
@@ -32,6 +33,7 @@ bool ModuleScenePaoPao::Start()
 
 	// TODO 1: Enable (and properly disable) the player module
 	App->player->Enable();
+	App->fight_timer->Enable();
 
 	return true;
 }
@@ -41,6 +43,7 @@ bool ModuleScenePaoPao::CleanUp()
 {
 	LOG("Unloading ken scene");
 	App->player->Disable();
+	App->fight_timer->Disable();
 
 	return true;
 }

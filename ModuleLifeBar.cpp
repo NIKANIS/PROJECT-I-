@@ -6,8 +6,6 @@
 #include "ModulePlayer.h"
 #include "ModuleLifeBar.h"
 
-// Reference at https://www.youtube.com/watch?v=OEhmUuehGOA
-
 ModuleLifeBar::ModuleLifeBar()
 {
 	position.x = HUD_X;
@@ -32,10 +30,8 @@ ModuleLifeBar::~ModuleLifeBar()
 // Load assets
 bool ModuleLifeBar::Start()
 {
-	LOG("Loading player textures");
-	bool ret = true;
 	graphics = App->textures->Load("SPRITES FATAL FURY/UI/UI sprites.png"); 
-	return ret;
+	return true;
 }
 
 update_status ModuleLifeBar::Update()

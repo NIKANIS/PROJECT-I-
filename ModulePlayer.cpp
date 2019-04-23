@@ -119,6 +119,7 @@ bool ModulePlayer::Start()
 bool ModulePlayer::CleanUp()
 {
 	App->lifebar->Disable();
+	App->plscore->Disable();
 	App->textures->Unload(graphics);
 
 	return true;
@@ -138,6 +139,7 @@ update_status ModulePlayer::Update()
 	if (health < 0)
 		health = 0;
 
+	//health--;
 	int speed = 1;
 
 	if (kicking == true) {
