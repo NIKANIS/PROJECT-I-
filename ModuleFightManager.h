@@ -20,6 +20,7 @@ private:
 	int en_won_rounds;
 	int timer_num;
 	int timer_counter;
+	bool time_stop;
 	void Reset();
 };
 

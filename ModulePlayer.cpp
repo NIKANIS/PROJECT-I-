@@ -183,10 +183,10 @@ update_status ModulePlayer::Update()
 			punching = false;
 		}
 	}
+
 	if (health < 0)
 		health = 0;
 
-	//health--;
 	int speed = 1;
 
 	if (kicking == true) {
@@ -197,8 +197,8 @@ update_status ModulePlayer::Update()
 		}
 	}
 	
-
 	Jump();
+
 	if (player == 0)
 	{
 
