@@ -15,14 +15,14 @@
     <Filter Include="Modules\Image Modules">
       <UniqueIdentifier>{6ebdd7cc-efaa-41e7-8681-d0678c1ec439}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Modules\BackGround Modules">
-      <UniqueIdentifier>{d782893a-bf9d-4030-86f5-69f1731389fd}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Modules\Utility Modules">
       <UniqueIdentifier>{62f55bff-5dea-4a6b-977a-fe6d4dcad87c}</UniqueIdentifier>
     </Filter>
     <Filter Include="Modules\Fight Modules">
       <UniqueIdentifier>{5315882b-d4c4-4b47-b69c-40cd3b034ace}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Scene Modules">
+      <UniqueIdentifier>{d782893a-bf9d-4030-86f5-69f1731389fd}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -44,9 +44,6 @@
     <ClInclude Include="Animation.h">
       <Filter>Containers</Filter>
     </ClInclude>
-    <ClInclude Include="ModuleAudio.h">
-      <Filter>Modules</Filter>
-    </ClInclude>
     <ClInclude Include="ModuleWindow.h">
       <Filter>Modules\Image Modules</Filter>
     </ClInclude>
@@ -57,10 +54,10 @@
       <Filter>Modules\Image Modules</Filter>
     </ClInclude>
     <ClInclude Include="ModuleScenePaoPao.h">
-      <Filter>Modules\BackGround Modules</Filter>
+      <Filter>Modules\Scene Modules</Filter>
     </ClInclude>
     <ClInclude Include="ModuleSceneIntro.h">
-      <Filter>Modules\BackGround Modules</Filter>
+      <Filter>Modules\Scene Modules</Filter>
     </ClInclude>
     <ClInclude Include="ModuleFadeToBlack.h">
       <Filter>Modules\Utility Modules</Filter>
@@ -80,6 +77,9 @@
     <ClInclude Include="ModuleLifeBar.h">
       <Filter>Modules\Fight Modules</Filter>
     </ClInclude>
+    <ClInclude Include="ModuleAudio.h">
+      <Filter>Modules\Utility Modules</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -91,9 +91,6 @@
     <ClCompile Include="Globals.cpp">
       <Filter>Core</Filter>
     </ClCompile>
-    <ClCompile Include="ModuleAudio.cpp">
-      <Filter>Modules</Filter>
-    </ClCompile>
     <ClCompile Include="ModuleWindow.cpp">
       <Filter>Modules\Image Modules</Filter>
     </ClCompile>
@@ -104,10 +101,10 @@
       <Filter>Modules\Image Modules</Filter>
     </ClCompile>
     <ClCompile Include="ModuleScenePaoPao.cpp">
-      <Filter>Modules\BackGround Modules</Filter>
+      <Filter>Modules\Scene Modules</Filter>
     </ClCompile>
     <ClCompile Include="ModuleSceneIntro.cpp">
-      <Filter>Modules\BackGround Modules</Filter>
+      <Filter>Modules\Scene Modules</Filter>
     </ClCompile>
     <ClCompile Include="ModuleFadeToBlack.cpp">
       <Filter>Modules\Utility Modules</Filter>
@@ -126,6 +123,9 @@
     </ClCompile>
     <ClCompile Include="ModuleLifeBar.cpp">
       <Filter>Modules\Fight Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleAudio.cpp">
+      <Filter>Modules\Utility Modules</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

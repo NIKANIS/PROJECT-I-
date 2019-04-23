@@ -3,6 +3,7 @@
 #include "ModuleRender.h"
 #include "ModuleInput.h"
 #include "ModuleTextures.h"
+#include "ModuleAudio.h"
 #include "ModuleScenePaoPao.h"
 #include "ModuleSceneIntro.h"
 #include "ModulePlayer.h"

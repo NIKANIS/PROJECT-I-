@@ -28,6 +28,7 @@ bool ModuleScenePaoPao::Start()
 	LOG("Loading ken scene");
 	
 	back_graphics = App->textures->Load("SPRITES FATAL FURY/Stages/1 Pao Pao Cafe(Richard)/frame_0.png");
+	back_graphics1 = App->textures->Load("SPRITES FATAL FURY/Stages/1 Pao Pao Cafe(Richard)/frame_1.png");
 
 	// TODO 1: Enable (and properly disable) the player module
 	App->player->Enable();
@@ -49,8 +50,9 @@ update_status ModuleScenePaoPao::Update()
 {
 
 	// Draw everything --------------------------------------
-	App->render->Blit(back_graphics, 0, 0, &ground, 0.75f); // sea and sky
-	// TODO 3: make so pressing O the HONDA stage is loaded
+	App->render->Blit(back_graphics, 0, 0, &ground, 0.75f); // background
+
+	// pressing O game is restarted
 	if (App->input->keyboard[SDL_SCANCODE_O] == KEY_STATE::KEY_DOWN)
 	{
 		App->fade->FadeToBlack(App->scene_paopao, App->scene_intro);
