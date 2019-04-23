@@ -32,8 +32,6 @@ private:
 	iPoint position;
 	int n[2];
 	SDL_Rect r[2];
-	int timer_num;
-	int timer_counter;
 };
 
 

@@ -3,6 +3,7 @@
 #include "ModuleInput.h"
 #include "ModuleRender.h"
 #include "ModuleFightTimer.h"
+#include "ModuleFightManager.h"
 
 ModuleFightTimer::ModuleFightTimer()
 {
@@ -19,8 +20,7 @@ ModuleFightTimer::ModuleFightTimer()
 	seven = { 67,103,15,22 };
 	eight = { 83,103,15,22 };
 	nine = { 99,103,15,22 };
-	timer_num = 93;
-	timer_counter = 0;
+	
 }
 
 ModuleFightTimer::~ModuleFightTimer()
@@ -35,17 +35,9 @@ bool ModuleFightTimer::Start()
 
 update_status ModuleFightTimer::Update()
 {
-	if (timer_num != 0)
-	{
-		timer_counter++;
-		if (timer_counter == 60)
-		{
-			timer_num--;
-			timer_counter = 0;
-		}
-	}
 
-	int time = timer_num;
+
+	int time = App->fight_manager->Time();
 	if (time > 90)
 		time = 90;
 

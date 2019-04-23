@@ -29,7 +29,6 @@ void ModulePlayer::Jump() {
 	}
 }
 
-
 int ModulePlayer::Health() 
 {
 	return health;
@@ -149,7 +148,32 @@ bool ModulePlayer::CleanUp()
 	return true;
 }
 
-// Update: draw background
+void ModulePlayer::Reset()
+{
+	health = 100;
+	if (player == 0)
+	{
+		this->player = 0;
+		position.x = 100;
+		position.y = 220;
+	}
+	if (player != 0)
+	{
+		this->player = 1;
+		position.x = 200;
+		position.y = 220;
+	}
+	current_animation = &idle;
+	lockX = false;
+	jumping = false;
+	punching = false;
+	kicking = false;
+	crowchaction = false;
+	t = 0; 
+	at = 0; 
+	vy = 0;
+}
+
 update_status ModulePlayer::Update()
 {
 	if (punching == true) {
@@ -172,8 +196,7 @@ update_status ModulePlayer::Update()
 			kicking = false;
 		}
 	}
-	if (App->input->keyboard[SDL_SCANCODE_E] == KEY_STATE::KEY_REPEAT)
-		score += 10000;
+	
 
 	Jump();
 	if (player == 0)

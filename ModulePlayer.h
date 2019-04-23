@@ -19,6 +19,7 @@ public:
 	int Health();
 	int Score();
 	bool CleanUp();
+	void Reset();
 
 private:
 

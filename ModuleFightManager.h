@@ -13,10 +13,14 @@ public:
 	bool Start();
 	update_status Update();
 	bool CleanUp();
+	int Time();
 private:
-	int winner;
+	int winner; // 0 = P1_win, 1 = P2_win, 2 = draw
 	int pl_won_rounds;
 	int en_won_rounds;
+	int timer_num;
+	int timer_counter;
+	void Reset();
 };
 
 #endif
