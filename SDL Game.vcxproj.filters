@@ -83,6 +83,9 @@
     <ClInclude Include="ModuleFightTimer.h">
       <Filter>Modules\Fight Modules</Filter>
     </ClInclude>
+    <ClInclude Include="ModuleFightManager.h">
+      <Filter>Modules\Fight Modules</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -131,6 +134,9 @@
       <Filter>Modules\Utility Modules</Filter>
     </ClCompile>
     <ClCompile Include="ModuleFightTimer.cpp">
+      <Filter>Modules\Fight Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleFightManager.cpp">
       <Filter>Modules\Fight Modules</Filter>
     </ClCompile>
   </ItemGroup>

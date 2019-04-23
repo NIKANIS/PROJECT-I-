@@ -13,6 +13,7 @@
 #include "ModuleLifeBar.h"
 #include "ModulePlayerScore.h"
 #include "ModuleFightTimer.h"
+#include "ModuleFightManager.h"
 
 Application::Application()
 {
@@ -32,6 +33,7 @@ Application::Application()
 	modules[13] = plscore = new ModulePlayerScore(0);
 	modules[14] = enscore = new ModulePlayerScore(1);
 	modules[15] = fight_timer = new ModuleFightTimer();
+	modules[16] = fight_manager = new ModuleFightManager();
 }	
 
 Application::~Application()
@@ -53,6 +55,7 @@ bool Application::Init()
 	plscore->Disable();
 	enscore->Disable();
 	fight_timer->Disable();
+	fight_manager->Disable();
 
 	for(int i = 0; i < NUM_MODULES && ret == true; ++i)
 		ret = modules[i]->Init();

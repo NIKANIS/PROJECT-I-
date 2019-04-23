@@ -4,10 +4,10 @@
 #include "ModuleScenePaoPao.h"
 #include "ModuleTextures.h"
 #include "ModuleRender.h"
-#include "ModulePlayer.h"
 #include "ModuleInput.h"
 #include "ModuleFadeToBlack.h"
-#include "ModuleFightTimer.h"
+#include "ModuleFightManager.h"
+
 
 // Reference at https://www.youtube.com/watch?v=OEhmUuehGOA
 
@@ -32,9 +32,8 @@ bool ModuleScenePaoPao::Start()
 	back_graphics1 = App->textures->Load("SPRITES FATAL FURY/Stages/1 Pao Pao Cafe(Richard)/frame_1.png");
 
 	// TODO 1: Enable (and properly disable) the player module
-	App->player->Enable();
-	App->enemy->Enable();
-	App->fight_timer->Enable();
+	App->fight_manager->Enable();
+
 
 	return true;
 }
@@ -43,9 +42,8 @@ bool ModuleScenePaoPao::Start()
 bool ModuleScenePaoPao::CleanUp()
 {
 	LOG("Unloading ken scene");
-	App->player->Disable();
-	App->enemy->Disable();
-	App->fight_timer->Disable();
+	App->fight_manager->Disable();
+
 
 	return true;
 }
