@@ -18,6 +18,11 @@ ModuleScenePaoPao::ModuleScenePaoPao()
 	ground.y = 0;
 	ground.w = 512;
 	ground.h = 224;
+
+	//background
+	background.PushBack({ 36, 72, 512, 224 });
+	background.PushBack({ 487, 318, 512, 224 });
+	background.speed = 0.05f;
 }
 
 ModuleScenePaoPao::~ModuleScenePaoPao()
@@ -26,12 +31,12 @@ ModuleScenePaoPao::~ModuleScenePaoPao()
 // Load assets
 bool ModuleScenePaoPao::Start()
 {
-	LOG("Loading ken scene");
-	
-	back_graphics = App->textures->Load("SPRITES FATAL FURY/Stages/1 Pao Pao Cafe(Richard)/frame_0.png");
-	back_graphics1 = App->textures->Load("SPRITES FATAL FURY/Stages/1 Pao Pao Cafe(Richard)/frame_1.png");
+	LOG("Loading Pao Pao scene");
+
 	music = App->audio->loadMusic("AUDIO FATAL FURY/MUSIC[OGG]/Fatal Fury King of Fighters - Halema School of Capoeira Fight Song (Richard Meyer Theme).ogg");
 	App->audio->playMusic(music);
+
+	back_graphics = App->textures->Load("SPRITES FATAL FURY/Stages/1 Pao Pao Cafe(Richard)/sprites paopao.png");
 
 	App->fight_manager->Enable();
 
@@ -41,7 +46,7 @@ bool ModuleScenePaoPao::Start()
 // UnLoad assets
 bool ModuleScenePaoPao::CleanUp()
 {
-	LOG("Unloading ken scene");
+	LOG("Unloading Pao Pao scene");
 	App->fight_manager->Disable();
 	App->audio->Disable();
 
@@ -53,7 +58,7 @@ update_status ModuleScenePaoPao::Update()
 {
 
 	// Draw everything --------------------------------------
-	App->render->Blit(back_graphics, 0, 0, &ground, 0.75f); // background
+	App->render->Blit(back_graphics, 0, 0, &(background.GetCurrentFrame()), 0.92f);
 
 	// pressing O game is restarted
 	if (App->input->keyboard[SDL_SCANCODE_Q] == KEY_STATE::KEY_DOWN)

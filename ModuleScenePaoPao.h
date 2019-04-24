@@ -20,7 +20,6 @@ public:
 public:
 	Mix_Music* music = nullptr;
 	SDL_Texture* back_graphics = nullptr;
-	SDL_Texture* back_graphics1 = nullptr;
 	SDL_Rect ground;
 	Animation background;
 
