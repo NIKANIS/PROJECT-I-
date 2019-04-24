@@ -30,10 +30,10 @@ bool ModuleScenePaoPao::Start()
 	
 	back_graphics = App->textures->Load("SPRITES FATAL FURY/Stages/1 Pao Pao Cafe(Richard)/frame_0.png");
 	back_graphics1 = App->textures->Load("SPRITES FATAL FURY/Stages/1 Pao Pao Cafe(Richard)/frame_1.png");
+	music = App->audio->loadMusic("AUDIO FATAL FURY/MUSIC[OGG]/Fatal Fury King of Fighters - Halema School of Capoeira Fight Song (Richard Meyer Theme).ogg");
+	App->audio->playMusic(music);
 
-	// TODO 1: Enable (and properly disable) the player module
 	App->fight_manager->Enable();
-
 
 	return true;
 }
@@ -43,7 +43,7 @@ bool ModuleScenePaoPao::CleanUp()
 {
 	LOG("Unloading ken scene");
 	App->fight_manager->Disable();
-
+	App->audio->Disable();
 
 	return true;
 }

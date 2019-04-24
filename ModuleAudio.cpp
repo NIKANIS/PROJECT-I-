@@ -1,103 +1,87 @@
 #include "Globals.h"
 #include "Application.h"
+#include "ModuleRender.h"
+#include "ModuleWindow.h"
+#include "ModuleInput.h"
 #include "ModuleAudio.h"
-#include "SDL_Mixer/include/SDL_mixer.h"
+
 #include "SDL/include/SDL.h"
-#pragma comment( lib, "SDL_Mixer/libx86/SDL2_Mixer.lib" )
+#include "SDL_mixer/include/SDL_mixer.h"
+#pragma comment( lib, "SDL_mixer/libx86/SDL2_mixer.lib" )
+
 
 ModuleAudio::ModuleAudio() : Module()
 {
-	for (int i = 0; i < MAX_CHUNKS; i++) {
-		chunks[i] = nullptr;
-	}
 }
 
+// Destructor
 ModuleAudio::~ModuleAudio()
 {}
 
-// Called before audio is available
+// Called before render is available
 bool ModuleAudio::Init()
 {
-	LOG("Init SDL Audio event system");
+	LOG("Init SDL input event system");
 	bool ret = true;
-	SDL_Init(0);
-
-	if (Mix_Init(MIX_INIT_OGG) < 0)
-	{
-		LOG("Mix_Init Error: %s\n", SDL_GetError());
+	int Audioflags = MIX_INIT_OGG | MIX_INIT_MOD;
+	int initted2 = Mix_Init(Audioflags);
+	if (initted2&Audioflags != Audioflags) {
+		LOG("Mix_Init: Failed to init required ogg and mod support!\n");
+		LOG("Mix_Init: %s\n", Mix_GetError());
 		ret = false;
-	}
-	if (Mix_OpenAudio(MIX_DEFAULT_FREQUENCY, MIX_DEFAULT_FORMAT, 2, 1048) < 0)
-	{
-		LOG("Mix_Init Error: %s\n", SDL_GetError());
-		ret = false;
+		// handle error
 	}
 
-	Mix_VolumeMusic(DEFAULT_VOLUME);
-	chunks[0] = LoadChunk("AUDIO FATAL FURY/FX[WAV]/Voice/Special Attacks/FX_BurnKnuckleAttackTerryBogardVoice.wav");
+	if (SDL_Init(SDL_INIT_AUDIO) == -1) {
+		LOG("SDL_Init: %s\n", SDL_GetError());
+		exit(1);
+	}
+	// open 44.1KHz, signed 16bit, system byte order,
+	//      stereo audio, using 1024 byte chunks
+	if (Mix_OpenAudio(22050, MIX_DEFAULT_FORMAT, 2, 4096) == -1) {
+		LOG("Mix_OpenAudio: %s\n", Mix_GetError());
+		exit(2);
+	}
 
 	return ret;
 }
 
-update_status ModuleAudio::Update() {
-	update_status update = UPDATE_CONTINUE;
-	return update;
+// Called every draw update
+update_status ModuleAudio::Update()
+{
+	return update_status::UPDATE_CONTINUE;
 }
 
+// Called before quitting
 bool ModuleAudio::CleanUp()
 {
-	bool ret = true;
-
-
+	LOG("Quitting SDL mixer");
+	SDL_QuitSubSystem(SDL_INIT_AUDIO);
 	Mix_CloseAudio();
 	Mix_Quit();
-
-	return ret;
-}
-
-void ModuleAudio::StopMusic() {
-	while (!Mix_FadeOutMusic(2000) && Mix_PlayingMusic()) {
-		SDL_Delay(80);
-	}
-	Mix_FadeOutMusic(2000);
-}
-
-Mix_Chunk * ModuleAudio::LoadChunk(const char* path)
-{
-	Mix_Chunk* chunk = nullptr;
-	chunk = Mix_LoadWAV(path);
-	if (chunk == NULL) {
-		LOG("Mix_LoadWAV: %s\n", Mix_GetError());
-
-	};
-	chunks[chunk_number] = chunk;
-	chunk_number++;
-	if (chunk_number == MAX_CHUNKS) chunk_number %= MAX_CHUNKS;
-	return chunk;
-}
-
-bool ModuleAudio::PlayChunk(Mix_Chunk * sound)
-{
-	Mix_PlayChannel(-1, sound, 0);
 	return true;
 }
 
-bool ModuleAudio::PlayMusic(const char* path, int loops)
+Mix_Chunk* const ModuleAudio::loadWAV(const char* path)
+{
+	return Mix_LoadWAV(path);
+}
+
+Mix_Music* const ModuleAudio::loadMusic(const char* path)
+{
+	return  Mix_LoadMUS(path);
+}
+
+bool ModuleAudio::playMusic(Mix_Music *music)
+{ 
+	bool ret = true; 
+	Mix_PlayMusic(music, -1); 
+	return ret;
+}
+
+bool ModuleAudio::playFx(Mix_Chunk *chunk)
 {
 	bool ret = true;
-
-	//Mix_VolumeMusic(0);
-
-	music = Mix_LoadMUS(path);
-
-	if (!music) {
-		LOG("Mix_LoadMUS: %s\n", Mix_GetError());
-		ret = false;
-	};
-
-	if (Mix_FadeInMusic(music, loops, 2000) < 0) {
-		LOG("Mix_PlayMusic: %s\n", Mix_GetError());
-		ret = false;
-	}
+	Mix_PlayChannel(-1, chunk, 0); 
 	return ret;
 }

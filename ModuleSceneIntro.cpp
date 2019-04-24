@@ -7,6 +7,7 @@
 #include "ModulePlayer.h"
 #include "ModuleInput.h"
 #include "ModuleFadeToBlack.h"
+#include "ModuleAudio.h"
 
 // Reference at https://youtu.be/6OlenbCC4WI?t=382
 
@@ -26,16 +27,16 @@ bool ModuleSceneIntro::Start()
 	LOG("Loading background assets");
 	bool ret = true;
 	graphics = App->textures->Load("SPRITES FATAL FURY/UI/3.Start_Screen_FF/fatfury1011.png");
-
+	music = App->audio->loadMusic("AUDIO FATAL FURY/MUSIC[OGG]/Fatal Fury King of Fighters-(Opening Arcade-Console).ogg");
+	App->audio->playMusic(music);
 	return ret;
 }
 
 // Load assets
 bool ModuleSceneIntro::CleanUp()
 {
-	// TODO 5: Remove all memory leaks
-	LOG("Unloading honda stage");
-	App->player->Disable();
+	LOG("Unloading intro");
+	App->audio->Disable();
 
 	return true;
 }

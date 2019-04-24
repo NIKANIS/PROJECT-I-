@@ -3,6 +3,7 @@
 
 #include "Module.h"
 #include "Animation.h"
+#include "ModuleAudio.h"
 #include "Globals.h"
 
 struct SDL_Texture;
@@ -22,6 +23,7 @@ public:
 	SDL_Texture* graphics = nullptr;
 	SDL_Rect background;
 	Animation water;
+	Mix_Music* music = nullptr;
 };
 
 #endif // __MODULESCENEINTRO_H__
