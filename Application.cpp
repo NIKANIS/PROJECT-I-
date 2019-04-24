@@ -14,6 +14,7 @@
 #include "ModulePlayerScore.h"
 #include "ModuleFightTimer.h"
 #include "ModuleFightManager.h"
+#include "ModuleCollision.h"
 
 Application::Application()
 {
@@ -34,6 +35,9 @@ Application::Application()
 	modules[14] = enscore = new ModulePlayerScore(1);
 	modules[15] = fight_timer = new ModuleFightTimer();
 	modules[16] = fight_manager = new ModuleFightManager();
+	modules[17] = collision = new ModuleCollision();
+	
+	
 }	
 
 Application::~Application()

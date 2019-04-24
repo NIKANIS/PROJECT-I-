@@ -3,7 +3,7 @@
 
 #include "Globals.h"
 
-#define NUM_MODULES 17
+#define NUM_MODULES 18
 
 class ModuleWindow;
 class ModuleInput;
@@ -20,6 +20,7 @@ class ModuleLifeBar;
 class ModulePlayerScore;
 class ModuleFightTimer;
 class ModuleFightManager;
+class ModuleCollision;
 
 class Application
 {
@@ -43,6 +44,7 @@ public:
 	ModulePlayerScore* enscore;
 	ModuleFightTimer* fight_timer;
 	ModuleFightManager* fight_manager;
+	ModuleCollision* collision;
 
 public:
 
