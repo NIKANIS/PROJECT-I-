@@ -36,6 +36,7 @@ private:
 	Animation backward;
 	Animation punchstanding;
 	Animation kickingstanding;
+	Animation specialattack;
 	iPoint position;
 	int health;
 	int score;
@@ -44,6 +45,7 @@ private:
 	bool punching = false; //true while punching
 	bool kicking = false; //true while kicking
 	bool crowchaction = false; //true while crowching
+	bool specialattack_ = false; //true while special attacking
 	int t = 0; //jumping coldown time
 	int at = 0; //attack coldown time
 	int vy = 0; //velocity y
