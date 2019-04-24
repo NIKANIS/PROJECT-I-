@@ -18,6 +18,11 @@ ModuleScenePaoPao::ModuleScenePaoPao()
 	ground.y = 0;
 	ground.w = 512;
 	ground.h = 224;
+
+	//background
+	background.PushBack({ 36, 72, 512, 224 });
+	background.PushBack({ 487, 318, 512, 224 });
+	background.speed = 0.05f;
 }
 
 ModuleScenePaoPao::~ModuleScenePaoPao()
@@ -28,8 +33,7 @@ bool ModuleScenePaoPao::Start()
 {
 	LOG("Loading ken scene");
 	
-	back_graphics = App->textures->Load("SPRITES FATAL FURY/Stages/1 Pao Pao Cafe(Richard)/frame_0.png");
-	back_graphics1 = App->textures->Load("SPRITES FATAL FURY/Stages/1 Pao Pao Cafe(Richard)/frame_1.png");
+	back_graphics = App->textures->Load("SPRITES FATAL FURY/Stages/1 Pao Pao Cafe(Richard)/sprites paopao.png");
 
 	// TODO 1: Enable (and properly disable) the player module
 	App->fight_manager->Enable();
@@ -53,7 +57,7 @@ update_status ModuleScenePaoPao::Update()
 {
 
 	// Draw everything --------------------------------------
-	App->render->Blit(back_graphics, 0, 0, &ground, 0.75f); // background
+	App->render->Blit(back_graphics, 0, 0, &(background.GetCurrentFrame()), 0.92f);
 
 	// pressing O game is restarted
 	if (App->input->keyboard[SDL_SCANCODE_Q] == KEY_STATE::KEY_DOWN)
