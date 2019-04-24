@@ -89,6 +89,12 @@
     <ClInclude Include="ModuleCollision.h">
       <Filter>Modules\Fight Modules</Filter>
     </ClInclude>
+    <ClInclude Include="ModuleSceneCongrats.h">
+      <Filter>Modules\Scene Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleSceneGameOver.h">
+      <Filter>Modules\Scene Modules</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -144,6 +150,12 @@
     </ClCompile>
     <ClCompile Include="ModuleCollision.cpp">
       <Filter>Modules\Fight Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleSceneCongrats.cpp">
+      <Filter>Modules\Scene Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleSceneGameOver.cpp">
+      <Filter>Modules\Scene Modules</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

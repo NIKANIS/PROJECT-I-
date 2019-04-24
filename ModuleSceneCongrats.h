@@ -1,5 +1,5 @@
-#ifndef __MODULESCENEINTRO_H__
-#define __MODULESCENEINTRO_H__
+#ifndef __MODULESCENECONGRATS_H__
+#define __MODULESCENECONGRATS_H__
 
 #include "Module.h"
 #include "Animation.h"
@@ -7,11 +7,11 @@
 
 struct SDL_Texture;
 
-class ModuleSceneIntro : public Module
+class ModuleSceneCongrats : public Module
 {
 public:
-	ModuleSceneIntro();
-	~ModuleSceneIntro();
+	ModuleSceneCongrats();
+	~ModuleSceneCongrats();
 
 	bool Start();
 	update_status Update();
@@ -24,4 +24,4 @@ public:
 	Animation water;
 };
 
-#endif // __MODULESCENEINTRO_H__
+#endif // __MODULESCENECONGRATS_H__

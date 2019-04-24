@@ -22,7 +22,7 @@ bool ModuleParticles::Start()
 	LOG("Loading particles");
 	graphics = App->textures->Load("SPRITES FATAL FURY/CHARACTERS/1-Terry Bogard/spritesTerryBogard.png");
 
-	// TODO 2: Create the template for a new particle
+	// Terry skill
 	skill.anim.PushBack({ 611, 274, 18, 42 });
 	skill.anim.PushBack({ 577, 247, 18, 69 });
 	skill.anim.PushBack({ 645, 219, 18, 97 });
@@ -72,6 +72,7 @@ update_status ModuleParticles::Update()
 			{
 				p->fx_played = true;
 				// Play particle fx here
+
 			}
 		}
 	}

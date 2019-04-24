@@ -6,6 +6,8 @@
 #include "ModuleAudio.h"
 #include "ModuleScenePaoPao.h"
 #include "ModuleSceneIntro.h"
+#include "ModuleSceneCongrats.h"
+#include "ModuleSceneGameOver.h"
 #include "ModulePlayer.h"
 #include "ModuleFadeToBlack.h"
 #include "ModuleAudio.h"
@@ -36,6 +38,8 @@ Application::Application()
 	modules[15] = fight_timer = new ModuleFightTimer();
 	modules[16] = fight_manager = new ModuleFightManager();
 	modules[17] = collision = new ModuleCollision();
+	modules[18] = scene_congrats = new ModuleSceneCongrats();
+	modules[19] = scene_gameover = new ModuleSceneGameOver();
 	
 	
 }	
@@ -54,6 +58,8 @@ bool Application::Init()
 	player->Disable();
 	enemy->Disable();
 	scene_paopao->Disable();
+	scene_congrats->Disable();
+	scene_gameover->Disable();
 	lifebar->Disable();
 	lifebar2->Disable();
 	plscore->Disable();
