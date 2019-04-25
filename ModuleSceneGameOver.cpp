@@ -51,7 +51,7 @@ update_status ModuleSceneGameOver::Update()
 
 	if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN)
 	{
-		App->fade->FadeToBlack(App->scene_intro, App->scene_paopao);
+		App->fade->FadeToBlack(App->scene_gameover, App->scene_intro);
 	}
 
 	return UPDATE_CONTINUE;
