@@ -7,6 +7,8 @@
 #include "ModuleParticles.h"
 #include "ModuleLifeBar.h"
 #include "ModulePlayerScore.h"
+#include "ModuleCollision.h"
+#include "ModuleFadeToBlack.h"
 
 // Reference at https://www.youtube.com/watch?v=OEhmUuehGOA
 
@@ -128,11 +130,13 @@ bool ModulePlayer::Start()
 	{
 		App->lifebar->Enable();
 		App->plscore->Enable();
+		player_col = App->collision->AddCollider({ position.x, position.y - 91, 49, 91 }, COLLIDER_PLAYER);
 	}
 	if (player == 1) 
 	{
 		App->lifebar2->Enable();
 		App->enscore->Enable();
+		enemy_col = App->collision->AddCollider({ position.x, position.y - 91, 49, 91 }, COLLIDER_ENEMY, App->player);
 	}
 	bool ret = true;
 	graphics = App->textures->Load("SPRITES FATAL FURY/CHARACTERS/1-Terry Bogard/Terry Bogard.gif"); // arcade version
@@ -218,6 +222,7 @@ update_status ModulePlayer::Update()
 
 	if (player == 0)
 	{
+		
 
 		if (App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT && !lockX && !punching && !kicking && !specialattack_)
 		{
@@ -317,6 +322,8 @@ update_status ModulePlayer::Update()
 			&& App->input->keyboard[SDL_SCANCODE_S] == KEY_STATE::KEY_IDLE
 			&& !jumping && !punching && !kicking && !specialattack_)
 			current_animation = &idle;
+		player_col->SetPos(position.x, position.y - 91);
+		
 	}
 
 	if (player == 1)
@@ -410,11 +417,19 @@ update_status ModulePlayer::Update()
 			&& App->input->keyboard[SDL_SCANCODE_DOWN] == KEY_STATE::KEY_IDLE
 			&& !jumping && !punching && !kicking)
 			current_animation = &idle;
+
+		enemy_col->SetPos(position.x, position.y - 91);
 	}
+	
 
 	SDL_Rect r = current_animation->GetCurrentFrame();
 
 	App->render->Blit(graphics, position.x, position.y - r.h, &r);
 	
 	return UPDATE_CONTINUE;
+}
+
+void ModulePlayer::OnCollision(Collider*, Collider*)
+{
+	App->fade->FadeToBlack((Module*)App->scene_paopao, (Module*)App->scene_gameover);
 }

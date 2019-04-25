@@ -71,9 +71,6 @@
     <ClInclude Include="ModulePlayerScore.h">
       <Filter>Modules\Fight Modules</Filter>
     </ClInclude>
-    <ClInclude Include="ModulePlayer.h">
-      <Filter>Modules\Fight Modules</Filter>
-    </ClInclude>
     <ClInclude Include="ModuleLifeBar.h">
       <Filter>Modules\Fight Modules</Filter>
     </ClInclude>
@@ -94,6 +91,9 @@
     </ClInclude>
     <ClInclude Include="ModuleSceneGameOver.h">
       <Filter>Modules\Scene Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="ModulePlayer.h">
+      <Filter>Modules</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -133,9 +133,6 @@
     <ClCompile Include="ModulePlayerScore.cpp">
       <Filter>Modules\Fight Modules</Filter>
     </ClCompile>
-    <ClCompile Include="ModulePlayer.cpp">
-      <Filter>Modules\Fight Modules</Filter>
-    </ClCompile>
     <ClCompile Include="ModuleLifeBar.cpp">
       <Filter>Modules\Fight Modules</Filter>
     </ClCompile>
@@ -156,6 +153,9 @@
     </ClCompile>
     <ClCompile Include="ModuleSceneGameOver.cpp">
       <Filter>Modules\Scene Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="ModulePlayer.cpp">
+      <Filter>Modules</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

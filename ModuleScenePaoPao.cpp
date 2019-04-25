@@ -9,8 +9,6 @@
 #include "ModuleFightManager.h"
 
 
-// Reference at https://www.youtube.com/watch?v=OEhmUuehGOA
-
 ModuleScenePaoPao::ModuleScenePaoPao()
 {
 	// ground

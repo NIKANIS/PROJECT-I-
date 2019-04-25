@@ -50,6 +50,10 @@ private:
 	int at = 0; //attack coldown time
 	int vy = 0; //velocity y
 	int player;
+
+	Collider* player_col = nullptr;
+	Collider* enemy_col = nullptr;
+	void OnCollision(Collider*, Collider*) override;
 };
 
 #endif
