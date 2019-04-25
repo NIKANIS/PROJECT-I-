@@ -6,6 +6,8 @@
 #include "ModuleFightTimer.h"
 #include "ModuleInput.h"
 #include "ModuleRoundDisplay.h"
+#include "ModuleFadeToBlack.h"
+
 
 
 ModuleFightManager::ModuleFightManager()
@@ -58,15 +60,8 @@ void ModuleFightManager::Reset()
 	timer_counter = 0;
 	time_stop = false;
 	blockpoints = false;
-}
-
-void ModuleFightManager::EndTimer()
-{
-	//timer_counter++;
-	//if (timer_counter >= 90 && winner != 0 && winner != 1)
-	//{
-		Reset();
-	//}
+	SDL_Rect none = { 0,0,0,0 };
+	f = none;
 }
 
 update_status ModuleFightManager::Update()
@@ -88,7 +83,6 @@ update_status ModuleFightManager::Update()
 		time_stop = true;
 		f = win;
 		timer_counter = 0;
-		EndTimer();
 	}
 	else if (App->enemy->Health() == 0 && !blockpoints)
 	{
@@ -97,7 +91,6 @@ update_status ModuleFightManager::Update()
 		time_stop = true;
 		f = lose;
 		timer_counter = 0;
-		EndTimer();
 	}
 
 	if (App->player->Health() == 0 && App->enemy->Health() == 0 && !blockpoints)
@@ -106,7 +99,6 @@ update_status ModuleFightManager::Update()
 		time_stop = true;
 		f = draw;
 		timer_counter = 0;
-		EndTimer();
 	}
 
 	if (timer_num == 0 && !blockpoints)
@@ -117,33 +109,41 @@ update_status ModuleFightManager::Update()
 			pl_won_rounds++;
 			f = win;
 			timer_counter = 0;
-			EndTimer();
 		}
 		if (App->player->Health() < App->enemy->Health())
 		{
 			en_won_rounds++;
 			f = lose;
 			timer_counter = 0;
-			EndTimer();
 		}
 		if (App->player->Health() == App->enemy->Health())
 		{
 			f = draw;
 			timer_counter = 0;
-			EndTimer();
 		}
 	}
 
+	if (blockpoints)
+	{
+		timer_counter++;
+		if (timer_counter >= 90 && winner != 0 && winner != 1)
+		{
+			Reset();
+		}
+	}
 	
 	if (pl_won_rounds >= 2 && pl_won_rounds > en_won_rounds)
 		winner = 0;
 	if (en_won_rounds >= 2 && pl_won_rounds < en_won_rounds)
 		winner = 1;
 
-	if (App->input->keyboard[SDL_SCANCODE_E] == KEY_STATE::KEY_DOWN)
-		Reset();
+	if (winner == 0)
+		App->fade->FadeToBlack((Module*)App->scene_paopao, (Module*)App->scene_congrats);
 
-	App->render->Blit(graphics, position.x, position.y, &f, 0.0f);
+	if (winner == 1)
+		App->fade->FadeToBlack((Module*)App->scene_paopao, (Module*)App->scene_gameover);
+
+	App->render->Blit(graphics, position.x - (f.w/2), position.y - (f.h/2), &f, 0.0f);
 
 	return update_status::UPDATE_CONTINUE;
 }
