@@ -57,15 +57,16 @@ void ModuleFightManager::Reset()
 	timer_num = 93;
 	timer_counter = 0;
 	time_stop = false;
+	blockpoints = false;
 }
 
 void ModuleFightManager::EndTimer()
 {
-	timer_counter++;
-	if (timer_counter == 90 && winner != 0 && winner != 1)
-	{
+	//timer_counter++;
+	//if (timer_counter >= 90 && winner != 0 && winner != 1)
+	//{
 		Reset();
-	}
+	//}
 }
 
 update_status ModuleFightManager::Update()
@@ -80,39 +81,55 @@ update_status ModuleFightManager::Update()
 		}
 	}
 
-	if (App->player->Health() == 0)
+	if (App->player->Health() == 0 && !blockpoints)
 	{
+		blockpoints = true;
 		en_won_rounds++;
 		time_stop = true;
+		f = win;
+		timer_counter = 0;
+		EndTimer();
 	}
-	else if (App->enemy->Health() == 0)
+	else if (App->enemy->Health() == 0 && !blockpoints)
 	{
+		blockpoints = true;
 		pl_won_rounds++;
 		time_stop = true;
+		f = lose;
+		timer_counter = 0;
+		EndTimer();
 	}
 
-	if (App->player->Health() == 0 && App->enemy->Health() == 0)
+	if (App->player->Health() == 0 && App->enemy->Health() == 0 && !blockpoints)
 	{
+		blockpoints = true;
 		time_stop = true;
+		f = draw;
+		timer_counter = 0;
+		EndTimer();
 	}
 
 	if (timer_num == 0 && !blockpoints)
 	{
+		blockpoints = true;
 		if (App->player->Health() > App->enemy->Health())
 		{
 			pl_won_rounds++;
-			App->render->Blit(graphics, position.x, position.y, &win, 0.0f);
+			f = win;
+			timer_counter = 0;
 			EndTimer();
 		}
 		if (App->player->Health() < App->enemy->Health())
 		{
 			en_won_rounds++;
-			App->render->Blit(graphics, position.x, position.y, &lose, 0.0f);
+			f = lose;
+			timer_counter = 0;
 			EndTimer();
 		}
 		if (App->player->Health() == App->enemy->Health())
 		{
-			App->render->Blit(graphics, position.x, position.y, &draw, 0.0f);
+			f = draw;
+			timer_counter = 0;
 			EndTimer();
 		}
 	}
@@ -125,6 +142,8 @@ update_status ModuleFightManager::Update()
 
 	if (App->input->keyboard[SDL_SCANCODE_E] == KEY_STATE::KEY_DOWN)
 		Reset();
+
+	App->render->Blit(graphics, position.x, position.y, &f, 0.0f);
 
 	return update_status::UPDATE_CONTINUE;
 }
