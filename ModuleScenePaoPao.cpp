@@ -47,6 +47,7 @@ bool ModuleScenePaoPao::CleanUp()
 	LOG("Unloading Pao Pao scene");
 	App->fight_manager->Disable();
 	App->audio->Disable();
+	App->textures->Unload(back_graphics);
 
 	return true;
 }

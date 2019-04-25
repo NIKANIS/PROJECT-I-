@@ -11,11 +11,12 @@ struct SDL_Texture;
 class ModuleLifeBar : public Module
 {
 public:
-	ModuleLifeBar(int player);
+	ModuleLifeBar(const int player);
 	~ModuleLifeBar();
 
 	bool Start();
 	update_status Update();
+	bool CleanUp();
 
 private:
 
@@ -24,6 +25,7 @@ private:
 	SDL_Rect health;
 	Animation healthy;
 	Animation lowhealth;
+	Animation dead;
 	iPoint position;
 	int player; //0 = P1 , 1 = P2
 

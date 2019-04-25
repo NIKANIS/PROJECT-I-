@@ -33,6 +33,12 @@ bool ModuleFightTimer::Start()
 	return true;
 }
 
+bool ModuleFightTimer::CleanUp()
+{
+	App->textures->Unload(graphics);
+	return true;
+}
+
 update_status ModuleFightTimer::Update()
 {
 

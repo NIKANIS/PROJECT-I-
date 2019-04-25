@@ -9,12 +9,12 @@ struct SDL_Texture;
 class ModulePlayerScore : public Module
 {
 public:
-	ModulePlayerScore(int player);
+	ModulePlayerScore(const int player);
 	~ModulePlayerScore();
 
 	bool Start();
 	update_status Update();
-	//bool CleanUp();
+	bool CleanUp();
 
 private:
 

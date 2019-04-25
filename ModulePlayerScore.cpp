@@ -8,7 +8,7 @@
 
 #define MAX_SCORE_D 5
 
-ModulePlayerScore::ModulePlayerScore(int player)
+ModulePlayerScore::ModulePlayerScore(const int player)
 {
 	position.x = HUD_X + 72;
 	position.y = HUD_Y - 17;
@@ -43,10 +43,11 @@ bool ModulePlayerScore::Start()
 	return true;
 }
 
-/*bool ModulePlayerScore::CleanUp()
+bool ModulePlayerScore::CleanUp()
 {
-
-}*/
+	App->textures->Unload(graphics);
+	return true;
+}
 
 update_status ModulePlayerScore::Update()
 {

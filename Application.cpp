@@ -17,6 +17,7 @@
 #include "ModuleFightTimer.h"
 #include "ModuleFightManager.h"
 #include "ModuleCollision.h"
+#include "ModuleRoundDisplay.h"
 
 Application::Application()
 {
@@ -40,6 +41,8 @@ Application::Application()
 	modules[17] = collision = new ModuleCollision();
 	modules[18] = scene_congrats = new ModuleSceneCongrats();
 	modules[19] = scene_gameover = new ModuleSceneGameOver();
+	modules[20] = round_pl = new ModuleRoundDisplay(0);
+	modules[21] = round_en = new ModuleRoundDisplay(1);
 	
 	
 }	
@@ -66,6 +69,8 @@ bool Application::Init()
 	enscore->Disable();
 	fight_timer->Disable();
 	fight_manager->Disable();
+	round_pl->Disable();
+	round_en->Disable();
 
 	for(int i = 0; i < NUM_MODULES && ret == true; ++i)
 		ret = modules[i]->Init();
