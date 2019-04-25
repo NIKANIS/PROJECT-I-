@@ -7,6 +7,7 @@
 #include "ModuleParticles.h"
 #include "ModuleLifeBar.h"
 #include "ModulePlayerScore.h"
+#include "SDL/include/SDL_timer.h"
 
 // Reference at https://www.youtube.com/watch?v=OEhmUuehGOA
 
@@ -208,6 +209,10 @@ update_status ModulePlayer::Update()
 
 	if (specialattack_ == true) {
 		at++;
+		if (at == 25) //para que añada la particula justo cuando el personaje toque al suelo
+		{
+			App->particles->AddParticle(App->particles->skillsmall, position.x + 40, position.y - 42);
+		}
 		if (at == 35)
 		{
 			specialattack_ = false;
@@ -303,7 +308,7 @@ update_status ModulePlayer::Update()
 				specialattack_ = true;
 				at = 0;
 				specialattack.Reset();
-				current_animation = &specialattack;
+				current_animation = &specialattack;				
 			}
 		}
 
