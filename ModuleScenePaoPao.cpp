@@ -7,6 +7,7 @@
 #include "ModuleInput.h"
 #include "ModuleFadeToBlack.h"
 #include "ModuleFightManager.h"
+#include "ModuleCollision.h"
 
 
 ModuleScenePaoPao::ModuleScenePaoPao()
@@ -48,6 +49,7 @@ bool ModuleScenePaoPao::CleanUp()
 	App->fight_manager->Disable();
 	App->audio->Disable();
 	App->textures->Unload(back_graphics);
+	App->collision->CleanUp();
 
 	return true;
 }
