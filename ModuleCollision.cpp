@@ -8,36 +8,51 @@ ModuleCollision::ModuleCollision()
 	for (uint i = 0; i < MAX_COLLIDERS; ++i)
 		colliders[i] = nullptr;
 
-	matrix[COLLIDER_WALL][COLLIDER_WALL] = false;
-	matrix[COLLIDER_WALL][COLLIDER_PLAYER] = true;
-	matrix[COLLIDER_WALL][COLLIDER_ENEMY] = true;
-	matrix[COLLIDER_WALL][COLLIDER_PLAYER_SHOT] = true;
-	matrix[COLLIDER_WALL][COLLIDER_ENEMY_SHOT] = true;
-
-	matrix[COLLIDER_PLAYER][COLLIDER_WALL] = true;
 	matrix[COLLIDER_PLAYER][COLLIDER_PLAYER] = false;
 	matrix[COLLIDER_PLAYER][COLLIDER_ENEMY] = true;
-	matrix[COLLIDER_PLAYER][COLLIDER_PLAYER_SHOT] = false;
-	matrix[COLLIDER_PLAYER][COLLIDER_ENEMY_SHOT] = true;
+	matrix[COLLIDER_PLAYER][COLLIDER_PLAYER_ATTACK] = false;
+	matrix[COLLIDER_PLAYER][COLLIDER_ENEMY_ATTACK] = true;
+	matrix[COLLIDER_PLAYER][COLLIDER_PLAYER_SKILL] = false;
+	matrix[COLLIDER_PLAYER][COLLIDER_ENEMY_SKILL] = true;
 
-	matrix[COLLIDER_ENEMY][COLLIDER_WALL] = true;
 	matrix[COLLIDER_ENEMY][COLLIDER_PLAYER] = true;
 	matrix[COLLIDER_ENEMY][COLLIDER_ENEMY] = false;
-	matrix[COLLIDER_ENEMY][COLLIDER_PLAYER_SHOT] = true;
-	matrix[COLLIDER_ENEMY][COLLIDER_ENEMY_SHOT] = false;
+	matrix[COLLIDER_ENEMY][COLLIDER_PLAYER_ATTACK] = true;
+	matrix[COLLIDER_ENEMY][COLLIDER_ENEMY_ATTACK] = false;
+	matrix[COLLIDER_ENEMY][COLLIDER_PLAYER_SKILL] = true;
+	matrix[COLLIDER_ENEMY][COLLIDER_ENEMY_SKILL] = false;
 
-	matrix[COLLIDER_PLAYER_SHOT][COLLIDER_WALL] = true;
-	matrix[COLLIDER_PLAYER_SHOT][COLLIDER_PLAYER] = false;
-	matrix[COLLIDER_PLAYER_SHOT][COLLIDER_ENEMY] = true;
-	matrix[COLLIDER_PLAYER_SHOT][COLLIDER_PLAYER_SHOT] = false;
-	matrix[COLLIDER_PLAYER_SHOT][COLLIDER_ENEMY_SHOT] = false;
+	matrix[COLLIDER_PLAYER_SKILL][COLLIDER_ENEMY_ATTACK] = true;
+	matrix[COLLIDER_PLAYER_SKILL][COLLIDER_PLAYER_ATTACK] = false;
+	matrix[COLLIDER_PLAYER_SKILL][COLLIDER_PLAYER] = false;
+	matrix[COLLIDER_PLAYER_SKILL][COLLIDER_ENEMY] = true;
+	matrix[COLLIDER_PLAYER_SKILL][COLLIDER_PLAYER_SKILL] = false;
+	matrix[COLLIDER_PLAYER_SKILL][COLLIDER_ENEMY_SKILL] = false;
 
-	matrix[COLLIDER_ENEMY_SHOT][COLLIDER_WALL] = true;
-	matrix[COLLIDER_ENEMY_SHOT][COLLIDER_PLAYER] = true;
-	matrix[COLLIDER_ENEMY_SHOT][COLLIDER_ENEMY] = false;
-	matrix[COLLIDER_ENEMY_SHOT][COLLIDER_PLAYER_SHOT] = false;
-	matrix[COLLIDER_ENEMY_SHOT][COLLIDER_ENEMY_SHOT] = false;
+	matrix[COLLIDER_ENEMY_SKILL][COLLIDER_PLAYER_ATTACK] = true;
+	matrix[COLLIDER_ENEMY_SKILL][COLLIDER_ENEMY_ATTACK] = false;
+	matrix[COLLIDER_ENEMY_SKILL][COLLIDER_PLAYER] = true;
+	matrix[COLLIDER_ENEMY_SKILL][COLLIDER_ENEMY] = false;
+	matrix[COLLIDER_ENEMY_SKILL][COLLIDER_PLAYER_SKILL] = false;
+	matrix[COLLIDER_ENEMY_SKILL][COLLIDER_ENEMY_SKILL] = false;
+
+	matrix[COLLIDER_PLAYER_ATTACK][COLLIDER_PLAYER_ATTACK] = false;
+	matrix[COLLIDER_PLAYER_ATTACK][COLLIDER_ENEMY_ATTACK] = true;
+	matrix[COLLIDER_PLAYER_ATTACK][COLLIDER_PLAYER] = false;
+	matrix[COLLIDER_PLAYER_ATTACK][COLLIDER_ENEMY] = true;
+	matrix[COLLIDER_PLAYER_ATTACK][COLLIDER_PLAYER_SKILL] = false;
+	matrix[COLLIDER_PLAYER_ATTACK][COLLIDER_ENEMY_SKILL] = false;
+
+	matrix[COLLIDER_ENEMY_ATTACK][COLLIDER_PLAYER_ATTACK] = true;
+	matrix[COLLIDER_ENEMY_ATTACK][COLLIDER_ENEMY_ATTACK] = false;
+	matrix[COLLIDER_ENEMY_ATTACK][COLLIDER_PLAYER] = true;
+	matrix[COLLIDER_ENEMY_ATTACK][COLLIDER_ENEMY] = false;
+	matrix[COLLIDER_ENEMY_ATTACK][COLLIDER_PLAYER_SKILL] = false;
+	matrix[COLLIDER_ENEMY_ATTACK][COLLIDER_ENEMY_SKILL] = false;
+
+
 }
+
 
 // Destructor
 ModuleCollision::~ModuleCollision()
@@ -101,7 +116,7 @@ update_status ModuleCollision::Update()
 
 void ModuleCollision::DebugDraw()
 {
-	if (App->input->keyboard[SDL_SCANCODE_F1] == KEY_DOWN)
+	if (App->input->keyboard[SDL_SCANCODE_F5] == KEY_DOWN)
 		debug = !debug;
 
 	if (debug == false)
@@ -118,7 +133,10 @@ void ModuleCollision::DebugDraw()
 		case COLLIDER_NONE: // white
 			App->render->DrawQuad(colliders[i]->rect, 255, 255, 255, alpha);
 			break;
-		case COLLIDER_WALL: // blue
+		case COLLIDER_PLAYER_ATTACK: // blue
+			App->render->DrawQuad(colliders[i]->rect, 0, 0, 255, alpha);
+			break;
+		case COLLIDER_ENEMY_ATTACK: // blue
 			App->render->DrawQuad(colliders[i]->rect, 0, 0, 255, alpha);
 			break;
 		case COLLIDER_PLAYER: // green
@@ -127,10 +145,10 @@ void ModuleCollision::DebugDraw()
 		case COLLIDER_ENEMY: // red
 			App->render->DrawQuad(colliders[i]->rect, 255, 0, 0, alpha);
 			break;
-		case COLLIDER_PLAYER_SHOT: // yellow
+		case COLLIDER_PLAYER_SKILL: // yellow
 			App->render->DrawQuad(colliders[i]->rect, 255, 255, 0, alpha);
 			break;
-		case COLLIDER_ENEMY_SHOT: // magenta
+		case COLLIDER_ENEMY_SKILL: // magenta
 			App->render->DrawQuad(colliders[i]->rect, 0, 255, 255, alpha);
 			break;
 		}
@@ -174,9 +192,6 @@ Collider* ModuleCollision::AddCollider(SDL_Rect rect, COLLIDER_TYPE type, Module
 
 bool Collider::CheckCollision(const SDL_Rect& r) const
 {
-	// TODO 0: Return true if there is an overlap
-	// between argument "r" and property "rect"
-
 	return (rect.x < r.x + r.w &&
 		rect.x + rect.w > r.x &&
 		rect.y < r.y + r.h &&

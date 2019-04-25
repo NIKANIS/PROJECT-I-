@@ -6,7 +6,7 @@
 #include "ModulePlayer.h"
 #include "ModuleLifeBar.h"
 
-ModuleLifeBar::ModuleLifeBar(int player)
+ModuleLifeBar::ModuleLifeBar(const int player)
 {
 	position.x = HUD_X;
 	position.y = HUD_Y;
@@ -23,6 +23,8 @@ ModuleLifeBar::ModuleLifeBar(int player)
 
 		lowhealth.PushBack({ 1,0,113,17 });
 		lowhealth.PushBack({ 1,36,113,17 });
+
+		dead.PushBack({ 1,36,113,17 });
 		
 	}
 	if (player != 0)
@@ -32,6 +34,8 @@ ModuleLifeBar::ModuleLifeBar(int player)
 
 		lowhealth.PushBack({ 1,18,113,17 });
 		lowhealth.PushBack({ 1,54,113,17 });
+
+		dead.PushBack({ 1,54,113,17 });
 	}
 }
 
@@ -44,6 +48,12 @@ bool ModuleLifeBar::Start()
 	return true;
 }
 
+bool ModuleLifeBar::CleanUp()
+{
+	App->textures->Unload(graphics);
+	return true;
+}
+
 update_status ModuleLifeBar::Update()
 {
 	Animation* current_animation = &healthy;
@@ -51,19 +61,31 @@ update_status ModuleLifeBar::Update()
 	if (player == 0)
 	{
 		health = { 1,72,App->player->Health(),7 };
+		if (App->player->Health() <= 20)
+		{
+			current_animation = &lowhealth;
+		}
+
+		if (App->player->Health() <= 0)
+		{
+			current_animation = &dead;
+		}
 	}
 
 	if (player == 1)
 	{
-		health = { 1 + (100 - App->enemy->Health()),72,App->player->Health(),7 };
+		health = { 1 + (100 - App->enemy->Health()),72,App->enemy->Health(),7 };
+		if (App->enemy->Health() <= 20)
+		{
+			current_animation = &lowhealth;
+		}
+
+		if (App->enemy->Health() <= 0)
+		{
+			current_animation = &dead;
+		}
 	}
 
-	if (App->player->Health() <= 20)
-	{
-		current_animation = &lowhealth;
-	}
-
-	// Draw everything --------------------------------------
 	SDL_Rect r = current_animation->GetCurrentFrame();
 
 	

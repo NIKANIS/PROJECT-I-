@@ -11,5 +11,9 @@ TEAM MEMBERS
 - How to play the game, detailing the controls
 
 - Changelist of all previous versions
+0.1
+	Scroll Pao Pao Cafe scene with moduleAudio ready.
+0.2
+	Terry throw a punch, kick and make the skill animation. Also added some scenes like game over scene and congrats scene but cannot acces to them yet.
 
 -https://github.com/NIKANIS/PROJECT-I-

@@ -7,9 +7,8 @@
 #include "ModuleInput.h"
 #include "ModuleFadeToBlack.h"
 #include "ModuleFightManager.h"
+#include "ModuleCollision.h"
 
-
-// Reference at https://www.youtube.com/watch?v=OEhmUuehGOA
 
 ModuleScenePaoPao::ModuleScenePaoPao()
 {
@@ -49,6 +48,8 @@ bool ModuleScenePaoPao::CleanUp()
 	LOG("Unloading Pao Pao scene");
 	App->fight_manager->Disable();
 	App->audio->Disable();
+	App->textures->Unload(back_graphics);
+	App->collision->CleanUp();
 
 	return true;
 }

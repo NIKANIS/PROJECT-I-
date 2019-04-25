@@ -23,11 +23,17 @@ bool ModuleParticles::Start()
 	graphics = App->textures->Load("SPRITES FATAL FURY/CHARACTERS/1-Terry Bogard/spritesTerryBogard.png");
 
 	// Terry skill
-	skill.anim.PushBack({ 611, 274, 18, 42 });
-	skill.anim.PushBack({ 577, 247, 18, 69 });
-	skill.anim.PushBack({ 645, 219, 18, 97 });
-	skill.anim.loop = false;
-	skill.anim.speed = 0.1f;
+	skillsmall.anim.PushBack({ 611, 274, 18, 42 });
+	skillsmall.life = 6000; //el tiempo que va a estar en pantalla (si pones 1000, apenas recorrerá uns metros
+	skillsmall.speed.x = 20; //la velocidad
+	
+	skillmedium.anim.PushBack({ 577, 247, 18, 69 });
+	skillmedium.life = 6000;
+	skillmedium.speed.x = 20;
+
+	skillbig.anim.PushBack({ 645, 219, 18, 97 });
+	skillbig.life = 6000;
+	skillbig.speed.x = 20;
 
 	return true;
 }
@@ -68,6 +74,7 @@ update_status ModuleParticles::Update()
 		else if(SDL_GetTicks() >= p->born)
 		{
 			App->render->Blit(graphics, p->position.x, p->position.y, &(p->anim.GetCurrentFrame()));
+
 			if(p->fx_played == false)
 			{
 				p->fx_played = true;
@@ -82,12 +89,18 @@ update_status ModuleParticles::Update()
 
 void ModuleParticles::AddParticle(const Particle& particle, int x, int y, Uint32 delay)
 {
-	Particle* p = new Particle(particle);
-	p->born = SDL_GetTicks() + delay;
-	p->position.x = x;
-	p->position.y = y;
-
-	active[last_particle++] = p++;
+	for (uint i = 0; i < MAX_ACTIVE_PARTICLES; ++i)
+	{
+		if (active[i] == nullptr)
+		{
+			Particle* p = new Particle(particle);
+			p->born = SDL_GetTicks() + delay; //born "guarda" los milisegundos justos cuando se crea la particula.
+			p->position.x = x;
+			p->position.y = y;
+			active[i] = p;
+			break;
+		}
+	}
 }
 
 // -------------------------------------------------------------
@@ -108,17 +121,19 @@ bool Particle::Update()
 {
 	bool ret = true;
 
-	if(life > 0)
+	if(life > 0) //este if hace que mientras si la particula lleva mas tiempo en pantalla que la vida que tiene, deje de updatear y elimine la particula
 	{
-		if((SDL_GetTicks() - born) > life)
+		if((SDL_GetTicks() - born) > life) 
 			ret = false;
 	}
-	else
-		if(anim.Finished())
-			ret = false;
 
-	position.x += speed.x;
-	position.y += speed.y;
+	//this code below is only for the special attack. Other particles would not work correctly with this function.
+
+	if (((SDL_GetTicks() - born) % 500) == 0) //este lo he puesto yo, y hace que cada 500 milisegundos avance 20 posiciones. Deberia estar bien pero parece que no.
+	{
+		position.x += speed.x;
+		position.y += speed.y;
+	}	
 
 	return ret;
 }

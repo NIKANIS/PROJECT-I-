@@ -45,7 +45,9 @@ private:
 
 public:
 
-	Particle skill;
+	Particle skillsmall;
+	Particle skillmedium;
+	Particle skillbig;
 };
 
 #endif // __MODULEPARTICLES_H__

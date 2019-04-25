@@ -9,8 +9,6 @@
 #include "ModuleInput.h"
 #include "ModuleFadeToBlack.h"
 
-// Reference at https://youtu.be/6OlenbCC4WI?t=382
-
 ModuleSceneCongrats::ModuleSceneCongrats()
 {
 
@@ -35,21 +33,19 @@ bool ModuleSceneCongrats::Start()
 bool ModuleSceneCongrats::CleanUp()
 {
 	LOG("Unloading honda stage");
-	App->player->Disable();
+	App->textures->Unload(graphics);
 
 	return true;
 }
 
-// Update: draw background
 update_status ModuleSceneCongrats::Update()
 {
-	// Draw everything --------------------------------------	
 
 	App->render->Blit(graphics, 0, 0, &background, 0.0f);
 
 	if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN)
 	{
-		App->fade->FadeToBlack(App->scene_intro, App->scene_paopao);
+		App->fade->FadeToBlack(App->scene_congrats, App->scene_intro);
 	}
 
 	return UPDATE_CONTINUE;
