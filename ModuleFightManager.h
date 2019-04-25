@@ -27,8 +27,9 @@ private:
 	SDL_Rect win;
 	SDL_Rect lose;
 	SDL_Rect draw;
+	SDL_Rect f;
 	iPoint position;
-	int winner; // 0 = P1_win, 1 = P2_win, 2 = draw
+	int winner = 3; // 0 = P1_win, 1 = P2_win, 2 = draw
 	int pl_won_rounds;
 	int en_won_rounds;
 	int timer_num;
