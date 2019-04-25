@@ -42,6 +42,7 @@ int ModulePlayer::Score()
 
 ModulePlayer::ModulePlayer(const int player)
 {
+	score = 0;
 	if (player == 0)
 	{
 		this->player = 0;
@@ -125,6 +126,7 @@ bool ModulePlayer::Start()
 	LOG("Loading player textures");
 	health = 100;
 	score = 0;
+
 	if (player == 0) 
 	{
 		position.x = 100;
@@ -168,13 +170,11 @@ void ModulePlayer::Reset()
 	health = 100;
 	if (player == 0)
 	{
-		this->player = 0;
 		position.x = 100;
 		position.y = 220;
 	}
-	if (player != 0)
+	if (player == 1)
 	{
-		this->player = 1;
 		position.x = 200;
 		position.y = 220;
 	}
@@ -229,9 +229,10 @@ update_status ModulePlayer::Update()
 
 	if (player == 0)
 	{
-		//health--;
 		if (App->input->keyboard[SDL_SCANCODE_B] == KEY_STATE::KEY_DOWN)
+		{
 			health = 0;
+		}
 
 		if (App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT && !lockX && !punching && !kicking && !specialattack_)
 		{
@@ -247,6 +248,7 @@ update_status ModulePlayer::Update()
 
 		if (App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT && !lockX && !punching && !kicking && !specialattack_)
 		{
+			score++;
 			position.x += speed;
 			if (current_animation != &forward && !jumping)
 			{
@@ -355,6 +357,7 @@ update_status ModulePlayer::Update()
 		if (App->input->keyboard[SDL_SCANCODE_RIGHT] == KEY_STATE::KEY_REPEAT && !lockX && !punching && !kicking && !specialattack_)
 		{
 			position.x += speed;
+			score++;
 			if (current_animation != &forward && !jumping)
 			{
 				forward.Reset();

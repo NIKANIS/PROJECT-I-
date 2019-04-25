@@ -45,6 +45,23 @@ bool ModulePlayerScore::Start()
 
 bool ModulePlayerScore::CleanUp()
 {
+
+	SDL_Rect none = { 0,0,0,0 };
+	if (player == 0 && App->player->Score() != 0)
+	{
+		for (int i = 0; i < MAX_SCORE_D; i++)
+		{
+			r[i] = none;
+		}
+	}
+	if (player == 1 && App->enemy->Score() != 0)
+	{
+		for (int i = 0; i < MAX_SCORE_D; i++)
+		{
+			r[i] = none;
+		}
+	}
+
 	App->textures->Unload(graphics);
 	return true;
 }
@@ -52,11 +69,14 @@ bool ModulePlayerScore::CleanUp()
 update_status ModulePlayerScore::Update()
 {
 	int s;
+
+	
 	if (player == 0)
-		s = App->player->Score();
+		s =App->player->Score();
 
 	if (player == 1)
-		s = App->enemy->Score();
+		s =App->enemy->Score();
+
 
 	if (s > 99999)
 	{
