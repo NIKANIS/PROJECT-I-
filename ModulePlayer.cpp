@@ -76,10 +76,10 @@ ModulePlayer::ModulePlayer(const int player)
 	forward.loop = true;
 
 	//go backwards done
-	backward.PushBack({ 1030, 269, 62, 105 });
-	backward.PushBack({ 1455, 266, 65, 113 });
-	backward.PushBack({ 1187, 267, 69, 111 });
-	backward.PushBack({ 1267, 272, 69, 111 });
+	backward.PushBack({ 1465, 446, 59, 102 });
+	backward.PushBack({ 1396, 445, 55, 104 });
+	backward.PushBack({ 1327, 442, 56, 106 });
+	backward.PushBack({ 1258, 444, 57, 104 });
 	backward.speed = 0.13f;
 	backward.loop = true;
 
