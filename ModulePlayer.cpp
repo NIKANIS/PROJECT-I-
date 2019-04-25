@@ -129,13 +129,13 @@ bool ModulePlayer::Start()
 	{
 		App->lifebar->Enable();
 		App->plscore->Enable();
-		player_col = App->collision->AddCollider({ position.x, position.y - 91, 49, 91 }, COLLIDER_PLAYER);
+		player_col = App->collision->AddCollider({ position.x+10, position.y - 91, 33, 90 }, COLLIDER_PLAYER);
 	}
 	if (player == 1) 
 	{
 		App->lifebar2->Enable();
 		App->enscore->Enable();
-		enemy_col = App->collision->AddCollider({ position.x, position.y - 91, 49, 91 }, COLLIDER_ENEMY, App->player);
+		enemy_col = App->collision->AddCollider({ position.x+10, position.y - 91, 33, 90 }, COLLIDER_ENEMY, App->player);
 	}
 	bool ret = true;
 	graphics = App->textures->Load("SPRITES FATAL FURY/CHARACTERS/1-Terry Bogard/Terry Bogard.gif"); // arcade version
@@ -327,7 +327,7 @@ update_status ModulePlayer::Update()
 			&& App->input->keyboard[SDL_SCANCODE_S] == KEY_STATE::KEY_IDLE
 			&& !jumping && !punching && !kicking && !specialattack_)
 			current_animation = &idle;
-		player_col->SetPos(position.x, position.y - 91);
+		player_col->SetPos(position.x+10, position.y - 91);
 		
 	}
 
@@ -435,7 +435,7 @@ update_status ModulePlayer::Update()
 			&& !jumping && !punching && !kicking && !specialattack_)
 			current_animation = &idle;
 
-		enemy_col->SetPos(position.x, position.y - 91);
+		enemy_col->SetPos(position.x+10, position.y - 91);
 	}
 	
 
