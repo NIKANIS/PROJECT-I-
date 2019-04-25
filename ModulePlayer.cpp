@@ -42,18 +42,13 @@ int ModulePlayer::Score()
 
 ModulePlayer::ModulePlayer(const int player)
 {
-	health = 100;
 	if (player == 0)
 	{
 		this->player = 0;
-		position.x = 100;
-		position.y = 220;
 	}
 	if (player != 0)
 	{
 		this->player = 1;
-		position.x = 200;
-		position.y = 220;
 	}
 	// idle animation
 	idle.PushBack({ 0, 19, 48, 90 });
@@ -125,14 +120,20 @@ ModulePlayer::~ModulePlayer()
 bool ModulePlayer::Start()
 {
 	LOG("Loading player textures");
+	health = 100;
+	score = 0;
 	if (player == 0) 
 	{
+		position.x = 100;
+		position.y = 220;
 		App->lifebar->Enable();
 		App->plscore->Enable();
 		player_col = App->collision->AddCollider({ position.x+10, position.y - 91, 33, 90 }, COLLIDER_PLAYER);
 	}
 	if (player == 1) 
 	{
+		position.x = 200;
+		position.y = 220;
 		App->lifebar2->Enable();
 		App->enscore->Enable();
 		enemy_col = App->collision->AddCollider({ position.x+10, position.y - 91, 33, 90 }, COLLIDER_ENEMY, App->player);
@@ -448,5 +449,5 @@ update_status ModulePlayer::Update()
 
 void ModulePlayer::OnCollision(Collider*, Collider*)
 {
-	App->fade->FadeToBlack((Module*)App->scene_paopao, (Module*)App->scene_gameover);
+	//App->fade->FadeToBlack((Module*)App->scene_paopao, (Module*)App->scene_gameover);
 }
