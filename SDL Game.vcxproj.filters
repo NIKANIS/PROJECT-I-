@@ -24,6 +24,9 @@
     <Filter Include="Modules\Scene Modules">
       <UniqueIdentifier>{d782893a-bf9d-4030-86f5-69f1731389fd}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Modules\Fight Modules\HUD">
+      <UniqueIdentifier>{017b9c66-dfbd-4cbb-95e0-ec4f654266b2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Module.h">
@@ -68,20 +71,11 @@
     <ClInclude Include="ModuleParticles.h">
       <Filter>Modules\Utility Modules</Filter>
     </ClInclude>
-    <ClInclude Include="ModulePlayerScore.h">
-      <Filter>Modules\Fight Modules</Filter>
-    </ClInclude>
     <ClInclude Include="ModulePlayer.h">
-      <Filter>Modules\Fight Modules</Filter>
-    </ClInclude>
-    <ClInclude Include="ModuleLifeBar.h">
       <Filter>Modules\Fight Modules</Filter>
     </ClInclude>
     <ClInclude Include="ModuleAudio.h">
       <Filter>Modules\Utility Modules</Filter>
-    </ClInclude>
-    <ClInclude Include="ModuleFightTimer.h">
-      <Filter>Modules\Fight Modules</Filter>
     </ClInclude>
     <ClInclude Include="ModuleFightManager.h">
       <Filter>Modules\Fight Modules</Filter>
@@ -94,6 +88,18 @@
     </ClInclude>
     <ClInclude Include="ModuleSceneGameOver.h">
       <Filter>Modules\Scene Modules</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleFightTimer.h">
+      <Filter>Modules\Fight Modules\HUD</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleLifeBar.h">
+      <Filter>Modules\Fight Modules\HUD</Filter>
+    </ClInclude>
+    <ClInclude Include="ModulePlayerScore.h">
+      <Filter>Modules\Fight Modules\HUD</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleRoundDisplay.h">
+      <Filter>Modules\Fight Modules\HUD</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -130,20 +136,11 @@
     <ClCompile Include="ModuleParticles.cpp">
       <Filter>Modules\Utility Modules</Filter>
     </ClCompile>
-    <ClCompile Include="ModulePlayerScore.cpp">
-      <Filter>Modules\Fight Modules</Filter>
-    </ClCompile>
     <ClCompile Include="ModulePlayer.cpp">
-      <Filter>Modules\Fight Modules</Filter>
-    </ClCompile>
-    <ClCompile Include="ModuleLifeBar.cpp">
       <Filter>Modules\Fight Modules</Filter>
     </ClCompile>
     <ClCompile Include="ModuleAudio.cpp">
       <Filter>Modules\Utility Modules</Filter>
-    </ClCompile>
-    <ClCompile Include="ModuleFightTimer.cpp">
-      <Filter>Modules\Fight Modules</Filter>
     </ClCompile>
     <ClCompile Include="ModuleFightManager.cpp">
       <Filter>Modules\Fight Modules</Filter>
@@ -156,6 +153,18 @@
     </ClCompile>
     <ClCompile Include="ModuleSceneGameOver.cpp">
       <Filter>Modules\Scene Modules</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleFightTimer.cpp">
+      <Filter>Modules\Fight Modules\HUD</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleLifeBar.cpp">
+      <Filter>Modules\Fight Modules\HUD</Filter>
+    </ClCompile>
+    <ClCompile Include="ModulePlayerScore.cpp">
+      <Filter>Modules\Fight Modules\HUD</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleRoundDisplay.cpp">
+      <Filter>Modules\Fight Modules\HUD</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

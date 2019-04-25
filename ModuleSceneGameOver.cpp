@@ -37,6 +37,7 @@ bool ModuleSceneGameOver::CleanUp()
 {
 	LOG("Unloading honda stage");
 	App->player->Disable();
+	App->textures->Unload(graphics);
 
 	return true;
 }

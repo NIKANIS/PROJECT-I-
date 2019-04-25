@@ -37,6 +37,7 @@ bool ModuleSceneIntro::CleanUp()
 {
 	LOG("Unloading intro");
 	App->audio->Disable();
+	App->textures->Unload(graphics);
 
 	return true;
 }

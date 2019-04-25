@@ -9,8 +9,6 @@
 #include "ModuleInput.h"
 #include "ModuleFadeToBlack.h"
 
-// Reference at https://youtu.be/6OlenbCC4WI?t=382
-
 ModuleSceneCongrats::ModuleSceneCongrats()
 {
 
@@ -36,6 +34,7 @@ bool ModuleSceneCongrats::CleanUp()
 {
 	LOG("Unloading honda stage");
 	App->player->Disable();
+	App->textures->Unload(graphics);
 
 	return true;
 }
