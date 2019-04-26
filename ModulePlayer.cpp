@@ -225,7 +225,6 @@ update_status ModulePlayer::Update()
 		at++;
 		if (at == 15)
 		{
-
 			if(player == 0)
 				player_punch_col = App->collision->AddCollider({ position.x + 43, position.y - 80, 41, 17 }, COLLIDER_PLAYER_ATTACK, App->enemy);
 			if (player == 1)
@@ -249,9 +248,21 @@ update_status ModulePlayer::Update()
 
 	if (kicking == true) {
 		at++;
+		if (at == 20)
+		{
+			if(player == 0)
+				player_kick_col = App->collision->AddCollider({ position.x + 43, position.y - 86, 49, 17 }, COLLIDER_PLAYER_ATTACK, App->enemy);
+			if (player == 1)																   
+				player_kick_col = App->collision->AddCollider({ position.x + 43, position.y - 86, 49, 17 }, COLLIDER_ENEMY_ATTACK, App->player);
+		}
+		if (at == 28)
+		{
+			player_kick_col->to_delete = true;
+			already_hit = false;
+		}
 		if (at == 32)
 		{
-
+			
 			kicking = false;
 		}
 	}
@@ -534,6 +545,7 @@ void ModulePlayer::OnCollision(Collider* a, Collider* b)
 		{
 			already_hit = true;
 			App->enemy->health -= 20;
+
 		}
 	}
 	if (player == 1)

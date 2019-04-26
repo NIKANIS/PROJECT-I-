@@ -57,8 +57,10 @@ private:
 
 	Collider* player_col = nullptr;
 	Collider* player_punch_col = nullptr;
+	Collider* player_kick_col = nullptr;
 	Collider* enemy_col = nullptr;
 	Collider* enemy_punch_col = nullptr;
+	Collider* enemy_kick_col = nullptr;
 
 	void OnCollision(Collider*, Collider*) override;
 };
