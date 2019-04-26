@@ -106,6 +106,7 @@ ModulePlayer::ModulePlayer(const int player)
 	//kick while standing done
 	kickingstanding.PushBack({ 513, 800, 52, 112 });
 	kickingstanding.PushBack({ 567, 801, 83, 112 });
+	kickingstanding.PushBack({ 444, 480, 85, 90 });
 	kickingstanding.speed = 0.13f;
 	kickingstanding.loop = false;
 
