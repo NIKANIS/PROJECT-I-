@@ -38,6 +38,7 @@ private:
 	Animation kickingstanding;
 	Animation specialattack;
 	Animation die;
+	Animation victory;
 	iPoint position;
 	int health;
 	int score;
