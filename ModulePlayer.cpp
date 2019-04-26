@@ -90,27 +90,30 @@ ModulePlayer::ModulePlayer(const int player)
 	backward.loop = true;
 
 	// crowch done
-	crowch.PushBack({ 264, 946, 57, 74 });
+	crowch.PushBack({ 440, 606, 52, 63 });
 
 	// crowch while going backwards and viceversa
-	crowchprotecc.PushBack({ 839,17,44,92 });
+	crowchprotecc.PushBack({ 380,607,52,62 });
 
 	//punch while standing done
-	punchstanding.PushBack({ 434, 917, 72, 101 });
-	punchstanding.PushBack({ 506, 917, 63, 102 });
-	punchstanding.PushBack({ 578, 916, 99, 91 });
-	punchstanding.PushBack({ 506, 917, 63, 102 });
-	punchstanding.PushBack({ 434, 917, 72, 101 });
-	punchstanding.speed = 0.13f;
+	punchstanding.PushBack({ 434, 919, 71, 99 });
+	punchstanding.PushBack({ 507, 919, 61, 100 });
+	punchstanding.PushBack({ 575, 917, 95, 102 });
+	punchstanding.PushBack({ 507, 919, 61, 100 });
+	punchstanding.PushBack({ 434, 919, 71, 99 });
+	punchstanding.speed = 0.17f;
 	punchstanding.loop = false;
 
 	//kick while standing done
-	kickingstanding.PushBack({1035,122,48,126});
-	kickingstanding.PushBack({1088,122,58,126});
-	kickingstanding.PushBack({1153,122,43,126});
-	kickingstanding.PushBack({1215,122,117,126});
-	kickingstanding.PushBack({1346,122,63,126});
-	kickingstanding.speed = 0.15f;
+	kickingstanding.PushBack({1119,631,59,103});
+	kickingstanding.PushBack({1196,628,47,106});
+	kickingstanding.PushBack({1261,642,47,93});
+	kickingstanding.PushBack({1314,617,57,120});
+	kickingstanding.PushBack({1379,617,42,120});
+	kickingstanding.PushBack({ 1441,612,116,125 });
+	kickingstanding.PushBack({ 1572,628,62,117 });
+	kickingstanding.PushBack({ 1653,625,57,91 });
+	kickingstanding.speed = 0.20f;
 	kickingstanding.loop = false;
 
 	//special attack while standing done
@@ -271,7 +274,7 @@ update_status ModulePlayer::Update()
 			player_kick_col->to_delete = true;
 			already_hit = false;
 		}
-		if (at == 32)
+		if (at == 45)
 		{
 			
 			kicking = false;
