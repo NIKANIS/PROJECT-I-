@@ -217,6 +217,7 @@ update_status ModulePlayer::Update()
 		at++;
 		if (at == 15)
 		{
+
 			if(player == 0)
 				player_punch_col = App->collision->AddCollider({ position.x + 43, position.y - 80, 41, 17 }, COLLIDER_PLAYER_ATTACK, App->enemy);
 			if (player == 1)
@@ -242,6 +243,7 @@ update_status ModulePlayer::Update()
 		at++;
 		if (at == 32)
 		{
+
 			kicking = false;
 		}
 	}
@@ -250,6 +252,7 @@ update_status ModulePlayer::Update()
 		at++;
 		if (at == 25) //para que añada la particula justo cuando el personaje toque al suelo
 		{
+			
 			App->particles->AddParticle(App->particles->skill, position.x + 40, position.y - 97);
 		}
 		if (at == 35)
