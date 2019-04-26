@@ -45,9 +45,6 @@ bool ModuleSceneCongrats::CleanUp()
 	return true;
 }
 
-// Update: draw background
-update_status ModuleSceneCongrats::Update()
-{
 	// Draw everything --------------------------------------	
 update_status ModuleSceneCongrats::Update()
 {

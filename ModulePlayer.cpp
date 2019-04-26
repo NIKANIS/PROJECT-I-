@@ -127,6 +127,8 @@ ModulePlayer::~ModulePlayer()
 bool ModulePlayer::Start()
 {
 	LOG("Loading player textures");
+	health = 100;
+	score = 0;
 	if (player == 0) 
 	{
 		position.x = 100;
@@ -171,13 +173,6 @@ void ModulePlayer::Reset()
 	health = 100;
 	if (player == 0)
 	{
-		this->player = 0;
-		position.x = 100;
-		position.y = 220;
-	}
-	if (player != 0)
-	{
-		this->player = 1;
 		position.x = 100;
 		position.y = 220;
 	}
@@ -186,6 +181,7 @@ void ModulePlayer::Reset()
 		position.x = 200;
 		position.y = 220;
 	}
+
 	current_animation = &idle;
 	lockX = false;
 	jumping = false;
@@ -248,7 +244,9 @@ update_status ModulePlayer::Update()
 	{
 		//health--;
 		if (App->input->keyboard[SDL_SCANCODE_B] == KEY_STATE::KEY_DOWN)
+		{
 			health = 0;
+		}
 
 		if (App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT && !lockX && !punching && !kicking && !specialattack_)
 		{
@@ -475,4 +473,5 @@ void ModulePlayer::OnCollision(Collider* a, Collider* b)
 	{
 		App->enemy->health = -10;
 	}
+}
 

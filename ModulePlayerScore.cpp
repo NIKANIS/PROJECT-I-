@@ -68,6 +68,7 @@ bool ModulePlayerScore::CleanUp()
 update_status ModulePlayerScore::Update()
 {
 	int s;
+
 	if (player == 0)
 		s = App->player->Score();
 

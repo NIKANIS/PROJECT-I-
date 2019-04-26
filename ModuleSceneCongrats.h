@@ -22,6 +22,7 @@ public:
 	SDL_Texture* graphics = nullptr;
 	SDL_Rect background;
 	Animation water;
+	Mix_Music* music;
 };
 
 #endif // __MODULESCENECONGRATS_H__
