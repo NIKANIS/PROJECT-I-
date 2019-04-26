@@ -10,6 +10,7 @@
 #include "ModuleCollision.h"
 #include "ModuleFadeToBlack.h"
 #include "SDL/include/SDL_timer.h"
+#include "ModuleAudio.h"
 
 void ModulePlayer::Jump() {
 	if (jumping) {
