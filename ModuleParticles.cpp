@@ -23,11 +23,11 @@ bool ModuleParticles::Start()
 	graphics = App->textures->Load("SPRITES FATAL FURY/CHARACTERS/1-Terry Bogard/spritesTerryBogard.png");
 
 	// Terry skill
-	skill.anim.PushBack({ 626, 221, 18, 97 });
-	skill.anim.PushBack({ 610, 221, 32, 97 });
-	skill.anim.PushBack({ 594, 221, 48, 97 });
-	skill.anim.PushBack({ 578, 221, 64, 97 });
-	skill.anim.PushBack({ 562, 221, 80, 97 });
+	skill.anim.PushBack({ 1087,798, 18, 97 });
+	skill.anim.PushBack({ 1071, 798, 32, 97 });
+	skill.anim.PushBack({ 1055, 798, 48, 97 });
+	skill.anim.PushBack({ 1040, 798, 64, 97 });
+	skill.anim.PushBack({ 1023, 798, 80, 97 });
 	skill.anim.loop = false;
 	skill.life = 6000; //el tiempo que va a estar en pantalla (si pones 1000, apenas recorrerá uns metros
 	skill.speed.x = 1.5f; //la velocidad

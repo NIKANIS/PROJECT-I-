@@ -471,7 +471,7 @@ void ModulePlayer::OnCollision(Collider* a, Collider* b)
 {
 	if (a->type == COLLIDER_PLAYER_ATTACK)
 	{
-		App->enemy->health = -10;
+		App->enemy->health =- 1 ;
 	}
 }
 
