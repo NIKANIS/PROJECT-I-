@@ -23,24 +23,17 @@ bool ModuleAudio::Init()
 {
 	LOG("Init SDL input event system");
 	bool ret = true;
-	int Audioflags = MIX_INIT_OGG | MIX_INIT_MOD;
-	int initted2 = Mix_Init(Audioflags);
-	if (initted2&Audioflags != Audioflags) {
-		LOG("Mix_Init: Failed to init required ogg and mod support!\n");
-		LOG("Mix_Init: %s\n", Mix_GetError());
-		ret = false;
-		// handle error
-	}
+	
 
 	if (SDL_Init(SDL_INIT_AUDIO) == -1) {
 		LOG("SDL_Init: %s\n", SDL_GetError());
-		exit(1);
+		ret = false;
 	}
 	// open 44.1KHz, signed 16bit, system byte order,
 	//      stereo audio, using 1024 byte chunks
-	if (Mix_OpenAudio(22050, MIX_DEFAULT_FORMAT, 2, 4096) == -1) {
+	if (Mix_OpenAudio(22050, MIX_DEFAULT_FORMAT, 2, 1048) == -1) {
 		LOG("Mix_OpenAudio: %s\n", Mix_GetError());
-		exit(2);
+		ret = false;
 	}
 
 	return ret;

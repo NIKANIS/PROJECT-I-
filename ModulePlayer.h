@@ -5,6 +5,7 @@
 #include "Animation.h"
 #include "Globals.h"
 #include "p2Point.h"
+#include "ModuleAudio.h"
 
 struct SDL_Texture;
 
@@ -62,6 +63,9 @@ private:
 	Collider* enemy_col = nullptr;
 	Collider* enemy_punch_col = nullptr;
 	Collider* enemy_kick_col = nullptr;
+
+	Mix_Chunk* punchFX = nullptr;
+	Mix_Chunk* skillFX = nullptr;
 
 	void OnCollision(Collider*, Collider*) override;
 };

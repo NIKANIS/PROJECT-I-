@@ -10,6 +10,7 @@
 #include "ModuleCollision.h"
 #include "ModuleFadeToBlack.h"
 #include "SDL/include/SDL_timer.h"
+#include "ModuleAudio.h"
 
 void ModulePlayer::Jump() {
 	if (jumping) {
@@ -181,6 +182,8 @@ bool ModulePlayer::Start()
 	bool ret = true;
 	graphics = App->textures->Load("SPRITES FATAL FURY/CHARACTERS/1-Terry Bogard/spritesTerryBogard.png"); // arcade version
 
+	skillFX = App->audio->loadWAV("AUDIO FATAL FURY/FX[WAV]/Voice/Special Attacks/FX_BurnKnuckleAttackTerryBogardVoice.wav");
+	
 	return ret;
 }
 
@@ -277,6 +280,7 @@ update_status ModulePlayer::Update()
 
 	if (specialattack_ == true) {
 		at++;
+		
 		if (at == 25) //para que añada la particula justo cuando el personaje toque al suelo
 		{
 			
@@ -286,6 +290,7 @@ update_status ModulePlayer::Update()
 		{
 			specialattack_ = false;
 		}
+		
 	}
 	Jump();
 	if (health == 0)
@@ -392,6 +397,7 @@ update_status ModulePlayer::Update()
 						at = 0;
 						specialattack.Reset();
 						current_animation = &specialattack;
+						App->audio->playFx(skillFX);
 					}
 				}
 
@@ -400,6 +406,7 @@ update_status ModulePlayer::Update()
 					&& App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_IDLE
 					&& !jumping && !punching && !kicking && !specialattack_)
 					current_animation = &idle;
+					
 				if (App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT
 					&& App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT
 					&& App->input->keyboard[SDL_SCANCODE_S] == KEY_STATE::KEY_IDLE
