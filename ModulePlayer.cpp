@@ -240,9 +240,9 @@ update_status ModulePlayer::Update()
 		if (at == 15)
 		{
 			if(player == 0)
-				player_punch_col = App->collision->AddCollider({ position.x + 43, position.y - 80, 41, 17 }, COLLIDER_PLAYER_ATTACK, App->enemy);
+				player_punch_col = App->collision->AddCollider({ position.x + 50, position.y - 90, 41, 17 }, COLLIDER_PLAYER_ATTACK, App->enemy);
 			if (player == 1)
-				player_punch_col = App->collision->AddCollider({ position.x + 43, position.y - 80, 41, 17 }, COLLIDER_ENEMY_ATTACK, App->player);
+				player_punch_col = App->collision->AddCollider({ position.x + 50, position.y - 90, 41, 17 }, COLLIDER_ENEMY_ATTACK, App->player);
 		}
 		if (at > 20)
 		{
@@ -265,9 +265,9 @@ update_status ModulePlayer::Update()
 		if (at == 20)
 		{
 			if(player == 0)
-				player_kick_col = App->collision->AddCollider({ position.x + 43, position.y - 86, 49, 17 }, COLLIDER_PLAYER_ATTACK, App->enemy);
+				player_kick_col = App->collision->AddCollider({ position.x + 65, position.y - 90, 49, 17 }, COLLIDER_PLAYER_ATTACK, App->enemy);
 			if (player == 1)																   
-				player_kick_col = App->collision->AddCollider({ position.x + 43, position.y - 86, 49, 17 }, COLLIDER_ENEMY_ATTACK, App->player);
+				player_kick_col = App->collision->AddCollider({ position.x + 65, position.y - 90, 49, 17 }, COLLIDER_ENEMY_ATTACK, App->player);
 		}
 		if (at == 28)
 		{
@@ -420,6 +420,12 @@ update_status ModulePlayer::Update()
 					current_animation = &idle;
 				
 				if (current_animation == &crowch)
+				{
+					player_col->rect.h = 65;
+					player_col->rect.w = 41;
+					player_col->SetPos(position.x + 5, position.y - 67);
+				}
+				else if (current_animation == &crowchprotecc)
 				{
 					player_col->rect.h = 65;
 					player_col->rect.w = 41;
