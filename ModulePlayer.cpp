@@ -279,7 +279,7 @@ update_status ModulePlayer::Update()
 		at++;
 		if (at == 25) //para que añada la particula justo cuando el personaje toque al suelo
 		{
-			
+			//skill1 = App->collision->AddCollider({ position.x + 40, position.y -40, 16, 40 }, COLLIDER_PLAYER_SKILL, App->enemy);
 			App->particles->AddParticle(App->particles->skill, position.x + 40, position.y - 97);
 		}
 		if (at == 35)
@@ -352,6 +352,9 @@ update_status ModulePlayer::Update()
 				if (App->input->keyboard[SDL_SCANCODE_S] == KEY_STATE::KEY_UP) {
 					lockX = false;
 					crowchaction = false;
+					player_col->SetPos(position.x + 10, position.y - 91);
+					player_col->rect.h = 90;
+					player_col->rect.w = 33;
 				}
 
 				if (App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_DOWN && !jumping && !punching && !kicking && !specialattack_)
@@ -405,8 +408,24 @@ update_status ModulePlayer::Update()
 					&& App->input->keyboard[SDL_SCANCODE_S] == KEY_STATE::KEY_IDLE
 					&& !jumping && !punching && !kicking && !specialattack_)
 					current_animation = &idle;
-				player_col->SetPos(position.x + 10, position.y - 91);
-
+				
+				if (current_animation == &crowch)
+				{
+					player_col->rect.h = 65;
+					player_col->rect.w = 41;
+					player_col->SetPos(position.x + 5, position.y - 67);
+				}
+				else
+				{
+					player_col->SetPos(position.x + 10, position.y - 91);
+					player_col->rect.h = 90;
+					player_col->rect.w = 33;
+				}	
+				//if (skillColDone = true)
+				//{
+				//	skill1->SetPos(App->particles->skill.position.x, App->particles->skill.position.y);
+				//}
+				
 			}
 		}
 		else
@@ -421,6 +440,7 @@ update_status ModulePlayer::Update()
 		{
 			if (player == 1)
 			{
+				enemy_col->SetPos(position.x + 10, position.y - 91);
 				if (App->input->keyboard[SDL_SCANCODE_V] == KEY_STATE::KEY_DOWN)
 					health = 0;
 
@@ -522,7 +542,7 @@ update_status ModulePlayer::Update()
 					&& !jumping && !punching && !kicking && !specialattack_)
 					current_animation = &idle;
 
-				enemy_col->SetPos(position.x + 10, position.y - 91);
+				
 			}
 		}
 		else

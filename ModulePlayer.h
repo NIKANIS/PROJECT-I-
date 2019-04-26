@@ -51,6 +51,7 @@ private:
 	bool kicking = false; //true while kicking
 	bool crowchaction = false; //true while crowching
 	bool specialattack_ = false; //true while special attacking
+	bool skillColDone = false;
 	int t = 0; //jumping coldown time
 	int at = 0; //attack coldown time
 	int vy = 0; //velocity y
@@ -62,6 +63,12 @@ private:
 	Collider* enemy_col = nullptr;
 	Collider* enemy_punch_col = nullptr;
 	Collider* enemy_kick_col = nullptr;
+	Collider* skill1 = nullptr;
+	Collider* skill2 = nullptr;
+	Collider* skill3 = nullptr;
+	Collider* skill4 = nullptr;
+	Collider* skill5 = nullptr;
+
 
 	void OnCollision(Collider*, Collider*) override;
 };
