@@ -26,7 +26,6 @@ private:
 	void Jump();
 	SDL_Texture* graphics = nullptr;
 	Animation* current_animation = nullptr;
-
 	Animation idle;
 	Animation jumpiup;
 	Animation jumpidown;
@@ -38,10 +37,12 @@ private:
 	Animation punchstanding;
 	Animation kickingstanding;
 	Animation specialattack;
-
+	Animation die;
 	iPoint position;
 	int health;
 	int score;
+	//bool stunt_hit; //stunt time after getting hit
+	bool already_hit;
 	bool lockX = false; //locks the sideways movement
 	bool jumping = false; //true while jumping
 	bool punching = false; //true while punching
