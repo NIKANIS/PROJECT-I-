@@ -134,6 +134,14 @@ ModulePlayer::ModulePlayer(const int player)
 	die.PushBack({1178,836,115,155});
 	die.speed = 0.15f;
 	die.loop = false;
+
+	//victory
+	victory.PushBack({699,324,56,136});
+	victory.PushBack({772,324,56,136});
+	victory.PushBack({839,324,60,136});
+	victory.PushBack({908,324,56,136});
+	victory.speed = 0.15f;
+	victory.loop = false;
 }
 
 ModulePlayer::~ModulePlayer()
@@ -268,221 +276,244 @@ update_status ModulePlayer::Update()
 	}
 	else
 	{
-		if (player == 0)
+		if (App->enemy->Health() != 0)
 		{
-			//health--;
-			if (App->input->keyboard[SDL_SCANCODE_B] == KEY_STATE::KEY_DOWN)
+			if (player == 0)
 			{
-				health = 0;
-			}
-
-			if (App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT && !lockX && !punching && !kicking && !specialattack_)
-			{
-				position.x -= speed;
-
-				if (current_animation != &backward && !jumping && current_animation != &crowch)
+				if (App->input->keyboard[SDL_SCANCODE_B] == KEY_STATE::KEY_DOWN)
 				{
-					backward.Reset();
-					current_animation = &backward;
+					health = 0;
 				}
 
-			}
-
-			if (App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT && !lockX && !punching && !kicking && !specialattack_)
-			{
-				position.x += speed;
-				if (current_animation != &forward && !jumping)
+				if (App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT && !lockX && !punching && !kicking && !specialattack_)
 				{
-					forward.Reset();
-					current_animation = &forward;
-				}
+					position.x -= speed;
 
-			}
-
-			if (App->input->keyboard[SDL_SCANCODE_S] == KEY_STATE::KEY_REPEAT && !jumping && !punching && !kicking && !specialattack_)
-			{
-				if (current_animation != &crowch)
-				{
-					lockX = true;
-					crowchaction = true;
-					crowch.Reset();
-					current_animation = &crowch;
-				}
-				if (App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT && !punching && !kicking && !specialattack_)
-				{
-					if (current_animation != &crowchprotecc)
+					if (current_animation != &backward && !jumping && current_animation != &crowch)
 					{
-						crowchprotecc.Reset();
-						current_animation = &crowchprotecc;
+						backward.Reset();
+						current_animation = &backward;
+					}
+
+				}
+
+				if (App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT && !lockX && !punching && !kicking && !specialattack_)
+				{
+					position.x += speed;
+					if (current_animation != &forward && !jumping)
+					{
+						forward.Reset();
+						current_animation = &forward;
+					}
+
+				}
+
+				if (App->input->keyboard[SDL_SCANCODE_S] == KEY_STATE::KEY_REPEAT && !jumping && !punching && !kicking && !specialattack_)
+				{
+					if (current_animation != &crowch)
+					{
+						lockX = true;
+						crowchaction = true;
+						crowch.Reset();
+						current_animation = &crowch;
+					}
+					if (App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT && !punching && !kicking && !specialattack_)
+					{
+						if (current_animation != &crowchprotecc)
+						{
+							crowchprotecc.Reset();
+							current_animation = &crowchprotecc;
+						}
 					}
 				}
-			}
 
-			if (App->input->keyboard[SDL_SCANCODE_S] == KEY_STATE::KEY_UP) {
-				lockX = false;
-				crowchaction = false;
-			}
-
-			if (App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_DOWN && !jumping && !punching && !kicking && !specialattack_)
-			{
-				if (current_animation != &jumpiup)
-				{
-					jumping = true;
-					t = 0;
-					jumpiup.Reset();
-					current_animation = &jumpiup;
-				}
-			}
-
-			if (App->input->keyboard[SDL_SCANCODE_H] == KEY_STATE::KEY_DOWN && !punching && !kicking && !crowchaction && !specialattack_) {
-				if (current_animation != &punchstanding && !jumping)
-				{
-					punching = true;
-					at = 0;
-					punchstanding.Reset();
-					current_animation = &punchstanding;
-				}
-			}
-
-			if (App->input->keyboard[SDL_SCANCODE_J] == KEY_STATE::KEY_DOWN && !punching && !jumping && !crowchaction && !specialattack_) {
-				if (current_animation != &kickingstanding && !jumping && !crowchaction && !specialattack_)
-				{
-					kicking = true;
-					at = 0;
-					kickingstanding.Reset();
-					current_animation = &kickingstanding;
-				}
-			}
-
-			if (App->input->keyboard[SDL_SCANCODE_K] == KEY_STATE::KEY_DOWN && !punching && !jumping && !crowchaction) {
-				if (current_animation != &kickingstanding && !jumping && !crowchaction && !specialattack_)
-				{
-					specialattack_ = true;
-					at = 0;
-					specialattack.Reset();
-					current_animation = &specialattack;
-				}
-			}
-
-			if (App->input->keyboard[SDL_SCANCODE_S] == KEY_STATE::KEY_IDLE
-				&& App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_IDLE
-				&& App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_IDLE
-				&& !jumping && !punching && !kicking && !specialattack_)
-				current_animation = &idle;
-			if (App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT
-				&& App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT
-				&& App->input->keyboard[SDL_SCANCODE_S] == KEY_STATE::KEY_IDLE
-				&& !jumping && !punching && !kicking && !specialattack_)
-				current_animation = &idle;
-			player_col->SetPos(position.x + 10, position.y - 91);
-
-		}
-
-		if (player == 1)
-		{
-			if (App->input->keyboard[SDL_SCANCODE_V] == KEY_STATE::KEY_DOWN)
-				health = 0;
-
-			if (App->input->keyboard[SDL_SCANCODE_LEFT] == KEY_STATE::KEY_REPEAT && !lockX && !punching && !kicking && !specialattack_)
-			{
-				position.x -= speed;
-				if (current_animation != &backward && !jumping && current_animation != &crowch)
-				{
-					backward.Reset();
-					current_animation = &backward;
+				if (App->input->keyboard[SDL_SCANCODE_S] == KEY_STATE::KEY_UP) {
+					lockX = false;
+					crowchaction = false;
 				}
 
-			}
-
-			if (App->input->keyboard[SDL_SCANCODE_RIGHT] == KEY_STATE::KEY_REPEAT && !lockX && !punching && !kicking && !specialattack_)
-			{
-				position.x += speed;
-				if (current_animation != &forward && !jumping)
+				if (App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_DOWN && !jumping && !punching && !kicking && !specialattack_)
 				{
-					forward.Reset();
-					current_animation = &forward;
-				}
-
-			}
-
-			if (App->input->keyboard[SDL_SCANCODE_DOWN] == KEY_STATE::KEY_REPEAT && !jumping && !punching && !kicking && !specialattack_)
-			{
-				if (current_animation != &crowch)
-				{
-					lockX = true;
-					crowchaction = true;
-					crowch.Reset();
-					current_animation = &crowch;
-				}
-				if (App->input->keyboard[SDL_SCANCODE_LEFT] == KEY_STATE::KEY_REPEAT && !punching && !kicking && !specialattack_)
-				{
-					if (current_animation != &crowchprotecc)
+					if (current_animation != &jumpiup)
 					{
-						crowchprotecc.Reset();
-						current_animation = &crowchprotecc;
+						jumping = true;
+						t = 0;
+						jumpiup.Reset();
+						current_animation = &jumpiup;
 					}
 				}
-			}
 
-			if (App->input->keyboard[SDL_SCANCODE_DOWN] == KEY_STATE::KEY_UP) {
-				lockX = false;
-				crowchaction = false;
-			}
-
-			if (App->input->keyboard[SDL_SCANCODE_UP] == KEY_STATE::KEY_DOWN && !jumping && !punching && !kicking && !specialattack_)
-			{
-				if (current_animation != &jumpiup)
-				{
-					jumping = true;
-					t = 0;
-					jumpiup.Reset();
-					current_animation = &jumpiup;
+				if (App->input->keyboard[SDL_SCANCODE_H] == KEY_STATE::KEY_DOWN && !punching && !kicking && !crowchaction && !specialattack_) {
+					if (current_animation != &punchstanding && !jumping)
+					{
+						punching = true;
+						at = 0;
+						punchstanding.Reset();
+						current_animation = &punchstanding;
+					}
 				}
-			}
 
-			if (App->input->keyboard[SDL_SCANCODE_I] == KEY_STATE::KEY_DOWN && !punching && !kicking && !crowchaction && !specialattack_) {
-				if (current_animation != &punchstanding && !jumping)
-				{
-					punching = true;
-					at = 0;
-					punchstanding.Reset();
-					current_animation = &punchstanding;
+				if (App->input->keyboard[SDL_SCANCODE_J] == KEY_STATE::KEY_DOWN && !punching && !jumping && !crowchaction && !specialattack_) {
+					if (current_animation != &kickingstanding && !jumping && !crowchaction && !specialattack_)
+					{
+						kicking = true;
+						at = 0;
+						kickingstanding.Reset();
+						current_animation = &kickingstanding;
+					}
 				}
-			}
 
-			if (App->input->keyboard[SDL_SCANCODE_O] == KEY_STATE::KEY_DOWN && !punching && !jumping && !crowchaction && !specialattack_) {
-				if (current_animation != &kickingstanding && !jumping && !crowchaction)
-				{
-					kicking = true;
-					at = 0;
-					kickingstanding.Reset();
-					current_animation = &kickingstanding;
+				if (App->input->keyboard[SDL_SCANCODE_K] == KEY_STATE::KEY_DOWN && !punching && !jumping && !crowchaction) {
+					if (current_animation != &kickingstanding && !jumping && !crowchaction && !specialattack_)
+					{
+						specialattack_ = true;
+						at = 0;
+						specialattack.Reset();
+						current_animation = &specialattack;
+					}
 				}
+
+				if (App->input->keyboard[SDL_SCANCODE_S] == KEY_STATE::KEY_IDLE
+					&& App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_IDLE
+					&& App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_IDLE
+					&& !jumping && !punching && !kicking && !specialattack_)
+					current_animation = &idle;
+				if (App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT
+					&& App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT
+					&& App->input->keyboard[SDL_SCANCODE_S] == KEY_STATE::KEY_IDLE
+					&& !jumping && !punching && !kicking && !specialattack_)
+					current_animation = &idle;
+				player_col->SetPos(position.x + 10, position.y - 91);
+
 			}
-
-			if (App->input->keyboard[SDL_SCANCODE_P] == KEY_STATE::KEY_DOWN && !punching && !jumping && !crowchaction) {
-				if (current_animation != &kickingstanding && !jumping && !crowchaction && !specialattack_)
-				{
-					specialattack_ = true;
-					at = 0;
-					specialattack.Reset();
-					current_animation = &specialattack;
-				}
-			}
-
-			if (App->input->keyboard[SDL_SCANCODE_DOWN] == KEY_STATE::KEY_IDLE
-				&& App->input->keyboard[SDL_SCANCODE_LEFT] == KEY_STATE::KEY_IDLE
-				&& App->input->keyboard[SDL_SCANCODE_RIGHT] == KEY_STATE::KEY_IDLE
-				&& !jumping && !punching && !kicking && !specialattack_)
-				current_animation = &idle;
-			if (App->input->keyboard[SDL_SCANCODE_RIGHT] == KEY_STATE::KEY_REPEAT
-				&& App->input->keyboard[SDL_SCANCODE_LEFT] == KEY_STATE::KEY_REPEAT
-				&& App->input->keyboard[SDL_SCANCODE_DOWN] == KEY_STATE::KEY_IDLE
-				&& !jumping && !punching && !kicking && !specialattack_)
-				current_animation = &idle;
-
-			enemy_col->SetPos(position.x + 10, position.y - 91);
 		}
+		else
+		{
+			if (current_animation != &victory)
+			{
+				victory.Reset();
+				current_animation = &victory;
+			}
+		}
+		if (App->player->Health() != 0)
+		{
+			if (player == 1)
+			{
+				if (App->input->keyboard[SDL_SCANCODE_V] == KEY_STATE::KEY_DOWN)
+					health = 0;
+
+				if (App->input->keyboard[SDL_SCANCODE_LEFT] == KEY_STATE::KEY_REPEAT && !lockX && !punching && !kicking && !specialattack_)
+				{
+					position.x -= speed;
+					if (current_animation != &backward && !jumping && current_animation != &crowch)
+					{
+						backward.Reset();
+						current_animation = &backward;
+					}
+
+				}
+
+				if (App->input->keyboard[SDL_SCANCODE_RIGHT] == KEY_STATE::KEY_REPEAT && !lockX && !punching && !kicking && !specialattack_)
+				{
+					position.x += speed;
+					if (current_animation != &forward && !jumping)
+					{
+						forward.Reset();
+						current_animation = &forward;
+					}
+
+				}
+
+				if (App->input->keyboard[SDL_SCANCODE_DOWN] == KEY_STATE::KEY_REPEAT && !jumping && !punching && !kicking && !specialattack_)
+				{
+					if (current_animation != &crowch)
+					{
+						lockX = true;
+						crowchaction = true;
+						crowch.Reset();
+						current_animation = &crowch;
+					}
+					if (App->input->keyboard[SDL_SCANCODE_LEFT] == KEY_STATE::KEY_REPEAT && !punching && !kicking && !specialattack_)
+					{
+						if (current_animation != &crowchprotecc)
+						{
+							crowchprotecc.Reset();
+							current_animation = &crowchprotecc;
+						}
+					}
+				}
+
+				if (App->input->keyboard[SDL_SCANCODE_DOWN] == KEY_STATE::KEY_UP) {
+					lockX = false;
+					crowchaction = false;
+				}
+
+				if (App->input->keyboard[SDL_SCANCODE_UP] == KEY_STATE::KEY_DOWN && !jumping && !punching && !kicking && !specialattack_)
+				{
+					if (current_animation != &jumpiup)
+					{
+						jumping = true;
+						t = 0;
+						jumpiup.Reset();
+						current_animation = &jumpiup;
+					}
+				}
+
+				if (App->input->keyboard[SDL_SCANCODE_I] == KEY_STATE::KEY_DOWN && !punching && !kicking && !crowchaction && !specialattack_) {
+					if (current_animation != &punchstanding && !jumping)
+					{
+						punching = true;
+						at = 0;
+						punchstanding.Reset();
+						current_animation = &punchstanding;
+					}
+				}
+
+				if (App->input->keyboard[SDL_SCANCODE_O] == KEY_STATE::KEY_DOWN && !punching && !jumping && !crowchaction && !specialattack_) {
+					if (current_animation != &kickingstanding && !jumping && !crowchaction)
+					{
+						kicking = true;
+						at = 0;
+						kickingstanding.Reset();
+						current_animation = &kickingstanding;
+					}
+				}
+
+				if (App->input->keyboard[SDL_SCANCODE_P] == KEY_STATE::KEY_DOWN && !punching && !jumping && !crowchaction) {
+					if (current_animation != &kickingstanding && !jumping && !crowchaction && !specialattack_)
+					{
+						specialattack_ = true;
+						at = 0;
+						specialattack.Reset();
+						current_animation = &specialattack;
+					}
+				}
+
+				if (App->input->keyboard[SDL_SCANCODE_DOWN] == KEY_STATE::KEY_IDLE
+					&& App->input->keyboard[SDL_SCANCODE_LEFT] == KEY_STATE::KEY_IDLE
+					&& App->input->keyboard[SDL_SCANCODE_RIGHT] == KEY_STATE::KEY_IDLE
+					&& !jumping && !punching && !kicking && !specialattack_)
+					current_animation = &idle;
+				if (App->input->keyboard[SDL_SCANCODE_RIGHT] == KEY_STATE::KEY_REPEAT
+					&& App->input->keyboard[SDL_SCANCODE_LEFT] == KEY_STATE::KEY_REPEAT
+					&& App->input->keyboard[SDL_SCANCODE_DOWN] == KEY_STATE::KEY_IDLE
+					&& !jumping && !punching && !kicking && !specialattack_)
+					current_animation = &idle;
+
+				enemy_col->SetPos(position.x + 10, position.y - 91);
+			}
+		}
+		else
+		{
+			if (current_animation != &victory)
+			{
+				victory.Reset();
+				current_animation = &victory;
+			}
+		}
+			
+			
+		
 	}
 	
 
