@@ -162,7 +162,7 @@ bool ModulePlayer::Start()
 	position.y = 220;
 	App->lifebar->Enable();
 	App->plscore->Enable();
-	player_col = App->collision->AddCollider({ position.x+10, position.y - 91, 33, 104 }, COLLIDER_PLAYER, App->enemy);
+	player_col = App->collision->AddCollider({ position.x+10, position.y - 90, 33, 104 }, COLLIDER_PLAYER, App->enemy);
 	
 
 	bool ret = true;
@@ -208,7 +208,7 @@ update_status ModulePlayer::Update()
 		at++;
 		if (at == 15)
 		{
-			player_punch_col = App->collision->AddCollider({ position.x + 43, position.y - 80, 41, 17 }, COLLIDER_PLAYER_ATTACK, App->enemy);
+			player_punch_col = App->collision->AddCollider({ position.x + 52, position.y - 90, 41, 12 }, COLLIDER_PLAYER_ATTACK, App->player);
 		}
 		if (at > 20)
 		{
@@ -395,8 +395,8 @@ update_status ModulePlayer::Update()
 				}
 				else
 				{
-					player_col->SetPos(position.x + 10, position.y - 104);
-					player_col->rect.h = 105;
+					player_col->SetPos(position.x + 10, position.y - 91);
+					player_col->rect.h = 90;
 					player_col->rect.w = 33;
 				}	
 				//if (skillColDone = true)

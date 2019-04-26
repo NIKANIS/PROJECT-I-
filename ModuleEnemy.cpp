@@ -163,8 +163,8 @@ bool ModuleEnemy::Start()
 	position.y = 220;
 	App->lifebar2->Enable();
 	App->enscore->Enable();
-	enemy_col = App->collision->AddCollider({ position.x + 10, position.y - 91, 33, 104 }, COLLIDER_ENEMY, App->player);
-
+	enemy_col = App->collision->AddCollider({ position.x + 10, position.y - 91, 33, 105 }, COLLIDER_ENEMY, App->player);
+	
 	bool ret = true;
 	graphics = App->textures->Load("SPRITES FATAL FURY/CHARACTERS/1-Terry Bogard/spritesTerryBogard.png"); // arcade version
 
@@ -210,7 +210,7 @@ update_status ModuleEnemy::Update()
 		at++;
 		if (at == 15)
 		{
-			enemy_punch_col = App->collision->AddCollider({ position.x + 43, position.y - 80, 41, 17 }, COLLIDER_ENEMY_ATTACK, App->player);
+			enemy_punch_col = App->collision->AddCollider({ position.x + 52, position.y - 90, 41, 12 }, COLLIDER_ENEMY_ATTACK, App->enemy);
 		}
 		if (at > 20)
 		{
@@ -258,8 +258,9 @@ update_status ModuleEnemy::Update()
 		{
 			specialattack_ = false;
 		}
-
 	}
+	
+
 	Jump();
 	if (health == 0)
 	{
@@ -273,8 +274,8 @@ update_status ModuleEnemy::Update()
 	{
 		if (App->player->Health() != 0)
 		{
-
-			enemy_col->SetPos(position.x + 10, position.y - 91);
+			enemy_col->SetPos(position.x + 10, position.y - 90);						
+						
 			if (App->input->keyboard[SDL_SCANCODE_V] == KEY_STATE::KEY_DOWN)
 				health = 0;
 
@@ -286,7 +287,14 @@ update_status ModuleEnemy::Update()
 					backward.Reset();
 					current_animation = &backward;
 				}
+			}
 
+			if (App->input->keyboard[SDL_SCANCODE_S] == KEY_STATE::KEY_UP) {
+				lockX = false;
+				crowchaction = false;
+				enemy_col->SetPos(position.x + 10, position.y - 91);
+				enemy_col->rect.h = 90;
+				enemy_col->rect.w = 33;
 			}
 
 			if (App->input->keyboard[SDL_SCANCODE_RIGHT] == KEY_STATE::KEY_REPEAT && !lockX && !punching && !kicking && !specialattack_)
@@ -308,6 +316,7 @@ update_status ModuleEnemy::Update()
 					crowchaction = true;
 					crowch.Reset();
 					current_animation = &crowch;
+
 				}
 				if (App->input->keyboard[SDL_SCANCODE_LEFT] == KEY_STATE::KEY_REPEAT && !punching && !kicking && !specialattack_)
 				{
@@ -315,6 +324,7 @@ update_status ModuleEnemy::Update()
 					{
 						crowchprotecc.Reset();
 						current_animation = &crowchprotecc;
+						
 					}
 				}
 			}
@@ -376,8 +386,24 @@ update_status ModuleEnemy::Update()
 				&& !jumping && !punching && !kicking && !specialattack_)
 				current_animation = &idle;
 
-
-			
+			if (current_animation == &crowch)
+			{
+				enemy_col->rect.h = 65;
+				enemy_col->rect.w = 41;
+				enemy_col->SetPos(position.x + 5, position.y - 67);
+			}
+			if (current_animation == &crowchprotecc)
+			{
+				enemy_col->rect.h = 65;
+				enemy_col->rect.w = 41;
+				enemy_col->SetPos(position.x + 5, position.y - 67);
+			}
+			else
+			{
+				enemy_col->SetPos(position.x + 10, position.y - 91);
+				enemy_col->rect.h = 90;
+				enemy_col->rect.w = 33;
+			}			
 		}
 		else
 		{
@@ -386,6 +412,7 @@ update_status ModuleEnemy::Update()
 				victory.Reset();
 				current_animation = &victory;
 			}
+			
 		}
 	}
 
