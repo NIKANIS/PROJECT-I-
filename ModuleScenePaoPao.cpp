@@ -1,5 +1,6 @@
 #include "Globals.h"
 #include "Application.h"
+
 #include "ModuleWindow.h"
 #include "ModuleRender.h"
 #include "ModuleInput.h"
@@ -62,6 +63,7 @@ bool ModuleScenePaoPao::CleanUp()
 	App->textures->Unload(back_graphics);
 	App->collision->CleanUp();
 	App->player->Reset();
+
 
 	return true;
 }

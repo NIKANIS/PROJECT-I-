@@ -23,6 +23,7 @@ public:
 	SDL_Rect background;
 	Animation water;
 	Mix_Music* music;
+
 };
 
 #endif // __MODULESCENEGAMEOVER_H__

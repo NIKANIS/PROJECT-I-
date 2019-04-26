@@ -26,7 +26,7 @@ private:
 	void Jump();
 	SDL_Texture* graphics = nullptr;
 	Animation* current_animation = nullptr;
-	
+
 	Animation idle;
 	Animation jumpiup;
 	Animation jumpidown;
@@ -55,9 +55,9 @@ private:
 
 	Collider* player_col = nullptr;
 	Collider* player_punch_col = nullptr;
-
 	Collider* enemy_col = nullptr;
 	Collider* enemy_punch_col = nullptr;
+
 	void OnCollision(Collider*, Collider*) override;
 };
 

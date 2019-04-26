@@ -46,74 +46,76 @@ ModulePlayer::ModulePlayer(const int player)
 	if (player == 0)
 	{
 		this->player = 0;
-		position.x = 100;
-		position.y = 220;
 	}
+	score = 0;
+
 	if (player != 0)
 	{
 		this->player = 1;
-		position.x = 200;
-		position.y = 220;
+
 	}
-	// idle animation
-	idle.PushBack({ 0, 19, 48, 90 });
-	idle.PushBack({ 49, 18, 49, 91 });
-	idle.PushBack({ 98, 17, 48, 92 });
-	idle.PushBack({ 49, 18, 49, 91 });
+	// idle animation done 
+	idle.PushBack({ 27, 913, 60, 105 });
+	idle.PushBack({ 95, 915, 61, 104 });
+	idle.PushBack({ 164, 914, 60, 103 });
+	idle.PushBack({ 95, 915, 61, 104 });
 	idle.loop = true;
 	idle.speed = 0.13f;
 
-	// jump idle up
-	jumpiup.PushBack({ 146, 0, 43, 109 });
+	// jump idle up done
+	jumpiup.PushBack({ 907, 471, 61, 128 });
 
-	// jump idle down
-	jumpidown.PushBack({ 189,27,48,82 });
+	// jump idle down 
+	jumpidown.PushBack({ 908, 655, 60, 96 });
 
-	//jump while moving
-	jump.PushBack({ 309,18,47,91 });
+	//jump while moving done
+	jump.PushBack({ 828, 565 , 63, 107 });
 
-	//go forward
-	forward.PushBack({ 356,15,57,94 });
-	forward.PushBack({ 413,16,49,93 });
-	forward.PushBack({ 462,19,50,90 });
-	forward.PushBack({ 512,19,48,90 });
+	//go forward done
+	forward.PushBack({ 1030, 269, 62, 105 });
+	forward.PushBack({ 1104, 265, 82, 115 });
+	forward.PushBack({ 1187, 267, 69, 111 });
+	forward.PushBack({ 1267, 272, 69, 111 });
 	forward.speed = 0.13f;
 	forward.loop = true;
 
-	//go backwards
-	backward.PushBack({ 560,18,51,91 });
-	backward.PushBack({ 611,16,47,93 });
-	backward.PushBack({ 658,15,47,94 });
-	backward.PushBack({ 705,16,45,93 });
+	//go backwards done
+	backward.PushBack({ 1465, 446, 59, 102 });
+	backward.PushBack({ 1396, 445, 55, 104 });
+	backward.PushBack({ 1327, 442, 56, 106 });
+	backward.PushBack({ 1258, 444, 57, 104 });
 	backward.speed = 0.13f;
 	backward.loop = true;
 
-	// crowch
-	crowch.PushBack({ 750,16,44,92 });
+	// crowch done
+	crowch.PushBack({ 264, 946, 57, 74 });
 
 	// crowch while going backwards and viceversa
 	crowchprotecc.PushBack({ 839,17,44,92 });
 
-	//punch while standing
-	punchstanding.PushBack({ 0,114,58,88 });
-	punchstanding.PushBack({ 59,114,45,88 });
-	punchstanding.PushBack({ 103,111,79,91 });
-	punchstanding.PushBack({ 59,114,45,88 });
-	punchstanding.PushBack({ 0,114,58,88 });
+	//punch while standing done
+	punchstanding.PushBack({ 434, 917, 72, 101 });
+	punchstanding.PushBack({ 506, 917, 63, 102 });
+	punchstanding.PushBack({ 578, 916, 99, 91 });
+	punchstanding.PushBack({ 506, 917, 63, 102 });
+	punchstanding.PushBack({ 434, 917, 72, 101 });
 	punchstanding.speed = 0.13f;
 	punchstanding.loop = false;
 
-	//kick while standing
-	kickingstanding.PushBack({ 1,208,49,90 });
-	kickingstanding.PushBack({ 51,206,39,92 });
+	//kick while standing done
+	kickingstanding.PushBack({ 513, 800, 52, 112 });
+	kickingstanding.PushBack({ 567, 801, 83, 112 });
 	kickingstanding.speed = 0.13f;
 	kickingstanding.loop = false;
 
-	//special attack while standing
-	specialattack.PushBack({ 2,307,42,92 });
-	specialattack.PushBack({ 45,300,44,99 });
-	specialattack.PushBack({ 90,315,49,84 });
-	specialattack.PushBack({ 140,332,55,67 });
+	//special attack while standing done
+	specialattack.PushBack({ 613, 684, 64, 115 });
+	specialattack.PushBack({ 550, 681, 62, 115 });
+	specialattack.PushBack({ 481, 694, 64, 104 });
+	specialattack.PushBack({ 398, 705, 84, 92 });
+	specialattack.PushBack({ 328, 713, 72, 85 });
+	specialattack.PushBack({ 258, 720, 69, 78 });
+	specialattack.PushBack({ 192, 711, 65, 86 });
 	specialattack.speed = 0.15f;
 	specialattack.loop = false;
 }
@@ -127,18 +129,23 @@ bool ModulePlayer::Start()
 	LOG("Loading player textures");
 	if (player == 0) 
 	{
+		position.x = 100;
+		position.y = 220;
 		App->lifebar->Enable();
 		App->plscore->Enable();
 		player_col = App->collision->AddCollider({ position.x+10, position.y - 91, 33, 90 }, COLLIDER_PLAYER);
 	}
 	if (player == 1) 
 	{
+		position.x = 200;
+		position.y = 220;
 		App->lifebar2->Enable();
 		App->enscore->Enable();
 		enemy_col = App->collision->AddCollider({ position.x+10, position.y - 91, 33, 90 }, COLLIDER_ENEMY, App->player);
 	}
 	bool ret = true;
-	graphics = App->textures->Load("SPRITES FATAL FURY/CHARACTERS/1-Terry Bogard/Terry Bogard.gif"); // arcade version
+	graphics = App->textures->Load("SPRITES FATAL FURY/CHARACTERS/1-Terry Bogard/spritesTerryBogard.png"); // arcade version
+
 	return ret;
 }
 
@@ -171,6 +178,11 @@ void ModulePlayer::Reset()
 	if (player != 0)
 	{
 		this->player = 1;
+		position.x = 100;
+		position.y = 220;
+	}
+	if (player == 1)
+	{
 		position.x = 200;
 		position.y = 220;
 	}
@@ -204,8 +216,6 @@ update_status ModulePlayer::Update()
 			punching = false;
 			player_punch_col->to_delete = true;
 		}
-
-		
 	}
 
 	if (health < 0)
@@ -254,6 +264,7 @@ update_status ModulePlayer::Update()
 
 		if (App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT && !lockX && !punching && !kicking && !specialattack_)
 		{
+			score++;
 			position.x += speed;
 			if (current_animation != &forward && !jumping)
 			{
@@ -362,6 +373,7 @@ update_status ModulePlayer::Update()
 		if (App->input->keyboard[SDL_SCANCODE_RIGHT] == KEY_STATE::KEY_REPEAT && !lockX && !punching && !kicking && !specialattack_)
 		{
 			position.x += speed;
+			score++;
 			if (current_animation != &forward && !jumping)
 			{
 				forward.Reset();
@@ -463,4 +475,4 @@ void ModulePlayer::OnCollision(Collider* a, Collider* b)
 	{
 		App->enemy->health = -10;
 	}
-}
+

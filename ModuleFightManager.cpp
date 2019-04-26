@@ -32,6 +32,18 @@ bool ModuleFightManager::Start()
 {
 	graphics = App->textures->Load("SPRITES FATAL FURY/UI/UI sprites.png");
 
+	position.x = 151;
+	position.y = 103;
+
+	pl_won_rounds = 0;
+	en_won_rounds = 0;
+	winner = 3;
+	timer_num = 93;
+	timer_counter = 0;
+	time_stop = false;
+	SDL_Rect none = { 0,0,0,0 };
+	f = none;
+
 	App->player->Enable();
 	App->enemy->Enable();
 	App->fight_timer->Enable();
@@ -82,6 +94,7 @@ update_status ModuleFightManager::Update()
 		en_won_rounds++;
 		time_stop = true;
 		f = win;
+		f = lose;
 		timer_counter = 0;
 	}
 	else if (App->enemy->Health() == 0 && !blockpoints)
@@ -90,6 +103,7 @@ update_status ModuleFightManager::Update()
 		pl_won_rounds++;
 		time_stop = true;
 		f = lose;
+		f = win;
 		timer_counter = 0;
 	}
 
@@ -129,6 +143,15 @@ update_status ModuleFightManager::Update()
 		if (timer_counter >= 90 && winner != 0 && winner != 1)
 		{
 			Reset();
+		if (timer_counter >= 90/* && winner != 0 && winner != 1*/)
+		{
+			Reset();
+			if (winner == 0)
+				App->fade->FadeToBlack((Module*)App->scene_paopao, (Module*)App->scene_congrats);
+
+			if (winner == 1)
+				App->fade->FadeToBlack((Module*)App->scene_paopao, (Module*)App->scene_gameover);
+
 		}
 	}
 	
@@ -142,7 +165,6 @@ update_status ModuleFightManager::Update()
 
 	if (winner == 1)
 		App->fade->FadeToBlack((Module*)App->scene_paopao, (Module*)App->scene_gameover);
-
 	App->render->Blit(graphics, position.x - (f.w/2), position.y - (f.h/2), &f, 0.0f);
 
 	return update_status::UPDATE_CONTINUE;

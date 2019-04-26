@@ -9,7 +9,7 @@
 
 ModuleParticles::ModuleParticles()
 {
-	for(uint i = 0; i < MAX_ACTIVE_PARTICLES; ++i)
+	for (uint i = 0; i < MAX_ACTIVE_PARTICLES; ++i)
 		active[i] = nullptr;
 }
 
@@ -44,9 +44,9 @@ bool ModuleParticles::CleanUp()
 	LOG("Unloading particles");
 	App->textures->Unload(graphics);
 
-	for(uint i = 0; i < MAX_ACTIVE_PARTICLES; ++i)
+	for (uint i = 0; i < MAX_ACTIVE_PARTICLES; ++i)
 	{
-		if(active[i] != nullptr)
+		if (active[i] != nullptr)
 		{
 			delete active[i];
 			active[i] = nullptr;
@@ -59,23 +59,23 @@ bool ModuleParticles::CleanUp()
 // Update: draw background
 update_status ModuleParticles::Update()
 {
-	for(uint i = 0; i < MAX_ACTIVE_PARTICLES; ++i)
+	for (uint i = 0; i < MAX_ACTIVE_PARTICLES; ++i)
 	{
 		Particle* p = active[i];
 
-		if(p == nullptr)
+		if (p == nullptr)
 			continue;
 
-		if(p->Update() == false)
+		if (p->Update() == false)
 		{
 			delete p;
 			active[i] = nullptr;
 		}
-		else if(SDL_GetTicks() >= p->born)
+		else if (SDL_GetTicks() >= p->born)
 		{
 			App->render->Blit(graphics, p->position.x, p->position.y, &(p->anim.GetCurrentFrame()));
 
-			if(p->fx_played == false)
+			if (p->fx_played == false)
 			{
 				p->fx_played = true;
 				// Play particle fx here
@@ -160,3 +160,4 @@ bool Particle::Update()
 
 	return ret;
 }
+

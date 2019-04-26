@@ -30,6 +30,7 @@ bool ModuleSceneGameOver::Start()
 	graphics = App->textures->Load("SPRITES FATAL FURY/UI/37.Game_Over/fatfury1672.png");
 	music = App->audio->loadMusic("AUDIO FATAL FURY/MUSIC[OGG]/Fatal Fury King of Fighters - Continue-Game Over.ogg");
 	App->audio->playMusic(music);
+
 	return ret;
 }
 
