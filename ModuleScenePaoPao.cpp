@@ -31,8 +31,8 @@ ModuleScenePaoPao::ModuleScenePaoPao()
 	ground.h = 224;
 
 	//background
-	background.PushBack({ 36, 72, 512, 224 });
-	background.PushBack({ 487, 318, 512, 224 });
+	background.PushBack({ 49, 134, 619, 234 });
+	background.PushBack({ 772, 134, 512, 224 });
 	background.speed = 0.05f;
 }
 
