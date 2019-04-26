@@ -162,7 +162,7 @@ bool ModulePlayer::Start()
 	position.y = 220;
 	App->lifebar->Enable();
 	App->plscore->Enable();
-	player_col = App->collision->AddCollider({ position.x+10, position.y - 90, 33, 104 }, COLLIDER_PLAYER, App->enemy);
+	player_col = App->collision->AddCollider({ position.x+10, position.y - 90, 33, 104 }, COLLIDER_PLAYER, App->player);
 	
 
 	bool ret = true;
@@ -231,7 +231,7 @@ update_status ModulePlayer::Update()
 		at++;
 		if (at == 20)
 		{
-			player_kick_col = App->collision->AddCollider({ position.x + 43, position.y - 86, 49, 17 }, COLLIDER_PLAYER_ATTACK, App->enemy);
+			player_kick_col = App->collision->AddCollider({ position.x + 43, position.y - 86, 49, 17 }, COLLIDER_PLAYER_ATTACK, App->player);
 		}
 		if (at == 28)
 		{
@@ -431,7 +431,6 @@ void ModulePlayer::OnCollision(Collider* a, Collider* b)
 		{
 			already_hit = true;
 			App->enemy->health -= 20;
-
 		}
 	}
 }
