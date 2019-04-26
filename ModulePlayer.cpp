@@ -387,6 +387,12 @@ update_status ModulePlayer::Update()
 					player_col->rect.w = 41;
 					player_col->SetPos(position.x + 5, position.y - 67);
 				}
+				else if (current_animation == &crowchprotecc)
+				{
+					player_col->rect.h = 65;
+					player_col->rect.w = 41;
+					player_col->SetPos(position.x + 5, position.y - 67);
+				}
 				else
 				{
 					player_col->SetPos(position.x + 10, position.y - 104);
