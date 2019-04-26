@@ -272,9 +272,8 @@ update_status ModuleEnemy::Update()
 	}
 	else
 	{
-		if (App->player->Health() != 0)
-		{
-									
+		if (App->enemy->Health() != 0)
+		{			
 						
 			if (App->input->keyboard[SDL_SCANCODE_V] == KEY_STATE::KEY_DOWN)
 				health = 0;
