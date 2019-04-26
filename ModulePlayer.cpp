@@ -4,6 +4,7 @@
 #include "ModuleInput.h"
 #include "ModuleRender.h"
 #include "ModulePlayer.h"
+#include "ModuleEnemy.h"
 #include "ModuleParticles.h"
 #include "ModuleLifeBar.h"
 #include "ModulePlayerScore.h"
@@ -41,21 +42,11 @@ int ModulePlayer::Score()
 	return score;
 }
 
-ModulePlayer::ModulePlayer(const int player)
+ModulePlayer::ModulePlayer()
 {
 	health = 100;
 	already_hit = false;
-	if (player == 0)
-	{
-		this->player = 0;
-	}
-	score = 0;
 
-	if (player != 0)
-	{
-		this->player = 1;
-
-	}
 	// idle animation done 
 	idle.PushBack({ 27, 913, 60, 105 });
 	idle.PushBack({ 95, 915, 61, 104 });
@@ -166,42 +157,27 @@ bool ModulePlayer::Start()
 	health = 100;
 	score = 0;
 	already_hit = false;
-	if (player == 0) 
-	{
-		position.x = 100;
-		position.y = 220;
-		App->lifebar->Enable();
-		App->plscore->Enable();
-		player_col = App->collision->AddCollider({ position.x+10, position.y - 91, 33, 90 }, COLLIDER_PLAYER, App->enemy);
-	}
-	if (player == 1) 
-	{
-		position.x = 200;
-		position.y = 220;
-		App->lifebar2->Enable();
-		App->enscore->Enable();
-		enemy_col = App->collision->AddCollider({ position.x+10, position.y - 91, 33, 90 }, COLLIDER_ENEMY, App->player);
-	}
+
+	position.x = 100;
+	position.y = 220;
+	App->lifebar->Enable();
+	App->plscore->Enable();
+	player_col = App->collision->AddCollider({ position.x+10, position.y - 91, 33, 104 }, COLLIDER_PLAYER, App->enemy);
+	
+
 	bool ret = true;
 	graphics = App->textures->Load("SPRITES FATAL FURY/CHARACTERS/1-Terry Bogard/spritesTerryBogard.png"); // arcade version
 
 	skillFX = App->audio->loadWAV("AUDIO FATAL FURY/FX[WAV]/Voice/Special Attacks/FX_BurnKnuckleAttackTerryBogardVoice.wav");
+	punchFX = App->audio->loadWAV("AUDIO FATAL FURY/FX[WAV]/Voice/Special Attacks/FX_BurnKnuckleAttackTerryBogardVoice.wav");
 	
 	return ret;
 }
 
 bool ModulePlayer::CleanUp()
 {
-	if (player == 0)
-	{
-		App->lifebar->Disable();
-		App->plscore->Disable();
-	}
-	if (player == 1)
-	{
-		App->lifebar2->Disable();
-		App->enscore->Disable();
-	}
+	App->lifebar->Disable();
+	App->plscore->Disable();
 	App->textures->Unload(graphics);
 
 	return true;
@@ -210,16 +186,9 @@ bool ModulePlayer::CleanUp()
 void ModulePlayer::Reset()
 {
 	health = 100;
-	if (player == 0)
-	{
-		position.x = 100;
-		position.y = 220;
-	}
-	if (player == 1)
-	{
-		position.x = 200;
-		position.y = 220;
-	}
+	position.x = 100;
+	position.y = 220;
+	
 
 	current_animation = &idle;
 	lockX = false;
@@ -239,10 +208,7 @@ update_status ModulePlayer::Update()
 		at++;
 		if (at == 15)
 		{
-			if(player == 0)
-				player_punch_col = App->collision->AddCollider({ position.x + 43, position.y - 80, 41, 17 }, COLLIDER_PLAYER_ATTACK, App->enemy);
-			if (player == 1)
-				player_punch_col = App->collision->AddCollider({ position.x + 43, position.y - 80, 41, 17 }, COLLIDER_ENEMY_ATTACK, App->player);
+			player_punch_col = App->collision->AddCollider({ position.x + 43, position.y - 80, 41, 17 }, COLLIDER_PLAYER_ATTACK, App->enemy);
 		}
 		if (at > 20)
 		{
@@ -264,10 +230,7 @@ update_status ModulePlayer::Update()
 		at++;
 		if (at == 20)
 		{
-			if(player == 0)
-				player_kick_col = App->collision->AddCollider({ position.x + 43, position.y - 86, 49, 17 }, COLLIDER_PLAYER_ATTACK, App->enemy);
-			if (player == 1)																   
-				player_kick_col = App->collision->AddCollider({ position.x + 43, position.y - 86, 49, 17 }, COLLIDER_ENEMY_ATTACK, App->player);
+			player_kick_col = App->collision->AddCollider({ position.x + 43, position.y - 86, 49, 17 }, COLLIDER_PLAYER_ATTACK, App->enemy);
 		}
 		if (at == 28)
 		{
@@ -308,8 +271,7 @@ update_status ModulePlayer::Update()
 	{
 		if (App->enemy->Health() != 0)
 		{
-			if (player == 0)
-			{
+
 				if (App->input->keyboard[SDL_SCANCODE_B] == KEY_STATE::KEY_DOWN)
 				{
 					health = 0;
@@ -427,16 +389,14 @@ update_status ModulePlayer::Update()
 				}
 				else
 				{
-					player_col->SetPos(position.x + 10, position.y - 91);
-					player_col->rect.h = 90;
+					player_col->SetPos(position.x + 10, position.y - 104);
+					player_col->rect.h = 105;
 					player_col->rect.w = 33;
 				}	
 				//if (skillColDone = true)
 				//{
 				//	skill1->SetPos(App->particles->skill.position.x, App->particles->skill.position.y);
 				//}
-				
-			}
 		}
 		else
 		{
@@ -446,128 +406,7 @@ update_status ModulePlayer::Update()
 				current_animation = &victory;
 			}
 		}
-		if (App->player->Health() != 0)
-		{
-			if (player == 1)
-			{
-				enemy_col->SetPos(position.x + 10, position.y - 91);
-				if (App->input->keyboard[SDL_SCANCODE_V] == KEY_STATE::KEY_DOWN)
-					health = 0;
-
-				if (App->input->keyboard[SDL_SCANCODE_LEFT] == KEY_STATE::KEY_REPEAT && !lockX && !punching && !kicking && !specialattack_)
-				{
-					position.x -= speed;
-					if (current_animation != &backward && !jumping && current_animation != &crowch)
-					{
-						backward.Reset();
-						current_animation = &backward;
-					}
-
-				}
-
-				if (App->input->keyboard[SDL_SCANCODE_RIGHT] == KEY_STATE::KEY_REPEAT && !lockX && !punching && !kicking && !specialattack_)
-				{
-					position.x += speed;
-					if (current_animation != &forward && !jumping)
-					{
-						forward.Reset();
-						current_animation = &forward;
-					}
-
-				}
-
-				if (App->input->keyboard[SDL_SCANCODE_DOWN] == KEY_STATE::KEY_REPEAT && !jumping && !punching && !kicking && !specialattack_)
-				{
-					if (current_animation != &crowch)
-					{
-						lockX = true;
-						crowchaction = true;
-						crowch.Reset();
-						current_animation = &crowch;
-					}
-					if (App->input->keyboard[SDL_SCANCODE_LEFT] == KEY_STATE::KEY_REPEAT && !punching && !kicking && !specialattack_)
-					{
-						if (current_animation != &crowchprotecc)
-						{
-							crowchprotecc.Reset();
-							current_animation = &crowchprotecc;
-						}
-					}
-				}
-
-				if (App->input->keyboard[SDL_SCANCODE_DOWN] == KEY_STATE::KEY_UP) {
-					lockX = false;
-					crowchaction = false;
-				}
-
-				if (App->input->keyboard[SDL_SCANCODE_UP] == KEY_STATE::KEY_DOWN && !jumping && !punching && !kicking && !specialattack_)
-				{
-					if (current_animation != &jumpiup)
-					{
-						jumping = true;
-						t = 0;
-						jumpiup.Reset();
-						current_animation = &jumpiup;
-					}
-				}
-
-				if (App->input->keyboard[SDL_SCANCODE_I] == KEY_STATE::KEY_DOWN && !punching && !kicking && !crowchaction && !specialattack_) {
-					if (current_animation != &punchstanding && !jumping)
-					{
-						punching = true;
-						at = 0;
-						punchstanding.Reset();
-						current_animation = &punchstanding;
-					}
-				}
-
-				if (App->input->keyboard[SDL_SCANCODE_O] == KEY_STATE::KEY_DOWN && !punching && !jumping && !crowchaction && !specialattack_) {
-					if (current_animation != &kickingstanding && !jumping && !crowchaction)
-					{
-						kicking = true;
-						at = 0;
-						kickingstanding.Reset();
-						current_animation = &kickingstanding;
-					}
-				}
-
-				if (App->input->keyboard[SDL_SCANCODE_P] == KEY_STATE::KEY_DOWN && !punching && !jumping && !crowchaction) {
-					if (current_animation != &kickingstanding && !jumping && !crowchaction && !specialattack_)
-					{
-						specialattack_ = true;
-						at = 0;
-						specialattack.Reset();
-						current_animation = &specialattack;
-					}
-				}
-
-				if (App->input->keyboard[SDL_SCANCODE_DOWN] == KEY_STATE::KEY_IDLE
-					&& App->input->keyboard[SDL_SCANCODE_LEFT] == KEY_STATE::KEY_IDLE
-					&& App->input->keyboard[SDL_SCANCODE_RIGHT] == KEY_STATE::KEY_IDLE
-					&& !jumping && !punching && !kicking && !specialattack_)
-					current_animation = &idle;
-				if (App->input->keyboard[SDL_SCANCODE_RIGHT] == KEY_STATE::KEY_REPEAT
-					&& App->input->keyboard[SDL_SCANCODE_LEFT] == KEY_STATE::KEY_REPEAT
-					&& App->input->keyboard[SDL_SCANCODE_DOWN] == KEY_STATE::KEY_IDLE
-					&& !jumping && !punching && !kicking && !specialattack_)
-					current_animation = &idle;
-
-				
-			}
-		}
-		else
-		{
-			if (current_animation != &victory)
-			{
-				victory.Reset();
-				current_animation = &victory;
-			}
-		}
-			
-			
-		
 	}
-	
 
 	SDL_Rect r = current_animation->GetCurrentFrame();
 
@@ -584,14 +423,6 @@ void ModulePlayer::OnCollision(Collider* a, Collider* b)
 			already_hit = true;
 			App->enemy->health -= 20;
 
-		}
-	}
-	if (player == 1)
-	{
-		if (b->type == COLLIDER_ENEMY_ATTACK && a->type == COLLIDER_PLAYER && !already_hit)
-		{
-			already_hit = true;
-			App->player->health -= 20;
 		}
 	}
 }

@@ -14,6 +14,7 @@ class ModuleSceneIntro;
 class ModuleSceneCongrats;
 class ModuleSceneGameOver;
 class ModulePlayer;
+class ModuleEnemy;
 class ModuleFadeToBlack;
 class Module;
 class ModuleAudio;
@@ -39,7 +40,7 @@ public:
 	ModuleSceneCongrats* scene_congrats;
 	ModuleSceneGameOver* scene_gameover;
 	ModulePlayer* player;
-	ModulePlayer* enemy;
+	ModuleEnemy* enemy;
 	ModuleFadeToBlack* fade;
 	ModuleAudio* audio;
 	ModuleParticles* particles;

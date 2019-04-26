@@ -19,9 +19,6 @@
     <ClCompile Include="ModuleLifeBar.cpp">
       <Filter>Modules\Fight</Filter>
     </ClCompile>
-    <ClCompile Include="ModulePlayer.cpp">
-      <Filter>Modules\Fight</Filter>
-    </ClCompile>
     <ClCompile Include="ModulePlayerScore.cpp">
       <Filter>Modules\Fight</Filter>
     </ClCompile>
@@ -64,6 +61,12 @@
     <ClCompile Include="ModuleAudio.cpp">
       <Filter>Modules\Image &amp; Sound</Filter>
     </ClCompile>
+    <ClCompile Include="ModulePlayer.cpp">
+      <Filter>Modules\Player &amp; Enemy</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleEnemy.cpp">
+      <Filter>Modules\Player &amp; Enemy</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Animation.h">
@@ -91,9 +94,6 @@
       <Filter>Modules\Fight</Filter>
     </ClInclude>
     <ClInclude Include="ModuleLifeBar.h">
-      <Filter>Modules\Fight</Filter>
-    </ClInclude>
-    <ClInclude Include="ModulePlayer.h">
       <Filter>Modules\Fight</Filter>
     </ClInclude>
     <ClInclude Include="ModulePlayerScore.h">
@@ -138,6 +138,12 @@
     <ClInclude Include="ModuleAudio.h">
       <Filter>Modules\Image &amp; Sound</Filter>
     </ClInclude>
+    <ClInclude Include="ModulePlayer.h">
+      <Filter>Modules\Player &amp; Enemy</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleEnemy.h">
+      <Filter>Modules\Player &amp; Enemy</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Core">
@@ -160,6 +166,9 @@
     </Filter>
     <Filter Include="Modules\Image &amp; Sound">
       <UniqueIdentifier>{f966b6b7-b4f5-44d2-be42-73b0cbe0f8a3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Player &amp; Enemy">
+      <UniqueIdentifier>{b57b3144-22e2-4a61-a46a-0d405f14c74f}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

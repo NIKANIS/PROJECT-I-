@@ -9,6 +9,7 @@
 #include "ModuleSceneCongrats.h"
 #include "ModuleSceneGameOver.h"
 #include "ModulePlayer.h"
+#include "ModuleEnemy.h"
 #include "ModuleFadeToBlack.h"
 #include "ModuleAudio.h"
 #include "ModuleParticles.h"
@@ -21,28 +22,29 @@
 
 Application::Application()
 {
-	modules[0] = window = new ModuleWindow();
-	modules[1] = render = new ModuleRender();
-	modules[2] = input = new ModuleInput();
-	modules[3] = textures = new ModuleTextures();
-	modules[4] = scene_intro = new ModuleSceneIntro();
-	modules[5] = scene_paopao = new ModuleScenePaoPao();
-	modules[6] = player = new ModulePlayer(0);
-	modules[7] = enemy = new ModulePlayer(1);
-	modules[8] = fade = new ModuleFadeToBlack();
-	modules[9] = audio = new ModuleAudio();
-	modules[10] = particles = new ModuleParticles();
-	modules[11] = lifebar = new ModuleLifeBar(0);
-	modules[12] = lifebar2 = new ModuleLifeBar(1);
-	modules[13] = plscore = new ModulePlayerScore(0);
-	modules[14] = enscore = new ModulePlayerScore(1);
-	modules[15] = fight_timer = new ModuleFightTimer();
-	modules[16] = fight_manager = new ModuleFightManager();
-	modules[17] = collision = new ModuleCollision();
-	modules[18] = scene_congrats = new ModuleSceneCongrats();
-	modules[19] = scene_gameover = new ModuleSceneGameOver();
-	modules[20] = round_pl = new ModuleRoundDisplay(0);
-	modules[21] = round_en = new ModuleRoundDisplay(1);
+	int i = 0;
+	modules[i++] = window = new ModuleWindow();
+	modules[i++] = render = new ModuleRender();
+	modules[i++] = input = new ModuleInput();
+	modules[i++] = textures = new ModuleTextures();
+	modules[i++] = scene_intro = new ModuleSceneIntro();
+	modules[i++] = scene_paopao = new ModuleScenePaoPao();
+	modules[i++] = player = new ModulePlayer();
+	modules[i++] = enemy = new ModuleEnemy();
+	modules[i++] = fade = new ModuleFadeToBlack();
+	modules[i++] = audio = new ModuleAudio();
+	modules[i++] = particles = new ModuleParticles();
+	modules[i++] = lifebar = new ModuleLifeBar(0);
+	modules[i++] = lifebar2 = new ModuleLifeBar(1);
+	modules[i++] = plscore = new ModulePlayerScore(0);
+	modules[i++] = enscore = new ModulePlayerScore(1);
+	modules[i++] = fight_timer = new ModuleFightTimer();
+	modules[i++] = fight_manager = new ModuleFightManager();
+	modules[i++] = collision = new ModuleCollision();
+	modules[i++] = scene_congrats = new ModuleSceneCongrats();
+	modules[i++] = scene_gameover = new ModuleSceneGameOver();
+	modules[i++] = round_pl = new ModuleRoundDisplay(0);
+	modules[i++] = round_en = new ModuleRoundDisplay(1);
 	
 	
 }	

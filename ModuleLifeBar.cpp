@@ -4,6 +4,7 @@
 #include "ModuleInput.h"
 #include "ModuleRender.h"
 #include "ModulePlayer.h"
+#include "ModuleEnemy.h"
 #include "ModuleLifeBar.h"
 
 ModuleLifeBar::ModuleLifeBar(const int player)

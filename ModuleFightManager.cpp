@@ -3,6 +3,7 @@
 #include "ModuleRender.h"
 #include "ModuleFightManager.h"
 #include "ModulePlayer.h"
+#include "ModuleEnemy.h"
 #include "ModuleFightTimer.h"
 #include "ModuleInput.h"
 #include "ModuleRoundDisplay.h"

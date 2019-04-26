@@ -12,7 +12,7 @@ struct SDL_Texture;
 class ModulePlayer : public Module
 {
 public:
-	ModulePlayer(const int player);
+	ModulePlayer();
 	~ModulePlayer();
 
 	bool Start();
@@ -21,6 +21,9 @@ public:
 	int Score();
 	bool CleanUp();
 	void Reset();
+
+	int health;
+	int score;
 
 private:
 
@@ -42,8 +45,7 @@ private:
 	Animation victory;
 	Animation hit;
 	iPoint position;
-	int health;
-	int score;
+
 	//bool stunt_hit; //stunt time after getting hit
 	bool already_hit;
 	bool lockX = false; //locks the sideways movement
