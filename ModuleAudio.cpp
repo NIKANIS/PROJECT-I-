@@ -27,7 +27,9 @@ bool ModuleAudio::Init()
 		LOG("SDL_Init: %s\n", SDL_GetError());
 		ret = false;
 	}
-	if (Mix_OpenAudio(22050, MIX_DEFAULT_FORMAT, 2, 4096) == -1) {
+
+
+	if (Mix_OpenAudio(22050, MIX_DEFAULT_FORMAT, 2, 1048) == -1) {
 		LOG("Mix_OpenAudio: %s\n", Mix_GetError());
 		ret = false;
 	}
