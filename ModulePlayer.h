@@ -75,6 +75,7 @@ private:
 
 	Mix_Chunk* punchFX = nullptr;
 	Mix_Chunk* skillFX = nullptr;
+	Mix_Chunk* kickFX = nullptr;
 
 	void OnCollision(Collider*, Collider*) override;
 };
