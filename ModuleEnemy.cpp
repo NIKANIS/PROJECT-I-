@@ -425,7 +425,6 @@ update_status ModuleEnemy::Update()
 
 void ModuleEnemy::OnCollision(Collider* a, Collider* b)
 {
-
 	if (b->type == COLLIDER_ENEMY_ATTACK && a->type == COLLIDER_PLAYER && !already_hit)
 	{
 		already_hit = true;

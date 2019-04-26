@@ -168,8 +168,9 @@ bool ModulePlayer::Start()
 	bool ret = true;
 	graphics = App->textures->Load("SPRITES FATAL FURY/CHARACTERS/1-Terry Bogard/spritesTerryBogard.png"); // arcade version
 
-	skillFX = App->audio->loadWAV("AUDIO FATAL FURY/FX[WAV]/Voice/Special Attacks/FX_BurnKnuckleAttackTerryBogardVoice.wav");
-	punchFX = App->audio->loadWAV("AUDIO FATAL FURY/FX[WAV]/Voice/Special Attacks/FX_BurnKnuckleAttackTerryBogardVoice.wav");
+	skillFX = App->audio->loadWAV("AUDIO FATAL FURY/FX[WAV]/Voice/Special Attacks/FX_PowerWaveAttackTerryBogardVoice.wav");
+	punchFX = App->audio->loadWAV("AUDIO FATAL FURY/FX[WAV]/Voice/Attacks/FX_Attack3.wav");
+	kickFX = App->audio->loadWAV("AUDIO FATAL FURY/FX[WAV]/Voice/Attacks/FX_Attack2.wav");
 	
 	return ret;
 }
@@ -345,6 +346,7 @@ update_status ModulePlayer::Update()
 						at = 0;
 						punchstanding.Reset();
 						current_animation = &punchstanding;
+						App->audio->playFx(punchFX);
 					}
 				}
 
@@ -355,6 +357,7 @@ update_status ModulePlayer::Update()
 						at = 0;
 						kickingstanding.Reset();
 						current_animation = &kickingstanding;
+						App->audio->playFx(kickFX);
 					}
 				}
 
