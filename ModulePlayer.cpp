@@ -117,13 +117,13 @@ ModulePlayer::ModulePlayer(const int player)
 	kickingstanding.loop = false;
 
 	//special attack while standing done
-	specialattack.PushBack({ 613, 684, 64, 115 });
-	specialattack.PushBack({ 550, 681, 62, 115 });
-	specialattack.PushBack({ 481, 694, 64, 104 });
-	specialattack.PushBack({ 398, 705, 84, 92 });
-	specialattack.PushBack({ 328, 713, 72, 85 });
-	specialattack.PushBack({ 258, 720, 69, 78 });
-	specialattack.PushBack({ 192, 711, 65, 86 });
+	specialattack.PushBack({ 620, 689, 51, 105 });
+	specialattack.PushBack({ 547, 682, 54, 112 });
+	specialattack.PushBack({ 482, 699, 60, 95 });
+	specialattack.PushBack({ 399, 717, 67, 76 });
+	specialattack.PushBack({ 399, 717, 67, 76 });
+	specialattack.PushBack({ 260, 727, 65, 67 });
+	specialattack.PushBack({ 195, 714, 60, 80 });
 	specialattack.speed = 0.15f;
 	specialattack.loop = false;
 
