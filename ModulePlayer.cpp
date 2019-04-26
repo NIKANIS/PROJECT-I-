@@ -74,10 +74,10 @@ ModulePlayer::ModulePlayer(const int player)
 	jump.PushBack({ 828, 565 , 63, 107 });
 
 	//go forward done
-	forward.PushBack({ 1030, 269, 62, 105 });
-	forward.PushBack({ 1104, 265, 82, 115 });
-	forward.PushBack({ 1187, 267, 69, 111 });
-	forward.PushBack({ 1267, 272, 69, 111 });
+	forward.PushBack({ 1111, 270, 69, 105 });
+	forward.PushBack({ 1193, 271, 59, 104 });
+	forward.PushBack({ 1267, 274, 59, 101 });
+	forward.PushBack({ 1036, 273, 59, 102 });
 	forward.speed = 0.13f;
 	forward.loop = true;
 
