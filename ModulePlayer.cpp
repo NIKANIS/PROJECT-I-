@@ -10,7 +10,6 @@
 #include "ModuleCollision.h"
 #include "ModuleFadeToBlack.h"
 #include "SDL/include/SDL_timer.h"
-#include "ModuleAudio.h"
 
 void ModulePlayer::Jump() {
 	if (jumping) {
@@ -105,7 +104,6 @@ ModulePlayer::ModulePlayer(const int player)
 	punchstanding.loop = false;
 
 	//kick while standing done
-
 	kickingstanding.PushBack({1035,122,48,126});
 	kickingstanding.PushBack({1088,122,58,126});
 	kickingstanding.PushBack({1153,122,43,126});
