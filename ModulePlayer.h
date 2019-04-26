@@ -39,6 +39,7 @@ private:
 	Animation specialattack;
 	Animation die;
 	Animation victory;
+	Animation hit;
 	iPoint position;
 	int health;
 	int score;

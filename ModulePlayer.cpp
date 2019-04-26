@@ -142,6 +142,14 @@ ModulePlayer::ModulePlayer(const int player)
 	victory.PushBack({908,324,56,136});
 	victory.speed = 0.15f;
 	victory.loop = false;
+
+	//hit
+	hit.PushBack({ 20, 473, 67, 104 });
+	hit.PushBack({ 88, 470, 73, 110 });
+	hit.PushBack({ 20, 473, 67, 104 });
+	hit.speed = 0.15f;
+	hit.loop = false;
+
 }
 
 ModulePlayer::~ModulePlayer()
