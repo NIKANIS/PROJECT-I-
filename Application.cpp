@@ -3,11 +3,21 @@
 #include "ModuleRender.h"
 #include "ModuleInput.h"
 #include "ModuleTextures.h"
-#include "ModuleSceneKen.h"
-#include "ModuleSceneHonda.h"
+#include "ModuleAudio.h"
+#include "ModuleScenePaoPao.h"
+#include "ModuleSceneIntro.h"
+#include "ModuleSceneCongrats.h"
+#include "ModuleSceneGameOver.h"
 #include "ModulePlayer.h"
 #include "ModuleFadeToBlack.h"
 #include "ModuleAudio.h"
+#include "ModuleParticles.h"
+#include "ModuleLifeBar.h"
+#include "ModulePlayerScore.h"
+#include "ModuleFightTimer.h"
+#include "ModuleFightManager.h"
+#include "ModuleCollision.h"
+#include "ModuleRoundDisplay.h"
 
 Application::Application()
 {
@@ -15,11 +25,26 @@ Application::Application()
 	modules[1] = render = new ModuleRender();
 	modules[2] = input = new ModuleInput();
 	modules[3] = textures = new ModuleTextures();
-	modules[4] = scene_honda = new ModuleSceneHonda();
-	modules[5] = scene_ken = new ModuleSceneKen();
-	modules[6] = player = new ModulePlayer();
-	modules[7] = fade = new ModuleFadeToBlack();
-	modules[8] = audio = new ModuleAudio();
+	modules[4] = scene_intro = new ModuleSceneIntro();
+	modules[5] = scene_paopao = new ModuleScenePaoPao();
+	modules[6] = player = new ModulePlayer(0);
+	modules[7] = enemy = new ModulePlayer(1);
+	modules[8] = fade = new ModuleFadeToBlack();
+	modules[9] = audio = new ModuleAudio();
+	modules[10] = particles = new ModuleParticles();
+	modules[11] = lifebar = new ModuleLifeBar(0);
+	modules[12] = lifebar2 = new ModuleLifeBar(1);
+	modules[13] = plscore = new ModulePlayerScore(0);
+	modules[14] = enscore = new ModulePlayerScore(1);
+	modules[15] = fight_timer = new ModuleFightTimer();
+	modules[16] = fight_manager = new ModuleFightManager();
+	modules[17] = collision = new ModuleCollision();
+	modules[18] = scene_congrats = new ModuleSceneCongrats();
+	modules[19] = scene_gameover = new ModuleSceneGameOver();
+	modules[20] = round_pl = new ModuleRoundDisplay(0);
+	modules[21] = round_en = new ModuleRoundDisplay(1);
+	
+	
 }	
 
 Application::~Application()
@@ -34,8 +59,18 @@ bool Application::Init()
 
 	// Player will be enabled on the first update of a new scene
 	player->Disable();
-	// Disable the map that you do not start with
-	scene_honda->Disable();
+	enemy->Disable();
+	scene_paopao->Disable();
+	scene_congrats->Disable();
+	scene_gameover->Disable();
+	lifebar->Disable();
+	lifebar2->Disable();
+	plscore->Disable();
+	enscore->Disable();
+	fight_timer->Disable();
+	fight_manager->Disable();
+	round_pl->Disable();
+	round_en->Disable();
 
 	for(int i = 0; i < NUM_MODULES && ret == true; ++i)
 		ret = modules[i]->Init();
