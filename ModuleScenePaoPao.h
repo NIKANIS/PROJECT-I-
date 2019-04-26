@@ -19,6 +19,7 @@ public:
 
 public:
 	Mix_Music* music = nullptr;
+	//SI hace falta efecte Mix_Chunk*;
 	SDL_Texture* back_graphics = nullptr;
 	SDL_Rect ground;
 	Animation background;
