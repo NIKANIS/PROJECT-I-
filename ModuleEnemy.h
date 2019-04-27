@@ -55,6 +55,7 @@ public:
 	bool crowchaction = false; //true while crowching
 	bool specialattack_ = false; //true while special attacking
 	bool skillColDone = false;
+	bool fliped = true;
 	int t = 0; //jumping coldown time
 	int at = 0; //attack coldown time
 	int vy = 0; //velocity y

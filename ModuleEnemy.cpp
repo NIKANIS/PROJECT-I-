@@ -284,7 +284,7 @@ update_status ModuleEnemy::Update()
 				if (current_animation != &backward && !jumping && current_animation != &crowch)
 				{
 					backward.Reset();
-					current_animation = &backward;
+					current_animation = &forward;
 				}
 			}			
 
@@ -294,7 +294,7 @@ update_status ModuleEnemy::Update()
 				if (current_animation != &forward && !jumping)
 				{
 					forward.Reset();
-					current_animation = &forward;
+					current_animation = &backward;
 				}
 			}
 
@@ -410,7 +410,15 @@ update_status ModuleEnemy::Update()
 
 	SDL_Rect r = current_animation->GetCurrentFrame();
 
-	App->render->Blit(graphics, position.x, position.y - r.h, &r,true);
+	if (App->player->position.x <= position.x)
+	{
+		fliped = true;
+	}
+	else
+	{
+		fliped = false;
+	}
+	App->render->Blit(graphics, position.x, position.y - r.h, &r,fliped);
 
 	return UPDATE_CONTINUE;
 }

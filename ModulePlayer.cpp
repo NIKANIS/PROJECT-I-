@@ -209,7 +209,7 @@ update_status ModulePlayer::Update()
 		at++;
 		if (at == 15)
 		{
-			player_punch_col = App->collision->AddCollider({ position.x + 52, position.y - 90, 41, 12 }, COLLIDER_PLAYER_ATTACK, App->player);
+			player_punch_col = App->collision->AddCollider({ position.x + 42, position.y - 90, 41, 12 }, COLLIDER_PLAYER_ATTACK, App->player);
 		}
 		if (at > 20)
 		{
@@ -231,7 +231,7 @@ update_status ModulePlayer::Update()
 		at++;
 		if (at == 20)
 		{
-			player_kick_col = App->collision->AddCollider({ position.x + 65, position.y - 90, 49, 12 }, COLLIDER_PLAYER_ATTACK, App->player);
+			player_kick_col = App->collision->AddCollider({ position.x + 42, position.y - 85, 49, 17 }, COLLIDER_PLAYER_ATTACK, App->player);
 		}
 		if (at == 28)
 		{
@@ -417,7 +417,15 @@ update_status ModulePlayer::Update()
 
 	SDL_Rect r = current_animation->GetCurrentFrame();
 
-	App->render->Blit(graphics, position.x, position.y - r.h, &r);
+	if (App->enemy->position.x <= position.x)
+	{
+		fliped = true;
+	}
+	else
+	{
+		fliped = false;
+	}
+	App->render->Blit(graphics, position.x, position.y - r.h, &r,fliped);
 	
 	return UPDATE_CONTINUE;
 }
