@@ -158,6 +158,7 @@ bool ModuleEnemy::Start()
 	health = 100;
 	score = 0;
 	already_hit = false;
+	body_collide = false;
 
 	position.x = 400;
 	position.y = 220;
@@ -191,6 +192,8 @@ void ModuleEnemy::Reset()
 
 	position.x = 400;
 	position.y = 220;
+	already_hit = false;
+	body_collide = false;
 
 	current_animation = &idle;
 	lockX = false;
@@ -322,7 +325,10 @@ update_status ModuleEnemy::Update()
 
 			if (App->input->keyboard[SDL_SCANCODE_LEFT] == KEY_STATE::KEY_REPEAT && !lockX && !punching && !kicking && !specialattack_)
 			{
-				if (position.x != -10)
+				if (body_collide && !fliped)
+					body_collide = false;
+
+				if (position.x != -10 && !body_collide)
 					position.x -= speed;
 				if (fliped == true) {
 					if (current_animation != &forward && !jumping && current_animation != &crowch)
@@ -343,7 +349,9 @@ update_status ModuleEnemy::Update()
 
 			if (App->input->keyboard[SDL_SCANCODE_RIGHT] == KEY_STATE::KEY_REPEAT && !lockX && !punching && !kicking && !specialattack_)
 			{
-				if (position.x != 610)
+				if (body_collide && fliped)
+					body_collide = false;
+				if (position.x != 610 && !body_collide)
 					position.x += speed;
 				if (fliped == true)
 				{
@@ -511,11 +519,25 @@ void ModuleEnemy::Damage(const int damage)
 	health -= damage;
 }
 
-void ModuleEnemy::OnCollision(Collider* a, Collider* b)
+void ModuleEnemy::OnCollision(Collider* a, Collider* b, bool colliding)
 {
-	if (a->type == COLLIDER_ENEMY_ATTACK && b->type == COLLIDER_PLAYER && !already_hit)
+	if (colliding)
 	{
-		already_hit = true;
-		App->player->Damage(20);
-	}	
+		if (a->type == COLLIDER_ENEMY_ATTACK && b->type == COLLIDER_PLAYER && !already_hit)
+		{
+			already_hit = true;
+			App->player->Damage(20);
+		}	
+		if (b->type == COLLIDER_PLAYER && a->type == COLLIDER_ENEMY)
+		{
+			body_collide = true;
+		}
+	}
+	else
+	{
+		if (b->type == COLLIDER_PLAYER && a->type == COLLIDER_ENEMY)
+		{
+			body_collide = false;
+		}
+	}
 }

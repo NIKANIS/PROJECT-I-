@@ -90,14 +90,17 @@ update_status ModuleCollision::PreUpdate()
 				continue;
 
 			c2 = colliders[k];
-
+			if (c1->type == COLLIDER_PLAYER && c2->type == COLLIDER_ENEMY && c1->CheckCollision(c2->rect) == false)
+			{
+				c1->callback->OnCollision(c1, c2, false);
+			}
 			if (c1->CheckCollision(c2->rect) == true)
 			{
 				if (matrix[c1->type][c2->type] && c1->callback)
-					c1->callback->OnCollision(c1, c2);
+					c1->callback->OnCollision(c1, c2, true);
 
 				if (matrix[c2->type][c1->type] && c2->callback)
-					c2->callback->OnCollision(c2, c1);
+					c2->callback->OnCollision(c2, c1, true);
 			}
 		}
 	}

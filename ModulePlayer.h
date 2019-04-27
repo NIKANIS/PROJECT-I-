@@ -49,6 +49,7 @@ public:
 	
 
 	//bool stunt_hit; //stunt time after getting hit
+	bool body_collide/* = false*/;
 	bool already_hit;
 	bool lockX = false; //locks the sideways movement
 	bool jumping = false; //true while jumping
@@ -80,7 +81,7 @@ public:
 	Mix_Chunk* skillFX = nullptr;
 	Mix_Chunk* kickFX = nullptr;
 
-	void OnCollision(Collider*, Collider*) override;
+	void OnCollision(Collider*, Collider*, bool colliding) override;
 };
 
 #endif

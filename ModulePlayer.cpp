@@ -53,6 +53,7 @@ ModulePlayer::ModulePlayer()
 {
 	health = 100;
 	already_hit = false;
+	body_collide = false;
 
 	// idle animation done 
 	idle.PushBack({ 27, 913, 60, 105 });
@@ -164,6 +165,7 @@ bool ModulePlayer::Start()
 	health = 100;
 	score = 0;
 	already_hit = false;
+	body_collide = false;
 
 	position.x = 200;
 	position.y = 220;
@@ -196,7 +198,8 @@ void ModulePlayer::Reset()
 	health = 100;
 	position.x = 200;
 	position.y = 220;
-	
+	body_collide = false;
+	already_hit = false;
 
 	current_animation = &idle;
 	lockX = false;
@@ -308,6 +311,10 @@ update_status ModulePlayer::Update()
 		
 	}
 	Jump();
+	if (body_collide == false)
+		score = 490;
+	else
+		score = 0;
 	if (health == 0)
 	{
 		if (current_animation != &die)
@@ -327,7 +334,9 @@ update_status ModulePlayer::Update()
 
 				if (App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT && !lockX && !punching && !kicking && !specialattack_)
 				{
-					if( position.x != -10)
+					if (body_collide && !fliped)
+						body_collide = false;
+					if (position.x != -10 && !body_collide)
 						position.x -= speed;
 					if (fliped == true) {
 						if (current_animation != &forward && !jumping && current_animation != &crowch)
@@ -348,7 +357,9 @@ update_status ModulePlayer::Update()
 
 				if (App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT && !lockX && !punching && !kicking && !specialattack_)
 				{
-					if (position.x != 610)
+					if (body_collide && fliped)
+						body_collide = false;
+					if (position.x != 610 && !body_collide)
 						position.x += speed;
 					if (fliped == true)
 					{
@@ -523,13 +534,26 @@ void ModulePlayer::Damage(const int damage)
 	health -= damage;
 }
 
-void ModulePlayer::OnCollision(Collider* a, Collider* b)
+void ModulePlayer::OnCollision(Collider* a, Collider* b, bool colliding)
 {
-	if (a->type == COLLIDER_PLAYER_ATTACK && b->type == COLLIDER_ENEMY && !already_hit)
+	if (colliding) 
 	{
-		already_hit = true;
-		App->enemy->Damage(20);
+		if (a->type == COLLIDER_PLAYER_ATTACK && b->type == COLLIDER_ENEMY && !already_hit)
+		{
+			already_hit = true;
+			App->enemy->Damage(20);
+		}
+		if (a->type == COLLIDER_PLAYER && b->type == COLLIDER_ENEMY)
+		{
+			body_collide = true;
+		}
 	}
-	
+	else
+	{
+		if (a->type == COLLIDER_PLAYER && b->type == COLLIDER_ENEMY)
+		{
+			body_collide = false;
+		}
+	}
 }
 

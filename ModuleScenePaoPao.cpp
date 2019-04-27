@@ -76,7 +76,7 @@ bool ModuleScenePaoPao::CleanUp()
 // Update: draw background
 update_status ModuleScenePaoPao::Update()
 {
-	int speed = 3;
+	/*int speed = 3;
 	if (App->player->position.x >= 30 && App->player->position.x <= 367 && !App->player->lockX && !App->player->punching && !App->player->kicking && !App->player->specialattack_)
 	{
 		if (App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT && App->input->keyboard[SDL_SCANCODE_S] != KEY_STATE::KEY_REPEAT)
@@ -101,7 +101,7 @@ update_status ModuleScenePaoPao::Update()
 			App->lifebar2->position.x += speed / 2;
 			App->fight_timer->position.x += speed / 2;
 		}
-	}
+	}*/
 	// Draw everything --------------------------------------
 	App->render->Blit(back_graphics, 0, 0, &(background.GetCurrentFrame()),false, 0.92f);
 

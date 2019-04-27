@@ -42,7 +42,7 @@ public:
 	}
 
 	// Callbacks ---
-	virtual void OnCollision(Collider*, Collider*) {}
+	virtual void OnCollision(Collider*, Collider*, bool colliding) {}
 };
 
 #endif // __MODULE_H__
