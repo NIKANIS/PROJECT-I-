@@ -18,7 +18,7 @@ public:
 	update_status Update();
 	bool CleanUp();
 
-private:
+public:
 
 	SDL_Texture* graphics = nullptr;
 	SDL_Rect P1photo;
