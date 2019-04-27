@@ -49,9 +49,10 @@ public:
 	Animation hit;
 	Animation kickstun;
 	Animation punchstun;
+	Animation crowchpunch;
 
 	int stuned; //stunt after getting hit 0 = not stuned / 1 = punch stuned / 2 = kick stuned
-	bool body_collide/* = false*/;
+	bool body_collide;
 	bool already_hit;
 	bool lockX = false; //locks the sideways movement
 	bool jumping = false; //true while jumping
