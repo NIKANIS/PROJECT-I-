@@ -221,6 +221,17 @@ void ModuleEnemy::Reset()
 	vy = 0;
 }
 
+int ModuleEnemy::Pos_X()
+{
+	if (punching == true && fliped && at >= 13 && at <= 18)
+		return position.x + 34;
+
+	if (kicking == true && fliped && at >= 25 && at <= 29)
+		return position.x + 44;
+
+	return position.x;
+}
+
 update_status ModuleEnemy::Update()
 {
 	if (punching == true) {
@@ -311,7 +322,6 @@ update_status ModuleEnemy::Update()
 	}
 	
 	Jump();
-
 	if (health == 0)
 	{
 		if (current_animation != &die)
@@ -365,12 +375,12 @@ update_status ModuleEnemy::Update()
 				if (App->input->keyboard[SDL_SCANCODE_V] == KEY_STATE::KEY_DOWN)
 					health = 0;
 
-				if (App->input->keyboard[SDL_SCANCODE_LEFT] == KEY_STATE::KEY_REPEAT && !lockX && !punching && !kicking && !specialattack_)
+				if (App->input->keyboard[SDL_SCANCODE_LEFT] == KEY_STATE::KEY_REPEAT && !lockX && !punching && !kicking && !specialattack_ && current_animation != &crowch)
 				{
 					if (body_collide && !fliped)
 						body_collide = false;
 
-					if (position.x != -10 && !body_collide)
+					if (position.x != -10 && !body_collide && position.x*(-SCREEN_SIZE) < App->render->camera.x)
 						position.x -= speed;
 					if (fliped == true) {
 						if (current_animation != &forward && !jumping && current_animation != &crowch)
@@ -389,11 +399,11 @@ update_status ModuleEnemy::Update()
 					}
 				}
 
-				if (App->input->keyboard[SDL_SCANCODE_RIGHT] == KEY_STATE::KEY_REPEAT && !lockX && !punching && !kicking && !specialattack_)
+				if (App->input->keyboard[SDL_SCANCODE_RIGHT] == KEY_STATE::KEY_REPEAT && !lockX && !punching && !kicking && !specialattack_ && current_animation != &crowch)
 				{
 					if (body_collide && fliped)
 						body_collide = false;
-					if (position.x != 610 && !body_collide)
+					if (position.x != 610 && !body_collide && (-SCREEN_SIZE * (position.x + 60)) > (App->render->camera.x - SCREEN_SIZE * SCREEN_WIDTH))
 						position.x += speed;
 					if (fliped == true)
 					{
@@ -516,7 +526,7 @@ update_status ModuleEnemy::Update()
 					enemy_col->rect.w = 41;
 					enemy_col->SetPos(position.x + 5, position.y - 67);
 				}
-				else if (!crowchaction)
+				else if (current_animation != &crowch)
 				{
 					if (!fliped)
 					{
@@ -571,9 +581,15 @@ void ModuleEnemy::OnCollision(Collider* a, Collider* b, bool colliding)
 		{
 			already_hit = true;
 			if (kicking)
-				App->player->Damage(30,2);
-			if (punching)
-				App->player->Damage(20,1);
+			{
+				App->player->Damage(30, 2);
+				score += 200;
+			}
+			if (punching) 
+			{
+				App->player->Damage(20, 1);
+				score += 100;
+			}
 		}	
 		if (b->type == COLLIDER_PLAYER && a->type == COLLIDER_ENEMY)
 		{

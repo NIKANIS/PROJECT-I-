@@ -56,34 +56,6 @@ update_status ModuleRender::PreUpdate()
 
 update_status ModuleRender::Update()	
 { 
-	/*int speed = 0;
-
-	if (App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT && App->input->keyboard[SDL_SCANCODE_S] != KEY_STATE::KEY_REPEAT)
-		if (App->player->position.x >= 101 && App->player->position.x <= 440)
-		{
-			camera.x += speed; 
-			App->round_pl->position.x    -= speed / 2;
-			App->round_en->position.x    -= speed / 2;
-			App->plscore->position.x     -= speed / 2;
-			App->enscore->position.x     -= speed / 2;
-			App->lifebar->position.x     -= speed / 2;
-			App->lifebar2->position.x    -= speed / 2;
-			App->fight_timer->position.x -= speed / 2;
-		}			
-		
-	if (App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT && App->input->keyboard[SDL_SCANCODE_S] != KEY_STATE::KEY_REPEAT)
-		if (App->player->position.x >= 101 && App->player->position.x <= 440)
-		{
-			camera.x -= speed;
-			App->round_pl->position.x += speed / 2;
-			App->round_en->position.x += speed / 2;
-			App->plscore->position.x  += speed / 2;
-			App->enscore->position.x  += speed / 2;
-			App->lifebar->position.x  += speed / 2;
-			App->lifebar2->position.x += speed / 2;
-			App->fight_timer->position.x += speed / 2;
-		}	*/
-
 	return update_status::UPDATE_CONTINUE;
 }
 
@@ -112,8 +84,8 @@ bool ModuleRender::Blit(SDL_Texture* texture, int x, int y, SDL_Rect* section,bo
 {
 	bool ret = true;
 	SDL_Rect rect;
-	rect.x = (int)(camera.x*speed) + x * SCREEN_SIZE;
-	rect.y = (int)(camera.y*speed) + y * SCREEN_SIZE;
+	rect.x = (camera.x*speed) + x * SCREEN_SIZE;
+	rect.y = (camera.y*speed) + y * SCREEN_SIZE;
 
 	if(section != NULL)
 	{

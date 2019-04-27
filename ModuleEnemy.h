@@ -19,6 +19,7 @@ public:
 	update_status Update();
 	int Health();
 	int Score();
+	int Pos_X();
 	bool CleanUp();
 	void Reset();
 	void Damage(const int damage, const int type);

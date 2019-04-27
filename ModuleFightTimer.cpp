@@ -42,6 +42,7 @@ bool ModuleFightTimer::CleanUp()
 update_status ModuleFightTimer::Update()
 {
 
+	position.x = -App->render->camera.x / SCREEN_SIZE;
 
 	int time = App->fight_manager->Time();
 	if (time > 90)
@@ -87,8 +88,8 @@ update_status ModuleFightTimer::Update()
 		}
 	}
 
-	App->render->Blit(graphics, position.x+ 120, position.y - 25, &timer, 0.0f);
-	App->render->Blit(graphics, position.x + 121, position.y - 15, &r[1], 0.0f);
-	App->render->Blit(graphics, position.x + 137, position.y - 15, &r[0], 0.0f);
+	App->render->Blit(graphics, position.x+ 120 + HUD_X, position.y - 25, &timer,false, 1.0f);
+	App->render->Blit(graphics, position.x + 121 + HUD_X, position.y - 15, &r[1], false, 1.0f);
+	App->render->Blit(graphics, position.x + 137 + HUD_X, position.y - 15, &r[0], false, 1.0f);
 	return update_status::UPDATE_CONTINUE;
 }

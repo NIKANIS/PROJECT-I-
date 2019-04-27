@@ -227,8 +227,20 @@ void ModulePlayer::Reset()
 	vy = 0;
 }
 
+int ModulePlayer::Pos_X()
+{
+	if (punching == true && fliped && at >= 13 && at <= 18) 
+		return (position.x + 34);
+
+	if (kicking == true && fliped && at >= 25 && at <= 29) 
+		return (position.x + 44);
+
+	return position.x;
+}
+
 update_status ModulePlayer::Update()
 {
+
 	if (App->enemy->position.x <= position.x)
 	{
 		fliped = true;
@@ -374,7 +386,7 @@ update_status ModulePlayer::Update()
 				{
 					if (body_collide && !fliped)
 						body_collide = false;
-					if (position.x != -10 && !body_collide)
+					if (position.x != 0 && !body_collide && position.x*(-SCREEN_SIZE) < App->render->camera.x)
 						position.x -= speed;
 					if (fliped == true) {
 						if (current_animation != &forward && !jumping && current_animation != &crowch)
@@ -397,7 +409,7 @@ update_status ModulePlayer::Update()
 				{
 					if (body_collide && fliped)
 						body_collide = false;
-					if (position.x != 610 && !body_collide)
+					if (position.x != 610 && !body_collide && (-SCREEN_SIZE * (position.x + 60)) > (App->render->camera.x - SCREEN_SIZE * SCREEN_WIDTH))
 						position.x += speed;
 					if (fliped == true)
 					{
@@ -524,7 +536,7 @@ update_status ModulePlayer::Update()
 					player_col->rect.w = 41;
 					player_col->SetPos(position.x + 5, position.y - 67);
 				}
-				else if (!crowchaction)
+				else if (current_animation != &crowch)
 				{
 					if (!fliped)
 					{
@@ -579,12 +591,17 @@ void ModulePlayer::OnCollision(Collider* a, Collider* b, bool colliding)
 	{
 		if (a->type == COLLIDER_PLAYER_ATTACK && b->type == COLLIDER_ENEMY && !already_hit)
 		{
-			
 			already_hit = true;
 			if (kicking)
-				App->enemy->Damage(30,2);
+			{
+				App->enemy->Damage(30, 2);
+				score += 200;
+			}
 			if (punching)
-				App->enemy->Damage(20,1);
+			{
+				App->enemy->Damage(20, 1);
+				score += 100;
+			}
 		}
 		if (a->type == COLLIDER_PLAYER && b->type == COLLIDER_ENEMY)
 		{

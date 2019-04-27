@@ -19,6 +19,7 @@ public:
 	update_status Update();
 	int Health();
 	int Score();
+	int Pos_X();
 	bool CleanUp();
 	void Reset();
 	void Damage(const int damage, const int type);
@@ -76,8 +77,6 @@ public:
 	Collider* skill3 = nullptr;
 	Collider* skill4 = nullptr;
 	Collider* skill5 = nullptr;
-
-
 	Mix_Chunk* punchFX = nullptr;
 	Mix_Chunk* skillFX = nullptr;
 	Mix_Chunk* kickFX = nullptr;

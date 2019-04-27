@@ -29,6 +29,7 @@ private:
 	SDL_Rect draw;
 	SDL_Rect f;
 	iPoint position;
+	int cam_pos_x;
 	int winner = 3; // 0 = P1_win, 1 = P2_win, 2 = draw
 	int pl_won_rounds;
 	int en_won_rounds;
@@ -37,8 +38,6 @@ private:
 	bool time_stop;
 	bool blockpoints; 
 	void Reset();
-	void EndTimer();
-
 };
 
 #endif
