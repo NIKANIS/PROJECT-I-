@@ -56,35 +56,7 @@ update_status ModuleRender::PreUpdate()
 
 update_status ModuleRender::Update()	
 { 
-	int speed = 3;
-
-	if (App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT && App->input->keyboard[SDL_SCANCODE_S] != KEY_STATE::KEY_REPEAT)
-		if (App->player->position.x >= 101 && App->player->position.x <= 440)
-		{
-			camera.x += speed; 
-			App->round_pl->position.x    -= speed / 2;
-			App->round_en->position.x    -= speed / 2;
-			App->plscore->position.x     -= speed / 2;
-			App->enscore->position.x     -= speed / 2;
-			App->lifebar->position.x     -= speed / 2;
-			App->lifebar2->position.x    -= speed / 2;
-			App->fight_timer->position.x -= speed / 2;
-		}			
-		
-	if (App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT && App->input->keyboard[SDL_SCANCODE_S] != KEY_STATE::KEY_REPEAT)
-		if (App->player->position.x >= 101 && App->player->position.x <= 440)
-		{
-			camera.x -= speed;
-			App->round_pl->position.x += speed / 2;
-			App->round_en->position.x += speed / 2;
-			App->plscore->position.x  += speed / 2;
-			App->enscore->position.x  += speed / 2;
-			App->lifebar->position.x  += speed / 2;
-			App->lifebar2->position.x += speed / 2;
-			App->fight_timer->position.x += speed / 2;
-		}
-		
-				
+	
 
 	return update_status::UPDATE_CONTINUE;
 }

@@ -159,7 +159,7 @@ bool ModuleEnemy::Start()
 	score = 0;
 	already_hit = false;
 
-	position.x = 300;
+	position.x = 400;
 	position.y = 220;
 	App->lifebar2->Enable();
 	App->enscore->Enable();
