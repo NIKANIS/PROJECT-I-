@@ -260,8 +260,8 @@ update_status ModuleEnemy::Update()
 		}
 	}
 	
-
 	Jump();
+
 	if (health == 0)
 	{
 		if (current_animation != &die)
@@ -274,6 +274,15 @@ update_status ModuleEnemy::Update()
 	{
 		if (App->enemy->Health() != 0)
 		{			
+
+			if (App->player->position.x <= position.x)
+			{
+				fliped = true;
+			}
+			else
+			{
+				fliped = false;
+			}
 						
 			if (App->input->keyboard[SDL_SCANCODE_V] == KEY_STATE::KEY_DOWN)
 				health = 0;
@@ -281,20 +290,41 @@ update_status ModuleEnemy::Update()
 			if (App->input->keyboard[SDL_SCANCODE_LEFT] == KEY_STATE::KEY_REPEAT && !lockX && !punching && !kicking && !specialattack_)
 			{
 				position.x -= speed;
-				if (current_animation != &backward && !jumping && current_animation != &crowch)
+				if (fliped == true) {
+					if (current_animation != &forward && !jumping && current_animation != &crowch)
+					{
+						forward.Reset();
+						current_animation = &forward;
+					}
+				}
+				else 
 				{
-					backward.Reset();
-					current_animation = &forward;
+					if (current_animation != &backward && !jumping)
+					{
+						backward.Reset();
+						current_animation = &backward;
+					}
 				}
 			}			
 
 			if (App->input->keyboard[SDL_SCANCODE_RIGHT] == KEY_STATE::KEY_REPEAT && !lockX && !punching && !kicking && !specialattack_)
 			{
 				position.x += speed;
-				if (current_animation != &forward && !jumping)
+				if (fliped == true)
 				{
-					forward.Reset();
-					current_animation = &backward;
+					if (current_animation != &backward && !jumping)
+					{
+						backward.Reset();
+						current_animation = &backward;
+					}
+				}
+				else
+				{
+					if (current_animation != &forward && !jumping && current_animation != &crowch)
+					{
+						forward.Reset();
+						current_animation = &forward;
+					}
 				}
 			}
 
@@ -306,14 +336,25 @@ update_status ModuleEnemy::Update()
 					crowchaction = true;
 					crowch.Reset();
 					current_animation = &crowch;
-
-				}
-				if (App->input->keyboard[SDL_SCANCODE_LEFT] == KEY_STATE::KEY_REPEAT && !punching && !kicking && !specialattack_)
+				}if (fliped == true)
 				{
-					if (current_animation != &crowchprotecc)
+					if (App->input->keyboard[SDL_SCANCODE_RIGHT] == KEY_STATE::KEY_REPEAT && !punching && !kicking && !specialattack_)
 					{
-						crowchprotecc.Reset();
-						current_animation = &crowchprotecc;						
+						if (current_animation != &crowchprotecc)
+						{
+							crowchprotecc.Reset();
+							current_animation = &crowchprotecc;
+						}
+					}
+				}
+				else {
+					if (App->input->keyboard[SDL_SCANCODE_LEFT] == KEY_STATE::KEY_REPEAT && !punching && !kicking && !specialattack_)
+					{
+						if (current_animation != &crowchprotecc)
+						{
+							crowchprotecc.Reset();
+							current_animation = &crowchprotecc;
+						}
 					}
 				}
 			}
@@ -395,7 +436,7 @@ update_status ModuleEnemy::Update()
 				enemy_col->SetPos(position.x + 10, position.y - 91);
 				enemy_col->rect.h = 90;
 				enemy_col->rect.w = 33;
-			}			
+			}
 		}
 		else
 		{
@@ -410,17 +451,14 @@ update_status ModuleEnemy::Update()
 
 	SDL_Rect r = current_animation->GetCurrentFrame();
 
-	if (App->player->position.x <= position.x)
-	{
-		fliped = true;
-	}
-	else
-	{
-		fliped = false;
-	}
 	App->render->Blit(graphics, position.x, position.y - r.h, &r,fliped);
 
 	return UPDATE_CONTINUE;
+}
+
+void ModuleEnemy::Damage(const int damage)
+{
+	health -= damage;
 }
 
 void ModuleEnemy::OnCollision(Collider* a, Collider* b)
@@ -428,6 +466,6 @@ void ModuleEnemy::OnCollision(Collider* a, Collider* b)
 	if (a->type == COLLIDER_ENEMY_ATTACK && b->type == COLLIDER_PLAYER && !already_hit)
 	{
 		already_hit = true;
-		App->player->health -= 20;
+		App->player->Damage(20);
 	}	
 }
