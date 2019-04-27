@@ -158,7 +158,7 @@ bool ModulePlayer::Start()
 	score = 0;
 	already_hit = false;
 
-	position.x = 100;
+	position.x = 200;
 	position.y = 220;
 	App->lifebar->Enable();
 	App->plscore->Enable();

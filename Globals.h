@@ -29,7 +29,7 @@ typedef unsigned int uint;
 #define WIN_BORDERLESS 0
 #define WIN_RESIZABLE 0
 #define REN_VSYNC 1
-#define HUD_X 16
+#define HUD_X 190
 #define HUD_Y 30
 
 #endif // __GLOBALS_H__

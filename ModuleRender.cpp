@@ -62,12 +62,12 @@ update_status ModuleRender::Update()
 		if (App->player->position.x >= 101 && App->player->position.x <= 440)
 		{
 			camera.x += speed; 
-			App->round_pl->position.x -= speed / 2;
-			App->round_en->position.x -= speed / 2;
-			App->plscore->position.x  -= speed / 2;
-			App->enscore->position.x  -= speed / 2;
-			App->lifebar->position.x  -= speed / 2;
-			App->lifebar2->position.x -= speed / 2;
+			App->round_pl->position.x    -= speed / 2;
+			App->round_en->position.x    -= speed / 2;
+			App->plscore->position.x     -= speed / 2;
+			App->enscore->position.x     -= speed / 2;
+			App->lifebar->position.x     -= speed / 2;
+			App->lifebar2->position.x    -= speed / 2;
 			App->fight_timer->position.x -= speed / 2;
 		}			
 		
