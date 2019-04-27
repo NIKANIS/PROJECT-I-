@@ -485,12 +485,6 @@ update_status ModulePlayer::Update()
 							player_col->rect.h = 90;
 							player_col->rect.w = 33;
 						}
-						if (kicking)
-						{
-							player_col->SetPos(position.x, position.y - 121);
-							player_col->rect.h = 110;
-							player_col->rect.w = 50;
-						}
 					}
 					else
 					{

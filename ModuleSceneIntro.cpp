@@ -27,8 +27,8 @@ bool ModuleSceneIntro::Start()
 	LOG("Loading background assets");
 	bool ret = true;
 	graphics = App->textures->Load("SPRITES FATAL FURY/UI/3.Start_Screen_FF/fatfury1011.png");
-	//music = App->audio->loadMusic("AUDIO FATAL FURY/MUSIC[OGG]/Fatal Fury King of Fighters-(Opening Arcade-Console).ogg");
-	//App->audio->playMusic(music);
+	music = App->audio->loadMusic("AUDIO FATAL FURY/MUSIC[OGG]/Fatal Fury King of Fighters-(Opening Arcade-Console).ogg");
+	App->audio->playMusic(music);
 	return ret;
 }
 
@@ -36,7 +36,7 @@ bool ModuleSceneIntro::Start()
 bool ModuleSceneIntro::CleanUp()
 {
 	LOG("Unloading intro");
-	//App->audio->Disable();
+	App->audio->Disable();
 	App->textures->Unload(graphics);
 
 	return true;

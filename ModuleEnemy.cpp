@@ -322,7 +322,8 @@ update_status ModuleEnemy::Update()
 
 			if (App->input->keyboard[SDL_SCANCODE_LEFT] == KEY_STATE::KEY_REPEAT && !lockX && !punching && !kicking && !specialattack_)
 			{
-				position.x -= speed;
+				if (position.x != -10)
+					position.x -= speed;
 				if (fliped == true) {
 					if (current_animation != &forward && !jumping && current_animation != &crowch)
 					{
@@ -342,7 +343,8 @@ update_status ModuleEnemy::Update()
 
 			if (App->input->keyboard[SDL_SCANCODE_RIGHT] == KEY_STATE::KEY_REPEAT && !lockX && !punching && !kicking && !specialattack_)
 			{
-				position.x += speed;
+				if (position.x != 610)
+					position.x += speed;
 				if (fliped == true)
 				{
 					if (current_animation != &backward && !jumping)

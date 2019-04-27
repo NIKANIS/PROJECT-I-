@@ -44,8 +44,8 @@ bool ModuleScenePaoPao::Start()
 {
 	LOG("Loading Pao Pao scene");
 	App->audio->Start();
-	//music = App->audio->loadMusic("AUDIO FATAL FURY/MUSIC[OGG]/Fatal Fury King of Fighters - Halema School of Capoeira Fight Song (Richard Meyer Theme).ogg");
-	//App->audio->playMusic(music);
+	music = App->audio->loadMusic("AUDIO FATAL FURY/MUSIC[OGG]/Fatal Fury King of Fighters - Halema School of Capoeira Fight Song (Richard Meyer Theme).ogg");
+	App->audio->playMusic(music);
 
 	back_graphics = App->textures->Load("SPRITES FATAL FURY/Stages/1 Pao Pao Cafe(Richard)/sprites paopao.png");
 
@@ -62,7 +62,7 @@ bool ModuleScenePaoPao::CleanUp()
 {
 	LOG("Unloading Pao Pao scene");
 	App->fight_manager->Disable();
-	//App->audio->Disable();
+	App->audio->Disable();
 	App->textures->Unload(back_graphics);
 	App->collision->CleanUp();
 	App->player->Reset();
