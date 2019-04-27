@@ -25,7 +25,7 @@ public:
 	int health;
 	int score;
 
-private:
+public:
 
 	void Jump();
 	SDL_Texture* graphics = nullptr;

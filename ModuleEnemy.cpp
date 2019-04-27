@@ -410,7 +410,7 @@ update_status ModuleEnemy::Update()
 
 	SDL_Rect r = current_animation->GetCurrentFrame();
 
-	App->render->Blit(graphics, position.x, position.y - r.h, &r);
+	App->render->Blit(graphics, position.x, position.y - r.h, &r,true);
 
 	return UPDATE_CONTINUE;
 }
