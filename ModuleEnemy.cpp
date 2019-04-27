@@ -93,7 +93,7 @@ ModuleEnemy::ModuleEnemy()
 	punchstanding.PushBack({ 575, 917, 95, 102 });
 	punchstanding.PushBack({ 507, 919, 61, 100 });
 	punchstanding.PushBack({ 434, 919, 71, 99 });
-	punchstanding.speed = 0.17f;
+	punchstanding.speed = 0.15f;
 	punchstanding.loop = false;
 
 	//kick while standing done
@@ -159,7 +159,7 @@ bool ModuleEnemy::Start()
 	score = 0;
 	already_hit = false;
 
-	position.x = 300;
+	position.x = 400;
 	position.y = 220;
 	App->lifebar2->Enable();
 	App->enscore->Enable();
@@ -189,7 +189,7 @@ void ModuleEnemy::Reset()
 {
 	health = 100;
 
-	position.x = 200;
+	position.x = 400;
 	position.y = 220;
 
 	current_animation = &idle;
@@ -208,16 +208,27 @@ update_status ModuleEnemy::Update()
 {
 	if (punching == true) {
 		at++;
-		if (at == 15)
+		if (at == 12)
 		{
-			enemy_punch_col = App->collision->AddCollider({ position.x + 52, position.y - 90, 41, 12 }, COLLIDER_ENEMY_ATTACK, App->enemy);
+			if (fliped == false)
+				enemy_punch_col = App->collision->AddCollider({ position.x + 50, position.y - 90, 41, 12 }, COLLIDER_ENEMY_ATTACK, App->enemy);
+			else
+				enemy_punch_col = App->collision->AddCollider({ position.x - 30, position.y - 90, 41, 12 }, COLLIDER_ENEMY_ATTACK, App->enemy);
 		}
-		if (at > 20)
+		if (at == 19)
 		{
 			enemy_punch_col->to_delete = true;
 			already_hit = false;
 		}
-		if (at == 35)
+		if (at == 13 && fliped)
+		{
+			position.x -= 34;
+		}
+		if (at == 19 && fliped)
+		{
+			position.x += 34;
+		}
+		if (at == 33)
 		{
 			punching = false;
 		}
@@ -228,20 +239,42 @@ update_status ModuleEnemy::Update()
 
 	int speed = 1;
 
+
 	if (kicking == true) {
 		at++;
-		if (at == 20)
+		if (at == 24)
 		{
-			enemy_kick_col = App->collision->AddCollider({ position.x + 43, position.y - 86, 49, 17 }, COLLIDER_ENEMY_ATTACK, App->enemy);
+			if (fliped == false)
+			{
+				enemy_kick_col = App->collision->AddCollider({ position.x + 50, position.y - 85, 49, 17 }, COLLIDER_ENEMY_ATTACK, App->enemy);
+				enemy_col->SetPos(position.x, position.y - 121);
+				enemy_col->rect.h = 110;
+				enemy_col->rect.w = 50;
+
+			}
+			else
+			{
+				enemy_kick_col = App->collision->AddCollider({ position.x - 25, position.y - 85, 49, 17 }, COLLIDER_ENEMY_ATTACK, App->enemy);
+				enemy_col->SetPos(position.x + 20, position.y - 121);
+				enemy_col->rect.h = 110;
+				enemy_col->rect.w = 50;
+			}
 		}
-		if (at == 28)
+		if (at == 25 && fliped)
 		{
+			position.x -= 44;
+		}
+		if (at == 30)
+		{
+			if (fliped)
+			{
+				position.x += 44;
+			}
 			enemy_kick_col->to_delete = true;
 			already_hit = false;
 		}
-		if (at == 45)
+		if (at == 40)
 		{
-
 			kicking = false;
 		}
 	}
@@ -272,7 +305,7 @@ update_status ModuleEnemy::Update()
 	}
 	else
 	{
-		if (App->enemy->Health() != 0)
+		if (App->player->Health() != 0)
 		{			
 
 			if (App->player->position.x <= position.x)
@@ -431,11 +464,26 @@ update_status ModuleEnemy::Update()
 				enemy_col->rect.w = 41;
 				enemy_col->SetPos(position.x + 5, position.y - 67);
 			}
-			else
+			else if(!crowchaction)
 			{
-				enemy_col->SetPos(position.x + 10, position.y - 91);
-				enemy_col->rect.h = 90;
-				enemy_col->rect.w = 33;
+				if (!fliped)
+				{
+					if (!punching && !kicking)
+					{
+						enemy_col->SetPos(position.x + 10, position.y - 91);
+						enemy_col->rect.h = 90;
+						enemy_col->rect.w = 33;
+					}
+				}
+				else
+				{
+					if (!punching && !kicking)
+					{
+						enemy_col->SetPos(position.x + 17, position.y - 91);
+						enemy_col->rect.h = 90;
+						enemy_col->rect.w = 33;
+					}
+				}
 			}
 		}
 		else
