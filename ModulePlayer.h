@@ -24,12 +24,13 @@ public:
 
 	int health;
 	int score;
+	iPoint position;
+	Animation* current_animation = nullptr;
 
 public:
 
 	void Jump();
 	SDL_Texture* graphics = nullptr;
-	Animation* current_animation = nullptr;
 	Animation idle;
 	Animation jumpiup;
 	Animation jumpidown;
@@ -44,7 +45,7 @@ public:
 	Animation die;
 	Animation victory;
 	Animation hit;
-	iPoint position;
+	
 
 	//bool stunt_hit; //stunt time after getting hit
 	bool already_hit;
