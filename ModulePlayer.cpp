@@ -435,7 +435,7 @@ void ModulePlayer::OnCollision(Collider* a, Collider* b)
 	if (a->type == COLLIDER_PLAYER_ATTACK && b->type == COLLIDER_ENEMY && !already_hit)
 	{
 		already_hit = true;
-		this->health -= 20;
+		App->enemy->health -= 20;
 	}
 	
 }
