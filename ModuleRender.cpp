@@ -5,6 +5,9 @@
 #include "ModuleInput.h"
 #include "ModuleEnemy.h"
 #include "ModulePlayer.h"
+#include "ModuleLifeBar.h"
+#include "ModulePlayerScore.h"
+#include "ModuleRoundDisplay.h"
 #include "SDL/include/SDL.h"
 
 ModuleRender::ModuleRender() : Module()
@@ -54,16 +57,11 @@ update_status ModuleRender::Update()
 { 
 	int speed = 3;
 
-	/*if (App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_REPEAT)
-		camera.y += speed;
-
-	if (App->input->keyboard[SDL_SCANCODE_S] == KEY_STATE::KEY_REPEAT)
-		camera.y -= speed;*/
-
 	if (App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT && App->input->keyboard[SDL_SCANCODE_S] != KEY_STATE::KEY_REPEAT)
 		if (App->player->position.x >= 101 && App->player->position.x <= 440)
 		{
 			camera.x += speed; 
+			App->lifebar;
 		}			
 		
 	if (App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT && App->input->keyboard[SDL_SCANCODE_S] != KEY_STATE::KEY_REPEAT)
