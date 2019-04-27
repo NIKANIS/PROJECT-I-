@@ -21,6 +21,7 @@ public:
 	int Score();
 	bool CleanUp();
 	void Reset();
+	void Damage(const int damage);
 
 	int health;
 	int score;
