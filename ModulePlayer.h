@@ -21,7 +21,7 @@ public:
 	int Score();
 	bool CleanUp();
 	void Reset();
-	void Damage(const int damage);
+	void Damage(const int damage, const int type);
 
 	int health;
 	int score;
@@ -46,9 +46,10 @@ public:
 	Animation die;
 	Animation victory;
 	Animation hit;
-	
+	Animation kickstun;
+	Animation punchstun;
 
-	//bool stunt_hit; //stunt time after getting hit
+	int stuned; //stunt after getting hit 0 = not stuned / 1 = punch stuned / 2 = kick stuned
 	bool body_collide/* = false*/;
 	bool already_hit;
 	bool lockX = false; //locks the sideways movement

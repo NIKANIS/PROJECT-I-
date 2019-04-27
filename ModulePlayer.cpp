@@ -153,6 +153,18 @@ ModulePlayer::ModulePlayer()
 	hit.speed = 0.15f;
 	hit.loop = false;
 
+	//kickstun
+	kickstun.PushBack({160,479,64,96});
+	kickstun.PushBack({235,479,69,96});
+	kickstun.speed = 0.04f;
+	kickstun.loop = false;
+
+	//punchstun
+	punchstun.PushBack({88,469,68,106});
+	punchstun.PushBack({24,475,60,100});
+	punchstun.speed = 0.04f;
+	punchstun.loop = false;
+
 }
 
 ModulePlayer::~ModulePlayer()
@@ -166,6 +178,7 @@ bool ModulePlayer::Start()
 	score = 0;
 	already_hit = false;
 	body_collide = false;
+	stuned = 0;
 
 	position.x = 200;
 	position.y = 220;
@@ -200,6 +213,7 @@ void ModulePlayer::Reset()
 	position.y = 220;
 	body_collide = false;
 	already_hit = false;
+	stuned = 0;
 
 	current_animation = &idle;
 	lockX = false;
@@ -311,10 +325,6 @@ update_status ModulePlayer::Update()
 		
 	}
 	Jump();
-	if (body_collide == false)
-		score = 490;
-	else
-		score = 0;
 	if (health == 0)
 	{
 		if (current_animation != &die)
@@ -327,12 +337,40 @@ update_status ModulePlayer::Update()
 	{
 		if (App->enemy->Health() != 0)
 		{
+			if (stuned != 0)
+			{
+				at++;
+				if (at < 20)
+				{
+					if (!fliped)
+						position.x -= 1;
+					else
+						position.x += 1;
+				}
+				if (current_animation != &kickstun && stuned == 2)
+				{
+					kickstun.Reset();
+					current_animation = &kickstun;
+					at = 0;
+				}
+				if (current_animation != &punchstun && stuned == 1)
+				{
+					punchstun.Reset();
+					current_animation = &punchstun;
+					at = 0;
+				}
+				if (at == 60)
+				{
+					stuned = 0;
+				}
+				player_col->SetPos(position.x + 17, position.y - 91);
+			}else{
 				if (App->input->keyboard[SDL_SCANCODE_B] == KEY_STATE::KEY_DOWN)
 				{
 					health = 0;
 				}
 
-				if (App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT && !lockX && !punching && !kicking && !specialattack_)
+				if (App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT && !lockX && !punching && !kicking && !specialattack_ && current_animation != &crowch)
 				{
 					if (body_collide && !fliped)
 						body_collide = false;
@@ -355,7 +393,7 @@ update_status ModulePlayer::Update()
 					}
 				}
 
-				if (App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT && !lockX && !punching && !kicking && !specialattack_)
+				if (App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT && !lockX && !punching && !kicking && !specialattack_ && current_animation != &crowch)
 				{
 					if (body_collide && fliped)
 						body_collide = false;
@@ -509,8 +547,8 @@ update_status ModulePlayer::Update()
 				}	
 				//if (skillColDone = true)
 				//{
-				//	skill1->SetPos(App->particles->skill.position.x, App->particles->skill.position.y);
-				//}
+				//	skill1->SetPos(App->particles->skill.position.x, App->particles->skill.position.y);}
+				}
 		}
 		else
 		{
@@ -529,9 +567,10 @@ update_status ModulePlayer::Update()
 	return UPDATE_CONTINUE;
 }
 
-void ModulePlayer::Damage(const int damage)
+void ModulePlayer::Damage(const int damage, const int type)
 {
 	health -= damage;
+	stuned = type;
 }
 
 void ModulePlayer::OnCollision(Collider* a, Collider* b, bool colliding)
@@ -540,8 +579,12 @@ void ModulePlayer::OnCollision(Collider* a, Collider* b, bool colliding)
 	{
 		if (a->type == COLLIDER_PLAYER_ATTACK && b->type == COLLIDER_ENEMY && !already_hit)
 		{
+			
 			already_hit = true;
-			App->enemy->Damage(20);
+			if (kicking)
+				App->enemy->Damage(30,2);
+			if (punching)
+				App->enemy->Damage(20,1);
 		}
 		if (a->type == COLLIDER_PLAYER && b->type == COLLIDER_ENEMY)
 		{

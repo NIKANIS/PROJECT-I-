@@ -146,6 +146,18 @@ ModuleEnemy::ModuleEnemy()
 	hit.speed = 0.15f;
 	hit.loop = false;
 
+	//kickstun
+	kickstun.PushBack({ 160,479,64,96 });
+	kickstun.PushBack({ 235,479,69,96 });
+	kickstun.speed = 0.04f;
+	kickstun.loop = false;
+
+	//punchstun
+	punchstun.PushBack({ 88,469,68,106 });
+	punchstun.PushBack({ 24,475,60,100 });
+	punchstun.speed = 0.04f;
+	punchstun.loop = false;
+
 }
 
 ModuleEnemy::~ModuleEnemy()
@@ -159,6 +171,7 @@ bool ModuleEnemy::Start()
 	score = 0;
 	already_hit = false;
 	body_collide = false;
+	stuned = 0;
 
 	position.x = 400;
 	position.y = 220;
@@ -194,6 +207,7 @@ void ModuleEnemy::Reset()
 	position.y = 220;
 	already_hit = false;
 	body_collide = false;
+	stuned = 0;
 
 	current_animation = &idle;
 	lockX = false;
@@ -310,188 +324,217 @@ update_status ModuleEnemy::Update()
 	{
 		if (App->player->Health() != 0)
 		{			
-
-			if (App->player->position.x <= position.x)
+			if (stuned != 0)
 			{
-				fliped = true;
-			}
-			else
-			{
-				fliped = false;
-			}
-						
-			if (App->input->keyboard[SDL_SCANCODE_V] == KEY_STATE::KEY_DOWN)
-				health = 0;
-
-			if (App->input->keyboard[SDL_SCANCODE_LEFT] == KEY_STATE::KEY_REPEAT && !lockX && !punching && !kicking && !specialattack_)
-			{
-				if (body_collide && !fliped)
-					body_collide = false;
-
-				if (position.x != -10 && !body_collide)
-					position.x -= speed;
-				if (fliped == true) {
-					if (current_animation != &forward && !jumping && current_animation != &crowch)
-					{
-						forward.Reset();
-						current_animation = &forward;
-					}
-				}
-				else 
+				at++;
+				if (at < 30)
 				{
-					if (current_animation != &backward && !jumping)
-					{
-						backward.Reset();
-						current_animation = &backward;
-					}
+					if (!fliped)
+						position.x -= 2;
+					else
+						position.x += 2;
 				}
-			}			
-
-			if (App->input->keyboard[SDL_SCANCODE_RIGHT] == KEY_STATE::KEY_REPEAT && !lockX && !punching && !kicking && !specialattack_)
-			{
-				if (body_collide && fliped)
-					body_collide = false;
-				if (position.x != 610 && !body_collide)
-					position.x += speed;
-				if (fliped == true)
+				if (current_animation != &kickstun && stuned == 2)
 				{
-					if (current_animation != &backward && !jumping)
-					{
-						backward.Reset();
-						current_animation = &backward;
-					}
+					kickstun.Reset();
+					current_animation = &kickstun;
+					at = 0;
+				}
+				if (current_animation != &punchstun && stuned == 1)
+				{
+					punchstun.Reset();
+					current_animation = &punchstun;
+					at = 0;
+				}
+				if (at == 60)
+				{
+					stuned = 0;
+				}
+				enemy_col->SetPos(position.x + 17, position.y - 91);
+			}
+			else {
+				if (App->player->position.x <= position.x)
+				{
+					fliped = true;
 				}
 				else
 				{
-					if (current_animation != &forward && !jumping && current_animation != &crowch)
-					{
-						forward.Reset();
-						current_animation = &forward;
-					}
+					fliped = false;
 				}
-			}
 
-			if (App->input->keyboard[SDL_SCANCODE_DOWN] == KEY_STATE::KEY_REPEAT && !jumping && !punching && !kicking && !specialattack_)
-			{
-				if (current_animation != &crowch)
+				if (App->input->keyboard[SDL_SCANCODE_V] == KEY_STATE::KEY_DOWN)
+					health = 0;
+
+				if (App->input->keyboard[SDL_SCANCODE_LEFT] == KEY_STATE::KEY_REPEAT && !lockX && !punching && !kicking && !specialattack_)
 				{
-					lockX = true;
-					crowchaction = true;
-					crowch.Reset();
-					current_animation = &crowch;
-				}if (fliped == true)
-				{
-					if (App->input->keyboard[SDL_SCANCODE_RIGHT] == KEY_STATE::KEY_REPEAT && !punching && !kicking && !specialattack_)
-					{
-						if (current_animation != &crowchprotecc)
+					if (body_collide && !fliped)
+						body_collide = false;
+
+					if (position.x != -10 && !body_collide)
+						position.x -= speed;
+					if (fliped == true) {
+						if (current_animation != &forward && !jumping && current_animation != &crowch)
 						{
-							crowchprotecc.Reset();
-							current_animation = &crowchprotecc;
+							forward.Reset();
+							current_animation = &forward;
+						}
+					}
+					else
+					{
+						if (current_animation != &backward && !jumping)
+						{
+							backward.Reset();
+							current_animation = &backward;
 						}
 					}
 				}
-				else {
-					if (App->input->keyboard[SDL_SCANCODE_LEFT] == KEY_STATE::KEY_REPEAT && !punching && !kicking && !specialattack_)
+
+				if (App->input->keyboard[SDL_SCANCODE_RIGHT] == KEY_STATE::KEY_REPEAT && !lockX && !punching && !kicking && !specialattack_)
+				{
+					if (body_collide && fliped)
+						body_collide = false;
+					if (position.x != 610 && !body_collide)
+						position.x += speed;
+					if (fliped == true)
 					{
-						if (current_animation != &crowchprotecc)
+						if (current_animation != &backward && !jumping)
 						{
-							crowchprotecc.Reset();
-							current_animation = &crowchprotecc;
+							backward.Reset();
+							current_animation = &backward;
+						}
+					}
+					else
+					{
+						if (current_animation != &forward && !jumping && current_animation != &crowch)
+						{
+							forward.Reset();
+							current_animation = &forward;
 						}
 					}
 				}
-			}
 
-			if (App->input->keyboard[SDL_SCANCODE_DOWN] == KEY_STATE::KEY_UP) {
-				lockX = false;
-				crowchaction = false;
-				enemy_col->SetPos(position.x + 10, position.y - 91);
-				enemy_col->rect.h = 90;
-				enemy_col->rect.w = 33;
-			}		
-
-			if (App->input->keyboard[SDL_SCANCODE_UP] == KEY_STATE::KEY_DOWN && !jumping && !punching && !kicking && !specialattack_)
-			{
-				if (current_animation != &jumpiup)
+				if (App->input->keyboard[SDL_SCANCODE_DOWN] == KEY_STATE::KEY_REPEAT && !jumping && !punching && !kicking && !specialattack_)
 				{
-					jumping = true;
-					t = 0;
-					jumpiup.Reset();
-					current_animation = &jumpiup;
-				}
-			}
-
-			if (App->input->keyboard[SDL_SCANCODE_I] == KEY_STATE::KEY_DOWN && !punching && !kicking && !crowchaction && !specialattack_) {
-				if (current_animation != &punchstanding && !jumping)
-				{
-					punching = true;
-					at = 0;
-					punchstanding.Reset();
-					current_animation = &punchstanding;
-				}
-			}
-
-			if (App->input->keyboard[SDL_SCANCODE_O] == KEY_STATE::KEY_DOWN && !punching && !jumping && !crowchaction && !specialattack_) {
-				if (current_animation != &kickingstanding && !jumping && !crowchaction)
-				{
-					kicking = true;
-					at = 0;
-					kickingstanding.Reset();
-					current_animation = &kickingstanding;
-				}
-			}
-
-			if (App->input->keyboard[SDL_SCANCODE_P] == KEY_STATE::KEY_DOWN && !punching && !jumping && !crowchaction) {
-				if (current_animation != &kickingstanding && !jumping && !crowchaction && !specialattack_)
-				{
-					specialattack_ = true;
-					at = 0;
-					specialattack.Reset();
-					current_animation = &specialattack;
-				}
-			}
-
-			if (App->input->keyboard[SDL_SCANCODE_DOWN] == KEY_STATE::KEY_IDLE
-				&& App->input->keyboard[SDL_SCANCODE_LEFT] == KEY_STATE::KEY_IDLE
-				&& App->input->keyboard[SDL_SCANCODE_RIGHT] == KEY_STATE::KEY_IDLE
-				&& !jumping && !punching && !kicking && !specialattack_)
-				current_animation = &idle;
-			if (App->input->keyboard[SDL_SCANCODE_RIGHT] == KEY_STATE::KEY_REPEAT
-				&& App->input->keyboard[SDL_SCANCODE_LEFT] == KEY_STATE::KEY_REPEAT
-				&& App->input->keyboard[SDL_SCANCODE_DOWN] == KEY_STATE::KEY_IDLE
-				&& !jumping && !punching && !kicking && !specialattack_)
-				current_animation = &idle;
-
-			if (current_animation == &crowch)
-			{
-				enemy_col->rect.h = 65;
-				enemy_col->rect.w = 41;
-				enemy_col->SetPos(position.x + 5, position.y - 67);
-			}
-			if (current_animation == &crowchprotecc)
-			{
-				enemy_col->rect.h = 65;
-				enemy_col->rect.w = 41;
-				enemy_col->SetPos(position.x + 5, position.y - 67);
-			}
-			else if(!crowchaction)
-			{
-				if (!fliped)
-				{
-					if (!punching && !kicking)
+					if (current_animation != &crowch)
 					{
-						enemy_col->SetPos(position.x + 10, position.y - 91);
-						enemy_col->rect.h = 90;
-						enemy_col->rect.w = 33;
+						lockX = true;
+						crowchaction = true;
+						crowch.Reset();
+						current_animation = &crowch;
+					}if (fliped == true)
+					{
+						if (App->input->keyboard[SDL_SCANCODE_RIGHT] == KEY_STATE::KEY_REPEAT && !punching && !kicking && !specialattack_)
+						{
+							if (current_animation != &crowchprotecc)
+							{
+								crowchprotecc.Reset();
+								current_animation = &crowchprotecc;
+							}
+						}
+					}
+					else {
+						if (App->input->keyboard[SDL_SCANCODE_LEFT] == KEY_STATE::KEY_REPEAT && !punching && !kicking && !specialattack_)
+						{
+							if (current_animation != &crowchprotecc)
+							{
+								crowchprotecc.Reset();
+								current_animation = &crowchprotecc;
+							}
+						}
 					}
 				}
-				else
+
+				if (App->input->keyboard[SDL_SCANCODE_DOWN] == KEY_STATE::KEY_UP) {
+					lockX = false;
+					crowchaction = false;
+					enemy_col->SetPos(position.x + 10, position.y - 91);
+					enemy_col->rect.h = 90;
+					enemy_col->rect.w = 33;
+				}
+
+				if (App->input->keyboard[SDL_SCANCODE_UP] == KEY_STATE::KEY_DOWN && !jumping && !punching && !kicking && !specialattack_)
 				{
-					if (!punching && !kicking)
+					if (current_animation != &jumpiup)
 					{
-						enemy_col->SetPos(position.x + 17, position.y - 91);
-						enemy_col->rect.h = 90;
-						enemy_col->rect.w = 33;
+						jumping = true;
+						t = 0;
+						jumpiup.Reset();
+						current_animation = &jumpiup;
+					}
+				}
+
+				if (App->input->keyboard[SDL_SCANCODE_I] == KEY_STATE::KEY_DOWN && !punching && !kicking && !crowchaction && !specialattack_) {
+					if (current_animation != &punchstanding && !jumping)
+					{
+						punching = true;
+						at = 0;
+						punchstanding.Reset();
+						current_animation = &punchstanding;
+					}
+				}
+
+				if (App->input->keyboard[SDL_SCANCODE_O] == KEY_STATE::KEY_DOWN && !punching && !jumping && !crowchaction && !specialattack_) {
+					if (current_animation != &kickingstanding && !jumping && !crowchaction)
+					{
+						kicking = true;
+						at = 0;
+						kickingstanding.Reset();
+						current_animation = &kickingstanding;
+					}
+				}
+
+				if (App->input->keyboard[SDL_SCANCODE_P] == KEY_STATE::KEY_DOWN && !punching && !jumping && !crowchaction) {
+					if (current_animation != &kickingstanding && !jumping && !crowchaction && !specialattack_)
+					{
+						specialattack_ = true;
+						at = 0;
+						specialattack.Reset();
+						current_animation = &specialattack;
+					}
+				}
+
+				if (App->input->keyboard[SDL_SCANCODE_DOWN] == KEY_STATE::KEY_IDLE
+					&& App->input->keyboard[SDL_SCANCODE_LEFT] == KEY_STATE::KEY_IDLE
+					&& App->input->keyboard[SDL_SCANCODE_RIGHT] == KEY_STATE::KEY_IDLE
+					&& !jumping && !punching && !kicking && !specialattack_)
+					current_animation = &idle;
+				if (App->input->keyboard[SDL_SCANCODE_RIGHT] == KEY_STATE::KEY_REPEAT
+					&& App->input->keyboard[SDL_SCANCODE_LEFT] == KEY_STATE::KEY_REPEAT
+					&& App->input->keyboard[SDL_SCANCODE_DOWN] == KEY_STATE::KEY_IDLE
+					&& !jumping && !punching && !kicking && !specialattack_)
+					current_animation = &idle;
+
+				if (current_animation == &crowch)
+				{
+					enemy_col->rect.h = 65;
+					enemy_col->rect.w = 41;
+					enemy_col->SetPos(position.x + 5, position.y - 67);
+				}
+				if (current_animation == &crowchprotecc)
+				{
+					enemy_col->rect.h = 65;
+					enemy_col->rect.w = 41;
+					enemy_col->SetPos(position.x + 5, position.y - 67);
+				}
+				else if (!crowchaction)
+				{
+					if (!fliped)
+					{
+						if (!punching && !kicking)
+						{
+							enemy_col->SetPos(position.x + 10, position.y - 91);
+							enemy_col->rect.h = 90;
+							enemy_col->rect.w = 33;
+						}
+					}
+					else
+					{
+						if (!punching && !kicking)
+						{
+							enemy_col->SetPos(position.x + 17, position.y - 91);
+							enemy_col->rect.h = 90;
+							enemy_col->rect.w = 33;
+						}
 					}
 				}
 			}
@@ -514,9 +557,10 @@ update_status ModuleEnemy::Update()
 	return UPDATE_CONTINUE;
 }
 
-void ModuleEnemy::Damage(const int damage)
+void ModuleEnemy::Damage(const int damage, const int type)
 {
 	health -= damage;
+	stuned = type;
 }
 
 void ModuleEnemy::OnCollision(Collider* a, Collider* b, bool colliding)
@@ -526,7 +570,10 @@ void ModuleEnemy::OnCollision(Collider* a, Collider* b, bool colliding)
 		if (a->type == COLLIDER_ENEMY_ATTACK && b->type == COLLIDER_PLAYER && !already_hit)
 		{
 			already_hit = true;
-			App->player->Damage(20);
+			if (kicking)
+				App->player->Damage(30,2);
+			if (punching)
+				App->player->Damage(20,1);
 		}	
 		if (b->type == COLLIDER_PLAYER && a->type == COLLIDER_ENEMY)
 		{
