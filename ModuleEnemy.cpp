@@ -417,7 +417,7 @@ update_status ModuleEnemy::Update()
 
 void ModuleEnemy::OnCollision(Collider* a, Collider* b)
 {
-	if (b->type == COLLIDER_ENEMY_ATTACK && a->type == COLLIDER_PLAYER && !already_hit)
+	if (a->type == COLLIDER_ENEMY_ATTACK && b->type == COLLIDER_PLAYER && !already_hit)
 	{
 		already_hit = true;
 		App->player->health -= 20;

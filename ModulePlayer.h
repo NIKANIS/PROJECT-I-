@@ -27,7 +27,7 @@ public:
 	iPoint position;
 	Animation* current_animation = nullptr;
 
-private:
+public:
 
 	void Jump();
 	SDL_Texture* graphics = nullptr;

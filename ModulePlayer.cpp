@@ -424,12 +424,11 @@ update_status ModulePlayer::Update()
 
 void ModulePlayer::OnCollision(Collider* a, Collider* b)
 {
-	if (player == 0) {
-		if (b->type == COLLIDER_PLAYER_ATTACK && a->type == COLLIDER_ENEMY && !already_hit)
-		{
-			already_hit = true;
-			App->enemy->health -= 20;
-		}
+	if (a->type == COLLIDER_PLAYER_ATTACK && b->type == COLLIDER_ENEMY && !already_hit)
+	{
+		already_hit = true;
+		App->enemy->health -= 20;
 	}
+	
 }
 
