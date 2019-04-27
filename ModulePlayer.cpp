@@ -352,12 +352,12 @@ update_status ModulePlayer::Update()
 			if (stuned != 0)
 			{
 				at++;
-				if (at < 20)
+				if (at < 30)
 				{
 					if (!fliped)
-						position.x -= 1;
+						position.x -= 2;
 					else
-						position.x += 1;
+						position.x += 2;
 				}
 				if (current_animation != &kickstun && stuned == 2)
 				{
