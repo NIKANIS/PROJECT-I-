@@ -231,7 +231,7 @@ update_status ModulePlayer::Update()
 		at++;
 		if (at == 20)
 		{
-			player_kick_col = App->collision->AddCollider({ position.x + 43, position.y - 86, 49, 17 }, COLLIDER_PLAYER_ATTACK, App->player);
+			player_kick_col = App->collision->AddCollider({ position.x + 65, position.y - 90, 49, 12 }, COLLIDER_PLAYER_ATTACK, App->player);
 		}
 		if (at == 28)
 		{
@@ -278,7 +278,7 @@ update_status ModulePlayer::Update()
 					health = 0;
 				}
 
-				if (App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT && !lockX && !punching && !kicking && !specialattack_)
+				if (App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT && !lockX && !punching && !kicking && !specialattack_ && position.x >= 0)
 				{
 					position.x -= speed;
 
@@ -287,10 +287,9 @@ update_status ModulePlayer::Update()
 						backward.Reset();
 						current_animation = &backward;
 					}
-
 				}
 
-				if (App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT && !lockX && !punching && !kicking && !specialattack_)
+				if (App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT && !lockX && !punching && !kicking && !specialattack_ && position.x <= 602)
 				{
 					position.x += speed;
 					if (current_animation != &forward && !jumping)
@@ -298,7 +297,6 @@ update_status ModulePlayer::Update()
 						forward.Reset();
 						current_animation = &forward;
 					}
-
 				}
 
 				if (App->input->keyboard[SDL_SCANCODE_S] == KEY_STATE::KEY_REPEAT && !jumping && !punching && !kicking && !specialattack_)
