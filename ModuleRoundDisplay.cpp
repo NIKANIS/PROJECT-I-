@@ -20,7 +20,7 @@ ModuleRoundDisplay::ModuleRoundDisplay(const int player)
 
 	if (player == 0)
 		this->player = 0;
-	if (player != 0)
+	if (player == 1)
 		this->player = 1;
 }
 

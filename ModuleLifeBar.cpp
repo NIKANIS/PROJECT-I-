@@ -28,7 +28,7 @@ ModuleLifeBar::ModuleLifeBar(const int player)
 		dead.PushBack({ 1,36,113,17 });
 		
 	}
-	if (player != 0)
+	if (player == 1)
 	{
 		this->player = 1;
 		healthy.PushBack({ 1,18,113,17 });

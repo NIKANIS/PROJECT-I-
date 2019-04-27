@@ -8,6 +8,7 @@
 #include "ModuleLifeBar.h"
 #include "ModulePlayerScore.h"
 #include "ModuleRoundDisplay.h"
+#include "ModuleFightTimer.h"
 #include "SDL/include/SDL.h"
 
 ModuleRender::ModuleRender() : Module()
@@ -61,13 +62,26 @@ update_status ModuleRender::Update()
 		if (App->player->position.x >= 101 && App->player->position.x <= 440)
 		{
 			camera.x += speed; 
-			App->lifebar;
+			App->round_pl->position.x -= speed / 2;
+			App->round_en->position.x -= speed / 2;
+			App->plscore->position.x  -= speed / 2;
+			App->enscore->position.x  -= speed / 2;
+			App->lifebar->position.x  -= speed / 2;
+			App->lifebar2->position.x -= speed / 2;
+			App->fight_timer->position.x -= speed / 2;
 		}			
 		
 	if (App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT && App->input->keyboard[SDL_SCANCODE_S] != KEY_STATE::KEY_REPEAT)
 		if (App->player->position.x >= 101 && App->player->position.x <= 440)
 		{
 			camera.x -= speed;
+			App->round_pl->position.x += speed / 2;
+			App->round_en->position.x += speed / 2;
+			App->plscore->position.x  += speed / 2;
+			App->enscore->position.x  += speed / 2;
+			App->lifebar->position.x  += speed / 2;
+			App->lifebar2->position.x += speed / 2;
+			App->fight_timer->position.x += speed / 2;
 		}
 		
 				
@@ -128,7 +142,7 @@ bool ModuleRender::Blit(SDL_Texture* texture, int x, int y, SDL_Rect* section,bo
 			ret = false;
 		}
 	}
-	else
+	if (flip == true)
 	{
 		if (SDL_RenderCopyEx(renderer, texture, section, &rect, 0.0,pivot,SDL_FLIP_HORIZONTAL) != 0)
 		{
