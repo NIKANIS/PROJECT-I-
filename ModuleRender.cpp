@@ -56,7 +56,7 @@ update_status ModuleRender::PreUpdate()
 
 update_status ModuleRender::Update()	
 { 
-	int speed = 0;
+	/*int speed = 0;
 
 	if (App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT && App->input->keyboard[SDL_SCANCODE_S] != KEY_STATE::KEY_REPEAT)
 		if (App->player->position.x >= 101 && App->player->position.x <= 440)
@@ -82,9 +82,7 @@ update_status ModuleRender::Update()
 			App->lifebar->position.x  += speed / 2;
 			App->lifebar2->position.x += speed / 2;
 			App->fight_timer->position.x += speed / 2;
-		}
-		
-				
+		}	*/
 
 	return update_status::UPDATE_CONTINUE;
 }

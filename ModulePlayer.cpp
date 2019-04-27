@@ -1,17 +1,24 @@
 #include "Globals.h"
 #include "Application.h"
 #include "ModuleTextures.h"
+#include "ModuleAudio.h"
+#include "ModuleWindow.h"
 #include "ModuleInput.h"
 #include "ModuleRender.h"
 #include "ModulePlayer.h"
 #include "ModuleEnemy.h"
 #include "ModuleParticles.h"
-#include "ModuleLifeBar.h"
-#include "ModulePlayerScore.h"
 #include "ModuleCollision.h"
 #include "ModuleFadeToBlack.h"
+
+#include "ModuleLifeBar.h"
+#include "ModulePlayerScore.h"
+#include "ModuleRoundDisplay.h"
+#include "ModuleFightTimer.h"
+
 #include "SDL/include/SDL_timer.h"
-#include "ModuleAudio.h"
+
+
 
 void ModulePlayer::Jump() {
 	if (jumping) {
@@ -313,7 +320,6 @@ update_status ModulePlayer::Update()
 	{
 		if (App->enemy->Health() != 0)
 		{
-
 				if (App->input->keyboard[SDL_SCANCODE_B] == KEY_STATE::KEY_DOWN)
 				{
 					health = 0;
@@ -321,7 +327,8 @@ update_status ModulePlayer::Update()
 
 				if (App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT && !lockX && !punching && !kicking && !specialattack_)
 				{
-					position.x -= speed;
+					if( position.x != -10)
+						position.x -= speed;
 					if (fliped == true) {
 						if (current_animation != &forward && !jumping && current_animation != &crowch)
 						{
@@ -341,7 +348,8 @@ update_status ModulePlayer::Update()
 
 				if (App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT && !lockX && !punching && !kicking && !specialattack_)
 				{
-					position.x += speed;
+					if (position.x != 610)
+						position.x += speed;
 					if (fliped == true)
 					{
 						if (current_animation != &backward && !jumping && current_animation != &crowch)
