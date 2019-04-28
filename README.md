@@ -27,7 +27,8 @@ The player can choose between three fighters to play versus 8 enemy fighters tha
 								L -> Special Attack
 					     OTHERS
 	F5 -> GodMode On/Off
-	(GodModeOn)-> B-> Player 1 lose // N-> Player 2 lose
+	(GodModeOn)-> 	B-> Player 1 lose // N-> Player 2 lose
+			0-> Restart Game
 
 ## Changelist of all versions
 ### 0.1
