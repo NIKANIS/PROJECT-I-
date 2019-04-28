@@ -306,7 +306,7 @@ update_status ModuleEnemy::Update()
 	if (health < 0)
 		health = 0;
 
-	int speed = 1;
+	int speed = 2;
 
 	if (kicking == true) {
 		at++;

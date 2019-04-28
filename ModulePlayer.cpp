@@ -309,7 +309,7 @@ update_status ModulePlayer::Update()
 	if (health < 0)
 		health = 0;
 
-	float speed = 1.5f;
+	int speed = 2;
 
 	if (kicking == true) {
 		at++;
