@@ -58,7 +58,7 @@ ModuleEnemy::ModuleEnemy()
 	// idle animation done 
 	idle.PushBack({ 27, 913, 60, 105 });
 	idle.PushBack({ 95, 915, 61, 104 });
-	idle.PushBack({ 164, 914, 60, 103 });
+	idle.PushBack({ 164, 914, 60, 104 });
 	idle.PushBack({ 95, 915, 61, 104 });
 	idle.loop = true;
 	idle.speed = 0.13f;
