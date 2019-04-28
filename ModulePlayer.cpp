@@ -213,6 +213,7 @@ bool ModulePlayer::CleanUp()
 	App->plscore->Disable();
 	App->textures->Unload(graphics);
 
+
 	return true;
 }
 
