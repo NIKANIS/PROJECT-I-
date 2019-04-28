@@ -105,11 +105,6 @@ update_status ModuleScenePaoPao::Update()
 	// Draw everything --------------------------------------
 	App->render->Blit(back_graphics, 0, 0, &(background.GetCurrentFrame()),false, 0.92f);
 
-	// pressing O game is restarted
-	if (App->input->keyboard[SDL_SCANCODE_Q] == KEY_STATE::KEY_DOWN)
-	{
-		App->fade->FadeToBlack(App->scene_paopao, App->scene_intro);
-	}
 
 	return UPDATE_CONTINUE;
 }

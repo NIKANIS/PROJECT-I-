@@ -664,6 +664,11 @@ void ModulePlayer::godMode()
 	{
 		App->enemy->health = 0;
 	}
+	// pressing O game is restarted
+	if (App->input->keyboard[SDL_SCANCODE_0] == KEY_STATE::KEY_DOWN)
+	{
+		App->fade->FadeToBlack((Module*)App->scene_paopao, (Module*)App->scene_intro);
+	}
 
 }
 
