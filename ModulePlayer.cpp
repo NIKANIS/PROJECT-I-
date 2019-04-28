@@ -495,7 +495,7 @@ update_status ModulePlayer::Update()
 						crowch.Reset();
 						current_animation = &crowch;
 					}
-					if (App->input->keyboard[SDL_SCANCODE_H] == KEY_STATE::KEY_DOWN && !punching && !kicking && !specialattack_) {
+					if (App->input->keyboard[SDL_SCANCODE_R] == KEY_STATE::KEY_DOWN && !punching && !kicking && !specialattack_) {
 						if (current_animation != &crowchpunch && !jumping)
 						{
 							punching = true;
@@ -549,7 +549,7 @@ update_status ModulePlayer::Update()
 					}
 				}
 
-				if (App->input->keyboard[SDL_SCANCODE_H] == KEY_STATE::KEY_DOWN && !punching && !kicking && !crowchaction && !specialattack_) {
+				if (App->input->keyboard[SDL_SCANCODE_R] == KEY_STATE::KEY_DOWN && !punching && !kicking && !crowchaction && !specialattack_) {
 					if (current_animation != &punchstanding && !jumping)
 					{
 						punching = true;
@@ -560,7 +560,7 @@ update_status ModulePlayer::Update()
 					}
 				}
 
-				if (App->input->keyboard[SDL_SCANCODE_J] == KEY_STATE::KEY_DOWN && !punching && !jumping && !crowchaction && !specialattack_) {
+				if (App->input->keyboard[SDL_SCANCODE_T] == KEY_STATE::KEY_DOWN && !punching && !jumping && !crowchaction && !specialattack_) {
 					if (current_animation != &kickingstanding && !jumping && !crowchaction && !specialattack_)
 					{
 						kicking = true;
@@ -571,7 +571,7 @@ update_status ModulePlayer::Update()
 					}
 				}
 
-				if (App->input->keyboard[SDL_SCANCODE_K] == KEY_STATE::KEY_DOWN && !punching && !jumping && !crowchaction && !sp) {
+				if (App->input->keyboard[SDL_SCANCODE_Y] == KEY_STATE::KEY_DOWN && !punching && !jumping && !crowchaction && !sp) {
 					if (current_animation != &kickingstanding && !jumping && !crowchaction && !specialattack_)
 					{
 						specialattack_ = true;

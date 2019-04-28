@@ -9,10 +9,16 @@ TEAM MEMBERS
 -David Rami
 
 -Controls
+				PLAYER 1									
        		MOVE			 	 ATTACK
-	 	 W -> Jump			H -> Punch
- A -> Left	 S -> Crouch	 D -> Right	J -> Kick
-						K -> Special Attack
+	 	 W -> Jump			R -> Punch
+ A -> Left	 S -> Crouch	 D -> Right	T -> Kick
+						Y -> Special Attack
+				PLAYER 2
+       		MOVE			 	 ATTACK
+	 	 UP -> Jump			J -> Punch
+LEFT  -> Left	 DOWN -> Crouch	 RIGHT -> Right	K -> Kick
+						L -> Special Attack
 	F5 -> Desactive/Active Debuger Function
 
 - Changelist of all previous versions
