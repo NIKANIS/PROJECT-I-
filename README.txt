@@ -19,7 +19,9 @@ TEAM MEMBERS
 	 	 UP -> Jump			J -> Punch
 LEFT  -> Left	 DOWN -> Crouch	 RIGHT -> Right	K -> Kick
 						L -> Special Attack
-	F5 -> Desactive/Active Debuger Function
+				OTHERS
+	F5 -> GodMode On/Off
+	(GodModeOn)-> B-> Player 1 lose // N-> Player 2 lose
 
 - Changelist of all previous versions
 0.1
@@ -29,5 +31,8 @@ LEFT  -> Left	 DOWN -> Crouch	 RIGHT -> Right	K -> Kick
 0.3
 	Can move the player, added colliders for attacks. Skill haven't got collider yet. 
 	Full implemented animations and UI. Some relevant sounds FX like skill, punch and kick.
+0.4 
+ 	Camera limits for the player. Full implemented colliders for the player and its particles. 
+	Player can collide with the enemy. God Mode when pressing F5 to see colliders and direct win/lose.
 
 -https://github.com/NIKANIS/PROJECT-I-
