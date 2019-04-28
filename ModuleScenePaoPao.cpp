@@ -82,6 +82,7 @@ update_status ModuleScenePaoPao::Update()
 		if (App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT && App->input->keyboard[SDL_SCANCODE_S] != KEY_STATE::KEY_REPEAT)
 		{
 			App->render->camera.x += speed;
+			//App->fight_manager->position.x += speed;
 			App->round_pl->position.x -= speed / 2;
 			App->round_en->position.x -= speed / 2;
 			App->plscore->position.x -= speed / 2;
@@ -93,6 +94,7 @@ update_status ModuleScenePaoPao::Update()
 		if (App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT && App->input->keyboard[SDL_SCANCODE_S] != KEY_STATE::KEY_REPEAT)
 		{
 			App->render->camera.x -= speed;
+			//App->fight_manager->position.x -= speed;
 			App->round_pl->position.x += speed / 2;
 			App->round_en->position.x += speed / 2;
 			App->plscore->position.x += speed / 2;

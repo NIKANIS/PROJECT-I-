@@ -7,7 +7,7 @@
 
 ModuleFightTimer::ModuleFightTimer()
 {
-	position.x =HUD_X;
+	position.x = HUD_X;
 	position.y = HUD_Y;
 	timer = { 1,80,33,33 };
 	zero = {35,80,15,22};

@@ -1,15 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="Application.cpp">
-      <Filter>Main</Filter>
-    </ClCompile>
-    <ClCompile Include="Globals.cpp">
-      <Filter>Main</Filter>
-    </ClCompile>
-    <ClCompile Include="Main.cpp">
-      <Filter>Main</Filter>
-    </ClCompile>
     <ClCompile Include="ModuleFightManager.cpp">
       <Filter>Modules\Fight</Filter>
     </ClCompile>
@@ -67,25 +58,19 @@
     <ClCompile Include="ModuleEnemy.cpp">
       <Filter>Modules\Player &amp; Enemy</Filter>
     </ClCompile>
+    <ClCompile Include="Application.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Globals.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Main.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Animation.h">
-      <Filter>Core</Filter>
-    </ClInclude>
-    <ClInclude Include="p2Point.h">
-      <Filter>Core</Filter>
-    </ClInclude>
     <ClInclude Include="Module.h">
       <Filter>Modules</Filter>
-    </ClInclude>
-    <ClInclude Include="Application.h">
-      <Filter>Main</Filter>
-    </ClInclude>
-    <ClInclude Include="Globals.h">
-      <Filter>Main</Filter>
-    </ClInclude>
-    <ClInclude Include="MemLeaks.h">
-      <Filter>Main</Filter>
     </ClInclude>
     <ClInclude Include="ModuleFightManager.h">
       <Filter>Modules\Fight</Filter>
@@ -144,6 +129,21 @@
     <ClInclude Include="ModuleEnemy.h">
       <Filter>Modules\Player &amp; Enemy</Filter>
     </ClInclude>
+    <ClInclude Include="p2Point.h">
+      <Filter>Containers</Filter>
+    </ClInclude>
+    <ClInclude Include="Animation.h">
+      <Filter>Containers</Filter>
+    </ClInclude>
+    <ClInclude Include="Application.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Globals.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="MemLeaks.h">
+      <Filter>Core</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Core">
@@ -151,9 +151,6 @@
     </Filter>
     <Filter Include="Modules">
       <UniqueIdentifier>{553e0c81-a7b4-4c21-a95c-f7b33e2bd997}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Main">
-      <UniqueIdentifier>{062492d5-17b2-4546-bb19-72492f931b01}</UniqueIdentifier>
     </Filter>
     <Filter Include="Modules\Fight">
       <UniqueIdentifier>{512cde9e-136d-485f-89ee-0b43e9d79abf}</UniqueIdentifier>
@@ -169,6 +166,9 @@
     </Filter>
     <Filter Include="Modules\Player &amp; Enemy">
       <UniqueIdentifier>{b57b3144-22e2-4a61-a46a-0d405f14c74f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Containers">
+      <UniqueIdentifier>{bc88dcad-af92-46fd-b5e5-2695550a855a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

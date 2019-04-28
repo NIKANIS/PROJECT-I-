@@ -238,6 +238,7 @@ void ModulePlayer::Reset()
 	at = 0; 
 	st = 0;
 	vy = 0;
+
 }
 
 int ModulePlayer::Pos_X()
