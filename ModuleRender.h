@@ -25,6 +25,7 @@ public:
 public:
 	SDL_Renderer* renderer = nullptr;
 	SDL_Rect camera;
+	int n = 0;
 };
 
 #endif //__ModuleRenderer_H__

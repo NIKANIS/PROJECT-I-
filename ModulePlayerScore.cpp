@@ -52,14 +52,15 @@ bool ModulePlayerScore::CleanUp()
 
 update_status ModulePlayerScore::Update()
 {
+	position.x = (-App->render->camera.x / SCREEN_SIZE) + 72;
 	int s;
 	SDL_Rect none = { 0,0,0,0 };
 
 	if (player == 0)
 		s = App->player->Score();
-
 	if (player == 1)
 		s = App->enemy->Score();
+
 
 	if (s > 99999)
 	{
@@ -125,11 +126,11 @@ update_status ModulePlayerScore::Update()
 	}
 	pastscore = s;
 
-	App->render->Blit(graphics, position.x + (88*player), position.y, &r[4], 0.0f);
-	App->render->Blit(graphics, position.x + 8 + (88 * player), position.y, &r[3], 0.0f);
-	App->render->Blit(graphics, position.x + 8*2 + (88 * player), position.y, &r[2], 0.0f);
-	App->render->Blit(graphics, position.x + 8*3 + (88 * player), position.y, &r[1], 0.0f);
-	App->render->Blit(graphics, position.x + 8*4 + (88 * player), position.y, &r[0], 0.0f);
+	App->render->Blit(graphics, position.x + (88*player) + HUD_X, position.y, &r[4], 0.0f);
+	App->render->Blit(graphics, position.x + 8 + (88 * player) + HUD_X, position.y, &r[3], 0.0f);
+	App->render->Blit(graphics, position.x + 8*2 + (88 * player) + HUD_X, position.y, &r[2], 0.0f);
+	App->render->Blit(graphics, position.x + 8*3 + (88 * player) + HUD_X, position.y, &r[1], 0.0f);
+	App->render->Blit(graphics, position.x + 8*4 + (88 * player) + HUD_X, position.y, &r[0], 0.0f);
 
 	return UPDATE_CONTINUE;
 }

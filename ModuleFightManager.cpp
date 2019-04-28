@@ -16,6 +16,8 @@ ModuleFightManager::ModuleFightManager()
 	win = { 155,1,123,16 };
 	lose = { 155,18,126,16 };
 	draw = { 155,35,142,16 };
+	round = {155,52,78,16};
+	fight = {99,205,173,40};
 }
 
 ModuleFightManager::~ModuleFightManager(){}
@@ -69,6 +71,12 @@ void ModuleFightManager::Reset()
 
 update_status ModuleFightManager::Update()
 {
+	App->render->camera.x = -SCREEN_SIZE * ((App->player->Pos_X() + App->enemy->Pos_X() + 60) / 2 - SCREEN_WIDTH / 2);
+	if (App->render->camera.x > 0)
+		App->render->camera.x = 0;
+	if (App->render->camera.x < -(640 - SCREEN_WIDTH)*SCREEN_SIZE)
+		App->render->camera.x = -(640 - SCREEN_WIDTH)*SCREEN_SIZE;
+	position.x = -App->render->camera.x / SCREEN_SIZE;
 	if (timer_num != 0 && !time_stop)
 	{
 		timer_counter++;
@@ -78,6 +86,16 @@ update_status ModuleFightManager::Update()
 			timer_counter = 0;
 		}
 	}
+	if (timer_num == 93)
+		f = round;
+	if (timer_num == 92)
+		f = fight;
+	if (timer_num == 90)
+	{
+		SDL_Rect none = { 0,0,0,0 };
+		f = none;
+	}
+
 
 	if (App->player->Health() == 0 && !blockpoints)
 	{
@@ -149,7 +167,7 @@ update_status ModuleFightManager::Update()
 
 		if (winner == 1)
 			App->fade->FadeToBlack((Module*)App->scene_paopao, (Module*)App->scene_gameover);
-		App->render->Blit(graphics, position.x - (f.w / 2), position.y - (f.h / 2), &f,false, 0.0f);
+		App->render->Blit(graphics, position.x - (f.w / 2) - 30, position.y - (f.h / 2), &f,false, 0.0f);
 
 		return update_status::UPDATE_CONTINUE;
 	

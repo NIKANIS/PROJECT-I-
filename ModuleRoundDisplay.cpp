@@ -46,52 +46,53 @@ update_status ModuleRoundDisplay::Update()
 
 	if (player == 0)
 	{
-
+		position.x = -App->render->camera.x / SCREEN_SIZE;
 		if (App->fight_manager->Player() >= 1)
 		{
 			current_animation = &on;
-			App->render->Blit(graphics, position.x, position.y, &current_animation->GetCurrentFrame(), 0.0f);
+			App->render->Blit(graphics, position.x + HUD_X, position.y, &current_animation->GetCurrentFrame(), 0.0f);
 		}else
 		{
 			current_animation = &off;
-			App->render->Blit(graphics, position.x, position.y, &current_animation->GetCurrentFrame(), 0.0f);
+			App->render->Blit(graphics, position.x + HUD_X, position.y, &current_animation->GetCurrentFrame(), 0.0f);
 		}
 
 		if (App->fight_manager->Player() >= 2)
 		{
 			current_animation = &on;
-			App->render->Blit(graphics, position.x + 18, position.y, &current_animation->GetCurrentFrame(), 0.0f);
+			App->render->Blit(graphics, position.x + 18 + HUD_X, position.y, &current_animation->GetCurrentFrame(), 0.0f);
 		}
 		else
 		{
 			current_animation = &off;
-			App->render->Blit(graphics, position.x + 18, position.y, &current_animation->GetCurrentFrame(), 0.0f);
+			App->render->Blit(graphics, position.x + 18 + HUD_X, position.y, &current_animation->GetCurrentFrame(), 0.0f);
 		}
 		
 	}
 
 	if (player == 1)
 	{
+		position.x = -App->render->camera.x / SCREEN_SIZE;
 		if (App->fight_manager->Enemy() >= 1)
 		{
 			current_animation = &on;
-			App->render->Blit(graphics, position.x + 257, position.y, &current_animation->GetCurrentFrame(), 0.0f);
+			App->render->Blit(graphics, position.x + 257 + HUD_X, position.y, &current_animation->GetCurrentFrame(), 0.0f);
 		}
 		else
 		{
 			current_animation = &off;
-			App->render->Blit(graphics, position.x + 257, position.y, &current_animation->GetCurrentFrame(), 0.0f);
+			App->render->Blit(graphics, position.x + 257 + HUD_X, position.y, &current_animation->GetCurrentFrame(), 0.0f);
 		}
 
 		if (App->fight_manager->Enemy() >= 2)
 		{
 			current_animation = &on;
-			App->render->Blit(graphics, position.x + 239, position.y, &current_animation->GetCurrentFrame(), 0.0f);
+			App->render->Blit(graphics, position.x + 239 + HUD_X, position.y, &current_animation->GetCurrentFrame(), 0.0f);
 		}
 		else
 		{
 			current_animation = &off;
-			App->render->Blit(graphics, position.x + 239, position.y, &current_animation->GetCurrentFrame(), 0.0f);
+			App->render->Blit(graphics, position.x + 239 + HUD_X, position.y, &current_animation->GetCurrentFrame(), 0.0f);
 		}
 	}
 

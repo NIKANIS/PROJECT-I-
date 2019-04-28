@@ -65,7 +65,6 @@ public:
 
 };
 
-// Global var made extern for Application ---
 extern Application* App;
 
 #endif // __APPLICATION_H__

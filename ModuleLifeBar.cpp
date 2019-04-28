@@ -61,6 +61,7 @@ update_status ModuleLifeBar::Update()
 
 	if (player == 0)
 	{
+		position.x = -App->render->camera.x / SCREEN_SIZE;
 		health = { 1,72,App->player->Health(),7 };
 		if (App->player->Health() <= 20)
 		{
@@ -75,6 +76,7 @@ update_status ModuleLifeBar::Update()
 
 	if (player == 1)
 	{
+		position.x = -App->render->camera.x / SCREEN_SIZE;
 		health = { 1 + (100 - App->enemy->Health()),72,App->enemy->Health(),7 };
 		if (App->enemy->Health() <= 20)
 		{
@@ -89,10 +91,9 @@ update_status ModuleLifeBar::Update()
 
 	SDL_Rect r = current_animation->GetCurrentFrame();
 
-	
-	App->render->Blit(graphics, position.x + (160)*player, position.y - r.h, &r, 0.0f);
-	App->render->Blit(graphics, position.x + 1 + (256)*player, position.y - r.h + 1, &P1photo, 0.0f);
-	App->render->Blit(graphics, (100 - App->enemy->Health())*player + position.x + 17 + (144)*player, position.y - r.h + 9, &health, 0.0f);
+	App->render->Blit(graphics, position.x + (160)*player + HUD_X, position.y - r.h, &r, 0.0f);
+	App->render->Blit(graphics, position.x + 1 + (256)*player + HUD_X, position.y - r.h + 1, &P1photo, 0.0f);
+	App->render->Blit(graphics, (100 - App->enemy->Health())*player + position.x + 17 + (144)*player + HUD_X, position.y - r.h + 9, &health, 0.0f);
 
 	return UPDATE_CONTINUE;
 }

@@ -19,6 +19,7 @@ public:
 	update_status Update();
 	int Health();
 	int Score();
+	int Pos_X();
 	bool CleanUp();
 	void Reset();
 	void Damage(const int damage, const int type);
@@ -48,9 +49,10 @@ public:
 	Animation hit;
 	Animation kickstun;
 	Animation punchstun;
+	Animation crowchpunch;
 
 	int stuned; //stunt after getting hit 0 = not stuned / 1 = punch stuned / 2 = kick stuned
-	bool body_collide/* = false*/;
+	bool body_collide;
 	bool already_hit;
 	bool lockX = false; //locks the sideways movement
 	bool jumping = false; //true while jumping
@@ -58,10 +60,12 @@ public:
 	bool kicking = false; //true while kicking
 	bool crowchaction = false; //true while crowching
 	bool specialattack_ = false; //true while special attacking
+	bool sp = false;
 	bool skillColDone = false;
 	bool fliped = false;
 	int t = 0; //jumping coldown time
 	int at = 0; //attack coldown time
+	int st = 0;		// specialattack coldown time
 	int vy = 0; //velocity y
 	int player;
 
@@ -76,8 +80,6 @@ public:
 	Collider* skill3 = nullptr;
 	Collider* skill4 = nullptr;
 	Collider* skill5 = nullptr;
-
-
 	Mix_Chunk* punchFX = nullptr;
 	Mix_Chunk* skillFX = nullptr;
 	Mix_Chunk* kickFX = nullptr;
