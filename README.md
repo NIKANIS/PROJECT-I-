@@ -1,4 +1,4 @@
-# FATAL FURY by RandomCali 
+﻿# FATAL FURY by RandomCali 
 Fatal Fury is a fighting game released in 1991 by SNK. 
 The player can choose between three fighters to play versus 8 enemy fighters that would need to beat to fight against the final boss.
 
@@ -40,10 +40,12 @@ The player can choose between three fighters to play versus 8 enemy fighters tha
 	
 ### 0.3
 	Can move the player, added colliders for attacks. Skill haven't got collider yet. 
-	Full implemented animations and UI. Some relevant sounds FX like skill, punch and kick.
+	Full implemented animations. Some relevant sounds FX like skill, punch and kick.
 	
 ### 0.4 
  	Camera limits for the player. Full implemented colliders for the player and its particles. 
 	Player can collide with the enemy. God Mode when pressing F5 to see colliders and direct win/lose.
+### 0.5
+	Full implemented UI and GodMode. Fixed some bugs and colliders. Pao Pao Cafe with Terry vs Terry. Camera follow players.
 
 -https://github.com/NIKANIS/PROJECT-I-
