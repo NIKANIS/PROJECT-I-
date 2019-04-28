@@ -2,6 +2,9 @@
 #include "ModuleInput.h"
 #include "ModuleRender.h"
 #include "ModuleCollision.h"
+#include "ModulePlayer.h"
+#include "ModuleEnemy.h"
+
 
 ModuleCollision::ModuleCollision()
 {
@@ -92,7 +95,8 @@ update_status ModuleCollision::PreUpdate()
 			c2 = colliders[k];
 			if (c1->type == COLLIDER_PLAYER && c2->type == COLLIDER_ENEMY && c1->CheckCollision(c2->rect) == false)
 			{
-				c1->callback->OnCollision(c1, c2, false);
+				App->player->OnCollision(c1, c2, false);
+				App->enemy->OnCollision(c1, c2, false);
 			}
 			if (c1->CheckCollision(c2->rect) == true)
 			{

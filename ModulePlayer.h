@@ -60,10 +60,12 @@ public:
 	bool kicking = false; //true while kicking
 	bool crowchaction = false; //true while crowching
 	bool specialattack_ = false; //true while special attacking
+	bool sp = false;
 	bool skillColDone = false;
 	bool fliped = false;
 	int t = 0; //jumping coldown time
 	int at = 0; //attack coldown time
+	int st = 0;		// specialattack coldown time
 	int vy = 0; //velocity y
 	int player;
 

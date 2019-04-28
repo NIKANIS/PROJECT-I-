@@ -27,6 +27,8 @@ private:
 	SDL_Rect win;
 	SDL_Rect lose;
 	SDL_Rect draw;
+	SDL_Rect round;
+	SDL_Rect fight;
 	SDL_Rect f;
 	iPoint position;
 	int cam_pos_x;

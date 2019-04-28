@@ -39,7 +39,7 @@ public:
 	bool Start();
 	update_status Update();
 	bool CleanUp();
-	void OnCollision(Collider* c1, Collider* c2);
+	void OnCollision(Collider* c1, Collider* c2, bool colliding);
 
 	void AddParticle(const Particle& particle, int x, int y, COLLIDER_TYPE collider_type = COLLIDER_NONE, Uint32 delay = 0);
 
@@ -51,7 +51,8 @@ private:
 public:
 
 	Particle skill;
-
+	Particle skill2;
+	Particle skill3;
 };
 
-#endif // __MODULEPARTICLES_H__
+#endif

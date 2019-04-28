@@ -10,7 +10,7 @@
 #include "ModuleParticles.h"
 #include "ModuleCollision.h"
 #include "ModuleFadeToBlack.h"
-
+#include "ModuleFightManager.h"
 #include "ModuleLifeBar.h"
 #include "ModulePlayerScore.h"
 #include "ModuleRoundDisplay.h"
@@ -183,6 +183,7 @@ ModulePlayer::~ModulePlayer()
 bool ModulePlayer::Start()
 {
 	LOG("Loading player textures");
+	current_animation = &idle;
 	health = 100;
 	score = 0;
 	already_hit = false;
@@ -231,8 +232,10 @@ void ModulePlayer::Reset()
 	kicking = false;
 	crowchaction = false;
 	specialattack_ = false;
+	sp = false;
 	t = 0; 
 	at = 0; 
+	st = 0;
 	vy = 0;
 }
 
@@ -344,19 +347,46 @@ update_status ModulePlayer::Update()
 		}
 	}
 
-	if (specialattack_ == true) {
-		at++;
-		
-		if (at == 25) //para que añada la particula justo cuando el personaje toque al suelo
+	if (sp == true) {
+		st++;
+		int n;
+		if (!fliped)
 		{
-			//skill1 = App->collision->AddCollider({ position.x + 40, position.y -40, 16, 40 }, COLLIDER_PLAYER_SKILL, App->enemy);
-			App->particles->AddParticle(App->particles->skill, position.x + 40, position.y - 97);
+			n = 20;
+			App->particles->skill.speed.x = 3.0f;
+			App->particles->skill2.speed.x = 3.0f;
+			App->particles->skill3.speed.x = 3.0f;
 		}
-		if (at == 35)
+		else
 		{
+			n = 0;
+			App->particles->skill.speed.x = -3.0f;
+			App->particles->skill2.speed.x = -3.0f;
+			App->particles->skill3.speed.x = -3.0f;
+		}
+		if (st == 25) 
+		{
+			App->particles->AddParticle(App->particles->skill, position.x + n, position.y - 40, COLLIDER_PLAYER_ATTACK);
+		}
+		if (st == 30)
+		{
+			App->particles->AddParticle(App->particles->skill2, position.x + n, position.y - 67, COLLIDER_PLAYER_ATTACK);
+		}
+		if (st == 35)
+		{
+			App->particles->AddParticle(App->particles->skill3, position.x + n, position.y - 95, COLLIDER_PLAYER_ATTACK);
 			specialattack_ = false;
 		}
-		
+		if (st == 40)
+		{
+			App->particles->AddParticle(App->particles->skill2, position.x + n, position.y - 67, COLLIDER_PLAYER_ATTACK);
+		}
+		if (st == 45)
+		{
+			App->particles->AddParticle(App->particles->skill, position.x + n, position.y - 40, COLLIDER_PLAYER_ATTACK);
+		}
+		if (st == 90)
+			sp = false;
 	}
 	Jump();
 	if (health == 0)
@@ -371,33 +401,40 @@ update_status ModulePlayer::Update()
 	{
 		if (App->enemy->Health() != 0)
 		{
-			if (stuned != 0)
+			if (stuned != 0 || App->fight_manager->Time() > 90)
 			{
-				at++;
-				if (at < 30)
+				if (stuned != 0)
 				{
-					if (!fliped)
-						position.x -= 2;
-					else
-						position.x += 2;
+					at++;
+					if (at < 30)
+					{
+						if (!fliped)
+							position.x -= 2;
+						else
+							position.x += 2;
+					}
+					if (current_animation != &kickstun && stuned == 2)
+					{
+						kickstun.Reset();
+						current_animation = &kickstun;
+						at = 0;
+					}
+					if (current_animation != &punchstun && stuned == 1)
+					{
+						punchstun.Reset();
+						current_animation = &punchstun;
+						at = 0;
+					}
+					if (at == 60)
+					{
+						stuned = 0;
+					}
+					player_col->SetPos(position.x + 17, position.y - 91);
+					if (position.x < 0)
+						position.x = 0;
+					if (position.x > 600)
+						position.x = 600;
 				}
-				if (current_animation != &kickstun && stuned == 2)
-				{
-					kickstun.Reset();
-					current_animation = &kickstun;
-					at = 0;
-				}
-				if (current_animation != &punchstun && stuned == 1)
-				{
-					punchstun.Reset();
-					current_animation = &punchstun;
-					at = 0;
-				}
-				if (at == 60)
-				{
-					stuned = 0;
-				}
-				player_col->SetPos(position.x + 17, position.y - 91);
 			}
 			else 
 			{
@@ -500,6 +537,11 @@ update_status ModulePlayer::Update()
 					crowchaction = false;
 				}
 
+				if (App->input->keyboard[SDL_SCANCODE_S] == KEY_STATE::KEY_UP && current_animation != &crowchpunch)
+				{
+					current_animation = &idle;
+				}
+
 				if (App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_DOWN && !jumping && !punching && !kicking && !specialattack_)
 				{
 					if (current_animation != &jumpiup)
@@ -533,11 +575,12 @@ update_status ModulePlayer::Update()
 					}
 				}
 
-				if (App->input->keyboard[SDL_SCANCODE_K] == KEY_STATE::KEY_DOWN && !punching && !jumping && !crowchaction) {
+				if (App->input->keyboard[SDL_SCANCODE_K] == KEY_STATE::KEY_DOWN && !punching && !jumping && !crowchaction && !sp) {
 					if (current_animation != &kickingstanding && !jumping && !crowchaction && !specialattack_)
 					{
 						specialattack_ = true;
-						at = 0;
+						sp = true;
+						st = 0;
 						specialattack.Reset();
 						current_animation = &specialattack;
 						App->audio->playFx(skillFX);
@@ -602,7 +645,10 @@ update_status ModulePlayer::Update()
 
 void ModulePlayer::Damage(const int damage, const int type)
 {
-	health -= damage;
+	if (current_animation == &backward || current_animation == &crowchprotecc)
+		health -= damage / 2;
+	else
+		health -= damage;
 	stuned = type;
 }
 

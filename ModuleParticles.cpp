@@ -1,8 +1,13 @@
+
+
 #include <math.h>
 #include "Globals.h"
 #include "Application.h"
 #include "ModuleTextures.h"
 #include "ModuleRender.h"
+#include "ModulePlayer.h"
+#include "ModuleEnemy.h"
+#include "ModuleCollision.h"
 #include "ModuleParticles.h"
 
 #include "SDL/include/SDL_timer.h"
@@ -22,17 +27,18 @@ bool ModuleParticles::Start()
 	LOG("Loading particles");
 	graphics = App->textures->Load("SPRITES FATAL FURY/CHARACTERS/1-Terry Bogard/spritesTerryBogard.png");
 
-	// Terry skill
-	skill.anim.PushBack({ 1087,798, 18, 97 });
-	skill.anim.PushBack({ 1071, 798, 32, 97 });
-	skill.anim.PushBack({ 1055, 798, 48, 97 });
-	skill.anim.PushBack({ 1040, 798, 64, 97 });
-	skill.anim.PushBack({ 1023, 798, 80, 97 });
-	skill.anim.loop = false;
-	skill.life = 6000; //el tiempo que va a estar en pantalla (si pones 1000, apenas recorrerá uns metros
-	skill.speed.x = 1.5f; //la velocidad
-	skill.anim.speed = 0.08f;
+	skill.anim.PushBack({ 1022,751,17,41 });
+	skill.life = 6000;
+	skill.speed.x = 3.0f;
 
+
+	skill2.anim.PushBack({ 1038,625,17,68});
+	skill2.life = 6000;
+	skill2.speed.x = 3.0f;
+
+	skill3.anim.PushBack({ 1054,496,17,96});
+	skill3.life = 6000;
+	skill3.speed.x = 3.0f;
 
 
 	return true;
@@ -74,12 +80,9 @@ update_status ModuleParticles::Update()
 		else if (SDL_GetTicks() >= p->born)
 		{
 			App->render->Blit(graphics, p->position.x, p->position.y, &(p->anim.GetCurrentFrame()));
-
 			if (p->fx_played == false)
 			{
 				p->fx_played = true;
-				// Play particle fx here
-
 			}
 		}
 	}
@@ -105,7 +108,8 @@ void ModuleParticles::AddParticle(const Particle& particle, int x, int y, COLLID
 	}
 }
 
-void ModuleParticles::OnCollision(Collider* c1, Collider* c2)
+// TODO 5: Make so every time a particle hits a wall it triggers an explosion particle
+void ModuleParticles::OnCollision(Collider* c1, Collider* c2, bool colliding)
 {
 	for (uint i = 0; i < MAX_ACTIVE_PARTICLES; ++i)
 	{
@@ -117,7 +121,20 @@ void ModuleParticles::OnCollision(Collider* c1, Collider* c2)
 			break;
 		}
 	}
+	if (c1->type == COLLIDER_PLAYER_ATTACK && c2->type == COLLIDER_ENEMY)
+	{
+		App->enemy->Damage(10, 2);
+		App->player->score += 100;
+	}
+	if (c1->type == COLLIDER_ENEMY_ATTACK && c2->type == COLLIDER_PLAYER)
+	{
+		App->player->Damage(10, 2);
+		App->enemy->score += 100;
+	}
 }
+
+// -------------------------------------------------------------
+// -------------------------------------------------------------
 
 Particle::Particle()
 {
@@ -157,4 +174,3 @@ bool Particle::Update()
 
 	return ret;
 }
-
