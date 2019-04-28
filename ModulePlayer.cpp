@@ -252,6 +252,7 @@ int ModulePlayer::Pos_X()
 
 update_status ModulePlayer::Update()
 {
+	godMode();
 	if (App->enemy->position.x <= position.x)
 	{
 		fliped = true;
@@ -438,11 +439,6 @@ update_status ModulePlayer::Update()
 			}
 			else 
 			{
-				if (App->input->keyboard[SDL_SCANCODE_B] == KEY_STATE::KEY_DOWN)
-				{
-					health = 0;
-				}
-
 				if (App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT && !lockX && !punching && !kicking && !specialattack_ && current_animation != &crowch)
 				{
 					if (body_collide && !fliped)
@@ -650,6 +646,25 @@ void ModulePlayer::Damage(const int damage, const int type)
 	else
 		health -= damage;
 	stuned = type;
+}
+
+void ModulePlayer::godMode()
+{
+	if (App->input->keyboard[SDL_SCANCODE_F5] == KEY_DOWN)
+		godMode_ = !godMode_;
+
+	if (godMode_ == false)
+		return;
+
+	if (App->input->keyboard[SDL_SCANCODE_B] == KEY_STATE::KEY_DOWN)
+	{
+		health = 0;
+	}
+	if (App->input->keyboard[SDL_SCANCODE_N] == KEY_STATE::KEY_DOWN)
+	{
+		App->enemy->health = 0;
+	}
+
 }
 
 void ModulePlayer::OnCollision(Collider* a, Collider* b, bool colliding)
