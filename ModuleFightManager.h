@@ -21,7 +21,7 @@ public:
 	int Enemy() { return en_won_rounds; }
 	int Winner() { return winner; }
 
-private:
+public:
 
 	SDL_Texture* graphics = nullptr;
 	SDL_Rect win;

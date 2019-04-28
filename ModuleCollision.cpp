@@ -143,7 +143,7 @@ void ModuleCollision::DebugDraw()
 		case COLLIDER_PLAYER_ATTACK: // blue
 			App->render->DrawQuad(colliders[i]->rect, 0, 0, 255, alpha);
 			break;
-		case COLLIDER_ENEMY_ATTACK: // blue
+		case COLLIDER_ENEMY_ATTACK: //pink
 			App->render->DrawQuad(colliders[i]->rect, 255, 0, 255, alpha);
 			break;
 		case COLLIDER_PLAYER: // green

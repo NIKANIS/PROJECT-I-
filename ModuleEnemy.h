@@ -69,9 +69,6 @@ public:
 	int vy = 0; //velocity y
 	int player;
 
-	Collider* player_col = nullptr;
-	Collider* player_punch_col = nullptr;
-	Collider* player_kick_col = nullptr;
 	Collider* enemy_col = nullptr;
 	Collider* enemy_punch_col = nullptr;
 	Collider* enemy_kick_col = nullptr;
@@ -80,6 +77,7 @@ public:
 	Collider* skill3 = nullptr;
 	Collider* skill4 = nullptr;
 	Collider* skill5 = nullptr;
+
 	Mix_Chunk* punchFX = nullptr;
 	Mix_Chunk* skillFX = nullptr;
 	Mix_Chunk* kickFX = nullptr;

@@ -252,6 +252,7 @@ int ModulePlayer::Pos_X()
 
 update_status ModulePlayer::Update()
 {
+	godMode();
 	if (App->enemy->position.x <= position.x)
 	{
 		fliped = true;
@@ -438,11 +439,6 @@ update_status ModulePlayer::Update()
 			}
 			else 
 			{
-				if (App->input->keyboard[SDL_SCANCODE_B] == KEY_STATE::KEY_DOWN)
-				{
-					health = 0;
-				}
-
 				if (App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT && !lockX && !punching && !kicking && !specialattack_ && current_animation != &crowch)
 				{
 					if (body_collide && !fliped)
@@ -499,7 +495,7 @@ update_status ModulePlayer::Update()
 						crowch.Reset();
 						current_animation = &crowch;
 					}
-					if (App->input->keyboard[SDL_SCANCODE_H] == KEY_STATE::KEY_DOWN && !punching && !kicking && !specialattack_) {
+					if (App->input->keyboard[SDL_SCANCODE_R] == KEY_STATE::KEY_DOWN && !punching && !kicking && !specialattack_) {
 						if (current_animation != &crowchpunch && !jumping)
 						{
 							punching = true;
@@ -553,7 +549,7 @@ update_status ModulePlayer::Update()
 					}
 				}
 
-				if (App->input->keyboard[SDL_SCANCODE_H] == KEY_STATE::KEY_DOWN && !punching && !kicking && !crowchaction && !specialattack_) {
+				if (App->input->keyboard[SDL_SCANCODE_R] == KEY_STATE::KEY_DOWN && !punching && !kicking && !crowchaction && !specialattack_) {
 					if (current_animation != &punchstanding && !jumping)
 					{
 						punching = true;
@@ -564,7 +560,7 @@ update_status ModulePlayer::Update()
 					}
 				}
 
-				if (App->input->keyboard[SDL_SCANCODE_J] == KEY_STATE::KEY_DOWN && !punching && !jumping && !crowchaction && !specialattack_) {
+				if (App->input->keyboard[SDL_SCANCODE_T] == KEY_STATE::KEY_DOWN && !punching && !jumping && !crowchaction && !specialattack_) {
 					if (current_animation != &kickingstanding && !jumping && !crowchaction && !specialattack_)
 					{
 						kicking = true;
@@ -575,7 +571,7 @@ update_status ModulePlayer::Update()
 					}
 				}
 
-				if (App->input->keyboard[SDL_SCANCODE_K] == KEY_STATE::KEY_DOWN && !punching && !jumping && !crowchaction && !sp) {
+				if (App->input->keyboard[SDL_SCANCODE_Y] == KEY_STATE::KEY_DOWN && !punching && !jumping && !crowchaction && !sp) {
 					if (current_animation != &kickingstanding && !jumping && !crowchaction && !specialattack_)
 					{
 						specialattack_ = true;
@@ -650,6 +646,30 @@ void ModulePlayer::Damage(const int damage, const int type)
 	else
 		health -= damage;
 	stuned = type;
+}
+
+void ModulePlayer::godMode()
+{
+	if (App->input->keyboard[SDL_SCANCODE_F5] == KEY_DOWN)
+		godMode_ = !godMode_;
+
+	if (godMode_ == false)
+		return;
+
+	if (App->input->keyboard[SDL_SCANCODE_B] == KEY_STATE::KEY_DOWN)
+	{
+		health = 0;
+	}
+	if (App->input->keyboard[SDL_SCANCODE_N] == KEY_STATE::KEY_DOWN)
+	{
+		App->enemy->health = 0;
+	}
+	// pressing O game is restarted
+	if (App->input->keyboard[SDL_SCANCODE_0] == KEY_STATE::KEY_DOWN)
+	{
+		App->fade->FadeToBlack((Module*)App->scene_paopao, (Module*)App->scene_intro);
+	}
+
 }
 
 void ModulePlayer::OnCollision(Collider* a, Collider* b, bool colliding)
