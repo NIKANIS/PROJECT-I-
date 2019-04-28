@@ -273,13 +273,13 @@ update_status ModuleEnemy::Update()
 		{
 			if (fliped == false)
 				if (current_animation == &crowchpunch)
-					enemy_punch_col = App->collision->AddCollider({ position.x + 50, position.y - 50, 41, 12 }, COLLIDER_ENEMY_ATTACK, App->enemy);
-				else
+					enemy_punch_col = App->collision->AddCollider({ position.x + 46, position.y - 52, 35, 12 }, COLLIDER_ENEMY_ATTACK, App->enemy);
+				else																														  
 					enemy_punch_col = App->collision->AddCollider({ position.x + 50, position.y - 90, 41, 12 }, COLLIDER_ENEMY_ATTACK, App->enemy);
-			else
-				if (current_animation == &crowchpunch)
-					enemy_punch_col = App->collision->AddCollider({ position.x - 30, position.y - 50, 41, 12 }, COLLIDER_ENEMY_ATTACK, App->enemy);
-				else
+			else																															  
+				if (current_animation == &crowchpunch)																						  
+					enemy_punch_col = App->collision->AddCollider({ position.x - 30, position.y - 52, 35, 12 }, COLLIDER_ENEMY_ATTACK, App->enemy);
+				else																														  
 					enemy_punch_col = App->collision->AddCollider({ position.x - 30, position.y - 90, 41, 12 }, COLLIDER_ENEMY_ATTACK, App->enemy);
 
 		}

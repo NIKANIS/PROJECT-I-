@@ -276,12 +276,12 @@ update_status ModulePlayer::Update()
 		{
 			if (fliped == false)
 				if (current_animation == &crowchpunch)
-					player_punch_col = App->collision->AddCollider({ position.x + 50, position.y - 50, 41, 12 }, COLLIDER_PLAYER_ATTACK, App->player);
+					player_punch_col = App->collision->AddCollider({ position.x + 46, position.y - 52, 35, 12 }, COLLIDER_PLAYER_ATTACK, App->player);
 				else
 					player_punch_col = App->collision->AddCollider({ position.x + 50, position.y - 90, 41, 12 }, COLLIDER_PLAYER_ATTACK, App->player);
 			else
 				if (current_animation == &crowchpunch)
-					player_punch_col = App->collision->AddCollider({ position.x - 30, position.y - 50, 41, 12 }, COLLIDER_PLAYER_ATTACK, App->player);
+					player_punch_col = App->collision->AddCollider({ position.x - 30, position.y - 52, 35, 12 }, COLLIDER_PLAYER_ATTACK, App->player);
 				else
 					player_punch_col = App->collision->AddCollider({ position.x - 30, position.y - 90, 41, 12 }, COLLIDER_PLAYER_ATTACK, App->player);
 				
@@ -309,7 +309,7 @@ update_status ModulePlayer::Update()
 	if (health < 0)
 		health = 0;
 
-	int speed = 1;
+	float speed = 1.5f;
 
 	if (kicking == true) {
 		at++;
