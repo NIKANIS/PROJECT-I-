@@ -28,8 +28,8 @@ bool ModuleSceneChoosePlayer::Start()
 	LOG("Loading choose player assets");
 	bool ret = true;
 	graphicschooseplayer = App->textures->Load("SPRITES FATAL FURY/GENERAL MENUS/Neo Geo NGCD - Fatal Fury King of Fighters - Select & Map Screens.png");
-	music = App->audio->loadMusic("AUDIO FATAL FURY/MUSIC[OGG]/Fatal Fury King of Fighters-(Opening Arcade-Console).ogg");
-	App->audio->playMusic(music);
+	//music = App->audio->loadMusic("AUDIO FATAL FURY/MUSIC[OGG]/Fatal Fury King of Fighters-(Opening Arcade-Console).ogg");
+	//App->audio->playMusic(music);
 	return ret;
 }
 
