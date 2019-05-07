@@ -9,8 +9,6 @@
 #include "ModuleRoundDisplay.h"
 #include "ModuleFadeToBlack.h"
 
-
-
 ModuleFightManager::ModuleFightManager()
 {
 	win = { 155,1,123,16 };

@@ -12,47 +12,47 @@
 
 // Reference at https://youtu.be/6OlenbCC4WI?t=382
 
-ModuleSceneIntro::ModuleSceneIntro()
+ModuleSceneChoosePlayer::ModuleSceneChoosePlayer()
 {
 
-	background = {0, 0, 304, 224};
+	background = { 8, 5, 308, 240 };
 
 }
 
-ModuleSceneIntro::~ModuleSceneIntro()
+ModuleSceneChoosePlayer::~ModuleSceneChoosePlayer()
 {}
 
 // Load assets
-bool ModuleSceneIntro::Start()
+bool ModuleSceneChoosePlayer::Start()
 {
-	LOG("Loading background assets");
+	LOG("Loading choose player assets");
 	bool ret = true;
-	graphics = App->textures->Load("SPRITES FATAL FURY/UI/3.Start_Screen_FF/fatfury1011.png");
+	graphicschooseplayer = App->textures->Load("SPRITES FATAL FURY/GENERAL MENUS/Neo Geo NGCD - Fatal Fury King of Fighters - Select & Map Screens.png");
 	music = App->audio->loadMusic("AUDIO FATAL FURY/MUSIC[OGG]/Fatal Fury King of Fighters-(Opening Arcade-Console).ogg");
 	App->audio->playMusic(music);
 	return ret;
 }
 
 // Load assets
-bool ModuleSceneIntro::CleanUp()
+bool ModuleSceneChoosePlayer::CleanUp()
 {
-	LOG("Unloading intro");
+	LOG("Unloading ChoosePlayer");
 	App->audio->Disable();
-	App->textures->Unload(graphics);
+	App->textures->Unload(graphicschooseplayer);
 
 	return true;
 }
 
 // Update: draw background
-update_status ModuleSceneIntro::Update()
+update_status ModuleSceneChoosePlayer::Update()
 {
 	// Draw everything --------------------------------------	
 
-	App->render->Blit(graphics, 0, 0, &background, 0.0f);
+	App->render->Blit(graphicschooseplayer, 0, 0, &background, 0.0f);
 
 	if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN)
 	{
-		App->fade->FadeToBlack(App->scene_intro, App->scene_chooseplayer);
+		App->fade->FadeToBlack(App->scene_chooseplayer, App->scene_paopao);
 	}
 
 	return UPDATE_CONTINUE;

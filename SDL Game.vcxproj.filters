@@ -67,6 +67,9 @@
     <ClCompile Include="Main.cpp">
       <Filter>Core</Filter>
     </ClCompile>
+    <ClCompile Include="ModuleSceneChoosePlayer.cpp">
+      <Filter>Modules\Scenes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Module.h">
@@ -143,6 +146,9 @@
     </ClInclude>
     <ClInclude Include="MemLeaks.h">
       <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleSceneChoosePlayer.h">
+      <Filter>Modules\Scenes</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

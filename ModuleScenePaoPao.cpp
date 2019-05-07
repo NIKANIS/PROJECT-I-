@@ -20,6 +20,7 @@
 #include "ModuleFightManager.h"
 #include "ModuleCollision.h"
 #include "ModuleRoundDisplay.h"
+#include "ModuleSceneChoosePlayer.h"
 
 
 ModuleScenePaoPao::ModuleScenePaoPao()
