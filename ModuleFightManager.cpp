@@ -36,7 +36,7 @@ bool ModuleFightManager::Start()
 	SDL_Rect none = { 0,0,0,0 };
 	f = none;
 
-	App->player->Enable();
+	//App->player->Enable();
 	App->enemy->Enable();
 	App->fight_timer->Enable();
 	App->round_pl->Enable();

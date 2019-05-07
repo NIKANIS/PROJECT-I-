@@ -22,7 +22,12 @@ public:
 
 	SDL_Texture* graphicschooseplayer = nullptr;
 	SDL_Rect background;
-	Animation water;
+	SDL_Rect grey_joehigashi;
+	SDL_Rect grey_terrybogard;
+	SDL_Rect grey_andybogard;
+	Animation selected_joehigashi;
+	Animation selected_terrybogard;
+	Animation selected_andybogard;
 	Mix_Music* music = nullptr;
 };
 

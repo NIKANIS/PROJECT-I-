@@ -14,9 +14,11 @@
 
 ModuleSceneChoosePlayer::ModuleSceneChoosePlayer()
 {
-
 	background = { 8, 5, 308, 240 };
-
+	grey_joehigashi = { 265, 248, 76, 133 };
+	grey_terrybogard = { 356, 253, 69, 128 };
+	grey_andybogard = { 439, 258, 50, 123 };
+	
 }
 
 ModuleSceneChoosePlayer::~ModuleSceneChoosePlayer()
@@ -49,6 +51,9 @@ update_status ModuleSceneChoosePlayer::Update()
 	// Draw everything --------------------------------------	
 
 	App->render->Blit(graphicschooseplayer, 0, 0, &background, 0.0f);
+	App->render->Blit(graphicschooseplayer, 25, 65, &grey_joehigashi, 0.0f);
+	App->render->Blit(graphicschooseplayer, 115, 70, &grey_terrybogard, 0.0f);
+	App->render->Blit(graphicschooseplayer, 205, 74, &grey_andybogard, 0.0f);
 
 	if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN)
 	{
