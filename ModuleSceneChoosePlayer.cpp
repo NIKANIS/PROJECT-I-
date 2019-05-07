@@ -22,17 +22,17 @@ ModuleSceneChoosePlayer::ModuleSceneChoosePlayer()
 
 	selected_joehigashi.PushBack({ 504, 248, 76, 133 });
 	selected_joehigashi.PushBack({ 26, 385, 76, 133 });
-	selected_joehigashi.speed = 1.00f;
+	selected_joehigashi.speed = 0.1f;
 	selected_joehigashi.loop = true;
 
 	selected_terrybogard.PushBack({ 599, 253, 69, 128 });
 	selected_terrybogard.PushBack({ 117, 390, 69, 128 });
-	selected_terrybogard.speed = 1.00f;
+	selected_terrybogard.speed = 0.1f;;
 	selected_terrybogard.loop = true;
 
 	selected_andybogard.PushBack({ 678, 258, 50, 123 });
 	selected_andybogard.PushBack({ 200, 395, 50, 123 });
-	selected_andybogard.speed = 1.00f;
+	selected_andybogard.speed = 0.1f;;
 	selected_andybogard.loop = true;
 }
 
@@ -91,7 +91,7 @@ update_status ModuleSceneChoosePlayer::Update()
 
 	App->render->Blit(graphicschooseplayer, 0, 0, &background, 0.0f);
 	App->render->Blit(graphicschooseplayer, 90, 57, &player_select_tittle, 0.0f);
-	//App->render->Blit(graphicschooseplayer, 30, 30, &selected_joehigashi, false, 0.0f);
+	App->render->Blit(graphicschooseplayer, 30, 30, &(selected_joehigashi.GetCurrentFrame()), false, 0.0f);
 
 	if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN)
 	{
