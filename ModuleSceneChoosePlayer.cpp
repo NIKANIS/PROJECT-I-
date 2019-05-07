@@ -52,7 +52,7 @@ update_status ModuleSceneChoosePlayer::Update()
 
 	if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN)
 	{
-		App->fade->FadeToBlack(App->scene_chooseplayer, App->scene_paopao);
+		App->fade->FadeToBlack(App->scene_chooseplayer,(Module*) App->scene_map);
 	}
 
 	return UPDATE_CONTINUE;

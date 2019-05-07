@@ -70,6 +70,9 @@
     <ClCompile Include="ModuleSceneChoosePlayer.cpp">
       <Filter>Modules\Scenes</Filter>
     </ClCompile>
+    <ClCompile Include="ModuleSceneMap.cpp">
+      <Filter>Modules\Scenes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Module.h">
@@ -148,6 +151,9 @@
       <Filter>Core</Filter>
     </ClInclude>
     <ClInclude Include="ModuleSceneChoosePlayer.h">
+      <Filter>Modules\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleSceneMap.h">
       <Filter>Modules\Scenes</Filter>
     </ClInclude>
   </ItemGroup>

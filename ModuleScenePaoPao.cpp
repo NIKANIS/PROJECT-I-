@@ -51,9 +51,6 @@ bool ModuleScenePaoPao::Start()
 	back_graphics = App->textures->Load("SPRITES FATAL FURY/Stages/1 Pao Pao Cafe(Richard)/sprites paopao.png");
 
 	App->fight_manager->Enable();
-	//App->render->camera.x = -525;
-	//App->render->camera.y = -46;
-	
 
 	return true;
 }

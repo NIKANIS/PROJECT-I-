@@ -1,5 +1,5 @@
-#ifndef __MODULESCENETERRY_H__
-#define __MODULESCENETERRY_H__
+#ifndef __MODULESCENEPAOPAO_H__
+#define __MODULESCENEPAOPAO_H__
 
 #include "Module.h"
 #include "Animation.h"
@@ -28,4 +28,4 @@ public:
 	bool forward;
 };
 
-#endif // __MODULESCENETERRY_H__
+#endif // __MODULESCENEPAOPAO_H__

@@ -20,6 +20,7 @@
 #include "ModuleCollision.h"
 #include "ModuleRoundDisplay.h"
 #include "ModuleSceneChoosePlayer.h"
+#include "ModuleSceneMap.h"
 
 Application::Application()
 {
@@ -31,6 +32,9 @@ Application::Application()
 	modules[i++] = scene_intro = new ModuleSceneIntro();
 	modules[i++] = scene_chooseplayer = new ModuleSceneChoosePlayer();
 	modules[i++] = scene_paopao = new ModuleScenePaoPao();
+	modules[i++] = scene_congrats = new ModuleSceneCongrats();
+	modules[i++] = scene_gameover = new ModuleSceneGameOver();
+	modules[i++] = scene_map = new ModuleSceneMap();
 	modules[i++] = player = new ModulePlayer();
 	modules[i++] = enemy = new ModuleEnemy();
 	modules[i++] = fade = new ModuleFadeToBlack();
@@ -43,8 +47,6 @@ Application::Application()
 	modules[i++] = fight_timer = new ModuleFightTimer();
 	modules[i++] = fight_manager = new ModuleFightManager();
 	modules[i++] = collision = new ModuleCollision();
-	modules[i++] = scene_congrats = new ModuleSceneCongrats();
-	modules[i++] = scene_gameover = new ModuleSceneGameOver();
 	modules[i++] = round_pl = new ModuleRoundDisplay(0);
 	modules[i++] = round_en = new ModuleRoundDisplay(1);
 	
@@ -68,6 +70,7 @@ bool Application::Init()
 	scene_congrats->Disable();
 	scene_gameover->Disable();
 	scene_chooseplayer->Disable();
+	scene_map->Disable();
 	lifebar->Disable();
 	lifebar2->Disable();
 	plscore->Disable();
