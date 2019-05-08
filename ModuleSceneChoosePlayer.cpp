@@ -140,7 +140,7 @@ update_status ModuleSceneChoosePlayer::Update()
 		}	break;
 	}
 
-	if (App->input->keyboard[SDL_SCANCODE_DOWN] == KEY_STATE::KEY_DOWN) {
+	if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN) {
 		switch (numberofplayers)
 		{
 			case 0:
@@ -149,21 +149,18 @@ update_status ModuleSceneChoosePlayer::Update()
 				{
 					App->render->Blit(graphicschooseplayer, 25, 78, &purple_joehigashi, 0.0f);
 					numberofplayers++;
-					SDL_Delay(1000);
 				}
 
 				if (player_selected == 1)
 				{
 					App->render->Blit(graphicschooseplayer, 115, 83, &purple_terrybogard, 0.0f);
 					numberofplayers++;
-					SDL_Delay(1000);
 				}
 
 				if (player_selected == 2)
 				{
 					App->render->Blit(graphicschooseplayer, 205, 87, &purple_andybogard, 0.0f);
 					numberofplayers++;
-					SDL_Delay(1000);
 				}
 
 			}	break;
@@ -174,7 +171,6 @@ update_status ModuleSceneChoosePlayer::Update()
 				{
 					App->render->Blit(graphicschooseplayer, 25, 78, &purple_joehigashi, 0.0f);
 					numberofplayers++;
-					SDL_Delay(1000);
 				}
 
 				if (player_selected == 1)
@@ -188,7 +184,6 @@ update_status ModuleSceneChoosePlayer::Update()
 				{
 					App->render->Blit(graphicschooseplayer, 205, 87, &purple_andybogard, 0.0f);
 					numberofplayers++;
-					SDL_Delay(1000);
 				} 
 
 			}	break;
