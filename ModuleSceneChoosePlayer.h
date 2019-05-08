@@ -20,6 +20,9 @@ public:
 
 public:
 	Animation* current_animation = nullptr;
+	bool joehigashi_chosen = false;
+	bool terrybogard_chosen = false;
+	bool andybogard_chosen = false;
 
 	SDL_Texture* graphicschooseplayer = nullptr;
 	SDL_Rect background;
