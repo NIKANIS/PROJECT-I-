@@ -138,7 +138,7 @@ void ModuleCollision::DebugDraw()
 		switch (colliders[i]->type)
 		{
 		case COLLIDER_NONE: // white
-			App->render->DrawQuad(colliders[i]->rect, 255, 255, 255, alpha);
+			App->render->DrawQuad(colliders[i]->rect, 0, 0, 0, alpha);
 			break;
 		case COLLIDER_PLAYER_ATTACK: // blue
 			App->render->DrawQuad(colliders[i]->rect, 0, 0, 255, alpha);
@@ -187,7 +187,7 @@ Collider* ModuleCollision::AddCollider(SDL_Rect rect, COLLIDER_TYPE type, Module
 	{
 		if (colliders[i] == nullptr)
 		{
-			ret = colliders[i] = new Collider(rect, type, callback);
+			ret = colliders[i] = new Collider({rect.x,rect.y + 28, rect.w, rect.h}, type, callback);
 			break;
 		}
 	}

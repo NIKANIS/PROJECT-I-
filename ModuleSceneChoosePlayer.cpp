@@ -69,7 +69,7 @@ update_status ModuleSceneChoosePlayer::Update()
 {
 	// Draw everything --------------------------------------	
 	App->render->Blit(graphicschooseplayer, 0, 0, &background, 0.0f);
-	App->render->Blit(graphicschooseplayer, 90, 57, &player_select_tittle, 0.0f);
+	App->render->Blit(graphicschooseplayer, SCREEN_WIDTH/2 - player_select_tittle.w/2, 57, &player_select_tittle, 0.0f);
 	
 	if (App->input->keyboard[SDL_SCANCODE_RIGHT] == KEY_STATE::KEY_DOWN && player_selected != 2) {
 		player_selected++;
@@ -84,7 +84,7 @@ update_status ModuleSceneChoosePlayer::Update()
 		case 0:
 		{
 			current_animation = &selected_joehigashi;
-			App->render->Blit(graphicschooseplayer, 25, 63, &(selected_joehigashi.GetCurrentFrame()), false, 0.0f);
+			App->render->Blit(graphicschooseplayer, 25, 40, &(selected_joehigashi.GetCurrentFrame()), false, 0.0f);
 			App->render->Blit(graphicschooseplayer, 115, 83, &grey_terrybogard, 0.0f);
 			App->render->Blit(graphicschooseplayer, 205, 87, &grey_andybogard, 0.0f);
 			App->render->Blit(graphicschooseplayer, 50, 75, &p1, 0.0f);
@@ -93,7 +93,7 @@ update_status ModuleSceneChoosePlayer::Update()
 		case 1:
 		{
 			current_animation = &selected_terrybogard;
-			App->render->Blit(graphicschooseplayer, 115, 68, &(selected_terrybogard.GetCurrentFrame()), false, 0.0f);
+			App->render->Blit(graphicschooseplayer, 115, 45, &(selected_terrybogard.GetCurrentFrame()), false, 0.0f);
 			App->render->Blit(graphicschooseplayer, 25, 78, &grey_joehigashi, 0.0f);
 			App->render->Blit(graphicschooseplayer, 205, 87, &grey_andybogard, 0.0f);
 			App->render->Blit(graphicschooseplayer, 125, 75, &p1, 0.0f);
@@ -102,7 +102,7 @@ update_status ModuleSceneChoosePlayer::Update()
 		case 2:
 		{
 			current_animation = &selected_andybogard;
-			App->render->Blit(graphicschooseplayer, 205, 71, &(selected_andybogard.GetCurrentFrame()), false, 0.0f);
+			App->render->Blit(graphicschooseplayer, 205, 48, &(selected_andybogard.GetCurrentFrame()), false, 0.0f);
 			App->render->Blit(graphicschooseplayer, 25, 78, &grey_joehigashi, 0.0f);
 			App->render->Blit(graphicschooseplayer, 115, 83, &grey_terrybogard, 0.0f);
 			App->render->Blit(graphicschooseplayer, 195, 75, &p1, 0.0f);

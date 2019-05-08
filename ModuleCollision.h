@@ -34,7 +34,7 @@ struct Collider
 	void SetPos(int x, int y)
 	{
 		rect.x = x;
-		rect.y = y;
+		rect.y = y + 28;
 	}
 
 	bool CheckCollision(const SDL_Rect& r) const;

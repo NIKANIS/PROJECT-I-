@@ -165,7 +165,7 @@ update_status ModuleFightManager::Update()
 		if (winner == 1)
 			App->fade->FadeToBlack((Module*)App->scene_paopao, (Module*)App->scene_gameover);
 
-		App->render->Blit(graphics, position.x - (f.w / 2) , position.y - (f.h / 2), &f,false, 0.0f);
+		App->render->Blit(graphics, position.x - (f.w / 2) , position.y - (f.h / 2) - 48, &f,false, 0.0f);
 
 		return update_status::UPDATE_CONTINUE;
 	

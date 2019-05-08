@@ -43,6 +43,8 @@ bool ModuleRender::Init()
 		ret = false;
 	}
 
+	SDL_RenderSetLogicalSize(renderer, 303, 207); // Comenta este codigo y pon en el archivo globals.h SCREEN SIZE 3 y WIN_FULLSCREEN_DESKTOP 0  para ver el juego en ventana
+
 	return ret;
 }
 
@@ -56,6 +58,7 @@ update_status ModuleRender::PreUpdate()
 
 update_status ModuleRender::Update()	
 { 
+	SDL_RenderClear(renderer);
 	return update_status::UPDATE_CONTINUE;
 }
 
@@ -85,7 +88,7 @@ bool ModuleRender::Blit(SDL_Texture* texture, int x, int y, SDL_Rect* section,bo
 	bool ret = true;
 	SDL_Rect rect;
 	rect.x = (camera.x*speed) + x * SCREEN_SIZE;
-	rect.y = (camera.y*speed) + y * SCREEN_SIZE;
+	rect.y = (camera.y*speed) + y * SCREEN_SIZE + 28;
 
 	if(section != NULL)
 	{
@@ -131,14 +134,15 @@ bool ModuleRender::DrawQuad(const SDL_Rect& rect, Uint8 r, Uint8 g, Uint8 b, Uin
 	SDL_SetRenderDrawColor(renderer, r, g, b, a);
 
 	SDL_Rect rec(rect);
-	if (use_camera)
+	if (App->player->godMode_)
 	{
 		rec.x = (int)(camera.x + rect.x * SCREEN_SIZE);
 		rec.y = (int)(camera.y + rect.y * SCREEN_SIZE);
 		rec.w *= SCREEN_SIZE;
 		rec.h *= SCREEN_SIZE;
-
+	
 	}
+
 	if (SDL_RenderFillRect(renderer, &rec) != 0)
 	{
 		LOG("Cannot draw quad to screen. SDL_RenderFillRect error: %s", SDL_GetError());
