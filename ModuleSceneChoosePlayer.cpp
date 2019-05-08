@@ -46,7 +46,7 @@ bool ModuleSceneChoosePlayer::Start()
 	bool ret = true;
 	graphicschooseplayer = App->textures->Load("SPRITES FATAL FURY/GENERAL MENUS/Neo Geo NGCD - Fatal Fury King of Fighters - Select & Map Screens.png");
 
-	current_animation = &selected_joehigashi;
+	current_animation = &selected_terrybogard;
 	player_selected = 1;
 
 	return ret;
@@ -65,21 +65,21 @@ bool ModuleSceneChoosePlayer::CleanUp()
 // Update: draw background
 update_status ModuleSceneChoosePlayer::Update()
 {
-	if (App->input->keyboard[SDL_SCANCODE_LEFT] != KEY_STATE::KEY_DOWN && player_selected != 1) {
-		player_selected--;
-	}
-
-	if (App->input->keyboard[SDL_SCANCODE_RIGHT] != KEY_STATE::KEY_DOWN && player_selected != 3) {
-		player_selected++;
-	}
-
 	// Draw everything --------------------------------------	
 	App->render->Blit(graphicschooseplayer, 0, 0, &background, 0.0f);
 	App->render->Blit(graphicschooseplayer, 90, 57, &player_select_tittle, 0.0f);
 
+	if (App->input->keyboard[SDL_SCANCODE_RIGHT] == KEY_STATE::KEY_DOWN && player_selected != 2) {
+		player_selected++;
+	}
+
+	if (App->input->keyboard[SDL_SCANCODE_LEFT] == KEY_STATE::KEY_DOWN && player_selected != 0) {
+		player_selected--;
+	}
+
 	switch (player_selected)
 	{
-		case 1:
+		case 0:
 		{
 			current_animation = &selected_joehigashi;
 			App->render->Blit(graphicschooseplayer, 25, 63, &(selected_joehigashi.GetCurrentFrame()), false, 0.0f);
@@ -87,7 +87,7 @@ update_status ModuleSceneChoosePlayer::Update()
 			App->render->Blit(graphicschooseplayer, 205, 87, &grey_andybogard, 0.0f);
 		}	break;
 
-		case 2:
+		case 1:
 		{
 			current_animation = &selected_terrybogard;
 			App->render->Blit(graphicschooseplayer, 115, 68, &(selected_terrybogard.GetCurrentFrame()), false, 0.0f);
@@ -95,7 +95,7 @@ update_status ModuleSceneChoosePlayer::Update()
 			App->render->Blit(graphicschooseplayer, 205, 87, &grey_andybogard, 0.0f);
 		}	break;
 
-		case 3:
+		case 2:
 		{
 			current_animation = &selected_andybogard;
 			App->render->Blit(graphicschooseplayer, 205, 71, &(selected_andybogard.GetCurrentFrame()), false, 0.0f);

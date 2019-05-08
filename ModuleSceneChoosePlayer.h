@@ -30,7 +30,7 @@ public:
 	Animation selected_joehigashi;
 	Animation selected_terrybogard;
 	Animation selected_andybogard;
-	int player_selected = 0; //player 1 -> Joe Higashi, player 2 -> Terry Bogard, player 3 -> Andy Bogard 
+	int player_selected; //player 1 -> Joe Higashi, player 2 -> Terry Bogard, player 3 -> Andy Bogard 
 	Mix_Music* music = nullptr;
 };
 
