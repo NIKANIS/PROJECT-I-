@@ -55,6 +55,8 @@ bool ModuleSceneChoosePlayer::Start()
 	bool ret = true;
 	graphicschooseplayer = App->textures->Load("SPRITES FATAL FURY/GENERAL MENUS/Neo Geo NGCD - Fatal Fury King of Fighters - Select & Map Screens.png");
 	music = App->audio->loadMusic("AUDIO FATAL FURY/MUSIC[OGG]/Fatal Fury King of Fighters-Character Selection.ogg");
+	select = App->audio->loadWAV("AUDIO FATAL FURY/FX[WAV]/FX/FX_SelectHover.wav");
+	selected = App->audio->loadWAV("AUDIO FATAL FURY/FX[WAV]/FX/FX_ChooseSelection.wav");
 
 	current_animation = &selected_terrybogard;
 	player_selected = 1;
@@ -83,28 +85,33 @@ update_status ModuleSceneChoosePlayer::Update()
 	
 	if (joehigashi_chosen == true)
 	{
+		App->audio->playFx(selected);
 		SDL_Delay(1000);
 		joehigashi_chosen = false;
 	}
 
 	if (terrybogard_chosen == true)
 	{
+		App->audio->playFx(selected);
 		SDL_Delay(1000);
 		terrybogard_chosen = false;
 	}
 
 	if (andybogard_chosen == true)
 	{
+		App->audio->playFx(selected);
 		SDL_Delay(1000);
 		andybogard_chosen = false;
 	}
 
 	if (App->input->keyboard[SDL_SCANCODE_RIGHT] == KEY_STATE::KEY_DOWN && player_selected != 2) {
 		player_selected++;
+		App->audio->playFx(select);
 	}
 
 	if (App->input->keyboard[SDL_SCANCODE_LEFT] == KEY_STATE::KEY_DOWN && player_selected != 0) {
 		player_selected--;
+		App->audio->playFx(select);
 	}
 
 	switch (player_selected)

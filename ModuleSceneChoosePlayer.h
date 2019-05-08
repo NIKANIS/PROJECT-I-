@@ -19,6 +19,9 @@ public:
 	bool CleanUp();
 
 public:
+	Mix_Chunk* select = nullptr;
+	Mix_Chunk* selected = nullptr;
+	
 	Animation* current_animation = nullptr;
 	bool joehigashi_chosen = false;
 	bool terrybogard_chosen = false;
