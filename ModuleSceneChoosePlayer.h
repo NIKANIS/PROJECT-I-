@@ -27,10 +27,13 @@ public:
 	SDL_Rect grey_terrybogard;
 	SDL_Rect grey_andybogard;
 	SDL_Rect player_select_tittle;
+	SDL_Rect p1;
+	SDL_Rect p2;
 	Animation selected_joehigashi;
 	Animation selected_terrybogard;
 	Animation selected_andybogard;
 	int player_selected; //player 1 -> Joe Higashi, player 2 -> Terry Bogard, player 3 -> Andy Bogard 
+	//int finalp1 ;
 	Mix_Music* music = nullptr;
 };
 

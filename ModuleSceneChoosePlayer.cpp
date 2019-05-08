@@ -19,6 +19,8 @@ ModuleSceneChoosePlayer::ModuleSceneChoosePlayer()
 	grey_terrybogard = { 356, 253, 69, 128 };
 	grey_andybogard = { 439, 258, 50, 123 };
 	player_select_tittle = { 598, 147, 120, 17 };
+	p1 = {603, 187, 48, 15};
+	p2 = {662, 187,48,15};
 
 	selected_joehigashi.PushBack({ 504, 248, 76, 133 });
 	selected_joehigashi.PushBack({ 26, 385, 76, 133 });
@@ -68,7 +70,7 @@ update_status ModuleSceneChoosePlayer::Update()
 	// Draw everything --------------------------------------	
 	App->render->Blit(graphicschooseplayer, 0, 0, &background, 0.0f);
 	App->render->Blit(graphicschooseplayer, 90, 57, &player_select_tittle, 0.0f);
-
+	
 	if (App->input->keyboard[SDL_SCANCODE_RIGHT] == KEY_STATE::KEY_DOWN && player_selected != 2) {
 		player_selected++;
 	}
@@ -85,6 +87,7 @@ update_status ModuleSceneChoosePlayer::Update()
 			App->render->Blit(graphicschooseplayer, 25, 63, &(selected_joehigashi.GetCurrentFrame()), false, 0.0f);
 			App->render->Blit(graphicschooseplayer, 115, 83, &grey_terrybogard, 0.0f);
 			App->render->Blit(graphicschooseplayer, 205, 87, &grey_andybogard, 0.0f);
+			App->render->Blit(graphicschooseplayer, 50, 75, &p1, 0.0f);
 		}	break;
 
 		case 1:
@@ -93,6 +96,7 @@ update_status ModuleSceneChoosePlayer::Update()
 			App->render->Blit(graphicschooseplayer, 115, 68, &(selected_terrybogard.GetCurrentFrame()), false, 0.0f);
 			App->render->Blit(graphicschooseplayer, 25, 78, &grey_joehigashi, 0.0f);
 			App->render->Blit(graphicschooseplayer, 205, 87, &grey_andybogard, 0.0f);
+			App->render->Blit(graphicschooseplayer, 125, 75, &p1, 0.0f);
 		}	break;
 
 		case 2:
@@ -101,11 +105,11 @@ update_status ModuleSceneChoosePlayer::Update()
 			App->render->Blit(graphicschooseplayer, 205, 71, &(selected_andybogard.GetCurrentFrame()), false, 0.0f);
 			App->render->Blit(graphicschooseplayer, 25, 78, &grey_joehigashi, 0.0f);
 			App->render->Blit(graphicschooseplayer, 115, 83, &grey_terrybogard, 0.0f);
+			App->render->Blit(graphicschooseplayer, 195, 75, &p1, 0.0f);
 		}	break;
 	}		
 
-	
-	
+		
 	if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN)
 	{
 		App->fade->FadeToBlack(App->scene_chooseplayer,(Module*) App->scene_map);
