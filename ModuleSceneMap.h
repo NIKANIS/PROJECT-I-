@@ -18,7 +18,9 @@ public:
 	bool CleanUp();
 
 public:
-	Mix_Music* music = nullptr;
+	Mix_Chunk* select = nullptr;
+	Mix_Chunk* selected = nullptr;
+
 	SDL_Texture* back_graphics = nullptr;
 	SDL_Rect background;
 	iPoint position;

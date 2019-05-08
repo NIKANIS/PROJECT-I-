@@ -67,8 +67,11 @@ ModuleSceneMap::~ModuleSceneMap()
 bool ModuleSceneMap::Start()
 {
 	LOG("Loading Map scene");
-	back_graphics = App->textures->Load("SPRITES FATAL FURY/GENERAL MENUS/Neo Geo NGCD - Fatal Fury King of Fighters - Select & Map Screens.png");
+	App->audio->Start();
 
+	back_graphics = App->textures->Load("SPRITES FATAL FURY/GENERAL MENUS/Neo Geo NGCD - Fatal Fury King of Fighters - Select & Map Screens.png");
+	select = App->audio->loadWAV("AUDIO FATAL FURY/FX[WAV]/FX/FX_SelectHover.wav");
+	selected = App->audio->loadWAV("AUDIO FATAL FURY/FX[WAV]/FX/FX_ChooseSelection.wav");
 	map = 1;
 
 	return true;
@@ -78,7 +81,7 @@ bool ModuleSceneMap::Start()
 bool ModuleSceneMap::CleanUp()
 {
 	LOG("Unloading Map scene");
-;
+	App->audio->Disable();
 	App->textures->Unload(back_graphics);
 	return true;
 }
@@ -90,18 +93,22 @@ update_status ModuleSceneMap::Update()
 	App->render->Blit(back_graphics, 0, 0, &background, false, 0.92f);
 
 	if (App->input->keyboard[SDL_SCANCODE_RIGHT] == KEY_STATE::KEY_DOWN && map != 4) {
+		App->audio->playFx(select);
 		map++;
 	}
 
 	if (App->input->keyboard[SDL_SCANCODE_LEFT] == KEY_STATE::KEY_DOWN && map != 1) {
+		App->audio->playFx(select);
 		map--;
 	}
 
 	if (App->input->keyboard[SDL_SCANCODE_DOWN] == KEY_STATE::KEY_DOWN && map != 3 && map != 4) {
+		App->audio->playFx(select);
 		map+= 2;
 	}
 
 	if (App->input->keyboard[SDL_SCANCODE_UP] == KEY_STATE::KEY_DOWN && map != 1 && map != 2) {
+		App->audio->playFx(select);
 		map-= 2;
 	}
 
@@ -122,7 +129,10 @@ update_status ModuleSceneMap::Update()
 	case 2:
 	{
 		App->render->Blit(back_graphics, SCREEN_WIDTH / 2 - 96, 75, &pao_pao, false, 0.92f);
-		App->render->Blit(back_graphics, SCREEN_WIDTH / 2, 75, &(map_2.GetCurrentFrame()), false, 0.92f);
+		if(map_chosen == true)
+			App->render->Blit(back_graphics, SCREEN_WIDTH / 2, 75, &sound_beach_selected, false, 0.92f);
+		else
+			App->render->Blit(back_graphics, SCREEN_WIDTH / 2, 75, &(map_2.GetCurrentFrame()), false, 0.92f);
 		App->render->Blit(back_graphics, SCREEN_WIDTH / 2 - 96, 75 + 64, &west_sub, false, 0.92f);
 		App->render->Blit(back_graphics, SCREEN_WIDTH / 2, 75 + 64, &howard_arena, false, 0.92f);
 	
@@ -132,7 +142,10 @@ update_status ModuleSceneMap::Update()
 	{
 		App->render->Blit(back_graphics, SCREEN_WIDTH / 2 - 96, 75, &pao_pao, false, 0.92f);
 		App->render->Blit(back_graphics, SCREEN_WIDTH / 2, 75, &sound_beach, false, 0.92f);
-		App->render->Blit(back_graphics, SCREEN_WIDTH / 2 - 96, 75 + 64, &(map_3.GetCurrentFrame()), false, 0.92f);
+		if(map_chosen == true)
+			App->render->Blit(back_graphics, SCREEN_WIDTH / 2 - 96, 75 + 64, &west_sub_selected, false, 0.92f);
+		else
+			App->render->Blit(back_graphics, SCREEN_WIDTH / 2 - 96, 75 + 64, &(map_3.GetCurrentFrame()), false, 0.92f);
 		App->render->Blit(back_graphics, SCREEN_WIDTH / 2, 75 + 64, &howard_arena, false, 0.92f);
 	
 	}	break;
@@ -142,7 +155,10 @@ update_status ModuleSceneMap::Update()
 		App->render->Blit(back_graphics, SCREEN_WIDTH / 2 - 96, 75, &pao_pao, false, 0.92f);
 		App->render->Blit(back_graphics, SCREEN_WIDTH / 2, 75, &sound_beach, false, 0.92f);
 		App->render->Blit(back_graphics, SCREEN_WIDTH / 2 - 96, 75 + 64, &west_sub, false, 0.92f);
-		App->render->Blit(back_graphics, SCREEN_WIDTH / 2, 75 + 64, &(map_4.GetCurrentFrame()), false, 0.92f);
+		if(map_chosen == true)
+			App->render->Blit(back_graphics, SCREEN_WIDTH / 2, 75 + 64, &howard_arena_selected, false, 0.92f);
+		else
+			App->render->Blit(back_graphics, SCREEN_WIDTH / 2, 75 + 64, &(map_4.GetCurrentFrame()), false, 0.92f);
 	
 	}	break;
 	}
@@ -155,6 +171,28 @@ update_status ModuleSceneMap::Update()
 		if (map == 1)
 		{
 			map_chosen = true;
+			App->audio->playFx(selected);
+			App->fade->FadeToBlack(App->scene_map, (Module*)App->scene_paopao);
+		}
+
+		if (map == 2)
+		{
+			map_chosen = true;
+			App->audio->playFx(selected);
+			App->fade->FadeToBlack(App->scene_map, (Module*)App->scene_paopao);
+		}
+		
+		if (map == 3)
+		{
+			map_chosen = true;
+			App->audio->playFx(selected);
+			App->fade->FadeToBlack(App->scene_map, (Module*)App->scene_paopao);
+		}
+		
+		if (map == 4)
+		{
+			map_chosen = true;
+			App->audio->playFx(selected);
 			App->fade->FadeToBlack(App->scene_map, (Module*)App->scene_paopao);
 		}
 			
