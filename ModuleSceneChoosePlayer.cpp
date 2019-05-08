@@ -186,6 +186,7 @@ update_status ModuleSceneChoosePlayer::Update()
 					joehigashi_chosen = true;
 					App->render->Blit(graphicschooseplayer, 25, 78, &purple_joehigashi, 0.0f);
 					numberofplayers++;
+					App->render->Blit(graphicschooseplayer, 50, 75, &p1, 0.0f);
 				}
 
 				if (player_selected == 1)
@@ -193,6 +194,7 @@ update_status ModuleSceneChoosePlayer::Update()
 					terrybogard_chosen = true;
 					App->render->Blit(graphicschooseplayer, 115, 83, &purple_terrybogard, 0.0f);
 					numberofplayers++;
+					App->render->Blit(graphicschooseplayer, 125, 75, &p1, 0.0f);
 				}
 
 				if (player_selected == 2)
@@ -200,6 +202,7 @@ update_status ModuleSceneChoosePlayer::Update()
 					andybogard_chosen = true;
 					App->render->Blit(graphicschooseplayer, 205, 87, &purple_andybogard, 0.0f);
 					numberofplayers++;
+					App->render->Blit(graphicschooseplayer, 195, 75, &p1, 0.0f);
 				}
 
 			}	break;
@@ -211,6 +214,7 @@ update_status ModuleSceneChoosePlayer::Update()
 					joehigashi_chosen = true;
 					App->render->Blit(graphicschooseplayer, 25, 78, &purple_joehigashi, 0.0f);
 					numberofplayers++;
+					App->render->Blit(graphicschooseplayer, 50, 75, &p2, 0.0f);
 				}
 
 				if (player_selected == 1)
@@ -218,6 +222,7 @@ update_status ModuleSceneChoosePlayer::Update()
 					terrybogard_chosen = true;
 					App->render->Blit(graphicschooseplayer, 115, 83, &purple_terrybogard, 0.0f);
 					numberofplayers++;
+					App->render->Blit(graphicschooseplayer, 125, 75, &p2, 0.0f);
 				} 
 
 				if (player_selected == 2)
@@ -225,6 +230,7 @@ update_status ModuleSceneChoosePlayer::Update()
 					andybogard_chosen = true;
 					App->render->Blit(graphicschooseplayer, 205, 87, &purple_andybogard, 0.0f);
 					numberofplayers++;
+					App->render->Blit(graphicschooseplayer, 195, 75, &p2, 0.0f);
 				} 
 
 			}	break;
