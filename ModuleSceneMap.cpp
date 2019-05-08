@@ -105,53 +105,56 @@ update_status ModuleSceneMap::Update()
 		map-= 2;
 	}
 
-
 	switch (map)
 	{
-		case 1:
-		{
+	case 1:
+	{
+		if(map_chosen == true)
+			App->render->Blit(back_graphics, SCREEN_WIDTH / 2 - 96, 75, &pao_pao_selected, false, 0.92f);
+		else
 			App->render->Blit(back_graphics, SCREEN_WIDTH / 2 - 96, 75, &(map_1.GetCurrentFrame()), false, 0.92f);
-			App->render->Blit(back_graphics, SCREEN_WIDTH / 2, 75, &sound_beach, false, 0.92f);
-			App->render->Blit(back_graphics, SCREEN_WIDTH / 2 - 96, 75 + 64, &west_sub, false, 0.92f);
-			App->render->Blit(back_graphics, SCREEN_WIDTH / 2, 75 + 64, &howard_arena, false, 0.92f);
-
-		}	break;
-
-		case 2:
-		{
-			App->render->Blit(back_graphics, SCREEN_WIDTH / 2 - 96, 75, &pao_pao, false, 0.92f);
-			App->render->Blit(back_graphics, SCREEN_WIDTH / 2, 75, &(map_2.GetCurrentFrame()), false, 0.92f);
-			App->render->Blit(back_graphics, SCREEN_WIDTH / 2 - 96, 75 + 64, &west_sub, false, 0.92f);
-			App->render->Blit(back_graphics, SCREEN_WIDTH / 2, 75 + 64, &howard_arena, false, 0.92f);
-
-		}	break;
-
-		case 3:
-		{
-			App->render->Blit(back_graphics, SCREEN_WIDTH / 2 - 96, 75, &pao_pao, false, 0.92f);
-			App->render->Blit(back_graphics, SCREEN_WIDTH / 2, 75, &sound_beach, false, 0.92f);
-			App->render->Blit(back_graphics, SCREEN_WIDTH / 2 - 96, 75 + 64, &(map_3.GetCurrentFrame()), false, 0.92f);
-			App->render->Blit(back_graphics, SCREEN_WIDTH / 2, 75 + 64, &howard_arena, false, 0.92f);
-
-		}	break;
-
-		case 4:
-		{
-			App->render->Blit(back_graphics, SCREEN_WIDTH / 2 - 96, 75,&pao_pao , false, 0.92f);
-			App->render->Blit(back_graphics, SCREEN_WIDTH / 2, 75, &sound_beach, false, 0.92f);
-			App->render->Blit(back_graphics, SCREEN_WIDTH / 2 - 96, 75 + 64, &west_sub, false, 0.92f);
-			App->render->Blit(back_graphics, SCREEN_WIDTH / 2, 75 + 64, &(map_4.GetCurrentFrame()), false, 0.92f);
-
-		}	break;
+		App->render->Blit(back_graphics, SCREEN_WIDTH / 2, 75, &sound_beach, false, 0.92f);
+		App->render->Blit(back_graphics, SCREEN_WIDTH / 2 - 96, 75 + 64, &west_sub, false, 0.92f);
+		App->render->Blit(back_graphics, SCREEN_WIDTH / 2, 75 + 64, &howard_arena, false, 0.92f);
+	
+	}	break;
+	
+	case 2:
+	{
+		App->render->Blit(back_graphics, SCREEN_WIDTH / 2 - 96, 75, &pao_pao, false, 0.92f);
+		App->render->Blit(back_graphics, SCREEN_WIDTH / 2, 75, &(map_2.GetCurrentFrame()), false, 0.92f);
+		App->render->Blit(back_graphics, SCREEN_WIDTH / 2 - 96, 75 + 64, &west_sub, false, 0.92f);
+		App->render->Blit(back_graphics, SCREEN_WIDTH / 2, 75 + 64, &howard_arena, false, 0.92f);
+	
+	}	break;
+	
+	case 3:
+	{
+		App->render->Blit(back_graphics, SCREEN_WIDTH / 2 - 96, 75, &pao_pao, false, 0.92f);
+		App->render->Blit(back_graphics, SCREEN_WIDTH / 2, 75, &sound_beach, false, 0.92f);
+		App->render->Blit(back_graphics, SCREEN_WIDTH / 2 - 96, 75 + 64, &(map_3.GetCurrentFrame()), false, 0.92f);
+		App->render->Blit(back_graphics, SCREEN_WIDTH / 2, 75 + 64, &howard_arena, false, 0.92f);
+	
+	}	break;
+	
+	case 4:
+	{
+		App->render->Blit(back_graphics, SCREEN_WIDTH / 2 - 96, 75, &pao_pao, false, 0.92f);
+		App->render->Blit(back_graphics, SCREEN_WIDTH / 2, 75, &sound_beach, false, 0.92f);
+		App->render->Blit(back_graphics, SCREEN_WIDTH / 2 - 96, 75 + 64, &west_sub, false, 0.92f);
+		App->render->Blit(back_graphics, SCREEN_WIDTH / 2, 75 + 64, &(map_4.GetCurrentFrame()), false, 0.92f);
+	
+	}	break;
 	}
+	
+	
 
 
 	if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN)
 	{
 		if (map == 1)
 		{
-			map_1.speed = 0;
-			App->render->Blit(back_graphics, SCREEN_WIDTH / 2 - 96, 75, &pao_pao_selected, false, 0.92f);
+			map_chosen = true;
 			App->fade->FadeToBlack(App->scene_map, (Module*)App->scene_paopao);
 		}
 			

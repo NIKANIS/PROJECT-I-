@@ -24,6 +24,7 @@ public:
 	iPoint position;
 
 	int map;
+	bool map_chosen = false;
 	SDL_Rect pao_pao;
 	SDL_Rect sound_beach;
 	SDL_Rect west_sub;
