@@ -92,6 +92,7 @@
     <ClInclude Include="ModuleSceneChoosePlayer.h" />
     <ClInclude Include="ModuleSceneCongrats.h" />
     <ClInclude Include="ModuleSceneGameOver.h" />
+    <ClInclude Include="ModuleSceneHowardArena.h" />
     <ClInclude Include="ModuleSceneIntro.h" />
     <ClInclude Include="ModuleSceneMap.h" />
     <ClInclude Include="ModuleScenePaoPao.h" />
@@ -121,6 +122,7 @@
     <ClCompile Include="ModuleSceneChoosePlayer.cpp" />
     <ClCompile Include="ModuleSceneCongrats.cpp" />
     <ClCompile Include="ModuleSceneGameOver.cpp" />
+    <ClCompile Include="ModuleSceneHowardArena.cpp" />
     <ClCompile Include="ModuleSceneIntro.cpp" />
     <ClCompile Include="ModuleSceneMap.cpp" />
     <ClCompile Include="ModuleScenePaoPao.cpp" />

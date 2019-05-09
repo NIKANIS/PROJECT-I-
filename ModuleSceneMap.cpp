@@ -83,6 +83,7 @@ bool ModuleSceneMap::CleanUp()
 	LOG("Unloading Map scene");
 	App->audio->Disable();
 	App->textures->Unload(back_graphics);
+	map_chosen = false;
 	return true;
 }
 
@@ -193,7 +194,7 @@ update_status ModuleSceneMap::Update()
 		{
 			map_chosen = true;
 			App->audio->playFx(selected);
-			App->fade->FadeToBlack(App->scene_map, (Module*)App->scene_paopao);
+			App->fade->FadeToBlack(App->scene_map, (Module*)App->scene_howardarena);
 		}
 			
 	}

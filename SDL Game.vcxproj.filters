@@ -79,6 +79,9 @@
     <ClCompile Include="ModuleSceneWestSubway.cpp">
       <Filter>Modules\Scenes</Filter>
     </ClCompile>
+    <ClCompile Include="ModuleSceneHowardArena.cpp">
+      <Filter>Modules\Scenes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Module.h">
@@ -166,6 +169,9 @@
       <Filter>Modules\Player &amp; Enemy</Filter>
     </ClInclude>
     <ClInclude Include="ModuleSceneWestSubway.h">
+      <Filter>Modules\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleSceneHowardArena.h">
       <Filter>Modules\Scenes</Filter>
     </ClInclude>
   </ItemGroup>

@@ -26,11 +26,6 @@
 
 ModuleSceneWestSubway::ModuleSceneWestSubway()
 {
-	// ground
-	ground.x = 0;
-	ground.y = 0;
-	ground.w = 619;
-	ground.h = 240;
 
 	//background
 	background.PushBack({ 619, 472, 619, 240 });

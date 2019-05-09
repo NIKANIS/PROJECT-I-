@@ -4,7 +4,7 @@
 #include "Globals.h"
 
 
-#define NUM_MODULES 26
+#define NUM_MODULES 27
 
 class ModuleWindow;
 class ModuleInput;
@@ -17,6 +17,7 @@ class ModuleSceneCongrats;
 class ModuleSceneGameOver;
 class ModuleScenePaoPao;
 class ModuleSceneWestSubway;
+class ModuleSceneHowardArena;
 class ModulePlayer;
 class ModuleEnemy;
 class ModuleFadeToBlack;
@@ -43,6 +44,7 @@ public:
 	ModuleTextures* textures;
 	ModuleScenePaoPao* scene_paopao;
 	ModuleSceneWestSubway* scene_westsubway;
+	ModuleSceneHowardArena* scene_howardarena;
 	ModuleSceneIntro* scene_intro;
 	ModuleSceneChoosePlayer* scene_chooseplayer;
 	ModuleSceneMap* scene_map;
@@ -72,6 +74,7 @@ public:
 	bool Init();
 	update_status Update();
 	bool CleanUp();
+	bool Restart();
 
 };
 

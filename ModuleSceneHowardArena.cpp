@@ -6,7 +6,7 @@
 #include "ModuleInput.h"
 #include "ModuleTextures.h"
 #include "ModuleAudio.h"
-#include "ModuleScenePaoPao.h"
+#include "ModuleSceneHowardArena.h"
 #include "ModuleSceneIntro.h"
 #include "ModuleSceneCongrats.h"
 #include "ModuleSceneGameOver.h"
@@ -24,32 +24,44 @@
 #include "ModuleJoeHigashiPlayer.h"
 
 
-ModuleScenePaoPao::ModuleScenePaoPao()
+ModuleSceneHowardArena::ModuleSceneHowardArena()
 {
-	// ground
-	ground.x = 0;
-	ground.y = 0;
-	ground.w = 512;
-	ground.h = 224;
 
 	//background
-	background.PushBack({ 49, 134, 619, 234 });
-	background.PushBack({ 772, 134, 619, 234 });
+	background.PushBack({ 156,118, 619, 236 });
+	background.PushBack({ 156,398, 619, 236 });
+	background.PushBack({ 156,669, 619, 236 });
+	background.PushBack({ 156,940, 619, 236 });
+								   
+	background.PushBack({ 828, 118, 619, 236 });
+	background.PushBack({ 828,398, 619, 236 });
+	background.PushBack({ 828, 669, 619, 236 });
+	background.PushBack({ 828,940, 619, 236 });
+								   
+	background.PushBack({ 1500, 118, 619, 236 });
+	background.PushBack({ 1500,398, 619, 236 });
+	background.PushBack({ 1500, 669, 619, 236 });
+	background.PushBack({ 1500,940, 619, 236 });
+								   
+	background.PushBack({ 1500, 118, 619, 236 });
+	background.PushBack({ 1500,398, 619, 236 });
+	background.PushBack({ 1500, 669, 619, 236 });
+	background.PushBack({ 1500,940, 619, 236 });
 	background.speed = 0.05f;
 }
 
-ModuleScenePaoPao::~ModuleScenePaoPao()
+ModuleSceneHowardArena::~ModuleSceneHowardArena()
 {}
 
 // Load assets
-bool ModuleScenePaoPao::Start()
+bool ModuleSceneHowardArena::Start()
 {
 	LOG("Loading Pao Pao scene");
 	App->audio->Start();
-	music = App->audio->loadMusic("AUDIO FATAL FURY/MUSIC[OGG]/Fatal Fury King of Fighters - Halema School of Capoeira Fight Song (Richard Meyer Theme).ogg");
+	music = App->audio->loadMusic("AUDIO FATAL FURY/MUSIC[OGG]/Fatal Fury King of Fighters - Four Thousand Years of Chinese History (Tung Fu Rue Theme).ogg");
 	App->audio->playMusic(music);
 
-	back_graphics = App->textures->Load("SPRITES FATAL FURY/Stages/1 Pao Pao Cafe(Richard)/sprites paopao.png");
+	back_graphics = App->textures->Load("SPRITES FATAL FURY/Stages/3 Howard Arena (Tung)/HowardArena.png");
 
 	App->fight_manager->Enable();
 
@@ -57,7 +69,7 @@ bool ModuleScenePaoPao::Start()
 }
 
 // UnLoad assets
-bool ModuleScenePaoPao::CleanUp()
+bool ModuleSceneHowardArena::CleanUp()
 {
 	LOG("Unloading Pao Pao scene");
 	App->fight_manager->Disable();
@@ -74,7 +86,7 @@ bool ModuleScenePaoPao::CleanUp()
 }
 
 // Update: draw background
-update_status ModuleScenePaoPao::Update()
+update_status ModuleSceneHowardArena::Update()
 {
 	int speed = 3;
 	if (App->player->position.x >= 30 && App->player->position.x <= 367 && !App->player->lockX && !App->player->punching && !App->player->kicking && !App->player->specialattack_)
@@ -107,7 +119,7 @@ update_status ModuleScenePaoPao::Update()
 
 	App->render->DrawQuad({ 0,0, SCREEN_WIDTH, SCREEN_HEIGHT }, 0, 0, 0, 80);
 	// Draw everything --------------------------------------
-	App->render->Blit(back_graphics, 0, 0, &(background.GetCurrentFrame()),false, 0.92f);
+	App->render->Blit(back_graphics, 0, -15, &(background.GetCurrentFrame()), false, 0.92f);
 
 
 	return UPDATE_CONTINUE;

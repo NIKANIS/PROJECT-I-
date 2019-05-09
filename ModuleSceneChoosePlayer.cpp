@@ -73,6 +73,9 @@ bool ModuleSceneChoosePlayer::CleanUp()
 	App->audio->Disable();
 	App->textures->Unload(graphicschooseplayer);
 
+	player_selected = 1;
+	numberofplayers = 0;
+
 	return true;
 }
 
@@ -246,7 +249,7 @@ update_status ModuleSceneChoosePlayer::Update()
 		
 	if (numberofplayers == 2)
 	{
-		App->fade->FadeToBlack(App->scene_chooseplayer,(Module*) App->scene_map);
+		App->fade->FadeToBlack(App->scene_chooseplayer,(Module*) App->scene_map, 0.5f);
 	}
 
 	return UPDATE_CONTINUE;

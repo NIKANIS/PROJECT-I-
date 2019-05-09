@@ -6,6 +6,7 @@
 #include "ModuleAudio.h"
 #include "ModuleScenePaoPao.h"
 #include "ModuleSceneWestSubway.h"
+#include "ModuleSceneHowardArena.h"
 #include "ModuleSceneIntro.h"
 #include "ModuleSceneCongrats.h"
 #include "ModuleSceneGameOver.h"
@@ -35,6 +36,7 @@ Application::Application()
 	modules[i++] = scene_chooseplayer = new ModuleSceneChoosePlayer();
 	modules[i++] = scene_paopao = new ModuleScenePaoPao();
 	modules[i++] = scene_westsubway = new ModuleSceneWestSubway();
+	modules[i++] = scene_howardarena = new ModuleSceneHowardArena();
 	modules[i++] = scene_congrats = new ModuleSceneCongrats();
 	modules[i++] = scene_gameover = new ModuleSceneGameOver();
 	modules[i++] = scene_map = new ModuleSceneMap();
@@ -73,6 +75,7 @@ bool Application::Init()
 	enemy->Disable();
 	scene_paopao->Disable();
 	scene_westsubway->Disable();
+	scene_howardarena->Disable();
 	scene_congrats->Disable();
 	scene_gameover->Disable();
 	scene_chooseplayer->Disable();
@@ -117,6 +120,32 @@ bool Application::CleanUp()
 
 	for(int i = NUM_MODULES - 1; i >= 0 && ret == true; --i)
 		ret = modules[i]->CleanUp();
+
+	return ret;
+}
+
+bool Application::Restart()
+{
+	bool ret = true;
+
+	player->Disable();
+	JoeHigashiPlayer->Disable();
+	enemy->Disable();
+	scene_paopao->Disable();
+	scene_westsubway->Disable();
+	scene_howardarena->Disable();
+	scene_congrats->Disable();
+	scene_gameover->Disable();
+	scene_chooseplayer->Disable();
+	scene_map->Disable();
+	lifebar->Disable();
+	lifebar2->Disable();
+	plscore->Disable();
+	enscore->Disable();
+	fight_timer->Disable();
+	fight_manager->Disable();
+	round_pl->Disable();
+	round_en->Disable();
 
 	return ret;
 }
