@@ -30,7 +30,7 @@ class ModuleFightTimer;
 class ModuleFightManager;
 class ModuleCollision;
 class ModuleRoundDisplay;
-
+class ModuleAndyBogardPlayer;
 class ModuleJoeHigashiPlayer;
 
 class Application
@@ -52,6 +52,7 @@ public:
 	ModuleSceneGameOver* scene_gameover;
 	ModulePlayer* player;
 	ModuleJoeHigashiPlayer* JoeHigashiPlayer;
+	ModuleAndyBogardPlayer* AndyBogardPlayer;
 	ModuleEnemy* enemy;
 	ModuleFadeToBlack* fade;
 	ModuleAudio* audio;

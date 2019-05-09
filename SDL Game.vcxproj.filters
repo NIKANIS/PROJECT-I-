@@ -1,63 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="ModuleFightManager.cpp">
-      <Filter>Modules\Fight</Filter>
-    </ClCompile>
-    <ClCompile Include="ModuleFightTimer.cpp">
-      <Filter>Modules\Fight</Filter>
-    </ClCompile>
-    <ClCompile Include="ModuleLifeBar.cpp">
-      <Filter>Modules\Fight</Filter>
-    </ClCompile>
-    <ClCompile Include="ModulePlayerScore.cpp">
-      <Filter>Modules\Fight</Filter>
-    </ClCompile>
-    <ClCompile Include="ModuleRoundDisplay.cpp">
-      <Filter>Modules\Fight</Filter>
-    </ClCompile>
-    <ClCompile Include="ModuleSceneCongrats.cpp">
-      <Filter>Modules\Scenes</Filter>
-    </ClCompile>
-    <ClCompile Include="ModuleSceneGameOver.cpp">
-      <Filter>Modules\Scenes</Filter>
-    </ClCompile>
-    <ClCompile Include="ModuleSceneIntro.cpp">
-      <Filter>Modules\Scenes</Filter>
-    </ClCompile>
-    <ClCompile Include="ModuleScenePaoPao.cpp">
-      <Filter>Modules\Scenes</Filter>
-    </ClCompile>
-    <ClCompile Include="ModuleCollision.cpp">
-      <Filter>Modules\Utility</Filter>
-    </ClCompile>
-    <ClCompile Include="ModuleFadeToBlack.cpp">
-      <Filter>Modules\Utility</Filter>
-    </ClCompile>
-    <ClCompile Include="ModuleInput.cpp">
-      <Filter>Modules\Utility</Filter>
-    </ClCompile>
-    <ClCompile Include="ModuleParticles.cpp">
-      <Filter>Modules\Utility</Filter>
-    </ClCompile>
-    <ClCompile Include="ModuleRender.cpp">
-      <Filter>Modules\Image &amp; Sound</Filter>
-    </ClCompile>
-    <ClCompile Include="ModuleTextures.cpp">
-      <Filter>Modules\Image &amp; Sound</Filter>
-    </ClCompile>
-    <ClCompile Include="ModuleWindow.cpp">
-      <Filter>Modules\Image &amp; Sound</Filter>
-    </ClCompile>
-    <ClCompile Include="ModuleAudio.cpp">
-      <Filter>Modules\Image &amp; Sound</Filter>
-    </ClCompile>
-    <ClCompile Include="ModulePlayer.cpp">
-      <Filter>Modules\Player &amp; Enemy</Filter>
-    </ClCompile>
-    <ClCompile Include="ModuleEnemy.cpp">
-      <Filter>Modules\Player &amp; Enemy</Filter>
-    </ClCompile>
     <ClCompile Include="Application.cpp">
       <Filter>Core</Filter>
     </ClCompile>
@@ -67,89 +10,83 @@
     <ClCompile Include="Main.cpp">
       <Filter>Core</Filter>
     </ClCompile>
+    <ClCompile Include="ModuleAndyBogardPlayer.cpp">
+      <Filter>Modules\Player &amp; Enemie</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleEnemy.cpp">
+      <Filter>Modules\Player &amp; Enemie</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleJoeHigashiPlayer.cpp">
+      <Filter>Modules\Player &amp; Enemie</Filter>
+    </ClCompile>
     <ClCompile Include="ModuleSceneChoosePlayer.cpp">
       <Filter>Modules\Scenes</Filter>
     </ClCompile>
-    <ClCompile Include="ModuleSceneMap.cpp">
+    <ClCompile Include="ModuleSceneCongrats.cpp">
       <Filter>Modules\Scenes</Filter>
     </ClCompile>
-    <ClCompile Include="ModuleJoeHigashiPlayer.cpp">
-      <Filter>Modules\Player &amp; Enemy</Filter>
-    </ClCompile>
-    <ClCompile Include="ModuleSceneWestSubway.cpp">
+    <ClCompile Include="ModuleSceneGameOver.cpp">
       <Filter>Modules\Scenes</Filter>
     </ClCompile>
     <ClCompile Include="ModuleSceneHowardArena.cpp">
       <Filter>Modules\Scenes</Filter>
     </ClCompile>
+    <ClCompile Include="ModuleSceneIntro.cpp">
+      <Filter>Modules\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleSceneMap.cpp">
+      <Filter>Modules\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleScenePaoPao.cpp">
+      <Filter>Modules\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleSceneWestSubway.cpp">
+      <Filter>Modules\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleAudio.cpp">
+      <Filter>Modules\Images &amp; Sound</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleFadeToBlack.cpp">
+      <Filter>Modules\Images &amp; Sound</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleRender.cpp">
+      <Filter>Modules\Images &amp; Sound</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleTextures.cpp">
+      <Filter>Modules\Images &amp; Sound</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleWindow.cpp">
+      <Filter>Modules\Images &amp; Sound</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleCollision.cpp">
+      <Filter>Modules\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="ModulePlayer.cpp">
+      <Filter>Modules\Player &amp; Enemie</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleParticles.cpp">
+      <Filter>Modules\Images &amp; Sound</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleInput.cpp">
+      <Filter>Modules\Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleFightManager.cpp">
+      <Filter>Modules\Fight Management</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleFightTimer.cpp">
+      <Filter>Modules\Fight Management</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleLifeBar.cpp">
+      <Filter>Modules\Fight Management</Filter>
+    </ClCompile>
+    <ClCompile Include="ModulePlayerScore.cpp">
+      <Filter>Modules\Fight Management</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleRoundDisplay.cpp">
+      <Filter>Modules\Fight Management</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Module.h">
-      <Filter>Modules</Filter>
-    </ClInclude>
-    <ClInclude Include="ModuleFightManager.h">
-      <Filter>Modules\Fight</Filter>
-    </ClInclude>
-    <ClInclude Include="ModuleFightTimer.h">
-      <Filter>Modules\Fight</Filter>
-    </ClInclude>
-    <ClInclude Include="ModuleLifeBar.h">
-      <Filter>Modules\Fight</Filter>
-    </ClInclude>
-    <ClInclude Include="ModulePlayerScore.h">
-      <Filter>Modules\Fight</Filter>
-    </ClInclude>
-    <ClInclude Include="ModuleRoundDisplay.h">
-      <Filter>Modules\Fight</Filter>
-    </ClInclude>
-    <ClInclude Include="ModuleSceneCongrats.h">
-      <Filter>Modules\Scenes</Filter>
-    </ClInclude>
-    <ClInclude Include="ModuleSceneGameOver.h">
-      <Filter>Modules\Scenes</Filter>
-    </ClInclude>
-    <ClInclude Include="ModuleSceneIntro.h">
-      <Filter>Modules\Scenes</Filter>
-    </ClInclude>
-    <ClInclude Include="ModuleScenePaoPao.h">
-      <Filter>Modules\Scenes</Filter>
-    </ClInclude>
-    <ClInclude Include="ModuleCollision.h">
-      <Filter>Modules\Utility</Filter>
-    </ClInclude>
-    <ClInclude Include="ModuleFadeToBlack.h">
-      <Filter>Modules\Utility</Filter>
-    </ClInclude>
-    <ClInclude Include="ModuleInput.h">
-      <Filter>Modules\Utility</Filter>
-    </ClInclude>
-    <ClInclude Include="ModuleParticles.h">
-      <Filter>Modules\Utility</Filter>
-    </ClInclude>
-    <ClInclude Include="ModuleRender.h">
-      <Filter>Modules\Image &amp; Sound</Filter>
-    </ClInclude>
-    <ClInclude Include="ModuleTextures.h">
-      <Filter>Modules\Image &amp; Sound</Filter>
-    </ClInclude>
-    <ClInclude Include="ModuleWindow.h">
-      <Filter>Modules\Image &amp; Sound</Filter>
-    </ClInclude>
-    <ClInclude Include="ModuleAudio.h">
-      <Filter>Modules\Image &amp; Sound</Filter>
-    </ClInclude>
-    <ClInclude Include="ModulePlayer.h">
-      <Filter>Modules\Player &amp; Enemy</Filter>
-    </ClInclude>
-    <ClInclude Include="ModuleEnemy.h">
-      <Filter>Modules\Player &amp; Enemy</Filter>
-    </ClInclude>
-    <ClInclude Include="p2Point.h">
-      <Filter>Containers</Filter>
-    </ClInclude>
-    <ClInclude Include="Animation.h">
-      <Filter>Containers</Filter>
-    </ClInclude>
     <ClInclude Include="Application.h">
       <Filter>Core</Filter>
     </ClInclude>
@@ -159,46 +96,115 @@
     <ClInclude Include="MemLeaks.h">
       <Filter>Core</Filter>
     </ClInclude>
+    <ClInclude Include="ModuleAndyBogardPlayer.h">
+      <Filter>Modules\Player &amp; Enemie</Filter>
+    </ClInclude>
+    <ClInclude Include="Animation.h">
+      <Filter>Containers</Filter>
+    </ClInclude>
+    <ClInclude Include="p2Point.h">
+      <Filter>Containers</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleEnemy.h">
+      <Filter>Modules\Player &amp; Enemie</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleJoeHigashiPlayer.h">
+      <Filter>Modules\Player &amp; Enemie</Filter>
+    </ClInclude>
+    <ClInclude Include="Module.h">
+      <Filter>Modules</Filter>
+    </ClInclude>
     <ClInclude Include="ModuleSceneChoosePlayer.h">
       <Filter>Modules\Scenes</Filter>
     </ClInclude>
-    <ClInclude Include="ModuleSceneMap.h">
+    <ClInclude Include="ModuleSceneCongrats.h">
       <Filter>Modules\Scenes</Filter>
     </ClInclude>
-    <ClInclude Include="ModuleJoeHigashiPlayer.h">
-      <Filter>Modules\Player &amp; Enemy</Filter>
-    </ClInclude>
-    <ClInclude Include="ModuleSceneWestSubway.h">
+    <ClInclude Include="ModuleSceneGameOver.h">
       <Filter>Modules\Scenes</Filter>
     </ClInclude>
     <ClInclude Include="ModuleSceneHowardArena.h">
       <Filter>Modules\Scenes</Filter>
     </ClInclude>
+    <ClInclude Include="ModuleSceneIntro.h">
+      <Filter>Modules\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleSceneMap.h">
+      <Filter>Modules\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleScenePaoPao.h">
+      <Filter>Modules\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleSceneWestSubway.h">
+      <Filter>Modules\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleAudio.h">
+      <Filter>Modules\Images &amp; Sound</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleFadeToBlack.h">
+      <Filter>Modules\Images &amp; Sound</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleParticles.h">
+      <Filter>Modules\Images &amp; Sound</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleRender.h">
+      <Filter>Modules\Images &amp; Sound</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleTextures.h">
+      <Filter>Modules\Images &amp; Sound</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleWindow.h">
+      <Filter>Modules\Images &amp; Sound</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleCollision.h">
+      <Filter>Modules\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="ModulePlayer.h">
+      <Filter>Modules\Player &amp; Enemie</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleInput.h">
+      <Filter>Modules\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleFightManager.h">
+      <Filter>Modules\Fight Management</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleFightTimer.h">
+      <Filter>Modules\Fight Management</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleLifeBar.h">
+      <Filter>Modules\Fight Management</Filter>
+    </ClInclude>
+    <ClInclude Include="ModulePlayerScore.h">
+      <Filter>Modules\Fight Management</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleRoundDisplay.h">
+      <Filter>Modules\Fight Management</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Core">
-      <UniqueIdentifier>{60028c6d-61fe-498c-b1fd-a7c62c9371f0}</UniqueIdentifier>
+      <UniqueIdentifier>{8c6919e5-8e79-4148-915f-be95194c2a0b}</UniqueIdentifier>
     </Filter>
     <Filter Include="Modules">
-      <UniqueIdentifier>{553e0c81-a7b4-4c21-a95c-f7b33e2bd997}</UniqueIdentifier>
+      <UniqueIdentifier>{01967998-5141-47f7-ada0-a8d8c71ccd9e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Modules\Fight">
-      <UniqueIdentifier>{512cde9e-136d-485f-89ee-0b43e9d79abf}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Modules\Scenes">
-      <UniqueIdentifier>{5f2404ea-e6ab-4545-8bfa-3200f8f08bd8}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Modules\Utility">
-      <UniqueIdentifier>{cd3738cd-f2af-4604-bcae-9c3e6ec74d59}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Modules\Image &amp; Sound">
-      <UniqueIdentifier>{f966b6b7-b4f5-44d2-be42-73b0cbe0f8a3}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Modules\Player &amp; Enemy">
-      <UniqueIdentifier>{b57b3144-22e2-4a61-a46a-0d405f14c74f}</UniqueIdentifier>
+    <Filter Include="Modules\Player &amp; Enemie">
+      <UniqueIdentifier>{6e49c4f9-a450-48e8-854e-cc2606356e29}</UniqueIdentifier>
     </Filter>
     <Filter Include="Containers">
-      <UniqueIdentifier>{bc88dcad-af92-46fd-b5e5-2695550a855a}</UniqueIdentifier>
+      <UniqueIdentifier>{18c9767c-f9cf-4c36-bdc7-a38cfbb38ab2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Scenes">
+      <UniqueIdentifier>{01872ff6-a8e7-48e5-9dd4-d487df6cfd14}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Images &amp; Sound">
+      <UniqueIdentifier>{a209778b-61ea-45dc-b814-f669abdd7979}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Utility">
+      <UniqueIdentifier>{c90e3a66-34f6-4bd1-b9fc-dcd1f13d8536}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Fight Management">
+      <UniqueIdentifier>{34783b5a-5015-4a04-a5aa-86edfd54164e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
