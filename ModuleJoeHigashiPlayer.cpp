@@ -115,10 +115,10 @@ ModuleJoeHigashiPlayer::ModuleJoeHigashiPlayer()
 	//kick while standing done
 	kickingstanding.PushBack({ 417,163,60,84 });
 	kickingstanding.PushBack({ 495,185,52,65 });
-	kickingstanding.PushBack({ 562,163,44,94 });
+	kickingstanding.PushBack({ 562,153,44,94 });
 	kickingstanding.PushBack({ 631,139,110,106 });
-	kickingstanding.PushBack({ 770,165,54,90 });	
-	kickingstanding.speed = 0.10f;
+	kickingstanding.PushBack({ 770,156,54,90 });	
+	kickingstanding.speed = 0.13f;
 	kickingstanding.loop = false;
 
 	//special attack while standing done
@@ -179,7 +179,7 @@ ModuleJoeHigashiPlayer::~ModuleJoeHigashiPlayer()
 // Load assets
 bool ModuleJoeHigashiPlayer::Start()
 {
-	LOG("Loading player textures");
+	LOG("Loading joe higashi textures");
 	current_animation = &idle;
 	health = 100;
 	score = 0;
@@ -191,11 +191,11 @@ bool ModuleJoeHigashiPlayer::Start()
 	position.y = 220;
 	App->lifebar->Enable();
 	App->plscore->Enable();
-	player_col = App->collision->AddCollider({ position.x + 10, position.y - 90, 33, 104 }, COLLIDER_PLAYER, App->player);
+	player_col = App->collision->AddCollider({ position.x + 10, position.y - 90, 33, 104 }, COLLIDER_PLAYER, App->JoeHigashiPlayer);
 
 
 	bool ret = true;
-	graphics = App->textures->Load("SPRITES FATAL FURY/CHARACTERS/3-Joe-Higashi/Sprites joe higashi.png"); // arcade version
+	graphics = App->textures->Load("SPRITES FATAL FURY/CHARACTERS/3-Joe Higashi/Sprites joe higashi.png"); // arcade version
 
 	skillFX = App->audio->loadWAV("AUDIO FATAL FURY/FX[WAV]/Voice/Special Attacks/FX_PowerWaveAttackTerryBogardVoice.wav");
 	punchFX = App->audio->loadWAV("AUDIO FATAL FURY/FX[WAV]/Voice/Attacks/FX_Attack3.wav");
@@ -209,7 +209,6 @@ bool ModuleJoeHigashiPlayer::CleanUp()
 	App->lifebar->Disable();
 	App->plscore->Disable();
 	App->textures->Unload(graphics);
-
 
 	return true;
 }
