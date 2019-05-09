@@ -21,6 +21,7 @@
 #include "ModuleCollision.h"
 #include "ModuleRoundDisplay.h"
 #include "ModuleSceneChoosePlayer.h"
+#include "ModuleJoeHigashiPlayer.h"
 
 
 ModuleScenePaoPao::ModuleScenePaoPao()
@@ -64,6 +65,7 @@ bool ModuleScenePaoPao::CleanUp()
 	App->textures->Unload(back_graphics);
 	App->collision->CleanUp();
 	App->player->Reset();
+	//App->JoeHigashiPlayer->Reset();
 	App->render->camera.x = 0;
 	App->render->camera.y = -46;
 

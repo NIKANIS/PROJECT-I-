@@ -85,4 +85,4 @@ public:
 	void OnCollision(Collider*, Collider*, bool colliding) override;
 };
 
-#endif
+#endif // __ModuleEnemy_H__
