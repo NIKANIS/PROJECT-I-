@@ -1,5 +1,5 @@
-#ifndef __ModuleJoeHigashiPlayer_H__
-#define __ModuleJoeHigashiPlayer_H__
+#ifndef __MODULEJOEHIGASHIPLAYER_H__
+#define __MODULEJOEHIGASHIPLAYER_H__
 
 #include "Module.h"
 #include "Animation.h"
@@ -88,4 +88,4 @@ public:
 	void OnCollision(Collider*, Collider*, bool colliding) override;
 };
 
-#endif
+#endif // __MODULEJOEHIGASHIPLAYER_H__

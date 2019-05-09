@@ -88,4 +88,4 @@ public:
 	void OnCollision(Collider*, Collider*, bool colliding) override;
 };
 
-#endif
+#endif //__ModulePlayer_H__

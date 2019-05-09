@@ -57,50 +57,51 @@ ModuleJoeHigashiPlayer::ModuleJoeHigashiPlayer()
 	body_collide = false;
 
 	// idle animation done 
-	idle.PushBack({ 27, 913, 60, 105 });
-	idle.PushBack({ 95, 915, 61, 104 });
-	idle.PushBack({ 164, 914, 60, 104 });
-	idle.PushBack({ 95, 915, 61, 104 });
+	idle.PushBack({ 195, 20, 62, 104 });
+	idle.PushBack({ 274, 18, 61, 106 });
+	idle.PushBack({ 354, 16, 63, 108 });
+	idle.PushBack({ 434, 18, 61, 106 });
+	idle.PushBack({ 518, 20, 62, 104 });
 	idle.loop = true;
-	idle.speed = 0.13f;
+	idle.speed = 0.14f;
 
 	// jump idle up done
-	jumpiup.PushBack({ 907, 471, 61, 128 });
+	jumpiup.PushBack({ 88, 367, 39, 126 });
 
 	// jump idle down 
-	jumpidown.PushBack({ 908, 655, 60, 96 });
+	jumpidown.PushBack({ 145, 367, 49, 81 });
 
 	//jump while moving done
-	jump.PushBack({ 828, 565 , 63, 107 });
-
-	//go forward done
-	forward.PushBack({ 1111, 270, 69, 105 });
-	forward.PushBack({ 1193, 271, 59, 104 });
-	forward.PushBack({ 1267, 274, 59, 101 });
-	forward.PushBack({ 1036, 273, 59, 102 });
+	jump.PushBack({ 204, 367, 56, 121 });
+	
+	//go forward done	
+	forward.PushBack({ 597, 19, 75, 105 });
+	forward.PushBack({ 686, 11, 65, 113 });
+	forward.PushBack({ 758, 5, 62, 119 });
+	forward.PushBack({ 825, 16, 63, 108 });
 	forward.speed = 0.13f;
 	forward.loop = true;
 
 	//go backwards done
-	backward.PushBack({ 1465, 446, 59, 102 });
-	backward.PushBack({ 1396, 445, 55, 104 });
-	backward.PushBack({ 1327, 442, 56, 106 });
-	backward.PushBack({ 1258, 444, 57, 104 });
+	backward.PushBack({ 33, 144, 60, 102 });
+	backward.PushBack({ 111, 141, 55, 105 });
+	backward.PushBack({ 176, 136, 55, 110 });
+	backward.PushBack({ 241, 140, 56, 106 });
 	backward.speed = 0.13f;
 	backward.loop = true;
 
 	// crowch done
-	crowch.PushBack({ 440, 606, 52, 63 });
+	crowch.PushBack({ 761, 888, 59, 69 });
 
 	// crowch while going backwards and viceversa
-	crowchprotecc.PushBack({ 380,607,52,62 });
+	crowchprotecc.PushBack({ 830,881,51,74 });
 
-	//punch while standing done
-	punchstanding.PushBack({ 434, 919, 71, 99 });
-	punchstanding.PushBack({ 507, 919, 61, 100 });
-	punchstanding.PushBack({ 575, 917, 95, 102 });
-	punchstanding.PushBack({ 507, 919, 61, 100 });
-	punchstanding.PushBack({ 434, 919, 71, 99 });
+	//punch while standing done	
+	punchstanding.PushBack({ 481, 610, 64, 102 });
+	punchstanding.PushBack({ 553, 616, 63, 96 });
+	punchstanding.PushBack({ 627, 616, 97, 96 });
+	punchstanding.PushBack({ 553, 616, 63, 96 });
+	punchstanding.PushBack({ 481, 610, 64, 102 });	
 	punchstanding.speed = 0.15f;
 	punchstanding.loop = false;
 
