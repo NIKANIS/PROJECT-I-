@@ -44,16 +44,16 @@ bool ModuleFightManager::Start()
 	SDL_Rect none = { 0,0,0,0 };
 	f = none;
 
-	if (App->scene_chooseplayer->final_player1 == 1) 
-	{
-		App->player->Enable();
-	}
-		
-	if (App->scene_chooseplayer->final_player1 == 0)
-	{
-		App->JoeHigashiPlayer->Enable();
-	}
-	
+	//if (App->scene_chooseplayer->final_player1 == 1) 
+	//{
+	//		App->player->Enable();
+	//}
+	//	
+	//if (App->scene_chooseplayer->final_player1 == 0)
+	//{
+	//	App->JoeHigashiPlayer->Enable();
+	//}
+	App->player->Enable();
 	App->enemy->Enable();
 	App->fight_timer->Enable();
 	App->round_pl->Enable();

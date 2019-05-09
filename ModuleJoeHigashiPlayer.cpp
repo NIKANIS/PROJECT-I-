@@ -181,6 +181,8 @@ ModuleJoeHigashiPlayer::~ModuleJoeHigashiPlayer()
 // Load assets
 bool ModuleJoeHigashiPlayer::Start()
 {
+	bool ret = true;
+
 	LOG("Loading joe higashi textures");
 	current_animation = &idle;
 	health = 100;
@@ -193,10 +195,8 @@ bool ModuleJoeHigashiPlayer::Start()
 	position.y = 220;
 	App->lifebar->Enable();
 	App->plscore->Enable();
+
 	player_col = App->collision->AddCollider({ position.x + 10, position.y - 90, 33, 104 }, COLLIDER_PLAYER, App->JoeHigashiPlayer);
-
-
-	bool ret = true;
 	graphics = App->textures->Load("SPRITES FATAL FURY/CHARACTERS/3-Joe Higashi/Sprites joe higashi.png"); // arcade version
 
 	skillFX = App->audio->loadWAV("AUDIO FATAL FURY/FX[WAV]/Voice/Special Attacks/FX_PowerWaveAttackTerryBogardVoice.wav");
