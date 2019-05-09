@@ -8,6 +8,7 @@
 #include "ModuleInput.h"
 #include "ModuleRoundDisplay.h"
 #include "ModuleFadeToBlack.h"
+#include "ModuleSceneMap.h"
 
 ModuleFightManager::ModuleFightManager()
 {
@@ -160,10 +161,30 @@ update_status ModuleFightManager::Update()
 			winner = 1;
 
 		if (winner == 0)
-			App->fade->FadeToBlack((Module*)App->scene_paopao, (Module*)App->scene_congrats);
+		{
+			if(App->scene_map->map == 1)
+				App->fade->FadeToBlack((Module*)App->scene_paopao, (Module*)App->scene_congrats);
+			//if (App->scene_map->map == 1)
+			//	App->fade->FadeToBlack((Module*)App->scene_paopao, (Module*)App->scene_congrats);
+			if (App->scene_map->map == 3)
+				App->fade->FadeToBlack((Module*)App->scene_westsubway, (Module*)App->scene_congrats);
+			//if (App->scene_map->map == 1)
+			//	App->fade->FadeToBlack((Module*)App->scene_paopao, (Module*)App->scene_congrats);
+		}	
+			
 
 		if (winner == 1)
-			App->fade->FadeToBlack((Module*)App->scene_paopao, (Module*)App->scene_gameover);
+		{
+			if (App->scene_map->map == 1)
+				App->fade->FadeToBlack((Module*)App->scene_paopao, (Module*)App->scene_gameover);
+			//if (App->scene_map->map == 1)
+			//	App->fade->FadeToBlack((Module*)App->scene_paopao, (Module*)App->scene_gameover);
+			if (App->scene_map->map == 3)
+				App->fade->FadeToBlack((Module*)App->scene_westsubway, (Module*)App->scene_gameover);
+			//if (App->scene_map->map == 1)
+			//	App->fade->FadeToBlack((Module*)App->scene_paopao, (Module*)App->scene_gameover);
+		}
+			
 
 		App->render->Blit(graphics, position.x - (f.w / 2) , position.y - (f.h / 2) - 48, &f,false, 0.0f);
 

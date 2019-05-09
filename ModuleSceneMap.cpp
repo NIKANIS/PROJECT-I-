@@ -186,7 +186,7 @@ update_status ModuleSceneMap::Update()
 		{
 			map_chosen = true;
 			App->audio->playFx(selected);
-			App->fade->FadeToBlack(App->scene_map, (Module*)App->scene_paopao);
+			App->fade->FadeToBlack(App->scene_map, (Module*)App->scene_westsubway);
 		}
 		
 		if (map == 4)

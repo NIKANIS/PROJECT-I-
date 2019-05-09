@@ -5,6 +5,7 @@
 #include "ModuleTextures.h"
 #include "ModuleAudio.h"
 #include "ModuleScenePaoPao.h"
+#include "ModuleSceneWestSubway.h"
 #include "ModuleSceneIntro.h"
 #include "ModuleSceneCongrats.h"
 #include "ModuleSceneGameOver.h"
@@ -33,6 +34,7 @@ Application::Application()
 	modules[i++] = scene_intro = new ModuleSceneIntro();
 	modules[i++] = scene_chooseplayer = new ModuleSceneChoosePlayer();
 	modules[i++] = scene_paopao = new ModuleScenePaoPao();
+	modules[i++] = scene_westsubway = new ModuleSceneWestSubway();
 	modules[i++] = scene_congrats = new ModuleSceneCongrats();
 	modules[i++] = scene_gameover = new ModuleSceneGameOver();
 	modules[i++] = scene_map = new ModuleSceneMap();
@@ -70,6 +72,7 @@ bool Application::Init()
 	JoeHigashiPlayer->Disable();
 	enemy->Disable();
 	scene_paopao->Disable();
+	scene_westsubway->Disable();
 	scene_congrats->Disable();
 	scene_gameover->Disable();
 	scene_chooseplayer->Disable();

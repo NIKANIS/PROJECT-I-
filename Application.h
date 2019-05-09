@@ -3,16 +3,19 @@
 
 #include "Globals.h"
 
-#define NUM_MODULES 24
+#define NUM_MODULES 26
 
 class ModuleWindow;
 class ModuleInput;
 class ModuleTextures;
 class ModuleRender;
-class ModuleScenePaoPao;
 class ModuleSceneIntro;
+class ModuleSceneChoosePlayer;
+class ModuleSceneMap;
 class ModuleSceneCongrats;
 class ModuleSceneGameOver;
+class ModuleScenePaoPao;
+class ModuleSceneWestSubway;
 class ModulePlayer;
 class ModuleEnemy;
 class ModuleFadeToBlack;
@@ -25,8 +28,7 @@ class ModuleFightTimer;
 class ModuleFightManager;
 class ModuleCollision;
 class ModuleRoundDisplay;
-class ModuleSceneChoosePlayer;
-class ModuleSceneMap;
+
 class ModuleJoeHigashiPlayer;
 
 class Application
@@ -39,6 +41,7 @@ public:
 	ModuleInput* input;
 	ModuleTextures* textures;
 	ModuleScenePaoPao* scene_paopao;
+	ModuleSceneWestSubway* scene_westsubway;
 	ModuleSceneIntro* scene_intro;
 	ModuleSceneChoosePlayer* scene_chooseplayer;
 	ModuleSceneMap* scene_map;
