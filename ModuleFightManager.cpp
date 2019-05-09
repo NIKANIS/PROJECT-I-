@@ -8,6 +8,7 @@
 #include "ModuleInput.h"
 #include "ModuleRoundDisplay.h"
 #include "ModuleFadeToBlack.h"
+#include "ModuleJoeHigashiPlayer.h"
 
 ModuleFightManager::ModuleFightManager()
 {
@@ -37,6 +38,7 @@ bool ModuleFightManager::Start()
 	f = none;
 
 	App->player->Enable();
+	//App->JoeHigashiPlayer->Enable();
 	App->enemy->Enable();
 	App->fight_timer->Enable();
 	App->round_pl->Enable();
@@ -48,6 +50,7 @@ bool ModuleFightManager::CleanUp()
 {
 	App->textures->Unload(graphics);
 	App->player->Disable();
+	//App->JoeHigashiPlayer->Disable();
 	App->enemy->Disable();
 	App->fight_timer->Disable();
 	App->round_pl->Disable();
@@ -58,6 +61,7 @@ bool ModuleFightManager::CleanUp()
 void ModuleFightManager::Reset()
 {
 	App->player->Reset();
+	//App->JoeHigashiPlayer->Reset();
 	App->enemy->Reset();
 	timer_num = 93;
 	timer_counter = 0;

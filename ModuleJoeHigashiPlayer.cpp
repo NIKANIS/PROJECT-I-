@@ -106,24 +106,19 @@ ModuleJoeHigashiPlayer::ModuleJoeHigashiPlayer()
 	punchstanding.loop = false;
 
 	//punch while crowching 
-	crowchpunch.PushBack({ 239,832,57,66 });
-	crowchpunch.PushBack({ 302,835,50,65 });
-	crowchpunch.PushBack({ 359,834,82,64 });
-	crowchpunch.PushBack({ 302,835,50,65 });
-	crowchpunch.PushBack({ 239,832,57,66 });
-	crowchpunch.speed = 0.15f;
+	crowchpunch.PushBack({ 97,286,55,71 });
+	crowchpunch.PushBack({ 159,288,76,70 });
+	crowchpunch.PushBack({ 97,286,55,71 });
+	crowchpunch.speed = 0.12f;
 	crowchpunch.loop = false;
 
 	//kick while standing done
-	kickingstanding.PushBack({ 1119,631,59,103 });
-	kickingstanding.PushBack({ 1196,628,47,106 });
-	kickingstanding.PushBack({ 1261,642,47,93 });
-	kickingstanding.PushBack({ 1314,617,57,120 });
-	kickingstanding.PushBack({ 1379,617,42,120 });
-	kickingstanding.PushBack({ 1441,612,116,125 });
-	kickingstanding.PushBack({ 1572,628,62,117 });
-	kickingstanding.PushBack({ 1653,625,57,91 });
-	kickingstanding.speed = 0.20f;
+	kickingstanding.PushBack({ 417,163,60,84 });
+	kickingstanding.PushBack({ 495,185,52,65 });
+	kickingstanding.PushBack({ 562,163,44,94 });
+	kickingstanding.PushBack({ 631,139,110,106 });
+	kickingstanding.PushBack({ 770,165,54,90 });	
+	kickingstanding.speed = 0.10f;
 	kickingstanding.loop = false;
 
 	//special attack while standing done
