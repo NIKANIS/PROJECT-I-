@@ -98,7 +98,7 @@ update_status ModuleSceneWestSubway::Update()
 		}
 	}
 	// Draw everything --------------------------------------
-	App->render->Blit(back_graphics, 0, -20, &(background.GetCurrentFrame()), false, 0.92f);
+	App->render->Blit(back_graphics, 0, -19, &(background.GetCurrentFrame()), false, 0.92f);
 
 
 	return UPDATE_CONTINUE;

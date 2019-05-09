@@ -19,7 +19,7 @@ public:
 	Mix_Chunk* const ModuleAudio::loadWAV(const char* path);
 	Mix_Music* const ModuleAudio::loadMusic(const char* path);
 	bool playMusic(Mix_Music *music);
-	bool playFx(Mix_Chunk *chunk);
+	bool playFx(Mix_Chunk *chunk, int channel = -1);
 public:
 
 };

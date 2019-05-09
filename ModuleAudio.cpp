@@ -34,6 +34,9 @@ bool ModuleAudio::Init()
 		ret = false;
 	}
 
+	Mix_Volume(-1, 75);
+	Mix_VolumeMusic(40);
+
 	return ret;
 }
 
@@ -70,9 +73,10 @@ bool ModuleAudio::playMusic(Mix_Music *music)
 	return ret;
 }
 
-bool ModuleAudio::playFx(Mix_Chunk *chunk)
+bool ModuleAudio::playFx(Mix_Chunk *chunk, int channel)
 {
 	bool ret = true;
-	Mix_PlayChannel(-1, chunk, 0); 
+
+	Mix_PlayChannel(channel, chunk, 0); 
 	return ret;
 }

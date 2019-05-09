@@ -4,6 +4,7 @@
 #include "Globals.h"
 #include "Module.h"
 #include "p2Point.h"
+#include "ModuleAudio.h"
 
 struct SDL_Texture;
 
@@ -20,6 +21,7 @@ public:
 	int Player() { return pl_won_rounds; }
 	int Enemy() { return en_won_rounds; }
 	int Winner() { return winner; }
+
 
 public:
 
@@ -40,6 +42,8 @@ public:
 	bool time_stop;
 	bool blockpoints; 
 	void Reset();
+	Mix_Chunk* roundFX = nullptr;
+	Mix_Chunk* fightFX = nullptr;
 };
 
 #endif

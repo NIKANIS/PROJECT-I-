@@ -10,6 +10,7 @@
 #include "ModuleFadeToBlack.h"
 #include "ModuleSceneMap.h"
 #include "ModuleJoeHigashiPlayer.h"
+#include "ModuleAudio.h"
 
 
 ModuleFightManager::ModuleFightManager()
@@ -19,6 +20,7 @@ ModuleFightManager::ModuleFightManager()
 	draw = { 155,35,142,16 };
 	round = {155,52,78,16};
 	fight = {99,205,173,40};
+
 }
 
 ModuleFightManager::~ModuleFightManager(){}
@@ -26,6 +28,8 @@ ModuleFightManager::~ModuleFightManager(){}
 bool ModuleFightManager::Start() 
 {
 	graphics = App->textures->Load("SPRITES FATAL FURY/UI/UI sprites.png");
+	fightFX = App->audio->loadWAV("AUDIO FATAL FURY/FX[WAV]/Voice/FX_FightVoice.wav");
+	roundFX = App->audio->loadWAV("AUDIO FATAL FURY/FX[WAV]/Voice/FX_ReadyVoice.wav");
 
 	position.x = 151;
 	position.y = 103;
@@ -90,9 +94,17 @@ update_status ModuleFightManager::Update()
 		}
 	}
 	if (timer_num == 93)
+	{
 		f = round;
+		//App->audio->playFx(roundFX);
+	}
+
 	if (timer_num == 92)
+	{
 		f = fight;
+		//App->audio->playFx(fightFX);
+	}
+
 	if (timer_num == 90)
 	{
 		SDL_Rect none = { 0,0,0,0 };

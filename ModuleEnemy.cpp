@@ -385,7 +385,7 @@ update_status ModuleEnemy::Update()
 		{
 			App->particles->AddParticle(App->particles->skill, position.x + n, position.y - 40, COLLIDER_ENEMY_ATTACK);
 		}
-		if (st == 90)
+		if (st == 1000)
 			sp = false;
 	}
 	Jump();
