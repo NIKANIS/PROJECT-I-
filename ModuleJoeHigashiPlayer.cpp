@@ -145,10 +145,12 @@ ModuleJoeHigashiPlayer::ModuleJoeHigashiPlayer()
 	die.loop = false;
 
 	//victory
-	victory.PushBack({ 699,324,56,136 });
-	victory.PushBack({ 772,324,56,136 });
-	victory.PushBack({ 839,324,60,136 });
-	victory.PushBack({ 908,324,56,136 });
+	victory.PushBack({ 430,810,63,101 });
+	victory.PushBack({ 770,156,54,90 });
+	victory.PushBack({ 601,943,52,62 });
+	victory.PushBack({ 526,923,52,64 });
+	victory.PushBack({ 518,821,85,87  });
+	
 	victory.speed = 0.15f;
 	victory.loop = false;
 
