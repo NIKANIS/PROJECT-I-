@@ -27,6 +27,7 @@ class ModuleCollision;
 class ModuleRoundDisplay;
 class ModuleSceneChoosePlayer;
 class ModuleSceneMap;
+class ModuleJoeHigashiPlayer;
 
 class Application
 {
@@ -44,6 +45,7 @@ public:
 	ModuleSceneCongrats* scene_congrats;
 	ModuleSceneGameOver* scene_gameover;
 	ModulePlayer* player;
+	ModuleJoeHigashiPlayer* JoeHigashiPlayer;
 	ModuleEnemy* enemy;
 	ModuleFadeToBlack* fade;
 	ModuleAudio* audio;

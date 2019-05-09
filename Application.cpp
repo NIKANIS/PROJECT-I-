@@ -21,6 +21,7 @@
 #include "ModuleRoundDisplay.h"
 #include "ModuleSceneChoosePlayer.h"
 #include "ModuleSceneMap.h"
+#include "ModuleJoeHigashiPlayer.h"
 
 Application::Application()
 {
@@ -36,6 +37,7 @@ Application::Application()
 	modules[i++] = scene_gameover = new ModuleSceneGameOver();
 	modules[i++] = scene_map = new ModuleSceneMap();
 	modules[i++] = player = new ModulePlayer();
+	modules[i++] = JoeHigashiPlayer = new ModuleJoeHigashiPlayer();
 	modules[i++] = enemy = new ModuleEnemy();
 	modules[i++] = fade = new ModuleFadeToBlack();
 	modules[i++] = audio = new ModuleAudio();
@@ -65,6 +67,7 @@ bool Application::Init()
 
 	// Player will be enabled on the first update of a new scene
 	player->Disable();
+	JoeHigashiPlayer->Disable();
 	enemy->Disable();
 	scene_paopao->Disable();
 	scene_congrats->Disable();

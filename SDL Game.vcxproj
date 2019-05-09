@@ -82,6 +82,7 @@
     <ClInclude Include="ModuleFightManager.h" />
     <ClInclude Include="ModuleFightTimer.h" />
     <ClInclude Include="ModuleInput.h" />
+    <ClInclude Include="ModuleJoeHigashiPlayer.h" />
     <ClInclude Include="ModuleLifeBar.h" />
     <ClInclude Include="ModuleParticles.h" />
     <ClInclude Include="ModulePlayer.h" />
@@ -109,6 +110,7 @@
     <ClCompile Include="ModuleFightManager.cpp" />
     <ClCompile Include="ModuleFightTimer.cpp" />
     <ClCompile Include="ModuleInput.cpp" />
+    <ClCompile Include="ModuleJoeHigashiPlayer.cpp" />
     <ClCompile Include="ModuleLifeBar.cpp" />
     <ClCompile Include="ModuleParticles.cpp" />
     <ClCompile Include="ModulePlayer.cpp" />
