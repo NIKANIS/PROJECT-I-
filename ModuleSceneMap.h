@@ -31,6 +31,7 @@ public:
 	SDL_Rect sound_beach;
 	SDL_Rect west_sub;
 	SDL_Rect howard_arena;
+	SDL_Rect map_select_tittle;
 
 	SDL_Rect pao_pao_selected;
 	SDL_Rect sound_beach_selected;
