@@ -43,6 +43,8 @@ public:
 	Animation selected_andybogard;
 	int player_selected; //player 1 -> Joe Higashi, player 2 -> Terry Bogard, player 3 -> Andy Bogard 
 	int numberofplayers = 0;
+	int final_player1;
+	int final_player2;
 	Mix_Music* music = nullptr;
 };
 

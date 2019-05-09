@@ -11,6 +11,7 @@
 #include "ModuleSceneMap.h"
 #include "ModuleJoeHigashiPlayer.h"
 #include "ModuleAudio.h"
+#include "ModuleSceneChoosePlayer.h"
 
 
 ModuleFightManager::ModuleFightManager()
@@ -43,8 +44,16 @@ bool ModuleFightManager::Start()
 	SDL_Rect none = { 0,0,0,0 };
 	f = none;
 
-	App->player->Enable();
-	//App->JoeHigashiPlayer->Enable();
+	if (App->scene_chooseplayer->final_player1 == 1) 
+	{
+		App->player->Enable();
+	}
+		
+	if (App->scene_chooseplayer->final_player1 == 0)
+	{
+		App->JoeHigashiPlayer->Enable();
+	}
+	
 	App->enemy->Enable();
 	App->fight_timer->Enable();
 	App->round_pl->Enable();

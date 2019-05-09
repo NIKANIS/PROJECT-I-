@@ -197,6 +197,7 @@ update_status ModuleSceneChoosePlayer::Update()
 					App->render->Blit(graphicschooseplayer, 25, 78, &purple_joehigashi, 0.0f);
 					numberofplayers++;
 					App->render->Blit(graphicschooseplayer, 50, 75, &p1, 0.0f);
+					final_player1 = 0;
 				}
 
 				if (player_selected == 1)
@@ -205,6 +206,7 @@ update_status ModuleSceneChoosePlayer::Update()
 					App->render->Blit(graphicschooseplayer, 115, 83, &purple_terrybogard, 0.0f);
 					numberofplayers++;
 					App->render->Blit(graphicschooseplayer, 125, 75, &p1, 0.0f);
+					final_player1 = 1;
 				}
 
 				if (player_selected == 2)
@@ -213,6 +215,7 @@ update_status ModuleSceneChoosePlayer::Update()
 					App->render->Blit(graphicschooseplayer, 205, 87, &purple_andybogard, 0.0f);
 					numberofplayers++;
 					App->render->Blit(graphicschooseplayer, 195, 75, &p1, 0.0f);
+					final_player1 = 2;
 				}
 
 			}	break;
@@ -225,6 +228,7 @@ update_status ModuleSceneChoosePlayer::Update()
 					App->render->Blit(graphicschooseplayer, 25, 78, &purple_joehigashi, 0.0f);
 					numberofplayers++;
 					App->render->Blit(graphicschooseplayer, 50, 75, &p2, 0.0f);
+					final_player2 = 0;
 				}
 
 				if (player_selected == 1)
@@ -233,6 +237,7 @@ update_status ModuleSceneChoosePlayer::Update()
 					App->render->Blit(graphicschooseplayer, 115, 83, &purple_terrybogard, 0.0f);
 					numberofplayers++;
 					App->render->Blit(graphicschooseplayer, 125, 75, &p2, 0.0f);
+					final_player2 = 1;
 				} 
 
 				if (player_selected == 2)
@@ -241,6 +246,7 @@ update_status ModuleSceneChoosePlayer::Update()
 					App->render->Blit(graphicschooseplayer, 205, 87, &purple_andybogard, 0.0f);
 					numberofplayers++;
 					App->render->Blit(graphicschooseplayer, 195, 75, &p2, 0.0f);
+					final_player2 = 3;
 				} 
 
 			}	break;
