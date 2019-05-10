@@ -55,8 +55,6 @@ ModulePlayer::ModulePlayer()
 	health = 100;
 	already_hit = false;
 	body_collide = false;
-
-
 }
 
 ModulePlayer::~ModulePlayer()
@@ -80,19 +78,19 @@ bool ModulePlayer::Start()
 	App->lifebar->Enable();
 	App->plscore->Enable();
 
-	if (App->scene_chooseplayer->final_player1 == 0)
+	if (App->scene_chooseplayer->final_player1 == 1)
 	{
 		player_col = App->collision->AddCollider({ position.x + 10, position.y - 90, 33, 104 }, COLLIDER_PLAYER, App->player);
 		graphics = App->textures->Load("SPRITES FATAL FURY/CHARACTERS/3-Joe Higashi/Sprites joe higashi.png"); // arcade version
 	}
 
-	if (App->scene_chooseplayer->final_player1 == 1)
+	if (App->scene_chooseplayer->final_player1 == 2)
 	{
 		player_col = App->collision->AddCollider({ position.x + 10, position.y - 90, 33, 104 }, COLLIDER_PLAYER, App->player);
 		graphics = App->textures->Load("SPRITES FATAL FURY/CHARACTERS/1-Terry Bogard/spritesTerryBogard.png"); // arcade version
 	}
 
-	if (App->scene_chooseplayer->final_player1 == 0)
+	if (App->scene_chooseplayer->final_player1 == 1)
 	{
 		// idle animation done 
 		idle.PushBack({ 195, 20, 62, 104 });
@@ -212,7 +210,7 @@ bool ModulePlayer::Start()
 		punchstun.loop = false;
 	}
 
-	if (App->scene_chooseplayer->final_player1 == 1)
+	if (App->scene_chooseplayer->final_player1 == 2)
 	{
 		// idle animation done 
 		idle.PushBack({ 27, 913, 60, 105 });
