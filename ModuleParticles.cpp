@@ -9,6 +9,7 @@
 #include "ModuleEnemy.h"
 #include "ModuleCollision.h"
 #include "ModuleParticles.h"
+#include "ModuleSceneChoosePlayer.h"
 
 #include "SDL/include/SDL_timer.h"
 
@@ -25,8 +26,11 @@ ModuleParticles::~ModuleParticles()
 bool ModuleParticles::Start()
 {
 	LOG("Loading particles");
+	
 	graphics = App->textures->Load("SPRITES FATAL FURY/CHARACTERS/1-Terry Bogard/spritesTerryBogard.png");
+	graphics1 = App->textures->Load("SPRITES FATAL FURY/CHARACTERS/1-Terry Bogard/spritesTerryBogard2.png");
 
+	//Terry skill
 	skill.anim.PushBack({ 1022,751,17,41 });
 	skill.life = 6000;
 	skill.speed.x = 3.0f;
@@ -79,7 +83,10 @@ update_status ModuleParticles::Update()
 		}
 		else if (SDL_GetTicks() >= p->born)
 		{
-			App->render->Blit(graphics, p->position.x, p->position.y, &(p->anim.GetCurrentFrame()));
+			if (App->player->sp == true)
+				App->render->Blit(graphics, p->position.x, p->position.y, &(p->anim.GetCurrentFrame()));
+			if (App->enemy->sp == true)
+				App->render->Blit(graphics1, p->position.x, p->position.y, &(p->anim.GetCurrentFrame()));
 			if (p->fx_played == false)
 			{
 				p->fx_played = true;
@@ -108,7 +115,6 @@ void ModuleParticles::AddParticle(const Particle& particle, int x, int y, COLLID
 	}
 }
 
-// TODO 5: Make so every time a particle hits a wall it triggers an explosion particle
 void ModuleParticles::OnCollision(Collider* c1, Collider* c2, bool colliding)
 {
 	for (uint i = 0; i < MAX_ACTIVE_PARTICLES; ++i)

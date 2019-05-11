@@ -22,6 +22,7 @@
 #include "ModuleRoundDisplay.h"
 #include "ModuleSceneChoosePlayer.h"
 #include "ModuleSceneMap.h"
+#include "SDL/include/SDL_timer.h"
 
 
 ModuleSceneMap::ModuleSceneMap()
@@ -172,34 +173,36 @@ update_status ModuleSceneMap::Update()
 
 	if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN)
 	{
-		if (map == 1)
+		switch (map) 
+		{
+		case 1:
 		{
 			map_chosen = true;
 			App->audio->playFx(selected);
 			App->fade->FadeToBlack(App->scene_map, (Module*)App->scene_paopao);
-		}
+		}	break;
 
-		if (map == 2)
+		case 2:
 		{
 			map_chosen = true;
 			App->audio->playFx(selected);
 			App->fade->FadeToBlack(App->scene_map, (Module*)App->scene_paopao);
-		}
-		
-		if (map == 3)
+		}break;
+
+		case 3:
 		{
 			map_chosen = true;
 			App->audio->playFx(selected);
 			App->fade->FadeToBlack(App->scene_map, (Module*)App->scene_westsubway);
-		}
-		
-		if (map == 4)
+		}	break;
+
+		case 4:
 		{
 			map_chosen = true;
 			App->audio->playFx(selected);
 			App->fade->FadeToBlack(App->scene_map, (Module*)App->scene_howardarena);
-		}
-			
+		} break;
+		}		
 	}
 
 	return UPDATE_CONTINUE;
