@@ -183,26 +183,25 @@ bool ModulePlayer::Start()
 		victory.PushBack({ 596,943,52,62 });
 		victory.PushBack({ 521,923,52,64 });
 		victory.PushBack({ 513,821,85,87 });
-
 		victory.speed = 0.15f;
 		victory.loop = false;
 
 		//hit
-		hit.PushBack({ 20, 473, 67, 104 });
-		hit.PushBack({ 88, 470, 73, 110 });
-		hit.PushBack({ 20, 473, 67, 104 });
+		hit.PushBack({ 856, 495, 75, 101 });
+		hit.PushBack({ 782, 510, 67, 86 });
+		hit.PushBack({ 856, 495, 75, 101 });
 		hit.speed = 0.15f;
 		hit.loop = false;
 
 		//kickstun
-		kickstun.PushBack({ 160,479,64,96 });
-		kickstun.PushBack({ 235,479,69,96 });
+		hit.PushBack({ 856, 495, 75, 101 });
+		hit.PushBack({ 782, 510, 67, 86 });
 		kickstun.speed = 0.04f;
 		kickstun.loop = false;
 
 		//punchstun
-		punchstun.PushBack({ 88,469,68,106 });
-		punchstun.PushBack({ 24,475,60,100 });
+		hit.PushBack({ 856, 495, 75, 101 });
+		hit.PushBack({ 782, 510, 67, 86 });
 		punchstun.speed = 0.04f;
 		punchstun.loop = false;
 	}
