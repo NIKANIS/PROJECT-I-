@@ -160,9 +160,9 @@ bool ModulePlayer::Start()
 		//special attack while standing done
 		specialattack.PushBack({ 1053, 44, 54, 102 });
 		specialattack.PushBack({ 1132, 83, 80, 63 });
-		specialattack.PushBack({ 1238, 62, 50, 84 });
-		specialattack.PushBack({ 1313, 5, 47, 141 });		
-		specialattack.speed = 0.12f;
+		specialattack.PushBack({ 1238, 60, 50, 84 });
+		specialattack.PushBack({ 1313, 5, 47, 141 });
+		specialattack.speed = 0.15f;
 		specialattack.loop = false;
 
 		//die
@@ -328,7 +328,7 @@ bool ModulePlayer::Start()
 		punchstun.loop = false;
 	}
 
-	skillFX = App->audio->loadWAV("AUDIO FATAL FURY/FX[WAV]/Voice/Special Attacks/FX_PowerWaveAttackTerryBogardVoice.wav");
+	skillFXTerry = App->audio->loadWAV("AUDIO FATAL FURY/FX[WAV]/Voice/Special Attacks/FX_PowerWaveAttackTerryBogardVoice.wav");
 	punchFX = App->audio->loadWAV("AUDIO FATAL FURY/FX[WAV]/Voice/Attacks/FX_Attack3.wav");
 	kickFX = App->audio->loadWAV("AUDIO FATAL FURY/FX[WAV]/Voice/Attacks/FX_Attack2.wav");
 	
@@ -540,37 +540,16 @@ update_status ModulePlayer::Update()
 			if (!fliped)
 			{
 				n = 20;
-				App->particles->skill.speed.x = 3.0f;
-				App->particles->skill2.speed.x = 3.0f;
-				App->particles->skill3.speed.x = 3.0f;
+				App->particles->skillJoe.speed.x = 3.0f;
 			}
 			else
 			{
 				n = 0;
-				App->particles->skill.speed.x = -3.0f;
-				App->particles->skill2.speed.x = -3.0f;
-				App->particles->skill3.speed.x = -3.0f;
+				App->particles->skillJoe.speed.x = -3.0f;
 			}
 			if (st == 25)
 			{
-				App->particles->AddParticle(App->particles->skill, position.x + n, position.y - 40, COLLIDER_PLAYER_ATTACK);
-			}
-			if (st == 30)
-			{
-				App->particles->AddParticle(App->particles->skill2, position.x + n, position.y - 67, COLLIDER_PLAYER_ATTACK);
-			}
-			if (st == 35)
-			{
-				App->particles->AddParticle(App->particles->skill3, position.x + n, position.y - 95, COLLIDER_PLAYER_ATTACK);
-				specialattack_ = false;
-			}
-			if (st == 40)
-			{
-				App->particles->AddParticle(App->particles->skill2, position.x + n, position.y - 67, COLLIDER_PLAYER_ATTACK);
-			}
-			if (st == 45)
-			{
-				App->particles->AddParticle(App->particles->skill, position.x + n, position.y - 40, COLLIDER_PLAYER_ATTACK);
+				App->particles->AddParticle(App->particles->skillJoe, position.x + n, position.y+ 120 , COLLIDER_PLAYER_ATTACK);
 			}
 			if (st == 1000)
 				sp = false;
@@ -815,7 +794,7 @@ update_status ModulePlayer::Update()
 						st = 0;
 						specialattack.Reset();
 						current_animation = &specialattack;
-						App->audio->playFx(skillFX);
+						App->audio->playFx(skillFXTerry);
 					}
 				}
 

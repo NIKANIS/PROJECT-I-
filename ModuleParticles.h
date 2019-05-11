@@ -47,6 +47,7 @@ private:
 
 	SDL_Texture* graphics = nullptr;
 	SDL_Texture* graphics1 = nullptr;
+	SDL_Texture* graphics2 = nullptr;
 	Particle* active[MAX_ACTIVE_PARTICLES];
 
 public:
@@ -54,6 +55,8 @@ public:
 	Particle skill;
 	Particle skill2;
 	Particle skill3;
+
+	Particle skillJoe;
 };
 
 #endif

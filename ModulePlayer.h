@@ -76,7 +76,7 @@ public:
 	Collider* player_kick_col = nullptr;
 
 	Mix_Chunk* punchFX = nullptr;
-	Mix_Chunk* skillFX = nullptr;
+	Mix_Chunk* skillFXTerry = nullptr;
 	Mix_Chunk* kickFX = nullptr;
 
 	void OnCollision(Collider*, Collider*, bool colliding) override;
