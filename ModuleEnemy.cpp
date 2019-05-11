@@ -15,6 +15,7 @@
 #include "ModulePlayerScore.h"
 #include "ModuleRoundDisplay.h"
 #include "ModuleFightTimer.h"
+#include "ModuleSceneChoosePlayer.h"
 
 #include "SDL/include/SDL_timer.h"
 
@@ -198,7 +199,10 @@ bool ModuleEnemy::Start()
 
 
 	bool ret = true;
-	graphics = App->textures->Load("SPRITES FATAL FURY/CHARACTERS/1-Terry Bogard/spritesTerryBogard.png"); // arcade version
+	if (App->scene_chooseplayer->final_player1 == App->scene_chooseplayer->final_player2)
+		graphics = App->textures->Load("SPRITES FATAL FURY/CHARACTERS/1-Terry Bogard/spritesTerryBogard2.png");
+	else
+		graphics = App->textures->Load("SPRITES FATAL FURY/CHARACTERS/1-Terry Bogard/spritesTerryBogard.png"); 
 
 	skillFX = App->audio->loadWAV("AUDIO FATAL FURY/FX[WAV]/Voice/Special Attacks/FX_PowerWaveAttackTerryBogardVoice.wav");
 	punchFX = App->audio->loadWAV("AUDIO FATAL FURY/FX[WAV]/Voice/Attacks/FX_Attack3.wav");

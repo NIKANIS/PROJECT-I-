@@ -327,6 +327,7 @@ bool ModulePlayer::Start()
 		punchstun.speed = 0.04f;
 		punchstun.loop = false;
 	}
+
 	skillFX = App->audio->loadWAV("AUDIO FATAL FURY/FX[WAV]/Voice/Special Attacks/FX_PowerWaveAttackTerryBogardVoice.wav");
 	punchFX = App->audio->loadWAV("AUDIO FATAL FURY/FX[WAV]/Voice/Attacks/FX_Attack3.wav");
 	kickFX = App->audio->loadWAV("AUDIO FATAL FURY/FX[WAV]/Voice/Attacks/FX_Attack2.wav");
@@ -381,6 +382,11 @@ update_status ModulePlayer::Update()
 {
 	godMode();
 
+	if (health < 0)
+		health = 0;
+
+	int speed = 2;
+
 	if (App->enemy->position.x <= position.x)
 	{
 		fliped = true;
@@ -394,14 +400,14 @@ update_status ModulePlayer::Update()
 		at++;
 		if (at == 1 && current_animation == &crowchpunch)
 		{ 
-			if (App->scene_chooseplayer->final_player1 == 0)
+			if (App->scene_chooseplayer->final_player1 == 1)
 			{
 				player_col->rect.h = 65;
 				player_col->rect.w = 41;
 				player_col->SetPos(position.x + 5, position.y - 67);
 			}
 
-			if (App->scene_chooseplayer->final_player1 == 1)
+			if (App->scene_chooseplayer->final_player1 == 2)
 			{
 				player_col->rect.h = 65;
 				player_col->rect.w = 41;
@@ -411,7 +417,7 @@ update_status ModulePlayer::Update()
 		}
 		if (at == 12)
 		{
-			if (App->scene_chooseplayer->final_player1 == 0)
+			if (App->scene_chooseplayer->final_player1 == 1)
 			{
 				if (fliped == false)
 					if (current_animation == &crowchpunch)
@@ -431,7 +437,7 @@ update_status ModulePlayer::Update()
 						player_col->SetPos(position.x + 15, position.y - 100);
 					}
 			}
-			if (App->scene_chooseplayer->final_player1 == 1)
+			if (App->scene_chooseplayer->final_player1 == 2)
 			{
 				if (fliped == false)
 					if (current_animation == &crowchpunch)
@@ -466,16 +472,11 @@ update_status ModulePlayer::Update()
 		}
 	}
 
-	if (health < 0)
-		health = 0;
-
-	int speed = 2;
-
 	if (kicking == true) {
 		at++;
 		if (at == 24)
 		{
-			if (App->scene_chooseplayer->final_player1 == 0)
+			if (App->scene_chooseplayer->final_player1 == 1)
 			{
 				if (fliped == false)
 				{
@@ -493,7 +494,7 @@ update_status ModulePlayer::Update()
 					player_col->rect.w = 50;
 				}
 			}
-			if (App->scene_chooseplayer->final_player1 == 1)
+			if (App->scene_chooseplayer->final_player1 == 2)
 			{
 				if (fliped == false)
 				{
@@ -534,7 +535,7 @@ update_status ModulePlayer::Update()
 	if (sp == true) {
 		st++;
 		int n;
-		if (App->scene_chooseplayer->final_player1 == 0)
+		if (App->scene_chooseplayer->final_player1 == 1)
 		{
 			if (!fliped)
 			{
@@ -575,7 +576,7 @@ update_status ModulePlayer::Update()
 				sp = false;
 		}
 
-		if (App->scene_chooseplayer->final_player1 == 1)
+		if (App->scene_chooseplayer->final_player1 == 2)
 		{
 			if (!fliped)
 			{
@@ -657,11 +658,11 @@ update_status ModulePlayer::Update()
 					{
 						stuned = 0;
 					}
-					if (App->scene_chooseplayer->final_player1 == 0)
+					if (App->scene_chooseplayer->final_player1 == 1)
 					{
 						player_col->SetPos(position.x + 17, position.y - 100);
 					}
-					if (App->scene_chooseplayer->final_player1 == 1)
+					if (App->scene_chooseplayer->final_player1 == 2)
 					{
 						player_col->SetPos(position.x + 17, position.y - 91);
 					}
@@ -832,7 +833,7 @@ update_status ModulePlayer::Update()
 
 				if (current_animation != &punchstanding && current_animation != &kickingstanding && current_animation != &crowchpunch)
 				{
-					if (App->scene_chooseplayer->final_player1 == 0)
+					if (App->scene_chooseplayer->final_player1 == 1)
 					{
 						if (current_animation == &crowch || current_animation == &crowchprotecc && crowchaction)
 						{
@@ -864,7 +865,7 @@ update_status ModulePlayer::Update()
 							}
 						}
 					}
-					if (App->scene_chooseplayer->final_player1 == 1)
+					if (App->scene_chooseplayer->final_player1 == 2)
 					{
 						if (current_animation == &crowch || current_animation == &crowchprotecc && crowchaction)
 						{
