@@ -59,7 +59,7 @@ bool ModuleSceneChoosePlayer::Start()
 	selected = App->audio->loadWAV("AUDIO FATAL FURY/FX[WAV]/FX/FX_ChooseSelection.wav");
 
 	current_animation = &selected_terrybogard;
-	player_selected = 1;
+	player_selected = 2;
 
 	App->audio->playMusic(music);
 
@@ -73,7 +73,7 @@ bool ModuleSceneChoosePlayer::CleanUp()
 	App->audio->Disable();
 	App->textures->Unload(graphicschooseplayer);
 
-	player_selected = 1;
+	player_selected = 2;
 	numberofplayers = 0;
 
 	return true;
@@ -107,12 +107,12 @@ update_status ModuleSceneChoosePlayer::Update()
 		andybogard_chosen = false;
 	}
 
-	if (App->input->keyboard[SDL_SCANCODE_RIGHT] == KEY_STATE::KEY_DOWN && player_selected != 2) {
+	if (App->input->keyboard[SDL_SCANCODE_RIGHT] == KEY_STATE::KEY_DOWN && player_selected != 3) {
 		player_selected++;
 		App->audio->playFx(select);
 	}
 
-	if (App->input->keyboard[SDL_SCANCODE_LEFT] == KEY_STATE::KEY_DOWN && player_selected != 0) {
+	if (App->input->keyboard[SDL_SCANCODE_LEFT] == KEY_STATE::KEY_DOWN && player_selected != 1) {
 		player_selected--;
 		App->audio->playFx(select);
 	}
