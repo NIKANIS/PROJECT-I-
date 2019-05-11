@@ -16,9 +16,6 @@
     <ClCompile Include="ModuleEnemy.cpp">
       <Filter>Modules\Player &amp; Enemie</Filter>
     </ClCompile>
-    <ClCompile Include="ModuleJoeHigashiPlayer.cpp">
-      <Filter>Modules\Player &amp; Enemie</Filter>
-    </ClCompile>
     <ClCompile Include="ModuleSceneChoosePlayer.cpp">
       <Filter>Modules\Scenes</Filter>
     </ClCompile>
@@ -106,9 +103,6 @@
       <Filter>Containers</Filter>
     </ClInclude>
     <ClInclude Include="ModuleEnemy.h">
-      <Filter>Modules\Player &amp; Enemie</Filter>
-    </ClInclude>
-    <ClInclude Include="ModuleJoeHigashiPlayer.h">
       <Filter>Modules\Player &amp; Enemie</Filter>
     </ClInclude>
     <ClInclude Include="Module.h">

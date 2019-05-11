@@ -192,7 +192,7 @@ bool ModuleAndyBogardPlayer::Start()
 	position.y = 220;
 	App->lifebar->Enable();
 	App->plscore->Enable();
-	player_col = App->collision->AddCollider({ position.x + 10, position.y - 90, 33, 104 }, COLLIDER_PLAYER, App->JoeHigashiPlayer);
+	player_col = App->collision->AddCollider({ position.x + 10, position.y - 90, 33, 104 }, COLLIDER_PLAYER, App->player);
 
 
 	bool ret = true;

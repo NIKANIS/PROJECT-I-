@@ -82,7 +82,7 @@ bool ModulePlayer::Start()
 
 	if (App->scene_chooseplayer->final_player1 == 0)
 	{
-		player_col = App->collision->AddCollider({ position.x + 10, position.y - 90, 33, 104 }, COLLIDER_PLAYER, App->player);
+		player_col = App->collision->AddCollider({ position.x + 5, position.y - 100, 33, 100 }, COLLIDER_PLAYER, App->player);
 		graphics = App->textures->Load("SPRITES FATAL FURY/CHARACTERS/3-Joe Higashi/Sprites joe higashi.png"); // arcade version
 	}
 
@@ -386,6 +386,7 @@ int ModulePlayer::Pos_X()
 update_status ModulePlayer::Update()
 {
 	godMode();
+
 	if (App->enemy->position.x <= position.x)
 	{
 		fliped = true;
@@ -399,23 +400,57 @@ update_status ModulePlayer::Update()
 		at++;
 		if (at == 1 && current_animation == &crowchpunch)
 		{ 
-			player_col->rect.h = 65;
-			player_col->rect.w = 41;
-			player_col->SetPos(position.x + 5, position.y - 67);
+			if (App->scene_chooseplayer->final_player1 == 0)
+			{
+				player_col->rect.h = 65;
+				player_col->rect.w = 41;
+				player_col->SetPos(position.x + 5, position.y - 67);
+			}
+
+			if (App->scene_chooseplayer->final_player1 == 1)
+			{
+				player_col->rect.h = 65;
+				player_col->rect.w = 41;
+				player_col->SetPos(position.x + 5, position.y - 67);
+			}
+
 		}
 		if (at == 12)
 		{
-			if (fliped == false)
-				if (current_animation == &crowchpunch)
-					player_punch_col = App->collision->AddCollider({ position.x + 46, position.y - 52, 35, 12 }, COLLIDER_PLAYER_ATTACK, App->player);
+			if (App->scene_chooseplayer->final_player1 == 0)
+			{
+				if (fliped == false)
+					if (current_animation == &crowchpunch)
+						player_punch_col = App->collision->AddCollider({ position.x + 40, position.y - 60, 35, 12 }, COLLIDER_PLAYER_ATTACK, App->player);
+					else
+					{
+						player_punch_col = App->collision->AddCollider({ position.x + 50, position.y - 87, 45, 12 }, COLLIDER_PLAYER_ATTACK, App->player);
+						player_col->SetPos(position.x + 17, position.y - 100);
+					}
+						
 				else
-					player_punch_col = App->collision->AddCollider({ position.x + 50, position.y - 90, 41, 12 }, COLLIDER_PLAYER_ATTACK, App->player);
-			else
-				if (current_animation == &crowchpunch)
-					player_punch_col = App->collision->AddCollider({ position.x - 30, position.y - 52, 35, 12 }, COLLIDER_PLAYER_ATTACK, App->player);
+					if (current_animation == &crowchpunch)
+						player_punch_col = App->collision->AddCollider({ position.x - 24, position.y - 60, 35, 12 }, COLLIDER_PLAYER_ATTACK, App->player);
+					else
+					{
+						player_punch_col = App->collision->AddCollider({ position.x - 30, position.y - 87, 45, 12 }, COLLIDER_PLAYER_ATTACK, App->player);
+						player_col->SetPos(position.x + 15, position.y - 100);
+					}
+			}
+			if (App->scene_chooseplayer->final_player1 == 1)
+			{
+				if (fliped == false)
+					if (current_animation == &crowchpunch)
+						player_punch_col = App->collision->AddCollider({ position.x + 46, position.y - 52, 35, 12 }, COLLIDER_PLAYER_ATTACK, App->player);
+					else
+						player_punch_col = App->collision->AddCollider({ position.x + 50, position.y - 90, 41, 12 }, COLLIDER_PLAYER_ATTACK, App->player);
 				else
-					player_punch_col = App->collision->AddCollider({ position.x - 30, position.y - 90, 41, 12 }, COLLIDER_PLAYER_ATTACK, App->player);
-				
+					if (current_animation == &crowchpunch)
+						player_punch_col = App->collision->AddCollider({ position.x - 30, position.y - 52, 35, 12 }, COLLIDER_PLAYER_ATTACK, App->player);
+					else
+						player_punch_col = App->collision->AddCollider({ position.x - 30, position.y - 90, 41, 12 }, COLLIDER_PLAYER_ATTACK, App->player);
+
+			}	
 		}
 		if (at == 19)
 		{
@@ -446,20 +481,41 @@ update_status ModulePlayer::Update()
 		at++;
 		if (at == 24)
 		{
-			if (fliped == false) 
+			if (App->scene_chooseplayer->final_player1 == 0)
 			{
-				player_kick_col = App->collision->AddCollider({ position.x + 50, position.y - 85, 49, 17 }, COLLIDER_PLAYER_ATTACK, App->player);
-				player_col->SetPos(position.x, position.y - 121);
-				player_col->rect.h = 110;
-				player_col->rect.w = 50;
+				if (fliped == false)
+				{
+					player_kick_col = App->collision->AddCollider({ position.x + 50, position.y - 85, 55, 17 }, COLLIDER_PLAYER_ATTACK, App->player);
+					player_col->SetPos(position.x, position.y - 100);
+					player_col->rect.h = 110;
+					player_col->rect.w = 50;
 
+				}
+				else
+				{
+					player_kick_col = App->collision->AddCollider({ position.x - 25, position.y - 85, 55, 17 }, COLLIDER_PLAYER_ATTACK, App->player);
+					player_col->SetPos(position.x + 20, position.y - 100);
+					player_col->rect.h = 110;
+					player_col->rect.w = 50;
+				}
 			}
-			else
+			if (App->scene_chooseplayer->final_player1 == 1)
 			{
-				player_kick_col = App->collision->AddCollider({ position.x -25, position.y - 85, 49, 17 }, COLLIDER_PLAYER_ATTACK, App->player);
-				player_col->SetPos(position.x + 20, position.y - 121);
-				player_col->rect.h = 110;
-				player_col->rect.w = 50;
+				if (fliped == false)
+				{
+					player_kick_col = App->collision->AddCollider({ position.x + 50, position.y - 85, 49, 17 }, COLLIDER_PLAYER_ATTACK, App->player);
+					player_col->SetPos(position.x, position.y - 121);
+					player_col->rect.h = 110;
+					player_col->rect.w = 50;
+
+				}
+				else
+				{
+					player_kick_col = App->collision->AddCollider({ position.x - 25, position.y - 85, 49, 17 }, COLLIDER_PLAYER_ATTACK, App->player);
+					player_col->SetPos(position.x + 20, position.y - 121);
+					player_col->rect.h = 110;
+					player_col->rect.w = 50;
+				}
 			}
 		}
 		if (at == 25 && fliped)
@@ -484,43 +540,87 @@ update_status ModulePlayer::Update()
 	if (sp == true) {
 		st++;
 		int n;
-		if (!fliped)
+		if (App->scene_chooseplayer->final_player1 == 0)
 		{
-			n = 20;
-			App->particles->skill.speed.x = 3.0f;
-			App->particles->skill2.speed.x = 3.0f;
-			App->particles->skill3.speed.x = 3.0f;
+			if (!fliped)
+			{
+				n = 20;
+				App->particles->skill.speed.x = 3.0f;
+				App->particles->skill2.speed.x = 3.0f;
+				App->particles->skill3.speed.x = 3.0f;
+			}
+			else
+			{
+				n = 0;
+				App->particles->skill.speed.x = -3.0f;
+				App->particles->skill2.speed.x = -3.0f;
+				App->particles->skill3.speed.x = -3.0f;
+			}
+			if (st == 25)
+			{
+				App->particles->AddParticle(App->particles->skill, position.x + n, position.y - 40, COLLIDER_PLAYER_ATTACK);
+			}
+			if (st == 30)
+			{
+				App->particles->AddParticle(App->particles->skill2, position.x + n, position.y - 67, COLLIDER_PLAYER_ATTACK);
+			}
+			if (st == 35)
+			{
+				App->particles->AddParticle(App->particles->skill3, position.x + n, position.y - 95, COLLIDER_PLAYER_ATTACK);
+				specialattack_ = false;
+			}
+			if (st == 40)
+			{
+				App->particles->AddParticle(App->particles->skill2, position.x + n, position.y - 67, COLLIDER_PLAYER_ATTACK);
+			}
+			if (st == 45)
+			{
+				App->particles->AddParticle(App->particles->skill, position.x + n, position.y - 40, COLLIDER_PLAYER_ATTACK);
+			}
+			if (st == 1000)
+				sp = false;
 		}
-		else
+
+		if (App->scene_chooseplayer->final_player1 == 1)
 		{
-			n = 0;
-			App->particles->skill.speed.x = -3.0f;
-			App->particles->skill2.speed.x = -3.0f;
-			App->particles->skill3.speed.x = -3.0f;
+			if (!fliped)
+			{
+				n = 20;
+				App->particles->skill.speed.x = 3.0f;
+				App->particles->skill2.speed.x = 3.0f;
+				App->particles->skill3.speed.x = 3.0f;
+			}
+			else
+			{
+				n = 0;
+				App->particles->skill.speed.x = -3.0f;
+				App->particles->skill2.speed.x = -3.0f;
+				App->particles->skill3.speed.x = -3.0f;
+			}
+			if (st == 25)
+			{
+				App->particles->AddParticle(App->particles->skill, position.x + n, position.y - 40, COLLIDER_PLAYER_ATTACK);
+			}
+			if (st == 30)
+			{
+				App->particles->AddParticle(App->particles->skill2, position.x + n, position.y - 67, COLLIDER_PLAYER_ATTACK);
+			}
+			if (st == 35)
+			{
+				App->particles->AddParticle(App->particles->skill3, position.x + n, position.y - 95, COLLIDER_PLAYER_ATTACK);
+				specialattack_ = false;
+			}
+			if (st == 40)
+			{
+				App->particles->AddParticle(App->particles->skill2, position.x + n, position.y - 67, COLLIDER_PLAYER_ATTACK);
+			}
+			if (st == 45)
+			{
+				App->particles->AddParticle(App->particles->skill, position.x + n, position.y - 40, COLLIDER_PLAYER_ATTACK);
+			}
+			if (st == 1000)
+				sp = false;
 		}
-		if (st == 25) 
-		{
-			App->particles->AddParticle(App->particles->skill, position.x + n, position.y - 40, COLLIDER_PLAYER_ATTACK);
-		}
-		if (st == 30)
-		{
-			App->particles->AddParticle(App->particles->skill2, position.x + n, position.y - 67, COLLIDER_PLAYER_ATTACK);
-		}
-		if (st == 35)
-		{
-			App->particles->AddParticle(App->particles->skill3, position.x + n, position.y - 95, COLLIDER_PLAYER_ATTACK);
-			specialattack_ = false;
-		}
-		if (st == 40)
-		{
-			App->particles->AddParticle(App->particles->skill2, position.x + n, position.y - 67, COLLIDER_PLAYER_ATTACK);
-		}
-		if (st == 45)
-		{
-			App->particles->AddParticle(App->particles->skill, position.x + n, position.y - 40, COLLIDER_PLAYER_ATTACK);
-		}
-		if (st == 1000)
-			sp = false;
 	}
 	Jump();
 	if (health == 0)
@@ -563,7 +663,15 @@ update_status ModulePlayer::Update()
 					{
 						stuned = 0;
 					}
-					player_col->SetPos(position.x + 17, position.y - 91);
+					if (App->scene_chooseplayer->final_player1 == 0)
+					{
+						player_col->SetPos(position.x + 17, position.y - 100);
+					}
+					if (App->scene_chooseplayer->final_player1 == 1)
+					{
+						player_col->SetPos(position.x + 17, position.y - 91);
+					}
+					
 					if (position.x < 0)
 						position.x = 0;
 					if (position.x > 600)
@@ -730,30 +838,64 @@ update_status ModulePlayer::Update()
 
 				if (current_animation != &punchstanding && current_animation != &kickingstanding && current_animation != &crowchpunch)
 				{
-					if (current_animation == &crowch || current_animation == &crowchprotecc && crowchaction)
+					if (App->scene_chooseplayer->final_player1 == 0)
 					{
-						player_col->rect.h = 65;
-						player_col->rect.w = 41;
-						player_col->SetPos(position.x + 5, position.y - 67);
-					}
-					else
-					{
-						if (!fliped)
+						if (current_animation == &crowch || current_animation == &crowchprotecc && crowchaction)
 						{
-							player_col->SetPos(position.x + 10, position.y - 91);
-							player_col->rect.h = 90;
-							player_col->rect.w = 33;
+							player_col->rect.h = 65;
+							player_col->rect.w = 41;
+							if (!fliped)
+							{
+								player_col->SetPos(position.x + 5, position.y - 67);
+							}
+							else
+							{
+								player_col->SetPos(position.x + 14, position.y - 67);
+							}
+
 						}
 						else
 						{
-							player_col->SetPos(position.x + 17, position.y - 91);
-							player_col->rect.h = 90;
-							player_col->rect.w = 33;
+							if (!fliped)
+							{
+								player_col->SetPos(position.x + 5, position.y - 100);
+								player_col->rect.h = 100;
+								player_col->rect.w = 33;
+							}
+							else
+							{
+								player_col->SetPos(position.x + 27, position.y - 100);
+								player_col->rect.h = 100;
+								player_col->rect.w = 33;
+							}
 						}
 					}
+					if (App->scene_chooseplayer->final_player1 == 1)
+					{
+						if (current_animation == &crowch || current_animation == &crowchprotecc && crowchaction)
+						{
+							player_col->rect.h = 65;
+							player_col->rect.w = 41;
+							player_col->SetPos(position.x + 5, position.y - 67);
+						}
+						else
+						{
+							if (!fliped)
+							{
+								player_col->SetPos(position.x + 10, position.y - 91);
+								player_col->rect.h = 90;
+								player_col->rect.w = 33;
+							}
+							else
+							{
+								player_col->SetPos(position.x + 17, position.y - 91);
+								player_col->rect.h = 90;
+								player_col->rect.w = 33;
+							}
+						}
+					}	
 				}
-			}
-				
+			}		
 		}
 		else
 		{
