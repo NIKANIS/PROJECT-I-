@@ -44,15 +44,6 @@ bool ModuleFightManager::Start()
 	SDL_Rect none = { 0,0,0,0 };
 	f = none;
 
-	//if (App->scene_chooseplayer->final_player1 == 1) 
-	//{
-	//		App->player->Enable();
-	//}
-	//	
-	//if (App->scene_chooseplayer->final_player1 == 0)
-	//{
-	//	App->JoeHigashiPlayer->Enable();
-	//}
 	App->player->Enable();
 	App->enemy->Enable();
 	App->fight_timer->Enable();
@@ -65,7 +56,6 @@ bool ModuleFightManager::CleanUp()
 {
 	App->textures->Unload(graphics);
 	App->player->Disable();
-	//App->JoeHigashiPlayer->Disable();
 	App->enemy->Disable();
 	App->fight_timer->Disable();
 	App->round_pl->Disable();
@@ -76,7 +66,6 @@ bool ModuleFightManager::CleanUp()
 void ModuleFightManager::Reset()
 {
 	App->player->Reset();
-	//App->JoeHigashiPlayer->Reset();
 	App->enemy->Reset();
 	timer_num = 93;
 	timer_counter = 0;

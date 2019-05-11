@@ -119,7 +119,7 @@ update_status ModuleSceneChoosePlayer::Update()
 
 	switch (player_selected)
 	{
-		case 0:
+		case 1:
 		{
 			if (joehigashi_chosen != true)
 			{
@@ -141,7 +141,7 @@ update_status ModuleSceneChoosePlayer::Update()
 			
 		}	break;
 
-		case 1:
+		case 2:
 		{
 			if (terrybogard_chosen != true)
 			{
@@ -163,7 +163,7 @@ update_status ModuleSceneChoosePlayer::Update()
 			
 		}	break;
 
-		case 2:
+		case 3:
 		{
 			if (andybogard_chosen != true)
 			{
@@ -191,56 +191,56 @@ update_status ModuleSceneChoosePlayer::Update()
 		{
 			case 0:
 			{
-				if (player_selected == 0)
+				if (player_selected == 1)
 				{
 					joehigashi_chosen = true;
 					App->render->Blit(graphicschooseplayer, 25, 78, &purple_joehigashi, 0.0f);
 					numberofplayers++;
 					App->render->Blit(graphicschooseplayer, 50, 75, &p1, 0.0f);
-					final_player1 = 0;
-				}
-
-				if (player_selected == 1)
-				{
-					terrybogard_chosen = true;
-					App->render->Blit(graphicschooseplayer, 115, 83, &purple_terrybogard, 0.0f);
-					numberofplayers++;
-					App->render->Blit(graphicschooseplayer, 125, 75, &p1, 0.0f);
 					final_player1 = 1;
 				}
 
 				if (player_selected == 2)
 				{
+					terrybogard_chosen = true;
+					App->render->Blit(graphicschooseplayer, 115, 83, &purple_terrybogard, 0.0f);
+					numberofplayers++;
+					App->render->Blit(graphicschooseplayer, 125, 75, &p1, 0.0f);
+					final_player1 = 2;
+				}
+
+				if (player_selected == 3)
+				{
 					andybogard_chosen = true;
 					App->render->Blit(graphicschooseplayer, 205, 87, &purple_andybogard, 0.0f);
 					numberofplayers++;
 					App->render->Blit(graphicschooseplayer, 195, 75, &p1, 0.0f);
-					final_player1 = 2;
+					final_player1 = 3;
 				}
 
 			}	break;
 
 			case 1:
 			{
-				if (player_selected == 0)
+				if (player_selected == 1)
 				{
 					joehigashi_chosen = true;
 					App->render->Blit(graphicschooseplayer, 25, 78, &purple_joehigashi, 0.0f);
 					numberofplayers++;
 					App->render->Blit(graphicschooseplayer, 50, 75, &p2, 0.0f);
-					final_player2 = 0;
+					final_player2 = 1;
 				}
 
-				if (player_selected == 1)
+				if (player_selected == 2)
 				{
 					terrybogard_chosen = true;
 					App->render->Blit(graphicschooseplayer, 115, 83, &purple_terrybogard, 0.0f);
 					numberofplayers++;
 					App->render->Blit(graphicschooseplayer, 125, 75, &p2, 0.0f);
-					final_player2 = 1;
+					final_player2 = 2;
 				} 
 
-				if (player_selected == 2)
+				if (player_selected == 3)
 				{
 					andybogard_chosen = true;
 					App->render->Blit(graphicschooseplayer, 205, 87, &purple_andybogard, 0.0f);
