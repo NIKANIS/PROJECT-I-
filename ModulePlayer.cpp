@@ -178,12 +178,11 @@ bool ModulePlayer::Start()
 		die.loop = false;
 
 		//victory
-		victory.PushBack({ 425,810,63,101 });
-		victory.PushBack({ 765,156,54,90 });
-		victory.PushBack({ 596,943,52,62 });
-		victory.PushBack({ 521,923,52,64 });
-		victory.PushBack({ 513,821,85,87 });
-		victory.speed = 0.15f;
+		victory.PushBack({ 573,943,73,62 });
+		victory.PushBack({ 497,923,76,64 });
+		victory.PushBack({ 504,821,94,87 });
+		victory.PushBack({ 504,821,94,87 });
+		victory.speed = 0.08f;
 		victory.loop = false;
 
 		//hit
@@ -883,7 +882,18 @@ update_status ModulePlayer::Update()
 
 	SDL_Rect r = current_animation->GetCurrentFrame();
 
-	App->render->Blit(graphics, position.x, position.y - r.h, &r,fliped);
+	if (App->scene_chooseplayer->final_player1 == 1)
+	{
+		if (current_animation == &victory)
+		{
+			App->render->Blit(graphics, position.x - 27, position.y - r.h, &r, fliped);
+		}
+		else
+		{
+			App->render->Blit(graphics, position.x, position.y - r.h, &r, fliped);
+		}
+	}
+		
 	
 	return UPDATE_CONTINUE;
 }
