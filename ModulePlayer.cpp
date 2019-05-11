@@ -893,6 +893,11 @@ update_status ModulePlayer::Update()
 			App->render->Blit(graphics, position.x, position.y - r.h, &r, fliped);
 		}
 	}
+
+	if (App->scene_chooseplayer->final_player1 == 2)
+	{
+		App->render->Blit(graphics, position.x, position.y - r.h, &r, fliped);
+	}
 		
 	
 	return UPDATE_CONTINUE;
