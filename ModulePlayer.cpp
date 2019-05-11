@@ -93,79 +93,76 @@ bool ModulePlayer::Start()
 	if (App->scene_chooseplayer->final_player1 == 1)
 	{
 		// idle animation done 
-		idle.PushBack({ 195, 20, 62, 104 });
-		idle.PushBack({ 274, 18, 61, 106 });
-		idle.PushBack({ 354, 16, 63, 108 });
-		idle.PushBack({ 434, 18, 61, 106 });
-		idle.PushBack({ 518, 20, 62, 104 });
+		idle.PushBack({ 190, 20, 62, 104 });
+		idle.PushBack({ 269, 18, 61, 106 });
+		idle.PushBack({ 349, 16, 63, 108 });
+		idle.PushBack({ 429, 18, 61, 106 });
+		idle.PushBack({ 513, 20, 62, 104 });
 		idle.loop = true;
 		idle.speed = 0.14f;
 
 		// jump idle up done
-		jumpiup.PushBack({ 88, 367, 39, 126 });
+		jumpiup.PushBack({ 83, 367, 39, 126 });
 
 		// jump idle down 
-		jumpidown.PushBack({ 145, 367, 49, 81 });
+		jumpidown.PushBack({ 140, 367, 49, 81 });
 
 		//jump while moving done
-		jump.PushBack({ 204, 367, 56, 121 });
+		jump.PushBack({ 199, 367, 56, 121 });
 
 		//go forward done	
-		forward.PushBack({ 597, 19, 75, 105 });
-		forward.PushBack({ 686, 11, 65, 113 });
-		forward.PushBack({ 758, 5, 62, 119 });
-		forward.PushBack({ 825, 16, 63, 108 });
+		forward.PushBack({ 592, 19, 75, 105 });
+		forward.PushBack({ 681, 11, 65, 113 });
+		forward.PushBack({ 753, 5, 62, 119 });
+		forward.PushBack({ 820, 16, 63, 108 });
 		forward.speed = 0.13f;
 		forward.loop = true;
 
 		//go backwards done
-		backward.PushBack({ 33, 144, 60, 102 });
-		backward.PushBack({ 111, 141, 55, 105 });
-		backward.PushBack({ 176, 136, 55, 110 });
-		backward.PushBack({ 241, 140, 56, 106 });
+		backward.PushBack({ 28, 144, 60, 102 });
+		backward.PushBack({ 106, 141, 55, 105 });
+		backward.PushBack({ 171, 136, 55, 110 });
+		backward.PushBack({ 236, 140, 56, 106 });
 		backward.speed = 0.13f;
 		backward.loop = true;
 
 		// crowch done
-		crowch.PushBack({ 761, 888, 59, 69 });
+		crowch.PushBack({ 756, 888, 59, 69 });
 
 		// crowch while going backwards and viceversa
-		crowchprotecc.PushBack({ 830,881,51,74 });
+		crowchprotecc.PushBack({ 825,881,51,74 });
 
 		//punch while standing done	
-		punchstanding.PushBack({ 481, 610, 64, 102 });
-		punchstanding.PushBack({ 553, 616, 63, 96 });
-		punchstanding.PushBack({ 627, 616, 97, 96 });
-		punchstanding.PushBack({ 553, 616, 63, 96 });
-		punchstanding.PushBack({ 481, 610, 64, 102 });
+		punchstanding.PushBack({ 476, 610, 64, 102 });
+		punchstanding.PushBack({ 548, 616, 63, 96 });
+		punchstanding.PushBack({ 622, 616, 97, 96 });
+		punchstanding.PushBack({ 548, 616, 63, 96 });
+		punchstanding.PushBack({ 476, 610, 64, 102 });
 		punchstanding.speed = 0.15f;
 		punchstanding.loop = false;
 
 		//punch while crowching 
-		crowchpunch.PushBack({ 97,286,55,71 });
-		crowchpunch.PushBack({ 159,288,76,70 });
-		crowchpunch.PushBack({ 97,286,55,71 });
-		crowchpunch.speed = 0.12f;
+		crowchpunch.PushBack({ 92,286,55,71 });
+		crowchpunch.PushBack({ 154,288,76,70 });
+		crowchpunch.PushBack({ 92,286,55,71 });
+		crowchpunch.speed = 0.14f;
 		crowchpunch.loop = false;
 
 		//kick while standing done
-		kickingstanding.PushBack({ 417,163,60,84 });
-		kickingstanding.PushBack({ 495,185,52,65 });
-		kickingstanding.PushBack({ 562,153,44,94 });
-		kickingstanding.PushBack({ 631,139,110,106 });
-		kickingstanding.PushBack({ 770,156,54,90 });
+		kickingstanding.PushBack({ 412,163,60,84 });
+		kickingstanding.PushBack({ 490,185,52,65 });
+		kickingstanding.PushBack({ 557,153,44,94 });
+		kickingstanding.PushBack({ 626,139,110,106 });
+		kickingstanding.PushBack({ 765,156,54,90 });
 		kickingstanding.speed = 0.13f;
 		kickingstanding.loop = false;
 
 		//special attack while standing done
-		specialattack.PushBack({ 620, 689, 51, 105 });
-		specialattack.PushBack({ 547, 682, 54, 112 });
-		specialattack.PushBack({ 482, 699, 60, 95 });
-		specialattack.PushBack({ 399, 717, 67, 76 });
-		specialattack.PushBack({ 399, 717, 67, 76 });
-		specialattack.PushBack({ 260, 727, 65, 67 });
-		specialattack.PushBack({ 195, 714, 60, 80 });
-		specialattack.speed = 0.15f;
+		specialattack.PushBack({ 1053, 44, 54, 102 });
+		specialattack.PushBack({ 1132, 83, 80, 63 });
+		specialattack.PushBack({ 1238, 62, 50, 84 });
+		specialattack.PushBack({ 1313, 5, 47, 141 });		
+		specialattack.speed = 0.12f;
 		specialattack.loop = false;
 
 		//die
@@ -181,11 +178,11 @@ bool ModulePlayer::Start()
 		die.loop = false;
 
 		//victory
-		victory.PushBack({ 430,810,63,101 });
-		victory.PushBack({ 770,156,54,90 });
-		victory.PushBack({ 601,943,52,62 });
-		victory.PushBack({ 526,923,52,64 });
-		victory.PushBack({ 518,821,85,87 });
+		victory.PushBack({ 425,810,63,101 });
+		victory.PushBack({ 765,156,54,90 });
+		victory.PushBack({ 596,943,52,62 });
+		victory.PushBack({ 521,923,52,64 });
+		victory.PushBack({ 513,821,85,87 });
 
 		victory.speed = 0.15f;
 		victory.loop = false;
