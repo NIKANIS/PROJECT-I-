@@ -22,6 +22,7 @@
 #include "ModuleRoundDisplay.h"
 #include "ModuleSceneChoosePlayer.h"
 #include "ModuleSceneMap.h"
+#include "ModuleSceneSoundBeach.h"
 #include "SDL/include/SDL_timer.h"
 
 
@@ -186,7 +187,7 @@ update_status ModuleSceneMap::Update()
 		{
 			map_chosen = true;
 			App->audio->playFx(selected);
-			App->fade->FadeToBlack(App->scene_map, (Module*)App->scene_paopao);
+			App->fade->FadeToBlack(App->scene_map, (Module*)App->scene_soundbeach);
 		}break;
 
 		case 3:

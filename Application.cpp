@@ -7,6 +7,7 @@
 #include "ModuleScenePaoPao.h"
 #include "ModuleSceneWestSubway.h"
 #include "ModuleSceneHowardArena.h"
+#include "ModuleSceneSoundBeach.h"
 #include "ModuleSceneIntro.h"
 #include "ModuleSceneCongrats.h"
 #include "ModuleSceneGameOver.h"
@@ -37,6 +38,7 @@ Application::Application()
 	modules[i++] = scene_paopao = new ModuleScenePaoPao();
 	modules[i++] = scene_westsubway = new ModuleSceneWestSubway();
 	modules[i++] = scene_howardarena = new ModuleSceneHowardArena();
+	modules[i++] = scene_soundbeach = new ModuleSceneSoundBeach();
 	modules[i++] = scene_congrats = new ModuleSceneCongrats();
 	modules[i++] = scene_gameover = new ModuleSceneGameOver();
 	modules[i++] = scene_map = new ModuleSceneMap();
@@ -76,6 +78,7 @@ bool Application::Init()
 	scene_paopao->Disable();
 	scene_westsubway->Disable();
 	scene_howardarena->Disable();
+	scene_soundbeach->Disable();
 	scene_congrats->Disable();
 	scene_gameover->Disable();
 	scene_chooseplayer->Disable();
@@ -133,6 +136,7 @@ bool Application::Restart()
 	scene_paopao->Disable();
 	scene_westsubway->Disable();
 	scene_howardarena->Disable();
+	scene_soundbeach->Disable();
 	scene_congrats->Disable();
 	scene_gameover->Disable();
 	scene_chooseplayer->Disable();
