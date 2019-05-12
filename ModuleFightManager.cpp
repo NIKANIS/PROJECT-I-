@@ -179,12 +179,12 @@ update_status ModuleFightManager::Update()
 		{
 			if(App->scene_map->map == 1)
 				App->fade->FadeToBlack((Module*)App->scene_paopao, (Module*)App->scene_congrats);
-			//if (App->scene_map->map == 2)
-			//	App->fade->FadeToBlack((Module*)App->scene_paopao, (Module*)App->scene_congrats);
+			if (App->scene_map->map == 2)
+				App->fade->FadeToBlack((Module*)App->scene_soundbeach, (Module*)App->scene_congrats);
 			if (App->scene_map->map == 3)
 				App->fade->FadeToBlack((Module*)App->scene_westsubway, (Module*)App->scene_congrats);
-			//if (App->scene_map->map == 4)
-			//	App->fade->FadeToBlack((Module*)App->scene_paopao, (Module*)App->scene_congrats);
+			if (App->scene_map->map == 4)
+				App->fade->FadeToBlack((Module*)App->scene_howardarena, (Module*)App->scene_congrats);
 		}	
 			
 
@@ -192,12 +192,12 @@ update_status ModuleFightManager::Update()
 		{
 			if (App->scene_map->map == 1)
 				App->fade->FadeToBlack((Module*)App->scene_paopao, (Module*)App->scene_gameover);
-			//if (App->scene_map->map == 2)
-			//	App->fade->FadeToBlack((Module*)App->scene_paopao, (Module*)App->scene_gameover);
+			if (App->scene_map->map == 2)
+				App->fade->FadeToBlack((Module*)App->scene_soundbeach, (Module*)App->scene_gameover);
 			if (App->scene_map->map == 3)
 				App->fade->FadeToBlack((Module*)App->scene_westsubway, (Module*)App->scene_gameover);
-			//if (App->scene_map->map == 4)
-			//	App->fade->FadeToBlack((Module*)App->scene_paopao, (Module*)App->scene_gameover);
+			if (App->scene_map->map == 4)
+				App->fade->FadeToBlack((Module*)App->scene_howardarena, (Module*)App->scene_gameover);
 		}
 			
 
