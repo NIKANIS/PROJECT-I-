@@ -106,7 +106,7 @@ update_status ModuleSceneSoundBeach::Update()
 		}
 	}
 	// Draw everything --------------------------------------
-	App->render->Blit(back_graphics, 0, 0, &landscape, 0.92f);
+	App->render->Blit(back_graphics, 100, 0, &landscape, 0.92f);
 	App->render->Blit(back_graphics, 0, 0, &(background.GetCurrentFrame()), false, 0.92f);
 	
 
