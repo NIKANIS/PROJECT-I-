@@ -77,39 +77,17 @@ bool ModuleSceneSoundBeach::CleanUp()
 // Update: draw background
 update_status ModuleSceneSoundBeach::Update()
 {
-	int speed = 3;
-	if (App->player->position.x >= 30 && App->player->position.x <= 367 && !App->player->lockX && !App->player->punching && !App->player->kicking && !App->player->specialattack_)
-	{
-		if (App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT && App->input->keyboard[SDL_SCANCODE_S] != KEY_STATE::KEY_REPEAT)
-		{
-			App->render->camera.x += speed;
-			//App->fight_manager->position.x += speed;
-			App->round_pl->position.x -= speed / 2;
-			App->round_en->position.x -= speed / 2;
-			App->plscore->position.x -= speed / 2;
-			App->enscore->position.x -= speed / 2;
-			App->lifebar->position.x -= speed / 2;
-			App->lifebar2->position.x -= speed / 2;
-			App->fight_timer->position.x -= speed / 2;
-		}
-		if (App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT && App->input->keyboard[SDL_SCANCODE_S] != KEY_STATE::KEY_REPEAT)
-		{
-			App->render->camera.x -= speed;
-			//App->fight_manager->position.x -= speed;
-			App->round_pl->position.x += speed / 2;
-			App->round_en->position.x += speed / 2;
-			App->plscore->position.x += speed / 2;
-			App->enscore->position.x += speed / 2;
-			App->lifebar->position.x += speed / 2;
-			App->lifebar2->position.x += speed / 2;
-			App->fight_timer->position.x += speed / 2;
-		}
-	}
+
 	// Draw everything --------------------------------------
 	App->render->DrawQuad({ 0,0, SCREEN_WIDTH, SCREEN_HEIGHT }, 0, 0, 0, 80);
+<<<<<<< HEAD
 	App->render->Blit(back_graphics, 0, 0, &landscape, 0.30f);
 	App->render->Blit(back_graphics, 0, 0, &(background.GetCurrentFrame()), false, 0.90f);
 	
+=======
+	App->render->Blit(back_graphics, 60, 0, &landscape, true, 0.75f);
+	App->render->Blit(back_graphics, 0, 0, &(background.GetCurrentFrame()), false, 0.9f);
+>>>>>>> d21128feeac34252548499faee0d0c106a8c1b0f
 
 
 	return UPDATE_CONTINUE;
