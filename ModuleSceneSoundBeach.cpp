@@ -38,7 +38,7 @@ ModuleSceneSoundBeach::ModuleSceneSoundBeach()
 	background.PushBack({ 940, 858, 619, 224 });
 	background.speed = 0.07f;
 
-	landscape = { 592, 1246, 461, 104 };
+	landscape = { 592, 1246, 665, 104 };
 }
 
 ModuleSceneSoundBeach::~ModuleSceneSoundBeach() {}
@@ -107,7 +107,7 @@ update_status ModuleSceneSoundBeach::Update()
 	}
 	// Draw everything --------------------------------------
 	App->render->DrawQuad({ 0,0, SCREEN_WIDTH, SCREEN_HEIGHT }, 0, 0, 0, 80);
-	App->render->Blit(back_graphics, 100, 0, &landscape, 0.90f);
+	App->render->Blit(back_graphics, 0, 0, &landscape, 0.30f);
 	App->render->Blit(back_graphics, 0, 0, &(background.GetCurrentFrame()), false, 0.90f);
 	
 
