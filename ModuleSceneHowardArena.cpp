@@ -77,7 +77,6 @@ bool ModuleSceneHowardArena::CleanUp()
 	App->textures->Unload(back_graphics);
 	App->collision->CleanUp();
 	App->player->Reset();
-	//App->JoeHigashiPlayer->Reset();
 	App->render->camera.x = 0;
 	App->render->camera.y = -46;
 
@@ -88,35 +87,6 @@ bool ModuleSceneHowardArena::CleanUp()
 // Update: draw background
 update_status ModuleSceneHowardArena::Update()
 {
-	int speed = 3;
-	if (App->player->position.x >= 30 && App->player->position.x <= 367 && !App->player->lockX && !App->player->punching && !App->player->kicking && !App->player->specialattack_)
-	{
-		if (App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT && App->input->keyboard[SDL_SCANCODE_S] != KEY_STATE::KEY_REPEAT)
-		{
-			App->render->camera.x += speed;
-			//App->fight_manager->position.x += speed;
-			App->round_pl->position.x -= speed / 2;
-			App->round_en->position.x -= speed / 2;
-			App->plscore->position.x -= speed / 2;
-			App->enscore->position.x -= speed / 2;
-			App->lifebar->position.x -= speed / 2;
-			App->lifebar2->position.x -= speed / 2;
-			App->fight_timer->position.x -= speed / 2;
-		}
-		if (App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT && App->input->keyboard[SDL_SCANCODE_S] != KEY_STATE::KEY_REPEAT)
-		{
-			App->render->camera.x -= speed;
-			//App->fight_manager->position.x -= speed;
-			App->round_pl->position.x += speed / 2;
-			App->round_en->position.x += speed / 2;
-			App->plscore->position.x += speed / 2;
-			App->enscore->position.x += speed / 2;
-			App->lifebar->position.x += speed / 2;
-			App->lifebar2->position.x += speed / 2;
-			App->fight_timer->position.x += speed / 2;
-		}
-	}
-
 	App->render->DrawQuad({ 0,0, SCREEN_WIDTH, SCREEN_HEIGHT }, 0, 0, 0, 80);
 	// Draw everything --------------------------------------
 	App->render->Blit(back_graphics, 0, -15, &(background.GetCurrentFrame()), false, 0.92f);

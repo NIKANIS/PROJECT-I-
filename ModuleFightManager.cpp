@@ -164,45 +164,64 @@ update_status ModuleFightManager::Update()
 		{
 			Reset();
 			if (winner == 0)
-				App->fade->FadeToBlack((Module*)App->scene_paopao, (Module*)App->scene_congrats);
-
+			{
+				if (App->scene_map->map == 1)
+					App->fade->FadeToBlack((Module*)App->scene_paopao, (Module*)App->scene_congrats);
+				if (App->scene_map->map == 2)
+					App->fade->FadeToBlack((Module*)App->scene_soundbeach, (Module*)App->scene_congrats);
+				if (App->scene_map->map == 3)
+					App->fade->FadeToBlack((Module*)App->scene_westsubway, (Module*)App->scene_congrats);
+				if (App->scene_map->map == 4)
+					App->fade->FadeToBlack((Module*)App->scene_howardarena, (Module*)App->scene_congrats);
+			}
+	
 			if (winner == 1)
-				App->fade->FadeToBlack((Module*)App->scene_paopao, (Module*)App->scene_gameover);
+			{
+				if (App->scene_map->map == 1)
+					App->fade->FadeToBlack((Module*)App->scene_paopao, (Module*)App->scene_gameover);
+				if (App->scene_map->map == 2)
+					App->fade->FadeToBlack((Module*)App->scene_soundbeach, (Module*)App->scene_gameover);
+				if (App->scene_map->map == 3)
+					App->fade->FadeToBlack((Module*)App->scene_westsubway, (Module*)App->scene_gameover);
+				if (App->scene_map->map == 4)
+					App->fade->FadeToBlack((Module*)App->scene_howardarena, (Module*)App->scene_gameover);
+			}
+				
 		}
 	}
-		if (pl_won_rounds >= 2 && pl_won_rounds > en_won_rounds)
-			winner = 0;
-		if (en_won_rounds >= 2 && pl_won_rounds < en_won_rounds)
-			winner = 1;
+	if (pl_won_rounds >= 2 && pl_won_rounds > en_won_rounds)
+		winner = 0;
+	if (en_won_rounds >= 2 && pl_won_rounds < en_won_rounds)
+		winner = 1;
 
-		if (winner == 0)
-		{
-			if(App->scene_map->map == 1)
-				App->fade->FadeToBlack((Module*)App->scene_paopao, (Module*)App->scene_congrats);
-			if (App->scene_map->map == 2)
-				App->fade->FadeToBlack((Module*)App->scene_soundbeach, (Module*)App->scene_congrats);
-			if (App->scene_map->map == 3)
-				App->fade->FadeToBlack((Module*)App->scene_westsubway, (Module*)App->scene_congrats);
-			if (App->scene_map->map == 4)
-				App->fade->FadeToBlack((Module*)App->scene_howardarena, (Module*)App->scene_congrats);
-		}	
-			
+	if (winner == 0)
+	{
+		if(App->scene_map->map == 1)
+			App->fade->FadeToBlack((Module*)App->scene_paopao, (Module*)App->scene_congrats);
+		if (App->scene_map->map == 2)
+			App->fade->FadeToBlack((Module*)App->scene_soundbeach, (Module*)App->scene_congrats);
+		if (App->scene_map->map == 3)
+			App->fade->FadeToBlack((Module*)App->scene_westsubway, (Module*)App->scene_congrats);
+		if (App->scene_map->map == 4)
+			App->fade->FadeToBlack((Module*)App->scene_howardarena, (Module*)App->scene_congrats);
+	}	
+		
 
-		if (winner == 1)
-		{
-			if (App->scene_map->map == 1)
-				App->fade->FadeToBlack((Module*)App->scene_paopao, (Module*)App->scene_gameover);
-			if (App->scene_map->map == 2)
-				App->fade->FadeToBlack((Module*)App->scene_soundbeach, (Module*)App->scene_gameover);
-			if (App->scene_map->map == 3)
-				App->fade->FadeToBlack((Module*)App->scene_westsubway, (Module*)App->scene_gameover);
-			if (App->scene_map->map == 4)
-				App->fade->FadeToBlack((Module*)App->scene_howardarena, (Module*)App->scene_gameover);
-		}
-			
+	if (winner == 1)
+	{
+		if (App->scene_map->map == 1)
+			App->fade->FadeToBlack((Module*)App->scene_paopao, (Module*)App->scene_gameover);
+		if (App->scene_map->map == 2)
+			App->fade->FadeToBlack((Module*)App->scene_soundbeach, (Module*)App->scene_gameover);
+		if (App->scene_map->map == 3)
+			App->fade->FadeToBlack((Module*)App->scene_westsubway, (Module*)App->scene_gameover);
+		if (App->scene_map->map == 4)
+			App->fade->FadeToBlack((Module*)App->scene_howardarena, (Module*)App->scene_gameover);
+	}
+		
 
-		App->render->Blit(graphics, position.x - (f.w / 2) , position.y - (f.h / 2) - 48, &f,false, 0.0f);
+	App->render->Blit(graphics, position.x - (f.w / 2) , position.y - (f.h / 2) - 48, &f,false, 0.0f);
 
-		return update_status::UPDATE_CONTINUE;
+	return update_status::UPDATE_CONTINUE;
 	
 }
