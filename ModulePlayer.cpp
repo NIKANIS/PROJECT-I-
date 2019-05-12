@@ -166,15 +166,13 @@ bool ModulePlayer::Start()
 		specialattack.loop = false;
 
 		//die
-		die.PushBack({ 1929,836,64,155 });
-		die.PushBack({ 1851,836,69,155 });
-		die.PushBack({ 1756,836,84,155 });
-		die.PushBack({ 1644,836,107,155 });
-		die.PushBack({ 1542,836,87,155 });
-		die.PushBack({ 1425,836,102,155 });
-		die.PushBack({ 1303,836,112,155 });
-		die.PushBack({ 1178,836,115,155 });
-		die.speed = 0.15f;
+		die.PushBack({ 856, 495, 75, 101 });
+		die.PushBack({ 103,751,61,94 });
+		die.PushBack({ 177,743,70,87 });
+		die.PushBack({ 432,736,79,65 });
+		die.PushBack({ 554,780,115,36 });
+		die.PushBack({ 2,884,120,24 });		
+		die.speed = 0.11f;
 		die.loop = false;
 
 		//victory
