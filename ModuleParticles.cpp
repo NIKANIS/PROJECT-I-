@@ -35,24 +35,15 @@ bool ModuleParticles::Start()
 	skill.anim.PushBack({ 1022,751,17,41 });
 	skill.life = 3000;
 	skill.speed.x = 3.0f;
-
-
+	
+	
 	skill2.anim.PushBack({ 1038,625,17,68});
 	skill2.life = 3000;
 	skill2.speed.x = 3.0f;
-
+	
 	skill3.anim.PushBack({ 1054,496,17,96});
 	skill3.life = 3000;
 	skill3.speed.x = 3.0f;
-
-	//Joe skill
-	skillJoe.anim.PushBack({ 1419, 85, 40, 60 }); //1ra
-	skillJoe.anim.PushBack({ 1475, 56,50, 89 }); //2nda
-	skillJoe.anim.PushBack({ 1538, 33, 61, 112 }); //3ra
-	skillJoe.anim.PushBack({ 1604, 33, 58, 112 }); //4rta
-	skillJoe.anim.PushBack({ 1671, 3, 63, 112 }); //5ta
-	skillJoe.life = 3000;
-	skillJoe.speed.x = 3.0f;
 
 	return true;
 }
@@ -94,30 +85,48 @@ update_status ModuleParticles::Update()
 		{
 			if (App->scene_chooseplayer->final_player1 != App->scene_chooseplayer->final_player2)
 			{
-				if (App->scene_chooseplayer->final_player1 == 1)
-					App->render->Blit(graphics2, p->position.x, p->position.y, &(p->anim.GetCurrentFrame()));
-				if (App->scene_chooseplayer->final_player1 == 2)
-					App->render->Blit(graphics, p->position.x, p->position.y, &(p->anim.GetCurrentFrame()));
+				if (App->player->sp == true)
+				{
+					//if (App->scene_chooseplayer->final_player1 == 1)
+					//	App->render->Blit(graphics2, p->position.x, p->position.y, &(p->anim.GetCurrentFrame()));
+					if (App->scene_chooseplayer->final_player1 == 2)
+						App->render->Blit(graphics, p->position.x, p->position.y, &(p->anim.GetCurrentFrame()));
+				}
+			
+				if (App->enemy->sp == true)
+				{
+					//if (App->scene_chooseplayer->final_player2 == 1)
+					//	App->render->Blit(graphics2, p->position.x, p->position.y, &(p->anim.GetCurrentFrame()));
+					if (App->scene_chooseplayer->final_player2 == 2)
+						App->render->Blit(graphics, p->position.x, p->position.y, &(p->anim.GetCurrentFrame()));
+				}
 			}
 			
 			if (App->scene_chooseplayer->final_player1 == App->scene_chooseplayer->final_player2)
 			{
-				if (App->scene_chooseplayer->final_player1 == 1)
-				{ }
-				if (App->scene_chooseplayer->final_player1 == 2)
-					App->render->Blit(graphics, p->position.x, p->position.y, &(p->anim.GetCurrentFrame()));
-				if (App->scene_chooseplayer->final_player1 == 3)
+				if (App->player->sp == true)
 				{
+					if (App->scene_chooseplayer->final_player1 == 1)
+					{
+					}
+					if (App->scene_chooseplayer->final_player1 == 2)
+						App->render->Blit(graphics, p->position.x, p->position.y, &(p->anim.GetCurrentFrame()));
+					if (App->scene_chooseplayer->final_player1 == 3)
+					{
+					}
 				}
-
-			//if (App->scene_chooseplayer->final_player2 == 1)
-			//{
-			//}
-			//if (App->scene_chooseplayer->final_player2 == 2)
-			//	App->render->Blit(graphics1, p->position.x, p->position.y, &(p->anim.GetCurrentFrame()));
-			//if (App->scene_chooseplayer->final_player2 == 3)
-			//{
-			//}
+			
+				if (App->enemy->sp == true)
+				{
+					if (App->scene_chooseplayer->final_player2 == 1)
+					{
+					}
+					if (App->scene_chooseplayer->final_player2 == 2)
+						App->render->Blit(graphics1, p->position.x, p->position.y, &(p->anim.GetCurrentFrame()));
+					if (App->scene_chooseplayer->final_player2 == 3)
+					{
+					}
+				}
 			}
 
 			if (p->fx_played == false)

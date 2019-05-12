@@ -162,7 +162,7 @@ bool ModulePlayer::Start()
 		specialattack.PushBack({ 1132, 83, 80, 63 });
 		specialattack.PushBack({ 1238, 60, 50, 84 });
 		specialattack.PushBack({ 1313, 5, 47, 141 });
-		specialattack.speed = 0.15f;
+		specialattack.speed = 0.1f;
 		specialattack.loop = false;
 
 		//die
@@ -203,6 +203,22 @@ bool ModulePlayer::Start()
 		hit.PushBack({ 782, 510, 67, 86 });
 		punchstun.speed = 0.04f;
 		punchstun.loop = false;
+
+		//Joe skill
+		skillJoe.anim.PushBack({ 1419, 85, 40, 60 }); //1ra
+		skillJoe.anim.PushBack({ 1475, 56,50, 89 }); //2nda
+		skillJoe.life = 1000;
+		skillJoe.speed.x = 3.0f;
+		skillJoe.anim.speed = 0.04f;
+		skillJoe.anim.loop = false;
+		
+
+		skillJoe2.anim.PushBack({ 1538, 33, 61, 112 }); //3ra
+		skillJoe2.anim.PushBack({ 1671, 33, 63, 112 }); //4ta
+		skillJoe2.anim.PushBack({ 1604, 33, 58, 112 }); //5ta
+		skillJoe2.life = 3000;
+		skillJoe2.speed.x = 3.0f;
+		skillJoe2.anim.speed = 0.1f;
 	}
 
 	if (App->scene_chooseplayer->final_player1 == 2)
@@ -325,6 +341,19 @@ bool ModulePlayer::Start()
 		punchstun.PushBack({ 24,475,60,100 });
 		punchstun.speed = 0.04f;
 		punchstun.loop = false;
+
+		//Terry skill
+		skillT.anim.PushBack({ 1022,751,17,41 });
+		skillT.life = 3000;
+		skillT.speed.x = 3.0f;
+			 
+		skillT2.anim.PushBack({ 1038,625,17,68 });
+		skillT2.life = 3000;
+		skillT2.speed.x = 3.0f;
+			 
+		skillT3.anim.PushBack({ 1054,496,17,96 });
+		skillT3.life = 3000;
+		skillT3.speed.x = 3.0f;
 	}
 
 	skillFXTerry = App->audio->loadWAV("AUDIO FATAL FURY/FX[WAV]/Voice/Special Attacks/FX_PowerWaveAttackTerryBogardVoice.wav");
@@ -539,18 +568,43 @@ update_status ModulePlayer::Update()
 			if (!fliped)
 			{
 				n = 20;
-				App->particles->skillJoe.speed.x = 3.0f;
+				skillJoe.speed.x = 3.0f;
+				skillJoe2.speed.x = 3.0f;
 			}
 			else
 			{
 				n = 0;
-				App->particles->skillJoe.speed.x = -3.0f;
+				skillJoe.speed.x = -3.0f;
+				skillJoe2.speed.x = -3.0f;
 			}
 			if (st == 25)
 			{
-				App->particles->AddParticle(App->particles->skillJoe, position.x + n, position.y+ 120 , COLLIDER_PLAYER_ATTACK);
+				skillJoe.position.x = position.x + 25;
+				skillJoe.position.y = position.y - 112;
+				App->particles->AddParticle(skillJoe, position.x + n, position.y - 112 , COLLIDER_PLAYER_ATTACK);
 			}
-			if (st == 1000)
+			if (st >= 25 && st < 35)
+			{
+				if(st < 26)
+					App->render->Blit(graphics, skillJoe.position.x, skillJoe.position.y + 60, &(skillJoe.anim.GetCurrentFrame()));
+				else
+					App->render->Blit(graphics, skillJoe.position.x, skillJoe.position.y + 23, &(skillJoe.anim.GetCurrentFrame()));
+				skillJoe.Update();
+				skillJoe2.position.x = skillJoe.position.x;
+				skillJoe2.position.y = skillJoe.position.y;
+			}
+
+			if (st >= 35)
+			{
+				App->render->Blit(graphics, skillJoe2.position.x, skillJoe2.position.y, &(skillJoe2.anim.GetCurrentFrame()));
+				skillJoe2.Update();
+			}
+			if (st == 35)
+			{
+				specialattack_ = false;
+			}
+
+			if (st == 200)
 				sp = false;
 		}
 
@@ -559,16 +613,16 @@ update_status ModulePlayer::Update()
 			if (!fliped)
 			{
 				n = 20;
-				App->particles->skill.speed.x = 3.0f;
-				App->particles->skill2.speed.x = 3.0f;
-				App->particles->skill3.speed.x = 3.0f;
+				skillT.speed.x = 3.0f;
+				skillT2.speed.x = 3.0f;
+				skillT3.speed.x = 3.0f;
 			}
 			else
 			{
 				n = 0;
-				App->particles->skill.speed.x = -3.0f;
-				App->particles->skill2.speed.x = -3.0f;
-				App->particles->skill3.speed.x = -3.0f;
+				skillT.speed.x = -3.0f;
+				skillT2.speed.x = -3.0f;
+				skillT3.speed.x = -3.0f;
 			}
 			if (st == 25)
 			{

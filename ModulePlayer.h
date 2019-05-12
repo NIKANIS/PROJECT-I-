@@ -6,6 +6,7 @@
 #include "Globals.h"
 #include "p2Point.h"
 #include "ModuleAudio.h"
+#include "ModuleParticles.h"
 
 struct SDL_Texture;
 
@@ -78,6 +79,13 @@ public:
 	Mix_Chunk* punchFX = nullptr;
 	Mix_Chunk* skillFXTerry = nullptr;
 	Mix_Chunk* kickFX = nullptr;
+
+	Particle skillT;
+	Particle skillT2;
+	Particle skillT3;
+
+	Particle skillJoe;
+	Particle skillJoe2;
 
 	void OnCollision(Collider*, Collider*, bool colliding) override;
 };

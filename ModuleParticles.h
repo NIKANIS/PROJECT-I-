@@ -56,7 +56,6 @@ public:
 	Particle skill2;
 	Particle skill3;
 
-	Particle skillJoe;
 };
 
 #endif
