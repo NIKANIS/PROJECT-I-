@@ -22,6 +22,8 @@ public:
 
 	SDL_Texture* graphics = nullptr;
 	SDL_Rect P1photo;
+	SDL_Rect P2photo;
+	SDL_Rect P3photo;
 	SDL_Rect health;
 	Animation healthy;
 	Animation lowhealth;

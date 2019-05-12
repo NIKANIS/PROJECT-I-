@@ -12,7 +12,10 @@ ModuleLifeBar::ModuleLifeBar(const int player)
 	position.x = HUD_X;
 	position.y = HUD_Y;
 
-	P1photo = { 1,144,15,15 };
+	P1photo = { 1, 145,15,14 };
+	P2photo = { 18,145,15,14 };
+	P3photo = { 31,145,15,14 };
+
 	health = { 1,72,100,7 };
 	lowhealth.speed = 0.2f;
 	lowhealth.loop = true;
@@ -92,7 +95,7 @@ update_status ModuleLifeBar::Update()
 	SDL_Rect r = current_animation->GetCurrentFrame();
 
 	App->render->Blit(graphics, position.x + (160)*player + HUD_X, position.y - r.h, &r, 0.0f);
-	App->render->Blit(graphics, position.x + 1 + (256)*player + HUD_X, position.y - r.h + 1, &P1photo, 0.0f);
+	App->render->Blit(graphics, position.x + 1 + (256)*player + HUD_X, position.y - r.h + 2, &P1photo, 0.0f);
 	App->render->Blit(graphics, (100 - App->enemy->Health())*player + position.x + 17 + (144)*player + HUD_X, position.y - r.h + 9, &health, 0.0f);
 
 	return UPDATE_CONTINUE;
