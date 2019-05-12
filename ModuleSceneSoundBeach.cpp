@@ -80,14 +80,8 @@ update_status ModuleSceneSoundBeach::Update()
 
 	// Draw everything --------------------------------------
 	App->render->DrawQuad({ 0,0, SCREEN_WIDTH, SCREEN_HEIGHT }, 0, 0, 0, 80);
-<<<<<<< HEAD
-	App->render->Blit(back_graphics, 0, 0, &landscape, 0.30f);
-	App->render->Blit(back_graphics, 0, 0, &(background.GetCurrentFrame()), false, 0.90f);
-	
-=======
 	App->render->Blit(back_graphics, 60, 0, &landscape, true, 0.75f);
 	App->render->Blit(back_graphics, 0, 0, &(background.GetCurrentFrame()), false, 0.9f);
->>>>>>> d21128feeac34252548499faee0d0c106a8c1b0f
 
 
 	return UPDATE_CONTINUE;
