@@ -23,9 +23,6 @@ public:
 	SDL_Texture* back_graphics = nullptr;
 	SDL_Rect landscape;
 	Animation background;
-
-	float foreground_pos;
-	bool forward;
 };
 
 #endif // __MODULESCENESOUNDBEACH_H__
