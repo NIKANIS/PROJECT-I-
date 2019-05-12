@@ -193,15 +193,21 @@ bool ModulePlayer::Start()
 		hit.loop = false;
 
 		//kickstun
-		hit.PushBack({ 856, 495, 75, 101 });
-		hit.PushBack({ 782, 510, 67, 86 });
-		kickstun.speed = 0.04f;
+		kickstun.PushBack({ 557, 495, 62, 105 }); 
+		kickstun.PushBack({ 626, 495, 70, 103 });
+		kickstun.PushBack({ 709, 495, 66, 103 });
+		kickstun.PushBack({ 856, 495, 75, 103 });
+		kickstun.PushBack({ 782, 495, 67, 103 });
+		kickstun.speed = 0.2f;
 		kickstun.loop = false;
 
 		//punchstun
-		hit.PushBack({ 856, 495, 75, 101 });
-		hit.PushBack({ 782, 510, 67, 86 });
-		punchstun.speed = 0.04f;
+		punchstun.PushBack({ 557, 495, 62, 105 });
+		punchstun.PushBack({ 626, 495, 70, 103 });
+		punchstun.PushBack({ 709, 495, 66, 103 });
+		punchstun.PushBack({ 856, 495, 75, 103 });
+		punchstun.PushBack({ 782, 495, 67, 103 });
+		punchstun.speed = 0.2f;
 		punchstun.loop = false;
 
 		//Joe skill
