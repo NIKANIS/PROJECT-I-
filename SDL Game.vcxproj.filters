@@ -82,6 +82,9 @@
     <ClCompile Include="ModuleParticles.cpp">
       <Filter>Modules\Utility</Filter>
     </ClCompile>
+    <ClCompile Include="ModuleSceneSoundBeach.cpp">
+      <Filter>Modules\Scenes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h">
@@ -173,6 +176,9 @@
     </ClInclude>
     <ClInclude Include="ModuleParticles.h">
       <Filter>Modules\Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleSceneSoundBeach.h">
+      <Filter>Modules\Scenes</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
