@@ -80,10 +80,6 @@ public:
 	Mix_Chunk* skillFXTerry = nullptr;
 	Mix_Chunk* kickFX = nullptr;
 
-	Particle skillT;
-	Particle skillT2;
-	Particle skillT3;
-
 	Particle skillJoe;
 	Particle skillJoe2;
 

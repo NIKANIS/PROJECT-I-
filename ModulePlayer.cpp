@@ -342,18 +342,6 @@ bool ModulePlayer::Start()
 		punchstun.speed = 0.04f;
 		punchstun.loop = false;
 
-		//Terry skill
-		skillT.anim.PushBack({ 1022,751,17,41 });
-		skillT.life = 3000;
-		skillT.speed.x = 3.0f;
-			 
-		skillT2.anim.PushBack({ 1038,625,17,68 });
-		skillT2.life = 3000;
-		skillT2.speed.x = 3.0f;
-			 
-		skillT3.anim.PushBack({ 1054,496,17,96 });
-		skillT3.life = 3000;
-		skillT3.speed.x = 3.0f;
 	}
 
 	skillFXTerry = App->audio->loadWAV("AUDIO FATAL FURY/FX[WAV]/Voice/Special Attacks/FX_PowerWaveAttackTerryBogardVoice.wav");
@@ -613,16 +601,16 @@ update_status ModulePlayer::Update()
 			if (!fliped)
 			{
 				n = 20;
-				skillT.speed.x = 3.0f;
-				skillT2.speed.x = 3.0f;
-				skillT3.speed.x = 3.0f;
+				App->particles->skill.speed.x = 3.0f;
+				App->particles->skill2.speed.x = 3.0f;
+				App->particles->skill3.speed.x = 3.0f;
 			}
 			else
 			{
 				n = 0;
-				skillT.speed.x = -3.0f;
-				skillT2.speed.x = -3.0f;
-				skillT3.speed.x = -3.0f;
+				App->particles->skill.speed.x = -3.0f;
+				App->particles->skill2.speed.x = -3.0f;
+				App->particles->skill3.speed.x = -3.0f;
 			}
 			if (st == 25)
 			{
