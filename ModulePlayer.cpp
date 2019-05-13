@@ -356,23 +356,22 @@ bool ModulePlayer::Start()
 
 	if (App->scene_chooseplayer->final_player1 == 3)
 	{
-		// idle animation 
-		idle.PushBack({ 195, 20, 62, 104 });
-		idle.PushBack({ 274, 18, 61, 106 });
-		idle.PushBack({ 354, 16, 63, 108 });
-		idle.PushBack({ 434, 18, 61, 106 });
-		idle.PushBack({ 518, 20, 62, 104 });
+		// idle animation done
+		idle.PushBack({ 428, 810, 59, 98 });
+		idle.PushBack({ 497, 808, 59, 100 });
+		idle.PushBack({ 428, 810, 59, 98 });
+		idle.PushBack({ 635, 811, 60, 95 });
 		idle.loop = true;
-		idle.speed = 0.14f;
+		idle.speed = 0.13f;
 
 		// jump idle up 
-		jumpiup.PushBack({ 88, 367, 39, 126 });
+		jumpiup.PushBack({ 515, 119, 42, 104 });
 
 		// jump idle 
-		jumpidown.PushBack({ 145, 367, 49, 81 });
+		jumpidown.PushBack({ 577, 119, 51, 92 });
 
 		//jump while moving 
-		jump.PushBack({ 204, 367, 56, 121 });
+		jump.PushBack({ 648, 122, 48, 83 });
 
 		//go forward done
 		forward.PushBack({ 746, 602, 63, 98 });
@@ -386,21 +385,21 @@ bool ModulePlayer::Start()
 		backward.PushBack({ 744, 473, 50, 100 });
 		backward.PushBack({ 801, 471, 49, 100 });
 		backward.PushBack({ 866, 475, 54, 98 });
-		backward.PushBack({ 947, 476, 53, 96 });
 		backward.speed = 0.13f;
 		backward.loop = true;
 
 		// crowch done
 		crowch.PushBack({ 947, 162, 48, 60 });
 
-		// crowch while going backwards and viceversa
-		crowchprotecc.PushBack({ 830,881,51,74 });
+		// crowch while going backwards and viceversa done
+		crowchprotecc.PushBack({ 944,81,44,64 });
 
 		//punch while standing done
-		punchstanding.PushBack({ 15, 121, 60, 101 });
-		punchstanding.PushBack({ 553, 616, 50, 90 });
-		punchstanding.PushBack({ 627, 616, 48, 96 });
+		punchstanding.PushBack({ 89, 132, 49, 90 });
+		punchstanding.PushBack({ 155, 128, 48, 95 });
 		punchstanding.PushBack({ 220, 127, 93, 95 });
+		punchstanding.PushBack({ 220, 127, 93, 95 });
+		punchstanding.PushBack({ 155, 128, 48, 95 });
 		punchstanding.speed = 0.15f;
 		punchstanding.loop = false;
 
@@ -410,13 +409,14 @@ bool ModulePlayer::Start()
 		crowchpunch.speed = 0.12f;
 		crowchpunch.loop = false;
 
-		//kick while standing 
-		kickingstanding.PushBack({ 417,163,60,84 });
-		kickingstanding.PushBack({ 495,185,52,65 });
-		kickingstanding.PushBack({ 562,153,44,94 });
-		kickingstanding.PushBack({ 631,139,110,106 });
-		kickingstanding.PushBack({ 770,156,54,90 });
-		kickingstanding.speed = 0.13f;
+		//kick while standing DONE
+		kickingstanding.PushBack({ 312,14,44,98 });
+		kickingstanding.PushBack({ 379,25,57,87 });
+		kickingstanding.PushBack({ 449,22,52,90 });
+		kickingstanding.PushBack({ 515,25,113,94 }); //instead of 94, put 75 as normal sprite
+		kickingstanding.PushBack({ 642,12,83,94 });
+		kickingstanding.PushBack({ 748,28,53,79 });
+		kickingstanding.speed = 0.15f;
 		kickingstanding.loop = false;
 
 		//special attack while standing done
