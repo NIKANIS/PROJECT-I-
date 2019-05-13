@@ -90,6 +90,12 @@ bool ModulePlayer::Start()
 		graphics = App->textures->Load("SPRITES FATAL FURY/CHARACTERS/1-Terry Bogard/spritesTerryBogard.png"); // arcade version
 	}
 
+	if (App->scene_chooseplayer->final_player1 == 3)
+	{
+		player_col = App->collision->AddCollider({ position.x + 10, position.y - 90, 33, 90 }, COLLIDER_PLAYER, App->player);
+		graphics = App->textures->Load("SPRITES FATAL FURY/CHARACTERS/2-Andy Bogard/Sprites_AndyBogard.png"); // arcade version
+	}
+
 	if (App->scene_chooseplayer->final_player1 == 1)
 	{
 		// idle animation done 
@@ -346,6 +352,117 @@ bool ModulePlayer::Start()
 		punchstun.speed = 0.04f;
 		punchstun.loop = false;
 
+	}
+
+	if (App->scene_chooseplayer->final_player1 == 3)
+	{
+		// idle animation 
+		idle.PushBack({ 195, 20, 62, 104 });
+		idle.PushBack({ 274, 18, 61, 106 });
+		idle.PushBack({ 354, 16, 63, 108 });
+		idle.PushBack({ 434, 18, 61, 106 });
+		idle.PushBack({ 518, 20, 62, 104 });
+		idle.loop = true;
+		idle.speed = 0.14f;
+
+		// jump idle up 
+		jumpiup.PushBack({ 88, 367, 39, 126 });
+
+		// jump idle 
+		jumpidown.PushBack({ 145, 367, 49, 81 });
+
+		//jump while moving 
+		jump.PushBack({ 204, 367, 56, 121 });
+
+		//go forward done
+		forward.PushBack({ 746, 602, 63, 98 });
+		forward.PushBack({ 821, 601, 53, 98 });
+		forward.PushBack({ 878, 602, 62, 98 });
+		forward.PushBack({ 944, 599, 59, 101 });
+		forward.speed = 0.13f;
+		forward.loop = true;
+
+		//go backwards done
+		backward.PushBack({ 744, 473, 50, 100 });
+		backward.PushBack({ 801, 471, 49, 100 });
+		backward.PushBack({ 866, 475, 54, 98 });
+		backward.PushBack({ 947, 476, 53, 96 });
+		backward.speed = 0.13f;
+		backward.loop = true;
+
+		// crowch done
+		crowch.PushBack({ 947, 162, 48, 60 });
+
+		// crowch while going backwards and viceversa
+		crowchprotecc.PushBack({ 830,881,51,74 });
+
+		//punch while standing done
+		punchstanding.PushBack({ 15, 121, 60, 101 });
+		punchstanding.PushBack({ 553, 616, 50, 90 });
+		punchstanding.PushBack({ 627, 616, 48, 96 });
+		punchstanding.PushBack({ 220, 127, 93, 95 });
+		punchstanding.speed = 0.15f;
+		punchstanding.loop = false;
+
+		//punch while crowching done
+		crowchpunch.PushBack({ 881, 735, 49, 63 });
+		crowchpunch.PushBack({ 942, 736, 78, 62 });
+		crowchpunch.speed = 0.12f;
+		crowchpunch.loop = false;
+
+		//kick while standing 
+		kickingstanding.PushBack({ 417,163,60,84 });
+		kickingstanding.PushBack({ 495,185,52,65 });
+		kickingstanding.PushBack({ 562,153,44,94 });
+		kickingstanding.PushBack({ 631,139,110,106 });
+		kickingstanding.PushBack({ 770,156,54,90 });
+		kickingstanding.speed = 0.13f;
+		kickingstanding.loop = false;
+
+		//special attack while standing done
+		specialattack.PushBack({ 24, 360, 65, 94 });
+		specialattack.PushBack({ 94, 363, 48, 91 });
+		specialattack.PushBack({ 155, 367, 48, 88 });
+		specialattack.PushBack({ 217, 366, 98, 88 });
+		specialattack.speed = 0.15f;
+		specialattack.loop = false;
+
+		//die done
+		die.PushBack({ 28, 938, 92, 78 });
+		die.PushBack({ 127, 941, 98, 59 });
+		die.PushBack({ 231, 942 ,89, 55 });
+		die.PushBack({ 317, 950, 98, 42 });
+		die.PushBack({ 422, 954, 111, 37 });
+		die.PushBack({ 520, 917, 109, 32 });
+		die.speed = 0.15f;
+		die.loop = false;
+
+		//victory
+		victory.PushBack({ 699,324,56,136 });
+		victory.PushBack({ 772,324,56,136 });
+		victory.PushBack({ 839,324,60,136 });
+		victory.PushBack({ 908,324,56,136 });
+		victory.speed = 0.15f;
+		victory.loop = false;
+
+		//hit
+		hit.PushBack({ 20, 473, 67, 104 });
+		hit.PushBack({ 88, 470, 73, 110 });
+		hit.PushBack({ 20, 473, 67, 104 });
+		hit.speed = 0.15f;
+		hit.loop = false;
+
+		//kickstun doone
+		kickstun.PushBack({ 843, 921, 54, 92 });
+		kickstun.PushBack({ 908, 932, 64, 79 });
+		kickstun.speed = 0.04f;
+		kickstun.loop = false;
+
+		//punchstun done
+		punchstun.PushBack({ 721, 929, 62, 95 });
+		punchstun.PushBack({ 780, 932 ,65, 82 });
+		punchstun.speed = 0.04f;
+		punchstun.loop = false;
 	}
 
 	skillFXTerry = App->audio->loadWAV("AUDIO FATAL FURY/FX[WAV]/Voice/Special Attacks/FX_PowerWaveAttackTerryBogardVoice.wav");
@@ -960,6 +1077,11 @@ update_status ModulePlayer::Update()
 	}
 
 	if (App->scene_chooseplayer->final_player1 == 2)
+	{
+		App->render->Blit(graphics, position.x, position.y - r.h, &r, fliped);
+	}
+
+	if (App->scene_chooseplayer->final_player1 == 3)
 	{
 		App->render->Blit(graphics, position.x, position.y - r.h, &r, fliped);
 	}
