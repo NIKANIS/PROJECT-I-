@@ -86,7 +86,7 @@ bool ModulePlayer::Start()
 
 	if (App->scene_chooseplayer->final_player1 == 2)
 	{
-		player_col = App->collision->AddCollider({ position.x + 10, position.y - 90, 33, 104 }, COLLIDER_PLAYER, App->player);
+		player_col = App->collision->AddCollider({ position.x + 10, position.y - 90, 33, 90 }, COLLIDER_PLAYER, App->player);
 		graphics = App->textures->Load("SPRITES FATAL FURY/CHARACTERS/1-Terry Bogard/spritesTerryBogard.png"); // arcade version
 	}
 
@@ -633,27 +633,28 @@ update_status ModulePlayer::Update()
 				App->particles->skill.speed.x = -3.0f;
 				App->particles->skill2.speed.x = -3.0f;
 				App->particles->skill3.speed.x = -3.0f;
+
 			}
 			if (st == 25)
 			{
-				App->particles->AddParticle(App->particles->skill, position.x + n, position.y - 40, COLLIDER_PLAYER_ATTACK);
+				App->particles->AddParticle(App->particles->skill, position.x + n, position.y - 40, COLLIDER_ENEMY_ATTACK);
 			}
 			if (st == 30)
 			{
-				App->particles->AddParticle(App->particles->skill2, position.x + n, position.y - 67, COLLIDER_PLAYER_ATTACK);
+				App->particles->AddParticle(App->particles->skill2, position.x + n, position.y - 67, COLLIDER_ENEMY_ATTACK);
 			}
 			if (st == 35)
 			{
-				App->particles->AddParticle(App->particles->skill3, position.x + n, position.y - 95, COLLIDER_PLAYER_ATTACK);
+				App->particles->AddParticle(App->particles->skill3, position.x + n, position.y - 95, COLLIDER_ENEMY_ATTACK);
 				specialattack_ = false;
 			}
 			if (st == 40)
 			{
-				App->particles->AddParticle(App->particles->skill2, position.x + n, position.y - 67, COLLIDER_PLAYER_ATTACK);
+				App->particles->AddParticle(App->particles->skill2, position.x + n, position.y - 67, COLLIDER_ENEMY_ATTACK);
 			}
 			if (st == 45)
 			{
-				App->particles->AddParticle(App->particles->skill, position.x + n, position.y - 40, COLLIDER_PLAYER_ATTACK);
+				App->particles->AddParticle(App->particles->skill, position.x + n, position.y - 40, COLLIDER_ENEMY_ATTACK);
 			}
 			if (st == 1000)
 				sp = false;

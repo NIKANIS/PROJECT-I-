@@ -31,7 +31,7 @@ bool ModuleParticles::Start()
 	graphics1 = App->textures->Load("SPRITES FATAL FURY/CHARACTERS/1-Terry Bogard/spritesTerryBogard2.png");
 	graphics2 = App->textures->Load("SPRITES FATAL FURY/CHARACTERS/3-Joe Higashi/Sprites joe higashi.png");
 
-	//Terry skill
+	////Terry skill
 	skill.anim.PushBack({ 1022,751,17,41 });
 	skill.life = 3000;
 	skill.speed.x = 3.0f;
