@@ -191,20 +191,20 @@ bool ModulePlayer::Start()
 		hit.loop = false;
 
 		//kickstun
-		kickstun.PushBack({ 557, 495, 62, 105 }); 
+		//kickstun.PushBack({ 557, 495, 62, 105 }); 
 		kickstun.PushBack({ 626, 495, 70, 103 });
 		kickstun.PushBack({ 709, 495, 66, 103 });
 		kickstun.PushBack({ 856, 495, 75, 103 });
-		kickstun.PushBack({ 782, 495, 67, 103 });
+		//kickstun.PushBack({ 782, 495, 67, 103 });
 		kickstun.speed = 0.2f;
 		kickstun.loop = false;
 
 		//punchstun
-		punchstun.PushBack({ 557, 495, 62, 105 });
+		//punchstun.PushBack({ 557, 495, 62, 105 });
 		punchstun.PushBack({ 626, 495, 70, 103 });
 		punchstun.PushBack({ 709, 495, 66, 103 });
 		punchstun.PushBack({ 856, 495, 75, 103 });
-		punchstun.PushBack({ 782, 495, 67, 103 });
+		//punchstun.PushBack({ 782, 495, 67, 103 });
 		punchstun.speed = 0.2f;
 		punchstun.loop = false;
 
@@ -220,7 +220,7 @@ bool ModulePlayer::Start()
 		skillJoe2.anim.PushBack({ 1538, 33, 61, 112 }); //3ra
 		skillJoe2.anim.PushBack({ 1671, 33, 63, 112 }); //4ta
 		skillJoe2.anim.PushBack({ 1604, 33, 58, 112 }); //5ta
-		skillJoe2.life = 3000;
+		skillJoe2.life = 6000;
 		skillJoe2.speed.x = 3.0f;
 		skillJoe2.anim.speed = 0.1f;
 	}
@@ -559,7 +559,7 @@ update_status ModulePlayer::Update()
 		{
 			if (!fliped)
 			{
-				n = 20;
+				n = 10;
 				skillJoe.speed.x = 3.0f;
 				skillJoe2.speed.x = 3.0f;
 			}
@@ -571,9 +571,16 @@ update_status ModulePlayer::Update()
 			}
 			if (st == 25)
 			{
-				skillJoe.position.x = position.x + 25;
+				skillJoe.position.x = position.x +25;
 				skillJoe.position.y = position.y - 112;
-				App->particles->AddParticle(skillJoe, position.x + n, position.y - 112 , COLLIDER_PLAYER_ATTACK);
+				if (fliped)
+				{
+					skillJoe.position.x = position.x;
+				}
+				App->particles->AddParticle(skillJoe, position.x + n, position.y - 112 , COLLIDER_NONE);	
+				player_skill_col = App->collision->AddCollider({ skillJoe.position.x, position.y - 52, 45, 60 }, COLLIDER_PLAYER_ATTACK, App->player);
+
+				
 			}
 			if (st >= 25 && st < 35)
 			{
@@ -584,20 +591,31 @@ update_status ModulePlayer::Update()
 				skillJoe.Update();
 				skillJoe2.position.x = skillJoe.position.x;
 				skillJoe2.position.y = skillJoe.position.y;
+				player_skill_col->SetPos(skillJoe.position.x, skillJoe.position.y+52);
 			}
 
 			if (st >= 35)
 			{
 				App->render->Blit(graphics, skillJoe2.position.x, skillJoe2.position.y, &(skillJoe2.anim.GetCurrentFrame()));
 				skillJoe2.Update();
+				player_skill_col->rect.h = 90;
+				player_skill_col->rect.w = 35;
+				player_skill_col->SetPos(skillJoe2.position.x+10, skillJoe2.position.y+20);
 			}
 			if (st == 35)
 			{
+
 				specialattack_ = false;
 			}
+			if (st == 100)
+			{
+				player_skill_col->to_delete = true;
+				already_hit = false;
+			}
 
-			if (st == 200)
+			if (st == 500)
 				sp = false;
+			
 		}
 
 		if (App->scene_chooseplayer->final_player1 == 2)
@@ -999,6 +1017,11 @@ void ModulePlayer::OnCollision(Collider* a, Collider* b, bool colliding)
 			{
 				App->enemy->Damage(20, 1);
 				score += 100;
+			}
+			if (sp)
+			{
+				App->enemy->Damage(50, 1);
+				score += 500;
 			}
 		}
 		if (a->type == COLLIDER_PLAYER && b->type == COLLIDER_ENEMY)

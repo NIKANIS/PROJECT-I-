@@ -75,6 +75,7 @@ public:
 	Collider* player_col = nullptr;
 	Collider* player_punch_col = nullptr;
 	Collider* player_kick_col = nullptr;
+	Collider* player_skill_col = nullptr;
 
 	Mix_Chunk* punchFX = nullptr;
 	Mix_Chunk* skillFXTerry = nullptr;
