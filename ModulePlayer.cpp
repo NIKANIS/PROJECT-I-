@@ -550,6 +550,12 @@ update_status ModulePlayer::Update()
 				player_col->rect.w = 41;
 				player_col->SetPos(position.x + 5, position.y - 67);
 			}
+			if (App->scene_chooseplayer->final_player1 == 3)
+			{
+				player_col->rect.h = 65;
+				player_col->rect.w = 41;
+				player_col->SetPos(position.x + 5, position.y - 67);
+			}
 
 		}
 		if (at == 12)
@@ -588,6 +594,20 @@ update_status ModulePlayer::Update()
 						player_punch_col = App->collision->AddCollider({ position.x - 30, position.y - 90, 41, 12 }, COLLIDER_PLAYER_ATTACK, App->player);
 
 			}	
+			if (App->scene_chooseplayer->final_player1 == 3)
+			{
+				if (fliped == false)
+					if (current_animation == &crowchpunch)
+						player_punch_col = App->collision->AddCollider({ position.x + 46, position.y - 52, 35, 12 }, COLLIDER_PLAYER_ATTACK, App->player);
+					else
+						player_punch_col = App->collision->AddCollider({ position.x + 50, position.y - 90, 41, 12 }, COLLIDER_PLAYER_ATTACK, App->player);
+				else
+					if (current_animation == &crowchpunch)
+						player_punch_col = App->collision->AddCollider({ position.x - 30, position.y - 52, 35, 12 }, COLLIDER_PLAYER_ATTACK, App->player);
+					else
+						player_punch_col = App->collision->AddCollider({ position.x - 30, position.y - 90, 41, 12 }, COLLIDER_PLAYER_ATTACK, App->player);
+
+			}
 		}
 		if (at == 19)
 		{
@@ -632,6 +652,24 @@ update_status ModulePlayer::Update()
 				}
 			}
 			if (App->scene_chooseplayer->final_player1 == 2)
+			{
+				if (fliped == false)
+				{
+					player_kick_col = App->collision->AddCollider({ position.x + 50, position.y - 85, 49, 17 }, COLLIDER_PLAYER_ATTACK, App->player);
+					player_col->SetPos(position.x, position.y - 121);
+					player_col->rect.h = 110;
+					player_col->rect.w = 50;
+
+				}
+				else
+				{
+					player_kick_col = App->collision->AddCollider({ position.x - 25, position.y - 85, 49, 17 }, COLLIDER_PLAYER_ATTACK, App->player);
+					player_col->SetPos(position.x + 20, position.y - 121);
+					player_col->rect.h = 110;
+					player_col->rect.w = 50;
+				}
+			}
+			if (App->scene_chooseplayer->final_player1 == 3)
 			{
 				if (fliped == false)
 				{
@@ -776,6 +814,48 @@ update_status ModulePlayer::Update()
 			if (st == 1000)
 				sp = false;
 		}
+
+		if (App->scene_chooseplayer->final_player1 == 3)
+		{
+			if (!fliped)
+			{
+				n = 20;
+				App->particles->skill.speed.x = 3.0f;
+				App->particles->skill2.speed.x = 3.0f;
+				App->particles->skill3.speed.x = 3.0f;
+			}
+			else
+			{
+				n = 0;
+				App->particles->skill.speed.x = -3.0f;
+				App->particles->skill2.speed.x = -3.0f;
+				App->particles->skill3.speed.x = -3.0f;
+
+			}
+			if (st == 25)
+			{
+				App->particles->AddParticle(App->particles->skill, position.x + n, position.y - 40, COLLIDER_PLAYER_ATTACK);
+			}
+			if (st == 30)
+			{
+				App->particles->AddParticle(App->particles->skill2, position.x + n, position.y - 67, COLLIDER_PLAYER_ATTACK);
+			}
+			if (st == 35)
+			{
+				App->particles->AddParticle(App->particles->skill3, position.x + n, position.y - 95, COLLIDER_PLAYER_ATTACK);
+				specialattack_ = false;
+			}
+			if (st == 40)
+			{
+				App->particles->AddParticle(App->particles->skill2, position.x + n, position.y - 67, COLLIDER_PLAYER_ATTACK);
+			}
+			if (st == 45)
+			{
+				App->particles->AddParticle(App->particles->skill, position.x + n, position.y - 40, COLLIDER_PLAYER_ATTACK);
+			}
+			if (st == 1000)
+				sp = false;
+		}
 	}
 	Jump();
 	if (health == 0)
@@ -823,6 +903,10 @@ update_status ModulePlayer::Update()
 						player_col->SetPos(position.x + 17, position.y - 100);
 					}
 					if (App->scene_chooseplayer->final_player1 == 2)
+					{
+						player_col->SetPos(position.x + 17, position.y - 91);
+					}
+					if (App->scene_chooseplayer->final_player1 == 3)
 					{
 						player_col->SetPos(position.x + 17, position.y - 91);
 					}
@@ -1049,6 +1133,31 @@ update_status ModulePlayer::Update()
 							}
 						}
 					}	
+
+					if (App->scene_chooseplayer->final_player1 == 3)
+					{
+						if (current_animation == &crowch || current_animation == &crowchprotecc && crowchaction)
+						{
+							player_col->rect.h = 65;
+							player_col->rect.w = 41;
+							player_col->SetPos(position.x + 5, position.y - 67);
+						}
+						else
+						{
+							if (!fliped)
+							{
+								player_col->SetPos(position.x + 10, position.y - 91);
+								player_col->rect.h = 90;
+								player_col->rect.w = 33;
+							}
+							else
+							{
+								player_col->SetPos(position.x + 17, position.y - 91);
+								player_col->rect.h = 90;
+								player_col->rect.w = 33;
+							}
+						}
+					}
 				}
 			}		
 		}
