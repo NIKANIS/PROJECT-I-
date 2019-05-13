@@ -637,24 +637,24 @@ update_status ModulePlayer::Update()
 			}
 			if (st == 25)
 			{
-				App->particles->AddParticle(App->particles->skill, position.x + n, position.y - 40, COLLIDER_ENEMY_ATTACK);
+				App->particles->AddParticle(App->particles->skill, position.x + n, position.y - 40, COLLIDER_PLAYER_ATTACK);
 			}
 			if (st == 30)
 			{
-				App->particles->AddParticle(App->particles->skill2, position.x + n, position.y - 67, COLLIDER_ENEMY_ATTACK);
+				App->particles->AddParticle(App->particles->skill2, position.x + n, position.y - 67, COLLIDER_PLAYER_ATTACK);
 			}
 			if (st == 35)
 			{
-				App->particles->AddParticle(App->particles->skill3, position.x + n, position.y - 95, COLLIDER_ENEMY_ATTACK);
+				App->particles->AddParticle(App->particles->skill3, position.x + n, position.y - 95, COLLIDER_PLAYER_ATTACK);
 				specialattack_ = false;
 			}
 			if (st == 40)
 			{
-				App->particles->AddParticle(App->particles->skill2, position.x + n, position.y - 67, COLLIDER_ENEMY_ATTACK);
+				App->particles->AddParticle(App->particles->skill2, position.x + n, position.y - 67, COLLIDER_PLAYER_ATTACK);
 			}
 			if (st == 45)
 			{
-				App->particles->AddParticle(App->particles->skill, position.x + n, position.y - 40, COLLIDER_ENEMY_ATTACK);
+				App->particles->AddParticle(App->particles->skill, position.x + n, position.y - 40, COLLIDER_PLAYER_ATTACK);
 			}
 			if (st == 1000)
 				sp = false;

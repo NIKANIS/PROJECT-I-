@@ -6,6 +6,7 @@
 #include "Globals.h"
 #include "p2Point.h"
 #include "ModuleAudio.h"
+#include "ModuleParticles.h"
 
 struct SDL_Texture;
 
@@ -72,11 +73,10 @@ public:
 	Collider* enemy_col = nullptr;
 	Collider* enemy_punch_col = nullptr;
 	Collider* enemy_kick_col = nullptr;
-	Collider* skill1 = nullptr;
-	Collider* skill2 = nullptr;
-	Collider* skill3 = nullptr;
-	Collider* skill4 = nullptr;
-	Collider* skill5 = nullptr;
+	Collider* enemy_skill_col = nullptr;
+
+	Particle skillJoe_;
+	Particle skillJoe2_;
 
 	Mix_Chunk* punchFX = nullptr;
 	Mix_Chunk* skillFX = nullptr;
