@@ -14,7 +14,7 @@
 #include "ModuleLifeBar.h"
 #include "ModulePlayerScore.h"
 #include "ModuleRoundDisplay.h"
-#include "ModuleFightTimer.h"
+#include "ModuleFightTimer.h" 
 #include "ModuleJoeHigashiPlayer.h"
 #include "ModuleAndyBogardPlayer.h"
 
@@ -75,41 +75,39 @@ ModuleAndyBogardPlayer::ModuleAndyBogardPlayer()
 	//jump while moving 
 	jump.PushBack({ 204, 367, 56, 121 });
 
-	//go forward 
-	forward.PushBack({ 746, 602, 63, 99 });
-	forward.PushBack({ 686, 11, 65, 113 });
-	forward.PushBack({ 758, 5, 62, 119 });
-	forward.PushBack({ 825, 16, 63, 108 });
+	//go forward done
+	forward.PushBack({ 746, 602, 63, 98 });
+	forward.PushBack({ 821, 601, 53, 98 });
+	forward.PushBack({ 878, 602, 62, 98 });
+	forward.PushBack({ 944, 599, 59, 101 });
 	forward.speed = 0.13f;
 	forward.loop = true;
 
-	//go backwards 
-	backward.PushBack({ 33, 144, 60, 102 });
-	backward.PushBack({ 111, 141, 55, 105 });
-	backward.PushBack({ 176, 136, 55, 110 });
-	backward.PushBack({ 241, 140, 56, 106 });
+	//go backwards done
+	backward.PushBack({ 744, 473, 50, 100 });
+	backward.PushBack({ 801, 471, 49, 100 });
+	backward.PushBack({ 866, 475, 54, 98 });
+	backward.PushBack({ 947, 476, 53, 96 });
 	backward.speed = 0.13f;
 	backward.loop = true;
 
-	// crowch 
-	crowch.PushBack({ 761, 888, 59, 69 });
+	// crowch done
+	crowch.PushBack({ 947, 162, 48, 60 });
 
 	// crowch while going backwards and viceversa
 	crowchprotecc.PushBack({ 830,881,51,74 });
 
-	//punch while standing 
-	punchstanding.PushBack({ 481, 610, 64, 102 });
-	punchstanding.PushBack({ 553, 616, 63, 96 });
-	punchstanding.PushBack({ 627, 616, 97, 96 });
-	punchstanding.PushBack({ 553, 616, 63, 96 });
-	punchstanding.PushBack({ 481, 610, 64, 102 });
+	//punch while standing done
+	punchstanding.PushBack({ 15, 121, 60, 101 });
+	punchstanding.PushBack({ 553, 616, 50, 90 });
+	punchstanding.PushBack({ 627, 616, 48, 96 });
+	punchstanding.PushBack({ 220, 127, 93, 95 });
 	punchstanding.speed = 0.15f;
 	punchstanding.loop = false;
 
-	//punch while crowching 
-	crowchpunch.PushBack({ 97,286,55,71 });
-	crowchpunch.PushBack({ 159,288,76,70 });
-	crowchpunch.PushBack({ 97,286,55,71 });
+	//punch while crowching done
+	crowchpunch.PushBack({ 881, 735, 49, 63 });
+	crowchpunch.PushBack({ 942, 736, 78, 62 });
 	crowchpunch.speed = 0.12f;
 	crowchpunch.loop = false;
 
@@ -122,26 +120,21 @@ ModuleAndyBogardPlayer::ModuleAndyBogardPlayer()
 	kickingstanding.speed = 0.13f;
 	kickingstanding.loop = false;
 
-	//special attack while standing 
-	specialattack.PushBack({ 620, 689, 51, 105 });
-	specialattack.PushBack({ 547, 682, 54, 112 });
-	specialattack.PushBack({ 482, 699, 60, 95 });
-	specialattack.PushBack({ 399, 717, 67, 76 });
-	specialattack.PushBack({ 399, 717, 67, 76 });
-	specialattack.PushBack({ 260, 727, 65, 67 });
-	specialattack.PushBack({ 195, 714, 60, 80 });
+	//special attack while standing done
+	specialattack.PushBack({ 24, 360, 65, 94 });
+	specialattack.PushBack({ 94, 363, 48, 91 });
+	specialattack.PushBack({ 155, 367, 48, 88 });
+	specialattack.PushBack({ 217, 366, 98, 88 });
 	specialattack.speed = 0.15f;
 	specialattack.loop = false;
 
-	//die
-	die.PushBack({ 1929,836,64,155 });
-	die.PushBack({ 1851,836,69,155 });
-	die.PushBack({ 1756,836,84,155 });
-	die.PushBack({ 1644,836,107,155 });
-	die.PushBack({ 1542,836,87,155 });
-	die.PushBack({ 1425,836,102,155 });
-	die.PushBack({ 1303,836,112,155 });
-	die.PushBack({ 1178,836,115,155 });
+	//die done
+	die.PushBack({ 28, 938, 92, 78});
+	die.PushBack({ 127, 941, 98, 59 });
+	die.PushBack({ 231, 942 ,89, 55 });
+	die.PushBack({ 317, 950, 98, 42 });
+	die.PushBack({ 422, 954, 111, 37 });
+	die.PushBack({ 520, 917, 109, 32 });
 	die.speed = 0.15f;
 	die.loop = false;
 
@@ -160,15 +153,15 @@ ModuleAndyBogardPlayer::ModuleAndyBogardPlayer()
 	hit.speed = 0.15f;
 	hit.loop = false;
 
-	//kickstun
-	kickstun.PushBack({ 160,479,64,96 });
-	kickstun.PushBack({ 235,479,69,96 });
+	//kickstun doone
+	kickstun.PushBack({ 843, 921, 54, 92 });
+	kickstun.PushBack({ 908, 932, 64, 79 });
 	kickstun.speed = 0.04f;
 	kickstun.loop = false;
 
-	//punchstun
-	punchstun.PushBack({ 88,469,68,106 });
-	punchstun.PushBack({ 24,475,60,100 });
+	//punchstun done
+	punchstun.PushBack({ 721, 929, 62, 95 });
+	punchstun.PushBack({ 780, 932 ,65, 82 });
 	punchstun.speed = 0.04f;
 	punchstun.loop = false;
 
