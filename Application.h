@@ -4,7 +4,7 @@
 #include "Globals.h"
 
 
-#define NUM_MODULES 28
+#define NUM_MODULES 27
 
 class ModuleWindow;
 class ModuleInput;
@@ -31,7 +31,6 @@ class ModuleFightTimer;
 class ModuleFightManager;
 class ModuleCollision;
 class ModuleRoundDisplay;
-class ModuleAndyBogardPlayer;
 
 class Application
 {
@@ -52,7 +51,6 @@ public:
 	ModuleSceneCongrats* scene_congrats;
 	ModuleSceneGameOver* scene_gameover;
 	ModulePlayer* player;
-	ModuleAndyBogardPlayer* AndyBogardPlayer;
 	ModuleEnemy* enemy;
 	ModuleFadeToBlack* fade;
 	ModuleAudio* audio;

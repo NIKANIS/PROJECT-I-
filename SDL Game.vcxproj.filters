@@ -10,9 +10,6 @@
     <ClCompile Include="Main.cpp">
       <Filter>Core</Filter>
     </ClCompile>
-    <ClCompile Include="ModuleAndyBogardPlayer.cpp">
-      <Filter>Modules\Player &amp; Enemie</Filter>
-    </ClCompile>
     <ClCompile Include="ModuleEnemy.cpp">
       <Filter>Modules\Player &amp; Enemie</Filter>
     </ClCompile>
@@ -95,9 +92,6 @@
     </ClInclude>
     <ClInclude Include="MemLeaks.h">
       <Filter>Core</Filter>
-    </ClInclude>
-    <ClInclude Include="ModuleAndyBogardPlayer.h">
-      <Filter>Modules\Player &amp; Enemie</Filter>
     </ClInclude>
     <ClInclude Include="Animation.h">
       <Filter>Containers</Filter>
