@@ -463,6 +463,22 @@ bool ModulePlayer::Start()
 		punchstun.PushBack({ 780, 932 ,65, 82 });
 		punchstun.speed = 0.04f;
 		punchstun.loop = false;
+
+		//Andy skill
+		skillAndy.anim.PushBack({ 328, 378, 22, 22 }); //1ra
+		skillAndy.anim.PushBack({ 364, 357, 35, 64 }); //2nda
+		skillAndy.anim.PushBack({ 404, 358, 48, 62}); //3ra
+		skillAndy.life = 1000;
+		skillAndy.speed.x = 2.0f;
+		skillAndy.anim.speed = 0.06f;
+		skillAndy.anim.loop = false;
+
+
+		skillAndy2.anim.PushBack({ 462, 345, 61, 87 }); //4ta
+		skillAndy2.anim.PushBack({ 534, 346, 46, 85 }); //5ta
+		skillAndy2.life = 6000;
+		skillAndy2.speed.x = 3.0f;
+		skillAndy2.anim.speed = 0.1f;
 	}
 
 	skillFXTerry = App->audio->loadWAV("AUDIO FATAL FURY/FX[WAV]/Voice/Special Attacks/FX_PowerWaveAttackTerryBogardVoice.wav");
@@ -771,6 +787,68 @@ update_status ModulePlayer::Update()
 			if (st == 500)
 				sp = false;
 			
+		}
+		if (App->scene_chooseplayer->final_player1 == 3)
+		{
+			if (!fliped)
+			{
+				n = 10;
+				skillAndy.speed.x = 3.0f;
+				skillAndy2.speed.x = 3.0f;
+			}
+			else
+			{
+				n = 0;
+				skillAndy.speed.x = -3.0f;
+				skillAndy2.speed.x = -3.0f;
+			}
+			if (st == 25)
+			{
+				skillAndy.position.x = position.x + 80;
+				skillAndy.position.y = position.y - 112;
+				if (fliped)
+				{
+					skillAndy.position.x = position.x;
+				}
+				App->particles->AddParticle(skillAndy, position.x + n, position.y - 112, COLLIDER_NONE);
+				player_skill_col = App->collision->AddCollider({ skillAndy.position.x, position.y - 52, 45, 60 }, COLLIDER_PLAYER_ATTACK, App->player);
+
+
+			}
+			if (st >= 25 && st < 35)
+			{
+				if (st < 26)
+					App->render->Blit(graphics, skillAndy.position.x, skillAndy.position.y + 60, &(skillAndy.anim.GetCurrentFrame()));
+				else
+					App->render->Blit(graphics, skillAndy.position.x, skillAndy.position.y + 23, &(skillAndy.anim.GetCurrentFrame()));
+				skillAndy.Update();
+				skillAndy2.position.x = skillAndy.position.x;
+				skillAndy2.position.y = skillAndy.position.y;
+				player_skill_col->SetPos(skillAndy.position.x, skillAndy.position.y + 52);
+			}
+
+			if (st >= 35)
+			{
+				App->render->Blit(graphics, skillAndy2.position.x, skillAndy2.position.y, &(skillAndy2.anim.GetCurrentFrame()));
+				skillAndy2.Update();
+				player_skill_col->rect.h = 90;
+				player_skill_col->rect.w = 35;
+				player_skill_col->SetPos(skillAndy2.position.x + 10, skillAndy2.position.y + 20);
+			}
+			if (st == 35)
+			{
+
+				specialattack_ = false;
+			}
+			if (st == 100)
+			{
+				player_skill_col->to_delete = true;
+				already_hit = false;
+			}
+
+			if (st == 500)
+				sp = false;
+
 		}
 
 		if (App->scene_chooseplayer->final_player1 == 2)

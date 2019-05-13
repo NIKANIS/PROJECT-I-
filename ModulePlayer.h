@@ -83,6 +83,8 @@ public:
 
 	Particle skillJoe;
 	Particle skillJoe2;
+	Particle skillAndy;
+	Particle skillAndy2;
 
 	void OnCollision(Collider*, Collider*, bool colliding) override;
 };
