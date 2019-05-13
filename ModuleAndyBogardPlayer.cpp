@@ -57,7 +57,7 @@ ModuleAndyBogardPlayer::ModuleAndyBogardPlayer()
 	already_hit = false;
 	body_collide = false;
 
-	// idle animation done 
+	// idle animation 
 	idle.PushBack({ 195, 20, 62, 104 });
 	idle.PushBack({ 274, 18, 61, 106 });
 	idle.PushBack({ 354, 16, 63, 108 });
@@ -66,24 +66,24 @@ ModuleAndyBogardPlayer::ModuleAndyBogardPlayer()
 	idle.loop = true;
 	idle.speed = 0.14f;
 
-	// jump idle up done
+	// jump idle up 
 	jumpiup.PushBack({ 88, 367, 39, 126 });
 
-	// jump idle down 
+	// jump idle 
 	jumpidown.PushBack({ 145, 367, 49, 81 });
 
-	//jump while moving done
+	//jump while moving 
 	jump.PushBack({ 204, 367, 56, 121 });
 
-	//go forward done	
-	forward.PushBack({ 597, 19, 75, 105 });
+	//go forward 
+	forward.PushBack({ 746, 602, 63, 99 });
 	forward.PushBack({ 686, 11, 65, 113 });
 	forward.PushBack({ 758, 5, 62, 119 });
 	forward.PushBack({ 825, 16, 63, 108 });
 	forward.speed = 0.13f;
 	forward.loop = true;
 
-	//go backwards done
+	//go backwards 
 	backward.PushBack({ 33, 144, 60, 102 });
 	backward.PushBack({ 111, 141, 55, 105 });
 	backward.PushBack({ 176, 136, 55, 110 });
@@ -91,13 +91,13 @@ ModuleAndyBogardPlayer::ModuleAndyBogardPlayer()
 	backward.speed = 0.13f;
 	backward.loop = true;
 
-	// crowch done
+	// crowch 
 	crowch.PushBack({ 761, 888, 59, 69 });
 
 	// crowch while going backwards and viceversa
 	crowchprotecc.PushBack({ 830,881,51,74 });
 
-	//punch while standing done	
+	//punch while standing 
 	punchstanding.PushBack({ 481, 610, 64, 102 });
 	punchstanding.PushBack({ 553, 616, 63, 96 });
 	punchstanding.PushBack({ 627, 616, 97, 96 });
@@ -113,7 +113,7 @@ ModuleAndyBogardPlayer::ModuleAndyBogardPlayer()
 	crowchpunch.speed = 0.12f;
 	crowchpunch.loop = false;
 
-	//kick while standing done
+	//kick while standing 
 	kickingstanding.PushBack({ 417,163,60,84 });
 	kickingstanding.PushBack({ 495,185,52,65 });
 	kickingstanding.PushBack({ 562,153,44,94 });
@@ -122,7 +122,7 @@ ModuleAndyBogardPlayer::ModuleAndyBogardPlayer()
 	kickingstanding.speed = 0.13f;
 	kickingstanding.loop = false;
 
-	//special attack while standing done
+	//special attack while standing 
 	specialattack.PushBack({ 620, 689, 51, 105 });
 	specialattack.PushBack({ 547, 682, 54, 112 });
 	specialattack.PushBack({ 482, 699, 60, 95 });
