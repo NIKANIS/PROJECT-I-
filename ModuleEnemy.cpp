@@ -55,126 +55,6 @@ ModuleEnemy::ModuleEnemy()
 	health = 100;
 	already_hit = false;
 	body_collide = false;
-
-	// idle animation done 
-	idle.PushBack({ 27, 913, 60, 105 });
-	idle.PushBack({ 95, 915, 61, 104 });
-	idle.PushBack({ 164, 914, 60, 104 });
-	idle.PushBack({ 95, 915, 61, 104 });
-	idle.loop = true;
-	idle.speed = 0.13f;
-
-	// jump idle up done
-	jumpiup.PushBack({ 907, 471, 61, 128 });
-
-	// jump idle down 
-	jumpidown.PushBack({ 908, 655, 60, 96 });
-
-	//jump while moving done
-	jump.PushBack({ 828, 565 , 63, 107 });
-
-	//go forward done
-	forward.PushBack({ 1111, 270, 69, 105 });
-	forward.PushBack({ 1193, 271, 59, 104 });
-	forward.PushBack({ 1267, 274, 59, 101 });
-	forward.PushBack({ 1036, 273, 59, 102 });
-	forward.speed = 0.13f;
-	forward.loop = true;
-
-	//go backwards done
-	backward.PushBack({ 1465, 446, 59, 102 });
-	backward.PushBack({ 1396, 445, 55, 104 });
-	backward.PushBack({ 1327, 442, 56, 106 });
-	backward.PushBack({ 1258, 444, 57, 104 });
-	backward.speed = 0.13f;
-	backward.loop = true;
-
-	// crowch done
-	crowch.PushBack({ 440, 606, 52, 63 });
-
-	// crowch while going backwards and viceversa
-	crowchprotecc.PushBack({ 380,607,52,62 });
-
-	//punch while standing done
-	punchstanding.PushBack({ 434, 919, 71, 99 });
-	punchstanding.PushBack({ 507, 919, 61, 100 });
-	punchstanding.PushBack({ 575, 917, 95, 102 });
-	punchstanding.PushBack({ 507, 919, 61, 100 });
-	punchstanding.PushBack({ 434, 919, 71, 99 });
-	punchstanding.speed = 0.15f;
-	punchstanding.loop = false;
-
-	//punch while crowching 
-	crowchpunch.PushBack({ 239,832,57,66 });
-	crowchpunch.PushBack({ 302,835,50,65 });
-	crowchpunch.PushBack({ 359,834,82,64 });
-	crowchpunch.PushBack({ 302,835,50,65 });
-	crowchpunch.PushBack({ 239,832,57,66 });
-	crowchpunch.speed = 0.15f;
-	crowchpunch.loop = false;
-
-	//kick while standing done
-	kickingstanding.PushBack({ 1119,631,59,103 });
-	kickingstanding.PushBack({ 1196,628,47,106 });
-	kickingstanding.PushBack({ 1261,642,47,93 });
-	kickingstanding.PushBack({ 1314,617,57,120 });
-	kickingstanding.PushBack({ 1379,617,42,120 });
-	kickingstanding.PushBack({ 1441,612,116,125 });
-	kickingstanding.PushBack({ 1572,628,62,117 });
-	kickingstanding.PushBack({ 1653,625,57,91 });
-	kickingstanding.speed = 0.20f;
-	kickingstanding.loop = false;
-
-	//special attack while standing done
-	specialattack.PushBack({ 620, 689, 51, 105 });
-	specialattack.PushBack({ 547, 682, 54, 112 });
-	specialattack.PushBack({ 482, 699, 60, 95 });
-	specialattack.PushBack({ 399, 717, 67, 76 });
-	specialattack.PushBack({ 399, 717, 67, 76 });
-	specialattack.PushBack({ 260, 727, 65, 67 });
-	specialattack.PushBack({ 195, 714, 60, 80 });
-	specialattack.speed = 0.15f;
-	specialattack.loop = false;
-
-	//die
-	die.PushBack({ 1929,836,64,155 });
-	die.PushBack({ 1851,836,69,155 });
-	die.PushBack({ 1756,836,84,155 });
-	die.PushBack({ 1644,836,107,155 });
-	die.PushBack({ 1542,836,87,155 });
-	die.PushBack({ 1425,836,102,155 });
-	die.PushBack({ 1303,836,112,155 });
-	die.PushBack({ 1178,836,115,155 });
-	die.speed = 0.15f;
-	die.loop = false;
-
-	//victory
-	victory.PushBack({ 699,324,56,136 });
-	victory.PushBack({ 772,324,56,136 });
-	victory.PushBack({ 839,324,60,136 });
-	victory.PushBack({ 908,324,56,136 });
-	victory.speed = 0.15f;
-	victory.loop = false;
-
-	//hit
-	hit.PushBack({ 20, 473, 67, 104 });
-	hit.PushBack({ 88, 470, 73, 110 });
-	hit.PushBack({ 20, 473, 67, 104 });
-	hit.speed = 0.15f;
-	hit.loop = false;
-
-	//kickstun
-	kickstun.PushBack({ 160,479,64,96 });
-	kickstun.PushBack({ 235,479,69,96 });
-	kickstun.speed = 0.04f;
-	kickstun.loop = false;
-
-	//punchstun
-	punchstun.PushBack({ 88,469,68,106 });
-	punchstun.PushBack({ 24,475,60,100 });
-	punchstun.speed = 0.04f;
-	punchstun.loop = false;
-
 }
 
 ModuleEnemy::~ModuleEnemy()
@@ -1121,6 +1001,11 @@ void ModuleEnemy::OnCollision(Collider* a, Collider* b, bool colliding)
 			{
 				App->player->Damage(20, 1);
 				score += 100;
+			}
+			if (sp)
+			{
+				App->player->Damage(50, 1);
+				score += 500;
 			}
 		}
 		if (b->type == COLLIDER_PLAYER && a->type == COLLIDER_ENEMY)
