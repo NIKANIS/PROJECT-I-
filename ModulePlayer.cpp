@@ -948,7 +948,6 @@ update_status ModulePlayer::Update()
 				SpecialAttack();
 				if (App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT && !lockX && !punching && !kicking && !specialattack_ && current_animation != &crowch)
 				{
-					health = 0;
 					if (body_collide && !fliped)
 						body_collide = false;
 					if (position.x != 0 && !body_collide && position.x*(-SCREEN_SIZE) < App->render->camera.x)
