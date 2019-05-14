@@ -788,6 +788,50 @@ update_status ModulePlayer::Update()
 				sp = false;
 			
 		}
+
+
+		if (App->scene_chooseplayer->final_player1 == 2)
+		{
+			if (!fliped)
+			{
+				n = 20;
+				App->particles->skill.speed.x = 3.0f;
+				App->particles->skill2.speed.x = 3.0f;
+				App->particles->skill3.speed.x = 3.0f;
+			}
+			else
+			{
+				n = 0;
+				App->particles->skill.speed.x = -3.0f;
+				App->particles->skill2.speed.x = -3.0f;
+				App->particles->skill3.speed.x = -3.0f;
+
+			}
+			if (st == 25)
+			{
+				App->particles->AddParticle(App->particles->skill, position.x + n, position.y - 40, COLLIDER_PLAYER_ATTACK);
+			}
+			if (st == 30)
+			{
+				App->particles->AddParticle(App->particles->skill2, position.x + n, position.y - 67, COLLIDER_PLAYER_ATTACK);
+			}
+			if (st == 35)
+			{
+				App->particles->AddParticle(App->particles->skill3, position.x + n, position.y - 95, COLLIDER_PLAYER_ATTACK);
+				specialattack_ = false;
+			}
+			if (st == 40)
+			{
+				App->particles->AddParticle(App->particles->skill2, position.x + n, position.y - 67, COLLIDER_PLAYER_ATTACK);
+			}
+			if (st == 45)
+			{
+				App->particles->AddParticle(App->particles->skill, position.x + n, position.y - 40, COLLIDER_PLAYER_ATTACK);
+			}
+			if (st == 1000)
+				sp = false;
+		}
+
 		if (App->scene_chooseplayer->final_player1 == 3)
 		{
 			if (!fliped)
@@ -849,90 +893,6 @@ update_status ModulePlayer::Update()
 			if (st == 500)
 				sp = false;
 
-		}
-
-		if (App->scene_chooseplayer->final_player1 == 2)
-		{
-			if (!fliped)
-			{
-				n = 20;
-				App->particles->skill.speed.x = 3.0f;
-				App->particles->skill2.speed.x = 3.0f;
-				App->particles->skill3.speed.x = 3.0f;
-			}
-			else
-			{
-				n = 0;
-				App->particles->skill.speed.x = -3.0f;
-				App->particles->skill2.speed.x = -3.0f;
-				App->particles->skill3.speed.x = -3.0f;
-
-			}
-			if (st == 25)
-			{
-				App->particles->AddParticle(App->particles->skill, position.x + n, position.y - 40, COLLIDER_PLAYER_ATTACK);
-			}
-			if (st == 30)
-			{
-				App->particles->AddParticle(App->particles->skill2, position.x + n, position.y - 67, COLLIDER_PLAYER_ATTACK);
-			}
-			if (st == 35)
-			{
-				App->particles->AddParticle(App->particles->skill3, position.x + n, position.y - 95, COLLIDER_PLAYER_ATTACK);
-				specialattack_ = false;
-			}
-			if (st == 40)
-			{
-				App->particles->AddParticle(App->particles->skill2, position.x + n, position.y - 67, COLLIDER_PLAYER_ATTACK);
-			}
-			if (st == 45)
-			{
-				App->particles->AddParticle(App->particles->skill, position.x + n, position.y - 40, COLLIDER_PLAYER_ATTACK);
-			}
-			if (st == 1000)
-				sp = false;
-		}
-
-		if (App->scene_chooseplayer->final_player1 == 3)
-		{
-			if (!fliped)
-			{
-				n = 20;
-				App->particles->skill.speed.x = 3.0f;
-				App->particles->skill2.speed.x = 3.0f;
-				App->particles->skill3.speed.x = 3.0f;
-			}
-			else
-			{
-				n = 0;
-				App->particles->skill.speed.x = -3.0f;
-				App->particles->skill2.speed.x = -3.0f;
-				App->particles->skill3.speed.x = -3.0f;
-
-			}
-			if (st == 25)
-			{
-				App->particles->AddParticle(App->particles->skill, position.x + n, position.y - 40, COLLIDER_PLAYER_ATTACK);
-			}
-			if (st == 30)
-			{
-				App->particles->AddParticle(App->particles->skill2, position.x + n, position.y - 67, COLLIDER_PLAYER_ATTACK);
-			}
-			if (st == 35)
-			{
-				App->particles->AddParticle(App->particles->skill3, position.x + n, position.y - 95, COLLIDER_PLAYER_ATTACK);
-				specialattack_ = false;
-			}
-			if (st == 40)
-			{
-				App->particles->AddParticle(App->particles->skill2, position.x + n, position.y - 67, COLLIDER_PLAYER_ATTACK);
-			}
-			if (st == 45)
-			{
-				App->particles->AddParticle(App->particles->skill, position.x + n, position.y - 40, COLLIDER_PLAYER_ATTACK);
-			}
-			if (st == 1000)
-				sp = false;
 		}
 	}
 	Jump();
