@@ -81,31 +81,12 @@ bool ModulePlayer::Start()
 	if (App->scene_chooseplayer->final_player1 == 1)
 	{
 		player_col = App->collision->AddCollider({ position.x + 5, position.y - 100, 33, 100 }, COLLIDER_PLAYER, App->player);
-		graphics = App->textures->Load("SPRITES FATAL FURY/CHARACTERS/3-Joe Higashi/Sprites joe higashi.png"); // arcade version
-	}
+		graphics = App->textures->Load("SPRITES FATAL FURY/CHARACTERS/3-Joe Higashi/Sprites joe higashi.png");
 
-	if (App->scene_chooseplayer->final_player1 == 2)
-	{
-		player_col = App->collision->AddCollider({ position.x + 10, position.y - 90, 33, 90 }, COLLIDER_PLAYER, App->player);
-		graphics = App->textures->Load("SPRITES FATAL FURY/CHARACTERS/1-Terry Bogard/spritesTerryBogard.png"); // arcade version
-	}
-
-	if (App->scene_chooseplayer->final_player1 == 3)
-	{
-		player_col = App->collision->AddCollider({ position.x + 10, position.y - 90, 33, 90 }, COLLIDER_PLAYER, App->player);
-		graphics = App->textures->Load("SPRITES FATAL FURY/CHARACTERS/2-Andy Bogard/Sprites_AndyBogard.png"); // arcade version
-	}
-
-	if (App->scene_chooseplayer->final_player1 == 1)
-	{
 		// idle animation done 
-		idle.PushBack({ 190, 20, 62, 104 });
-		idle.PushBack({ 269, 18, 61, 106 });
-		idle.PushBack({ 349, 16, 63, 108 });
-		idle.PushBack({ 429, 18, 61, 106 });
-		idle.PushBack({ 513, 20, 62, 104 });
-		idle.loop = true;
-		idle.speed = 0.14f;
+		idle.PushBack({ 190, 20, 62, 104 }); idle.PushBack({ 269, 18, 61, 106 }); idle.PushBack({ 349, 16, 63, 108 });
+		idle.PushBack({ 429, 18, 61, 106 }); idle.PushBack({ 513, 20, 62, 104 });
+		idle.loop = true; idle.speed = 0.14f;
 
 		// jump idle up done
 		jumpiup.PushBack({ 83, 367, 39, 126 });
@@ -117,20 +98,12 @@ bool ModulePlayer::Start()
 		jump.PushBack({ 199, 367, 56, 121 });
 
 		//go forward done	
-		forward.PushBack({ 592, 19, 75, 105 });
-		forward.PushBack({ 681, 11, 65, 113 });
-		forward.PushBack({ 753, 5, 62, 119 });
-		forward.PushBack({ 820, 16, 63, 108 });
-		forward.speed = 0.13f;
-		forward.loop = true;
+		forward.PushBack({ 592, 19, 75, 105 }); forward.PushBack({ 681, 11, 65, 113 }); forward.PushBack({ 753, 5, 62, 119 }); forward.PushBack({ 820, 16, 63, 108 });
+		forward.speed = 0.13f; forward.loop = true;
 
 		//go backwards done
-		backward.PushBack({ 28, 144, 60, 102 });
-		backward.PushBack({ 106, 141, 55, 105 });
-		backward.PushBack({ 171, 136, 55, 110 });
-		backward.PushBack({ 236, 140, 56, 106 });
-		backward.speed = 0.13f;
-		backward.loop = true;
+		backward.PushBack({ 28, 144, 60, 102 }); backward.PushBack({ 106, 141, 55, 105 }); backward.PushBack({ 171, 136, 55, 110 }); backward.PushBack({ 236, 140, 56, 106 });
+		backward.speed = 0.13f; backward.loop = true;
 
 		// crowch done
 		crowch.PushBack({ 756, 888, 59, 69 });
@@ -139,13 +112,9 @@ bool ModulePlayer::Start()
 		crowchprotecc.PushBack({ 825,881,51,74 });
 
 		//punch while standing done	
-		punchstanding.PushBack({ 476, 610, 64, 102 });
-		punchstanding.PushBack({ 548, 616, 63, 96 });
-		punchstanding.PushBack({ 622, 616, 97, 96 });
-		punchstanding.PushBack({ 548, 616, 63, 96 });
-		punchstanding.PushBack({ 476, 610, 64, 102 });
-		punchstanding.speed = 0.15f;
-		punchstanding.loop = false;
+		punchstanding.PushBack({ 476, 610, 64, 102 }); punchstanding.PushBack({ 548, 616, 63, 96 }); punchstanding.PushBack({ 622, 616, 97, 96 });
+		punchstanding.PushBack({ 548, 616, 63, 96 }); punchstanding.PushBack({ 476, 610, 64, 102 });
+		punchstanding.speed = 0.15f; punchstanding.loop = false;
 
 		//punch while crowching 
 		crowchpunch.PushBack({ 92,286,55,71 });
@@ -233,6 +202,9 @@ bool ModulePlayer::Start()
 
 	if (App->scene_chooseplayer->final_player1 == 2)
 	{
+		player_col = App->collision->AddCollider({ position.x + 10, position.y - 90, 33, 90 }, COLLIDER_PLAYER, App->player);
+		graphics = App->textures->Load("SPRITES FATAL FURY/CHARACTERS/1-Terry Bogard/spritesTerryBogard.png");
+
 		// idle animation done 
 		idle.PushBack({ 27, 913, 60, 105 });
 		idle.PushBack({ 95, 915, 61, 104 });
@@ -356,6 +328,9 @@ bool ModulePlayer::Start()
 
 	if (App->scene_chooseplayer->final_player1 == 3)
 	{
+		player_col = App->collision->AddCollider({ position.x + 10, position.y - 90, 33, 90 }, COLLIDER_PLAYER, App->player);
+		graphics = App->textures->Load("SPRITES FATAL FURY/CHARACTERS/2-Andy Bogard/Sprites_AndyBogard.png");
+
 		// idle animation done
 		idle.PushBack({ 428, 810, 59, 98 });
 		idle.PushBack({ 497, 808, 59, 100 });
