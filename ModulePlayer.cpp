@@ -19,37 +19,6 @@
 
 #include "SDL/include/SDL_timer.h"
 
-
-
-void ModulePlayer::Jump() {
-	if (jumping) {
-		t++;
-		position.y = 220 - 7 * t + 0.12*(t*t);
-		vy = -7 + 0.24*t;
-		if (position.y >= 220) {
-			jumping = false;
-			position.y = 220;
-		}
-		if (vy > 0) {
-			if (current_animation != &jumpidown)
-			{
-				jumpidown.Reset();
-				current_animation = &jumpidown;
-			}
-		}
-	}
-}
-
-int ModulePlayer::Health() 
-{
-	return health;
-}
-
-int ModulePlayer::Score()
-{
-	return score;
-}
-
 ModulePlayer::ModulePlayer()
 {
 	health = 100;
@@ -60,7 +29,6 @@ ModulePlayer::ModulePlayer()
 ModulePlayer::~ModulePlayer()
 {}
 
-// Load assets
 bool ModulePlayer::Start()
 {
 	bool ret = true;
@@ -480,6 +448,10 @@ void ModulePlayer::Reset()
 	body_collide = false;
 	already_hit = false;
 	stuned = 0;
+	if (player_punch_col != nullptr)
+		player_punch_col->to_delete = true;
+	if (player_kick_col != nullptr)
+		player_kick_col->to_delete = true;
 
 	current_animation = &idle;
 	lockX = false;
@@ -495,6 +467,16 @@ void ModulePlayer::Reset()
 	vy = 0;
 }
 
+int ModulePlayer::Health()
+{
+	return health;
+}
+
+int ModulePlayer::Score()
+{
+	return score;
+}
+
 int ModulePlayer::Pos_X()
 {
 	if (punching == true && fliped && at >= 13 && at <= 18) 
@@ -506,28 +488,31 @@ int ModulePlayer::Pos_X()
 	return position.x;
 }
 
-update_status ModulePlayer::Update()
+void ModulePlayer::Jump() {
+	if (jumping) {
+		t++;
+		position.y = 220 - 7 * t + 0.12*(t*t);
+		vy = -7 + 0.24*t;
+		if (position.y >= 220) {
+			jumping = false;
+			position.y = 220;
+		}
+		if (vy > 0) {
+			if (current_animation != &jumpidown && current_animation != &die)
+			{
+				jumpidown.Reset();
+				current_animation = &jumpidown;
+			}
+		}
+	}
+}
+
+void ModulePlayer::Punch()
 {
-	godMode();
-
-	if (health < 0)
-		health = 0;
-
-	int speed = 2;
-
-	if (App->enemy->position.x <= position.x)
-	{
-		fliped = true;
-	}
-	else
-	{
-		fliped = false;
-	}
-
 	if (punching == true) {
 		at++;
 		if (at == 1 && current_animation == &crowchpunch)
-		{ 
+		{
 			if (App->scene_chooseplayer->final_player1 == 1)
 			{
 				player_col->rect.h = 65;
@@ -561,7 +546,7 @@ update_status ModulePlayer::Update()
 						player_punch_col = App->collision->AddCollider({ position.x + 50, position.y - 87, 45, 12 }, COLLIDER_PLAYER_ATTACK, App->player);
 						player_col->SetPos(position.x + 17, position.y - 100);
 					}
-						
+
 				else
 					if (current_animation == &crowchpunch)
 						player_punch_col = App->collision->AddCollider({ position.x - 24, position.y - 60, 35, 12 }, COLLIDER_PLAYER_ATTACK, App->player);
@@ -584,7 +569,7 @@ update_status ModulePlayer::Update()
 					else
 						player_punch_col = App->collision->AddCollider({ position.x - 30, position.y - 90, 41, 12 }, COLLIDER_PLAYER_ATTACK, App->player);
 
-			}	
+			}
 			if (App->scene_chooseplayer->final_player1 == 3)
 			{
 				if (fliped == false)
@@ -603,7 +588,6 @@ update_status ModulePlayer::Update()
 		if (at == 19)
 		{
 			player_punch_col->to_delete = true;
-			already_hit = false;
 		}
 		if (at == 13 && fliped)
 		{
@@ -617,9 +601,13 @@ update_status ModulePlayer::Update()
 		{
 			punching = false;
 			crowchaction = false;
+			already_hit = false;
 		}
 	}
+}
 
+void ModulePlayer::Kick()
+{
 	if (kicking == true) {
 		at++;
 		if (at == 24)
@@ -685,19 +673,22 @@ update_status ModulePlayer::Update()
 		}
 		if (at == 30)
 		{
-			if (fliped) 
+			if (fliped)
 			{
 				position.x += 44;
 			}
 			player_kick_col->to_delete = true;
-			already_hit = false;
 		}
 		if (at == 40)
 		{
 			kicking = false;
+			already_hit = false;
 		}
 	}
+}
 
+void ModulePlayer::SpecialAttack()
+{
 	if (sp == true) {
 		st++;
 		int n;
@@ -717,27 +708,27 @@ update_status ModulePlayer::Update()
 			}
 			if (st == 25)
 			{
-				skillJoe.position.x = position.x +25;
+				skillJoe.position.x = position.x + 25;
 				skillJoe.position.y = position.y - 112;
 				if (fliped)
 				{
 					skillJoe.position.x = position.x;
 				}
-				App->particles->AddParticle(skillJoe, position.x + n, position.y - 112 , COLLIDER_NONE);	
+				App->particles->AddParticle(skillJoe, position.x + n, position.y - 112, COLLIDER_NONE);
 				player_skill_col = App->collision->AddCollider({ skillJoe.position.x, position.y - 52, 45, 60 }, COLLIDER_PLAYER_ATTACK, App->player);
 
-				
+
 			}
 			if (st >= 25 && st < 35)
 			{
-				if(st < 26)
+				if (st < 26)
 					App->render->Blit(graphics, skillJoe.position.x, skillJoe.position.y + 60, &(skillJoe.anim.GetCurrentFrame()));
 				else
 					App->render->Blit(graphics, skillJoe.position.x, skillJoe.position.y + 23, &(skillJoe.anim.GetCurrentFrame()));
 				skillJoe.Update();
 				skillJoe2.position.x = skillJoe.position.x;
 				skillJoe2.position.y = skillJoe.position.y;
-				player_skill_col->SetPos(skillJoe.position.x, skillJoe.position.y+52);
+				player_skill_col->SetPos(skillJoe.position.x, skillJoe.position.y + 52);
 			}
 
 			if (st >= 35)
@@ -746,7 +737,7 @@ update_status ModulePlayer::Update()
 				skillJoe2.Update();
 				player_skill_col->rect.h = 90;
 				player_skill_col->rect.w = 35;
-				player_skill_col->SetPos(skillJoe2.position.x+10, skillJoe2.position.y+20);
+				player_skill_col->SetPos(skillJoe2.position.x + 10, skillJoe2.position.y + 20);
 			}
 			if (st == 35)
 			{
@@ -761,7 +752,7 @@ update_status ModulePlayer::Update()
 
 			if (st == 500)
 				sp = false;
-			
+
 		}
 
 
@@ -870,7 +861,27 @@ update_status ModulePlayer::Update()
 
 		}
 	}
+}
+
+update_status ModulePlayer::Update()
+{
+	godMode();
 	Jump();
+
+	if (health < 0)
+		health = 0;
+
+	int speed = 2;
+
+	if (App->enemy->Pos_X() <= Pos_X())
+	{
+		fliped = true;
+	}
+	else
+	{
+		fliped = false;
+	}
+
 	if (health == 0)
 	{
 		if (current_animation != &die)
@@ -932,8 +943,12 @@ update_status ModulePlayer::Update()
 			}
 			else 
 			{
+				Punch();
+				Kick();
+				SpecialAttack();
 				if (App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT && !lockX && !punching && !kicking && !specialattack_ && current_animation != &crowch)
 				{
+					health = 0;
 					if (body_collide && !fliped)
 						body_collide = false;
 					if (position.x != 0 && !body_collide && position.x*(-SCREEN_SIZE) < App->render->camera.x)

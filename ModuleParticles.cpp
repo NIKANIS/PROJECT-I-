@@ -157,6 +157,15 @@ void ModuleParticles::AddParticle(const Particle& particle, int x, int y, COLLID
 	}
 }
 
+void ModuleParticles::DeleteAll()
+{
+	for (uint i = 0; i < MAX_ACTIVE_PARTICLES; ++i)
+	{
+		delete active[i];
+		active[i] = nullptr;
+	}
+}
+
 void ModuleParticles::OnCollision(Collider* c1, Collider* c2, bool colliding)
 {
 	for (uint i = 0; i < MAX_ACTIVE_PARTICLES; ++i)

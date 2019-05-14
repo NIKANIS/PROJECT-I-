@@ -35,6 +35,9 @@ public:
 public:
 
 	void Jump();
+	void Punch();
+	void Kick();
+	void SpecialAttack();
 	SDL_Texture* graphics = nullptr;
 	Animation idle;
 	Animation jumpiup;

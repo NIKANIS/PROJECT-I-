@@ -67,6 +67,7 @@ void ModuleFightManager::Reset()
 {
 	App->player->Reset();
 	App->enemy->Reset();
+	App->particles->DeleteAll();
 	timer_num = 93;
 	timer_counter = 0;
 	time_stop = false;

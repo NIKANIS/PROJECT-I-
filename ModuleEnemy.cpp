@@ -19,37 +19,6 @@
 
 #include "SDL/include/SDL_timer.h"
 
-
-
-void ModuleEnemy::Jump() {
-	if (jumping) {
-		t++;
-		position.y = 220 - 7 * t + 0.12*(t*t);
-		vy = -7 + 0.24*t;
-		if (position.y >= 220) {
-			jumping = false;
-			position.y = 220;
-		}
-		if (vy > 0) {
-			if (current_animation != &jumpidown)
-			{
-				jumpidown.Reset();
-				current_animation = &jumpidown;
-			}
-		}
-	}
-}
-
-int ModuleEnemy::Health()
-{
-	return health;
-}
-
-int ModuleEnemy::Score()
-{
-	return score;
-}
-
 ModuleEnemy::ModuleEnemy()
 {
 	health = 100;
@@ -395,6 +364,16 @@ void ModuleEnemy::Reset()
 	vy = 0;
 }
 
+int ModuleEnemy::Health()
+{
+	return health;
+}
+
+int ModuleEnemy::Score()
+{
+	return score;
+}
+
 int ModuleEnemy::Pos_X()
 {
 	if (punching == true && fliped && at >= 13 && at <= 18)
@@ -406,17 +385,27 @@ int ModuleEnemy::Pos_X()
 	return position.x;
 }
 
-update_status ModuleEnemy::Update()
-{
-	if (position.x < App->player->position.x)
-	{
-		fliped = false;
+void ModuleEnemy::Jump() {
+	if (jumping) {
+		t++;
+		position.y = 220 - 7 * t + 0.12*(t*t);
+		vy = -7 + 0.24*t;
+		if (position.y >= 220) {
+			jumping = false;
+			position.y = 220;
+		}
+		if (vy > 0) {
+			if (current_animation != &jumpidown && current_animation != &die)
+			{
+				jumpidown.Reset();
+				current_animation = &jumpidown;
+			}
+		}
 	}
-	else
-	{
-		fliped = true;
-	}
+}
 
+void ModuleEnemy::Punch()
+{
 	if (punching == true) {
 		at++;
 		if (at == 1 && current_animation == &crowchpunch)
@@ -475,7 +464,6 @@ update_status ModuleEnemy::Update()
 		if (at == 19)
 		{
 			enemy_punch_col->to_delete = true;
-			already_hit = false;
 		}
 		if (at == 13 && fliped)
 		{
@@ -489,14 +477,13 @@ update_status ModuleEnemy::Update()
 		{
 			punching = false;
 			crowchaction = false;
+			already_hit = false;
 		}
 	}
+}
 
-	if (health < 0)
-		health = 0;
-
-	int speed = 2;
-
+void ModuleEnemy::Kick()
+{
 	if (kicking == true) {
 		at++;
 		if (at == 24)
@@ -549,17 +536,20 @@ update_status ModuleEnemy::Update()
 				position.x += 44;
 			}
 			enemy_kick_col->to_delete = true;
-			already_hit = false;
 		}
 		if (at == 40)
 		{
 			kicking = false;
+			already_hit = false;
 		}
 	}
+}
 
+void ModuleEnemy::SpecialAttack()
+{
 	if (sp == true) {
 		st++;
-		int n;		
+		int n;
 		if (App->scene_chooseplayer->final_player2 == 1)
 		{
 			if (!fliped)
@@ -665,7 +655,25 @@ update_status ModuleEnemy::Update()
 				sp = false;
 		}
 	}
+}
+
+update_status ModuleEnemy::Update()
+{
 	Jump();
+	if (Pos_X() < App->player->Pos_X())
+	{
+		fliped = false;
+	}
+	else
+	{
+		fliped = true;
+	}
+
+	if (health < 0)
+		health = 0;
+
+	int speed = 2;
+
 	if (health == 0)
 	{
 		if (current_animation != &die)
@@ -722,7 +730,9 @@ update_status ModuleEnemy::Update()
 			}
 			else
 			{
-
+				Punch();
+				Kick();
+				SpecialAttack();
 				if (App->input->keyboard[SDL_SCANCODE_LEFT] == KEY_STATE::KEY_REPEAT && !lockX && !punching && !kicking && !specialattack_ && current_animation != &crowch)
 				{
 					if (body_collide && !fliped)
