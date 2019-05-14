@@ -295,7 +295,7 @@ bool ModulePlayer::Start()
 	}
 
 	if (App->scene_chooseplayer->final_player1 == 3)
-	{
+ 	{
 		player_col = App->collision->AddCollider({ position.x + 10, position.y - 90, 33, 90 }, COLLIDER_PLAYER, App->player);
 		graphics = App->textures->Load("SPRITES FATAL FURY/CHARACTERS/2-Andy Bogard/Sprites_AndyBogard.png");
 
