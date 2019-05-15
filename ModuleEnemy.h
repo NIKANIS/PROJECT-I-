@@ -64,6 +64,7 @@ public:
 	bool kicking = false; //true while kicking
 	bool crowchaction = false; //true while crowching
 	bool specialattack_ = false; //true while special attacking
+	iPoint spatckpos;
 	bool sp = false;
 	bool skillColDone = false;
 	bool fliped = false;

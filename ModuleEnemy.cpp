@@ -795,18 +795,23 @@ void ModuleEnemy::SpecialAttack()
 
 		if (App->scene_chooseplayer->final_player2 == 2)
 		{
+			if (!fliped)
+				n = 55;
+			else
+				n = -10;
+
 			if (st == 1)
 			{
+				spatckpos.x = position.x;
+				spatckpos.y = position.y;
 				if (!fliped)
 				{
-					n = 20;
 					App->particles->skill.speed.x = 3.0f;
 					App->particles->skill2.speed.x = 3.0f;
 					App->particles->skill3.speed.x = 3.0f;
 				}
 				else
 				{
-					n = 0;
 					App->particles->skill.speed.x = -3.0f;
 					App->particles->skill2.speed.x = -3.0f;
 					App->particles->skill3.speed.x = -3.0f;
@@ -815,24 +820,24 @@ void ModuleEnemy::SpecialAttack()
 			
 			if (st == 25)
 			{
-				App->particles->AddParticle(App->particles->skill, position.x + n, position.y - 40, COLLIDER_ENEMY_ATTACK);
+				App->particles->AddParticle(App->particles->skill, spatckpos.x + n, spatckpos.y - 40, COLLIDER_ENEMY_ATTACK);
 			}
 			if (st == 30)
 			{
-				App->particles->AddParticle(App->particles->skill2, position.x + n, position.y - 67, COLLIDER_ENEMY_ATTACK);
+				App->particles->AddParticle(App->particles->skill2, spatckpos.x + n, spatckpos.y - 67, COLLIDER_ENEMY_ATTACK);
 			}
 			if (st == 35)
 			{
-				App->particles->AddParticle(App->particles->skill3, position.x + n, position.y - 95, COLLIDER_ENEMY_ATTACK);
+				App->particles->AddParticle(App->particles->skill3, spatckpos.x + n, spatckpos.y - 95, COLLIDER_ENEMY_ATTACK);
 				specialattack_ = false;
 			}
 			if (st == 40)
 			{
-				App->particles->AddParticle(App->particles->skill2, position.x + n, position.y - 67, COLLIDER_ENEMY_ATTACK);
+				App->particles->AddParticle(App->particles->skill2, spatckpos.x + n, spatckpos.y - 67, COLLIDER_ENEMY_ATTACK);
 			}
 			if (st == 45)
 			{
-				App->particles->AddParticle(App->particles->skill, position.x + n, position.y - 40, COLLIDER_ENEMY_ATTACK);
+				App->particles->AddParticle(App->particles->skill, spatckpos.x + n, spatckpos.y - 40, COLLIDER_ENEMY_ATTACK);
 			}
 			if (st == 1000)
 				sp = false;
