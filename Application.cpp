@@ -8,7 +8,7 @@
 #include "ModuleSceneWestSubway.h"
 #include "ModuleSceneHowardArena.h"
 #include "ModuleSceneSoundBeach.h"
-#include "ModuleSceneNeoGeo.h"
+#include "ModuleSceneNeoGeoIntro.h"
 #include "ModuleSceneIntro.h"
 #include "ModuleSceneCongrats.h"
 #include "ModuleSceneGameOver.h"
@@ -33,7 +33,7 @@ Application::Application()
 	modules[i++] = render = new ModuleRender();
 	modules[i++] = input = new ModuleInput();
 	modules[i++] = textures = new ModuleTextures();	
-	modules[i++] = scene_neogeo = new ModuleSceneNeoGeo();
+	modules[i++] = scene_neogeo = new ModuleSceneNeoGeoIntro();
 	modules[i++] = scene_intro = new ModuleSceneIntro();
 	modules[i++] = scene_chooseplayer = new ModuleSceneChoosePlayer();
 	modules[i++] = scene_paopao = new ModuleScenePaoPao();
