@@ -696,16 +696,11 @@ void ModulePlayer::Kick()
 			}
 			player_kick_col->to_delete = true;
 		}
-		if (at == 40 && current_animation != &lowkick)
+		if (at == 40)
 		{
 			kicking = false;
 			already_hit = false;
-		}
-		if (at == 30 && current_animation != &kickingstanding)
-		{
-			kicking = false;
-			already_hit = false;
-		}
+		}		
 	}
 }
 
