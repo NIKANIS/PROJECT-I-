@@ -1,5 +1,5 @@
-#ifndef __MODULESCENENEOGEO_H__
-#define __MODULESCENENEOGEO_H__
+#ifndef __MODULESCENENEOGEOINTRO_H__
+#define __MODULESCENENEOGEOINTRO_H__
 
 #include "Module.h"
 #include "Animation.h"
@@ -8,11 +8,11 @@
 
 struct SDL_Texture;
 
-class ModuleSceneNeoGeo : public Module
+class ModuleSceneNeoGeoIntro : public Module
 {
 public:
-	ModuleSceneNeoGeo();
-	~ModuleSceneNeoGeo();
+	ModuleSceneNeoGeoIntro();
+	~ModuleSceneNeoGeoIntro();
 
 	bool Start();
 	update_status Update();
@@ -25,4 +25,4 @@ public:
 	Mix_Music* music = nullptr;
 };
 
-#endif // __MODULESCENENEOGEO_H__
+#endif // __MODULESCENENEOGEOINTRO_H__

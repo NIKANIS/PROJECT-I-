@@ -1,6 +1,6 @@
 #include "Globals.h"
 #include "Application.h"
-#include "ModuleSceneNeoGeo.h"
+#include "ModuleSceneNeoGeoIntro.h"
 #include "ModuleSceneIntro.h"
 #include "ModuleScenePaoPao.h"
 #include "ModuleTextures.h"
@@ -11,7 +11,7 @@
 #include "ModuleAudio.h"
 #include "ModuleSceneChoosePlayer.h"
 
-ModuleSceneNeoGeo::ModuleSceneNeoGeo()
+ModuleSceneNeoGeoIntro::ModuleSceneNeoGeoIntro()
 {
 	for (int i = 0; i < 8; i++)
 	{
@@ -22,17 +22,17 @@ ModuleSceneNeoGeo::ModuleSceneNeoGeo()
 		}
 
 		LOG("i++")
-	}	
+	}
 
-	backgroundanim.speed = 0.10f;
+	backgroundanim.speed = 0.20f;
 	backgroundanim.loop = false;
 }
 
-ModuleSceneNeoGeo::~ModuleSceneNeoGeo()
+ModuleSceneNeoGeoIntro::~ModuleSceneNeoGeoIntro()
 {}
 
 // Load assets
-bool ModuleSceneNeoGeo::Start()
+bool ModuleSceneNeoGeoIntro::Start()
 {
 	LOG("Loading Neo Geo screen");
 	bool ret = true;
@@ -43,7 +43,7 @@ bool ModuleSceneNeoGeo::Start()
 }
 
 // Load assets
-bool ModuleSceneNeoGeo::CleanUp()
+bool ModuleSceneNeoGeoIntro::CleanUp()
 {
 	LOG("Unloading NeoGeo screen");
 	App->audio->Disable();
@@ -53,7 +53,7 @@ bool ModuleSceneNeoGeo::CleanUp()
 }
 
 // Update: draw background
-update_status ModuleSceneNeoGeo::Update()
+update_status ModuleSceneNeoGeoIntro::Update()
 {
 	App->render->Blit(graphics, 0, 0, &(backgroundanim.GetCurrentFrame()), 0.0f);
 
