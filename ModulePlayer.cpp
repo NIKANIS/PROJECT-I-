@@ -300,9 +300,9 @@ bool ModulePlayer::Start()
 		punchstun.loop = false;
 
 		//low kick
-		lowkick.PushBack({1101,160,58,63 });
-		lowkick.PushBack({ 1174,160,92,60 });
-		lowkick.PushBack({ 1101,160,58,63 });
+		lowkick.PushBack({1132,154,58,63 });
+		lowkick.PushBack({ 1205,154,92,60 });
+		lowkick.PushBack({ 1132,154,58,63 });
 		lowkick.speed = 0.12f;
 		lowkick.loop = false;
 
