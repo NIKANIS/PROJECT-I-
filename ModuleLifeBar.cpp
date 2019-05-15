@@ -124,7 +124,7 @@ update_status ModuleLifeBar::Update()
 
 	if (App->scene_chooseplayer->final_player2 == 3)
 	{
-		App->render->Blit(graphics, position.x + 2 + 256 + HUD_X, position.y - r.h + 2, &P3photo, 0.0f);
+		App->render->Blit(graphics, position.x + 256 + HUD_X, position.y - r.h + 2, &P3photo, 0.0f);
 	}
 
 	

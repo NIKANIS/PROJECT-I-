@@ -82,6 +82,9 @@
     <ClCompile Include="ModuleSceneSoundBeach.cpp">
       <Filter>Modules\Scenes</Filter>
     </ClCompile>
+    <ClCompile Include="ModuleSceneNeoGeo.cpp">
+      <Filter>Modules\Scenes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h">
@@ -172,6 +175,9 @@
       <Filter>Modules\Utility</Filter>
     </ClInclude>
     <ClInclude Include="ModuleSceneSoundBeach.h">
+      <Filter>Modules\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleSceneNeoGeo.h">
       <Filter>Modules\Scenes</Filter>
     </ClInclude>
   </ItemGroup>

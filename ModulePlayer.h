@@ -38,6 +38,7 @@ public:
 	void Punch();
 	void Kick();
 	void SpecialAttack();
+
 	SDL_Texture* graphics = nullptr;
 	Animation idle;
 	Animation jumpiup;
@@ -81,11 +82,12 @@ public:
 	Collider* player_skill_col = nullptr;
 
 	Mix_Chunk* punchFX = nullptr;
-	Mix_Chunk* skillFXTerry = nullptr;
+	Mix_Chunk* skillFX = nullptr;
 	Mix_Chunk* kickFX = nullptr;
 
 	Particle skillJoe;
 	Particle skillJoe2;
+
 	Particle skillAndy;
 	Particle skillAndy2;
 

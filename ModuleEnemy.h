@@ -81,6 +81,10 @@ public:
 	Particle skillJoe_;
 	Particle skillJoe2_;
 
+
+	Particle skillAndy_;
+	Particle skillAndy2_;
+
 	Mix_Chunk* punchFX = nullptr;
 	Mix_Chunk* skillFX = nullptr;
 	Mix_Chunk* kickFX = nullptr;

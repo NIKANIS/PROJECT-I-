@@ -32,6 +32,7 @@ ModuleEnemy::~ModuleEnemy()
 // Load assets
 bool ModuleEnemy::Start()
 {
+	bool ret = true;
 	LOG("Loading enemy textures");
 	current_animation = &idle;
 	health = 100;
@@ -45,30 +46,15 @@ bool ModuleEnemy::Start()
 	App->lifebar2->Enable();
 	App->enscore->Enable();
 
-
-	bool ret = true;
-	
 	if (App->scene_chooseplayer->final_player2 == 1)
-	{
+	{	
 		enemy_col = App->collision->AddCollider({ position.x + 5, position.y - 100, 33, 100 }, COLLIDER_ENEMY, App->enemy);
 		graphics = App->textures->Load("SPRITES FATAL FURY/CHARACTERS/3-Joe Higashi/Sprites joe higashi.png"); // arcade version
-	}
-	
-	if (App->scene_chooseplayer->final_player2 == 2)
-	{
-		enemy_col = App->collision->AddCollider({ position.x + 10, position.y - 90, 33, 90 }, COLLIDER_ENEMY, App->enemy);
-		graphics = App->textures->Load("SPRITES FATAL FURY/CHARACTERS/1-Terry Bogard/spritesTerryBogard.png"); // arcade version
-	}
-	
-	if (App->scene_chooseplayer->final_player1 == App->scene_chooseplayer->final_player2)
-	{
-		if (App->scene_chooseplayer->final_player2 == 2)
-			graphics = App->textures->Load("SPRITES FATAL FURY/CHARACTERS/1-Terry Bogard/spritesTerryBogard2.png");
-	}
-	
+		
+		punchFX = App->audio->loadWAV("AUDIO FATAL FURY/FX[WAV]/Voice/Attacks/FX_Attack2.wav");
+		kickFX = App->audio->loadWAV("AUDIO FATAL FURY/FX[WAV]/Voice/Attacks/FX_Attack2.wav");
+		skillFX = App->audio->loadWAV("AUDIO FATAL FURY/FX[WAV]/Voice/Special Attacks/FX_HurricaneUpAttackJoeHigashiVoice.wav");
 
-	if (App->scene_chooseplayer->final_player2 == 1)
-	{
 		// idle animation done 
 		idle.PushBack({ 190, 20, 62, 104 });
 		idle.PushBack({ 269, 18, 61, 106 });
@@ -204,6 +190,19 @@ bool ModuleEnemy::Start()
 
 	if (App->scene_chooseplayer->final_player2 == 2)
 	{
+
+		enemy_col = App->collision->AddCollider({ position.x + 10, position.y - 90, 33, 90 }, COLLIDER_ENEMY, App->enemy);
+		graphics = App->textures->Load("SPRITES FATAL FURY/CHARACTERS/1-Terry Bogard/spritesTerryBogard.png");
+
+		skillFX = App->audio->loadWAV("AUDIO FATAL FURY/FX[WAV]/Voice/Special Attacks/FX_PowerWaveAttackTerryBogardVoice.wav");
+		punchFX = App->audio->loadWAV("AUDIO FATAL FURY/FX[WAV]/Voice/Attacks/FX_Attack3.wav");
+		kickFX = App->audio->loadWAV("AUDIO FATAL FURY/FX[WAV]/Voice/Attacks/FX_Attack3.wav");
+
+		if (App->scene_chooseplayer->final_player1 == App->scene_chooseplayer->final_player2)
+		{
+			graphics = App->textures->Load("SPRITES FATAL FURY/CHARACTERS/1-Terry Bogard/spritesTerryBogard2.png");
+		}
+
 		// idle animation done 
 		idle.PushBack({ 27, 913, 60, 105 });
 		idle.PushBack({ 95, 915, 61, 104 });
@@ -325,9 +324,141 @@ bool ModuleEnemy::Start()
 
 	}
 
-	skillFX = App->audio->loadWAV("AUDIO FATAL FURY/FX[WAV]/Voice/Special Attacks/FX_PowerWaveAttackTerryBogardVoice.wav");
-	punchFX = App->audio->loadWAV("AUDIO FATAL FURY/FX[WAV]/Voice/Attacks/FX_Attack3.wav");
-	kickFX = App->audio->loadWAV("AUDIO FATAL FURY/FX[WAV]/Voice/Attacks/FX_Attack2.wav");
+	if (App->scene_chooseplayer->final_player2 == 3)
+	{
+		enemy_col = App->collision->AddCollider({ position.x + 10, position.y - 90, 33, 90 }, COLLIDER_ENEMY, App->enemy);
+		graphics = App->textures->Load("SPRITES FATAL FURY/CHARACTERS/2-Andy Bogard/Sprites_AndyBogard.png");
+		skillFX = App->audio->loadWAV("AUDIO FATAL FURY/FX[WAV]/Voice/Special Attacks/FX_HishokenAttackAndyBogardVoice.wav");
+
+		punchFX = App->audio->loadWAV("AUDIO FATAL FURY/FX[WAV]/Voice/Attacks/FX_Attack.wav");
+		kickFX = App->audio->loadWAV("AUDIO FATAL FURY/FX[WAV]/Voice/Attacks/FX_Attack.wav");
+
+		// idle animation done
+		idle.PushBack({ 428, 810, 59, 98 });
+		idle.PushBack({ 497, 808, 59, 100 });
+		idle.PushBack({ 428, 810, 59, 98 });
+		idle.PushBack({ 635, 811, 60, 95 });
+		idle.loop = true;
+		idle.speed = 0.13f;
+
+		// jump idle up 
+		jumpiup.PushBack({ 515, 119, 42, 104 });
+
+		// jump idle 
+		jumpidown.PushBack({ 577, 119, 51, 92 });
+
+		//jump while moving 
+		jump.PushBack({ 648, 122, 48, 83 });
+
+		//go forward done
+		forward.PushBack({ 746, 602, 63, 98 });
+		forward.PushBack({ 821, 601, 53, 98 });
+		forward.PushBack({ 878, 602, 62, 98 });
+		forward.PushBack({ 944, 599, 59, 101 });
+		forward.speed = 0.13f;
+		forward.loop = true;
+
+		//go backwards done
+		backward.PushBack({ 744, 473, 50, 100 });
+		backward.PushBack({ 801, 471, 49, 100 });
+		backward.PushBack({ 866, 475, 54, 98 });
+		backward.speed = 0.13f;
+		backward.loop = true;
+
+		// crowch done
+		crowch.PushBack({ 947, 162, 48, 60 });
+
+		// crowch while going backwards and viceversa done
+		crowchprotecc.PushBack({ 944,81,44,64 });
+
+		//punch while standing done
+		punchstanding.PushBack({ 89, 132, 49, 90 });
+		punchstanding.PushBack({ 155, 128, 48, 95 });
+		punchstanding.PushBack({ 220, 127, 93, 95 });
+		punchstanding.PushBack({ 220, 127, 93, 95 });
+		punchstanding.PushBack({ 155, 128, 48, 95 });
+		punchstanding.speed = 0.15f;
+		punchstanding.loop = false;
+
+		//punch while crowching done
+		crowchpunch.PushBack({ 881, 735, 49, 63 });
+		crowchpunch.PushBack({ 942, 736, 78, 62 });
+		crowchpunch.speed = 0.12f;
+		crowchpunch.loop = false;
+
+		//kick while standing DONE
+		kickingstanding.PushBack({ 312,14,44,98 });
+		kickingstanding.PushBack({ 379,25,57,87 });
+		kickingstanding.PushBack({ 449,22,52,90 });
+		kickingstanding.PushBack({ 515,25,113,94 }); //instead of 94, put 75 as normal sprite
+		kickingstanding.PushBack({ 642,12,83,94 });
+		kickingstanding.PushBack({ 748,28,53,79 });
+		kickingstanding.speed = 0.15f;
+		kickingstanding.loop = false;
+
+		//special attack while standing done
+		specialattack.PushBack({ 24, 360, 65, 94 });
+		specialattack.PushBack({ 94, 363, 48, 91 });
+		specialattack.PushBack({ 155, 367, 48, 88 });
+		specialattack.PushBack({ 217, 366, 98, 88 });
+		specialattack.speed = 0.15f;
+		specialattack.loop = false;
+
+		//die done
+		die.PushBack({ 28, 938, 92, 78 });
+		die.PushBack({ 127, 941, 98, 59 });
+		die.PushBack({ 231, 942 ,89, 55 });
+		die.PushBack({ 317, 950, 98, 42 });
+		die.PushBack({ 422, 954, 111, 37 });
+		die.PushBack({ 520, 917, 109, 32 });
+		die.speed = 0.15f;
+		die.loop = false;
+
+		//victory
+		victory.PushBack({ 699,324,56,136 });
+		victory.PushBack({ 772,324,56,136 });
+		victory.PushBack({ 839,324,60,136 });
+		victory.PushBack({ 908,324,56,136 });
+		victory.speed = 0.15f;
+		victory.loop = false;
+
+		//hit
+		hit.PushBack({ 20, 473, 67, 104 });
+		hit.PushBack({ 88, 470, 73, 110 });
+		hit.PushBack({ 20, 473, 67, 104 });
+		hit.speed = 0.15f;
+		hit.loop = false;
+
+		//kickstun doone
+		kickstun.PushBack({ 843, 921, 54, 92 });
+		kickstun.PushBack({ 908, 932, 64, 79 });
+		kickstun.speed = 0.04f;
+		kickstun.loop = false;
+
+		//punchstun done
+		punchstun.PushBack({ 721, 929, 62, 95 });
+		punchstun.PushBack({ 780, 932 ,65, 82 });
+		punchstun.speed = 0.04f;
+		punchstun.loop = false;
+
+		//Andy skill
+		skillAndy_.anim.PushBack({ 328, 378, 22, 22 }); //1ra
+		skillAndy_.anim.PushBack({ 364, 357, 35, 64 }); //2nda
+		skillAndy_.anim.PushBack({ 404, 358, 48, 62 }); //3ra
+		skillAndy_.life = 1000;
+		skillAndy_.speed.x = 2.0f;
+		skillAndy_.anim.speed = 0.06f;
+		skillAndy_.anim.loop = false;
+
+
+		skillAndy2_.anim.PushBack({ 462, 345, 61, 87 }); //4ta
+		skillAndy2_.anim.PushBack({ 534, 346, 46, 85 }); //5ta
+		skillAndy2_.life = 6000;
+		skillAndy2_.speed.x = 3.0f;
+		skillAndy2_.anim.speed = 0.1f;
+	}
+
+
 
 	return ret;
 }
@@ -349,6 +480,13 @@ void ModuleEnemy::Reset()
 	body_collide = false;
 	already_hit = false;
 	stuned = 0;
+
+	if (enemy_punch_col != nullptr)
+		enemy_punch_col->to_delete = true;
+	if (enemy_kick_col != nullptr)
+		enemy_kick_col->to_delete = true;
+	if (enemy_skill_col != nullptr)
+		enemy_skill_col->to_delete = true;
 
 	current_animation = &idle;
 	lockX = false;
@@ -423,6 +561,13 @@ void ModuleEnemy::Punch()
 				enemy_col->rect.w = 41;
 				enemy_col->SetPos(position.x + 5, position.y - 67);
 			}
+
+			if (App->scene_chooseplayer->final_player2 == 3)
+			{
+				enemy_col->rect.h = 65;
+				enemy_col->rect.w = 41;
+				enemy_col->SetPos(position.x + 5, position.y - 67);
+			}
 		}
 		if (at == 12)
 		{
@@ -447,6 +592,20 @@ void ModuleEnemy::Punch()
 					}
 			}
 			if (App->scene_chooseplayer->final_player2 == 2)
+			{
+				if (fliped == false)
+					if (current_animation == &crowchpunch)
+						enemy_punch_col = App->collision->AddCollider({ position.x + 46, position.y - 52, 35, 12 }, COLLIDER_ENEMY_ATTACK, App->enemy);
+					else
+						enemy_punch_col = App->collision->AddCollider({ position.x + 50, position.y - 90, 41, 12 }, COLLIDER_ENEMY_ATTACK, App->enemy);
+				else
+					if (current_animation == &crowchpunch)
+						enemy_punch_col = App->collision->AddCollider({ position.x - 30, position.y - 52, 35, 12 }, COLLIDER_ENEMY_ATTACK, App->enemy);
+					else
+						enemy_punch_col = App->collision->AddCollider({ position.x - 30, position.y - 90, 41, 12 }, COLLIDER_ENEMY_ATTACK, App->enemy);
+
+			}
+			if (App->scene_chooseplayer->final_player2 == 3)
 			{
 				if (fliped == false)
 					if (current_animation == &crowchpunch)
@@ -524,6 +683,24 @@ void ModuleEnemy::Kick()
 					enemy_col->rect.w = 50;
 				}
 			}
+			if (App->scene_chooseplayer->final_player2 == 3)
+			{
+				if (fliped == false)
+				{
+					enemy_kick_col = App->collision->AddCollider({ position.x + 50, position.y - 85, 49, 17 }, COLLIDER_ENEMY_ATTACK, App->enemy);
+					enemy_col->SetPos(position.x, position.y - 121);
+					enemy_col->rect.h = 110;
+					enemy_col->rect.w = 50;
+
+				}
+				else
+				{
+					enemy_kick_col = App->collision->AddCollider({ position.x - 25, position.y - 85, 49, 17 }, COLLIDER_ENEMY_ATTACK, App->enemy);
+					enemy_col->SetPos(position.x + 20, position.y - 121);
+					enemy_col->rect.h = 110;
+					enemy_col->rect.w = 50;
+				}
+			}
 		}
 		if (at == 25 && fliped)
 		{
@@ -552,18 +729,22 @@ void ModuleEnemy::SpecialAttack()
 		int n;
 		if (App->scene_chooseplayer->final_player2 == 1)
 		{
-			if (!fliped)
+			if (st == 1)
 			{
-				n = 10;
-				skillJoe_.speed.x = 3.0f;
-				skillJoe2_.speed.x = 3.0f;
+				if (!fliped)
+				{
+					n = 10;
+					skillJoe_.speed.x = 3.0f;
+					skillJoe2_.speed.x = 3.0f;
+				}
+				else
+				{
+					n = 0;
+					skillJoe_.speed.x = -3.0f;
+					skillJoe2_.speed.x = -3.0f;
+				}
 			}
-			else
-			{
-				n = 0;
-				skillJoe_.speed.x = -3.0f;
-				skillJoe2_.speed.x = -3.0f;
-			}
+			
 			if (st == 25)
 			{
 				skillJoe_.position.x = position.x + 25;
@@ -572,7 +753,7 @@ void ModuleEnemy::SpecialAttack()
 				{
 					skillJoe_.position.x = position.x;
 				}
-				App->particles->AddParticle(skillJoe_, position.x + n, position.y - 112, COLLIDER_NONE);
+				App->particles->AddParticle(skillJoe_, position.x, position.y - 112, COLLIDER_NONE);
 				enemy_skill_col = App->collision->AddCollider({ skillJoe_.position.x, position.y - 52, 45, 60 }, COLLIDER_ENEMY_ATTACK, App->enemy);
 
 
@@ -580,9 +761,9 @@ void ModuleEnemy::SpecialAttack()
 			if (st >= 25 && st < 35)
 			{
 				if (st < 26)
-					App->render->Blit(graphics, skillJoe_.position.x, skillJoe_.position.y + 60, &(skillJoe_.anim.GetCurrentFrame()));
+					App->render->Blit(graphics, skillJoe_.position.x, skillJoe_.position.y + 60, &(skillJoe_.anim.GetCurrentFrame()), fliped);
 				else
-					App->render->Blit(graphics, skillJoe_.position.x, skillJoe_.position.y + 23, &(skillJoe_.anim.GetCurrentFrame()));
+					App->render->Blit(graphics, skillJoe_.position.x, skillJoe_.position.y + 23, &(skillJoe_.anim.GetCurrentFrame()), fliped);
 				skillJoe_.Update();
 				skillJoe2_.position.x = skillJoe_.position.x;
 				skillJoe2_.position.y = skillJoe_.position.y;
@@ -591,7 +772,7 @@ void ModuleEnemy::SpecialAttack()
 
 			if (st >= 35)
 			{
-				App->render->Blit(graphics, skillJoe2_.position.x, skillJoe2_.position.y, &(skillJoe2_.anim.GetCurrentFrame()));
+				App->render->Blit(graphics, skillJoe2_.position.x, skillJoe2_.position.y, &(skillJoe2_.anim.GetCurrentFrame()), fliped);
 				skillJoe2_.Update();
 				enemy_skill_col->rect.h = 90;
 				enemy_skill_col->rect.w = 35;
@@ -599,7 +780,6 @@ void ModuleEnemy::SpecialAttack()
 			}
 			if (st == 35)
 			{
-
 				specialattack_ = false;
 			}
 			if (st == 100)
@@ -615,21 +795,24 @@ void ModuleEnemy::SpecialAttack()
 
 		if (App->scene_chooseplayer->final_player2 == 2)
 		{
-			if (!fliped)
+			if (st == 1)
 			{
-				n = 20;
-				App->particles->skill.speed.x = 3.0f;
-				App->particles->skill2.speed.x = 3.0f;
-				App->particles->skill3.speed.x = 3.0f;
+				if (!fliped)
+				{
+					n = 20;
+					App->particles->skill.speed.x = 3.0f;
+					App->particles->skill2.speed.x = 3.0f;
+					App->particles->skill3.speed.x = 3.0f;
+				}
+				else
+				{
+					n = 0;
+					App->particles->skill.speed.x = -3.0f;
+					App->particles->skill2.speed.x = -3.0f;
+					App->particles->skill3.speed.x = -3.0f;
+				}
 			}
-			else
-			{
-				n = 0;
-				App->particles->skill.speed.x = -3.0f;
-				App->particles->skill2.speed.x = -3.0f;
-				App->particles->skill3.speed.x = -3.0f;
-
-			}
+			
 			if (st == 25)
 			{
 				App->particles->AddParticle(App->particles->skill, position.x + n, position.y - 40, COLLIDER_ENEMY_ATTACK);
@@ -653,6 +836,69 @@ void ModuleEnemy::SpecialAttack()
 			}
 			if (st == 1000)
 				sp = false;
+		}
+
+		if (App->scene_chooseplayer->final_player2 == 3)
+		{
+			if (st == 1)
+			{
+				if (!fliped)
+				{
+					skillAndy_.speed.x = 3.0f;
+					skillAndy2_.speed.x = 3.0f;
+				}
+				else
+				{
+					skillAndy_.speed.x = -3.0f;
+					skillAndy2_.speed.x = -3.0f;
+				}
+			}
+			if (st == 25)
+			{
+				skillAndy_.position.x = position.x + 80;
+				skillAndy_.position.y = position.y - 112;
+				if (fliped)
+				{
+					skillAndy_.position.x = position.x;
+				}
+				App->particles->AddParticle(skillAndy_, position.x, position.y - 112, COLLIDER_NONE);
+				enemy_skill_col = App->collision->AddCollider({ skillAndy_.position.x, position.y - 50, 30, 30 }, COLLIDER_ENEMY_ATTACK, App->enemy);
+
+
+			}
+			if (st >= 25 && st < 35)
+			{
+				if (st < 26)
+					App->render->Blit(graphics, skillAndy_.position.x, skillAndy_.position.y + 60, &(skillAndy_.anim.GetCurrentFrame()), fliped);
+				else
+					App->render->Blit(graphics, skillAndy_.position.x, skillAndy_.position.y + 23, &(skillAndy_.anim.GetCurrentFrame()),fliped);
+				skillAndy_.Update();
+				skillAndy2_.position.x = skillAndy_.position.x;
+				skillAndy2_.position.y = skillAndy_.position.y;
+				enemy_skill_col->SetPos(skillAndy_.position.x, skillAndy_.position.y + 20);
+			}
+
+			if (st >= 35)
+			{
+				App->render->Blit(graphics, skillAndy2_.position.x, skillAndy2_.position.y, &(skillAndy2_.anim.GetCurrentFrame()),fliped);
+				skillAndy2_.Update();
+				enemy_skill_col->rect.h = 60;
+				enemy_skill_col->rect.w = 25;
+				enemy_skill_col->SetPos(skillAndy2_.position.x + 10, skillAndy2_.position.y + 20);
+			}
+			if (st == 35)
+			{
+				specialattack_ = false;
+			}
+			if (st == 200)
+			{
+				enemy_skill_col->to_delete = true;
+				already_hit = false;
+			}
+
+			if (st == 500)
+				sp = false;
+
 		}
 	}
 }
@@ -718,6 +964,10 @@ update_status ModuleEnemy::Update()
 						enemy_col->SetPos(position.x + 17, position.y - 100);
 					}
 					if (App->scene_chooseplayer->final_player2 == 2)
+					{
+						enemy_col->SetPos(position.x + 17, position.y - 91);
+					}
+					if (App->scene_chooseplayer->final_player2 == 3)
 					{
 						enemy_col->SetPos(position.x + 17, position.y - 91);
 					}
@@ -948,6 +1198,30 @@ update_status ModuleEnemy::Update()
 							}
 						}
 					}
+					if (App->scene_chooseplayer->final_player2 == 3)
+					{
+						if (current_animation == &crowch || current_animation == &crowchprotecc && crowchaction)
+						{
+							enemy_col->rect.h = 65;
+							enemy_col->rect.w = 41;
+							enemy_col->SetPos(position.x + 5, position.y - 67);
+						}
+						else
+						{
+							if (!fliped)
+							{
+								enemy_col->SetPos(position.x + 10, position.y - 91);
+								enemy_col->rect.h = 90;
+								enemy_col->rect.w = 33;
+							}
+							else
+							{
+								enemy_col->SetPos(position.x + 17, position.y - 91);
+								enemy_col->rect.h = 90;
+								enemy_col->rect.w = 33;
+							}
+						}
+					}
 				}
 			}
 
@@ -980,7 +1254,11 @@ update_status ModuleEnemy::Update()
 	{
 		App->render->Blit(graphics, position.x, position.y - r.h, &r, fliped);
 	}
-
+	
+	if (App->scene_chooseplayer->final_player2 == 3)
+	{
+		App->render->Blit(graphics, position.x, position.y - r.h, &r, fliped);
+	}
 
 
 	return UPDATE_CONTINUE;

@@ -26,8 +26,7 @@ ModulePlayer::ModulePlayer()
 	body_collide = false;
 }
 
-ModulePlayer::~ModulePlayer()
-{}
+ModulePlayer::~ModulePlayer(){}
 
 bool ModulePlayer::Start()
 {
@@ -50,6 +49,10 @@ bool ModulePlayer::Start()
 	{
 		player_col = App->collision->AddCollider({ position.x + 5, position.y - 100, 33, 100 }, COLLIDER_PLAYER, App->player);
 		graphics = App->textures->Load("SPRITES FATAL FURY/CHARACTERS/3-Joe Higashi/Sprites joe higashi.png");
+
+		skillFX = App->audio->loadWAV("AUDIO FATAL FURY/FX[WAV]/Voice/Special Attacks/FX_HurricaneUpAttackJoeHigashiVoice.wav");
+		punchFX = App->audio->loadWAV("AUDIO FATAL FURY/FX[WAV]/Voice/Attacks/FX_Attack2.wav");
+		kickFX = App->audio->loadWAV("AUDIO FATAL FURY/FX[WAV]/Voice/Attacks/FX_Attack2.wav");
 
 		// idle animation done 
 		idle.PushBack({ 190, 20, 62, 104 }); idle.PushBack({ 269, 18, 61, 106 }); idle.PushBack({ 349, 16, 63, 108 });
@@ -172,6 +175,10 @@ bool ModulePlayer::Start()
 	{
 		player_col = App->collision->AddCollider({ position.x + 10, position.y - 90, 33, 90 }, COLLIDER_PLAYER, App->player);
 		graphics = App->textures->Load("SPRITES FATAL FURY/CHARACTERS/1-Terry Bogard/spritesTerryBogard.png");
+
+		skillFX = App->audio->loadWAV("AUDIO FATAL FURY/FX[WAV]/Voice/Special Attacks/FX_PowerWaveAttackTerryBogardVoice.wav");
+		punchFX = App->audio->loadWAV("AUDIO FATAL FURY/FX[WAV]/Voice/Attacks/FX_Attack3.wav");
+		kickFX = App->audio->loadWAV("AUDIO FATAL FURY/FX[WAV]/Voice/Attacks/FX_Attack3.wav");
 
 		// idle animation done 
 		idle.PushBack({ 27, 913, 60, 105 });
@@ -299,6 +306,10 @@ bool ModulePlayer::Start()
 		player_col = App->collision->AddCollider({ position.x + 10, position.y - 90, 33, 90 }, COLLIDER_PLAYER, App->player);
 		graphics = App->textures->Load("SPRITES FATAL FURY/CHARACTERS/2-Andy Bogard/Sprites_AndyBogard.png");
 
+		skillFX = App->audio->loadWAV("AUDIO FATAL FURY/FX[WAV]/Voice/Special Attacks/FX_HishokenAttackAndyBogardVoice.wav");
+		punchFX = App->audio->loadWAV("AUDIO FATAL FURY/FX[WAV]/Voice/Attacks/FX_Attack.wav");
+		kickFX = App->audio->loadWAV("AUDIO FATAL FURY/FX[WAV]/Voice/Attacks/FX_Attack.wav");
+
 		// idle animation done
 		idle.PushBack({ 428, 810, 59, 98 });
 		idle.PushBack({ 497, 808, 59, 100 });
@@ -424,9 +435,6 @@ bool ModulePlayer::Start()
 		skillAndy2.anim.speed = 0.1f;
 	}
 
-	skillFXTerry = App->audio->loadWAV("AUDIO FATAL FURY/FX[WAV]/Voice/Special Attacks/FX_PowerWaveAttackTerryBogardVoice.wav");
-	punchFX = App->audio->loadWAV("AUDIO FATAL FURY/FX[WAV]/Voice/Attacks/FX_Attack3.wav");
-	kickFX = App->audio->loadWAV("AUDIO FATAL FURY/FX[WAV]/Voice/Attacks/FX_Attack2.wav");
 	
 	return ret;
 }
@@ -452,6 +460,8 @@ void ModulePlayer::Reset()
 		player_punch_col->to_delete = true;
 	if (player_kick_col != nullptr)
 		player_kick_col->to_delete = true;
+	if (player_skill_col != nullptr)
+		player_skill_col->to_delete = true;
 
 	current_animation = &idle;
 	lockX = false;
@@ -694,18 +704,20 @@ void ModulePlayer::SpecialAttack()
 		int n;
 		if (App->scene_chooseplayer->final_player1 == 1)
 		{
-			if (!fliped)
+			if (st == 1)
 			{
-				n = 10;
-				skillJoe.speed.x = 3.0f;
-				skillJoe2.speed.x = 3.0f;
+				if (!fliped)
+				{
+					skillJoe.speed.x = 3.0f;
+					skillJoe2.speed.x = 3.0f;
+				}
+				else
+				{
+					skillJoe.speed.x = -3.0f;
+					skillJoe2.speed.x = -3.0f;
+				}
 			}
-			else
-			{
-				n = 0;
-				skillJoe.speed.x = -3.0f;
-				skillJoe2.speed.x = -3.0f;
-			}
+
 			if (st == 25)
 			{
 				skillJoe.position.x = position.x + 25;
@@ -714,7 +726,7 @@ void ModulePlayer::SpecialAttack()
 				{
 					skillJoe.position.x = position.x;
 				}
-				App->particles->AddParticle(skillJoe, position.x + n, position.y - 112, COLLIDER_NONE);
+				App->particles->AddParticle(skillJoe, position.x, position.y - 112, COLLIDER_NONE);
 				player_skill_col = App->collision->AddCollider({ skillJoe.position.x, position.y - 52, 45, 60 }, COLLIDER_PLAYER_ATTACK, App->player);
 
 
@@ -722,9 +734,9 @@ void ModulePlayer::SpecialAttack()
 			if (st >= 25 && st < 35)
 			{
 				if (st < 26)
-					App->render->Blit(graphics, skillJoe.position.x, skillJoe.position.y + 60, &(skillJoe.anim.GetCurrentFrame()));
+					App->render->Blit(graphics, skillJoe.position.x, skillJoe.position.y + 60, &(skillJoe.anim.GetCurrentFrame()), fliped);
 				else
-					App->render->Blit(graphics, skillJoe.position.x, skillJoe.position.y + 23, &(skillJoe.anim.GetCurrentFrame()));
+					App->render->Blit(graphics, skillJoe.position.x, skillJoe.position.y + 23, &(skillJoe.anim.GetCurrentFrame()), fliped);
 				skillJoe.Update();
 				skillJoe2.position.x = skillJoe.position.x;
 				skillJoe2.position.y = skillJoe.position.y;
@@ -733,7 +745,7 @@ void ModulePlayer::SpecialAttack()
 
 			if (st >= 35)
 			{
-				App->render->Blit(graphics, skillJoe2.position.x, skillJoe2.position.y, &(skillJoe2.anim.GetCurrentFrame()));
+				App->render->Blit(graphics, skillJoe2.position.x, skillJoe2.position.y, &(skillJoe2.anim.GetCurrentFrame()), fliped);
 				skillJoe2.Update();
 				player_skill_col->rect.h = 90;
 				player_skill_col->rect.w = 35;
@@ -755,24 +767,27 @@ void ModulePlayer::SpecialAttack()
 
 		}
 
-
 		if (App->scene_chooseplayer->final_player1 == 2)
 		{
-			if (!fliped)
+			if (st == 1)
 			{
-				n = 20;
-				App->particles->skill.speed.x = 3.0f;
-				App->particles->skill2.speed.x = 3.0f;
-				App->particles->skill3.speed.x = 3.0f;
-			}
-			else
-			{
-				n = 0;
-				App->particles->skill.speed.x = -3.0f;
-				App->particles->skill2.speed.x = -3.0f;
-				App->particles->skill3.speed.x = -3.0f;
+				if (!fliped)
+				{
+					n = 20;
+					App->particles->skill.speed.x = 3.0f;
+					App->particles->skill2.speed.x = 3.0f;
+					App->particles->skill3.speed.x = 3.0f;
+				}
+				else
+				{
+					n = 0;
+					App->particles->skill.speed.x = -3.0f;
+					App->particles->skill2.speed.x = -3.0f;
+					App->particles->skill3.speed.x = -3.0f;
 
+				}
 			}
+
 			if (st == 25)
 			{
 				App->particles->AddParticle(App->particles->skill, position.x + n, position.y - 40, COLLIDER_PLAYER_ATTACK);
@@ -800,18 +815,20 @@ void ModulePlayer::SpecialAttack()
 
 		if (App->scene_chooseplayer->final_player1 == 3)
 		{
-			if (!fliped)
+			if (st == 1)
 			{
-				n = 10;
-				skillAndy.speed.x = 3.0f;
-				skillAndy2.speed.x = 3.0f;
+				if (!fliped)
+				{
+					skillAndy.speed.x = 3.0f;
+					skillAndy2.speed.x = 3.0f;
+				}
+				else
+				{
+					skillAndy.speed.x = -3.0f;
+					skillAndy2.speed.x = -3.0f;
+				}
 			}
-			else
-			{
-				n = 0;
-				skillAndy.speed.x = -3.0f;
-				skillAndy2.speed.x = -3.0f;
-			}
+
 			if (st == 25)
 			{
 				skillAndy.position.x = position.x + 80;
@@ -820,29 +837,29 @@ void ModulePlayer::SpecialAttack()
 				{
 					skillAndy.position.x = position.x;
 				}
-				App->particles->AddParticle(skillAndy, position.x + n, position.y - 112, COLLIDER_NONE);
-				player_skill_col = App->collision->AddCollider({ skillAndy.position.x, position.y - 52, 45, 60 }, COLLIDER_PLAYER_ATTACK, App->player);
+				App->particles->AddParticle(skillAndy, position.x, position.y - 112, COLLIDER_NONE);
+				player_skill_col = App->collision->AddCollider({ skillAndy.position.x, position.y - 50, 30, 30 }, COLLIDER_PLAYER_ATTACK, App->player);
 
 
 			}
 			if (st >= 25 && st < 35)
 			{
 				if (st < 26)
-					App->render->Blit(graphics, skillAndy.position.x, skillAndy.position.y + 60, &(skillAndy.anim.GetCurrentFrame()));
+					App->render->Blit(graphics, skillAndy.position.x, skillAndy.position.y + 60, &(skillAndy.anim.GetCurrentFrame()),fliped);
 				else
-					App->render->Blit(graphics, skillAndy.position.x, skillAndy.position.y + 23, &(skillAndy.anim.GetCurrentFrame()));
+					App->render->Blit(graphics, skillAndy.position.x, skillAndy.position.y + 23, &(skillAndy.anim.GetCurrentFrame()), fliped);
 				skillAndy.Update();
 				skillAndy2.position.x = skillAndy.position.x;
 				skillAndy2.position.y = skillAndy.position.y;
-				player_skill_col->SetPos(skillAndy.position.x, skillAndy.position.y + 52);
+				player_skill_col->SetPos(skillAndy.position.x, skillAndy.position.y + 20);
 			}
 
 			if (st >= 35)
 			{
-				App->render->Blit(graphics, skillAndy2.position.x, skillAndy2.position.y, &(skillAndy2.anim.GetCurrentFrame()));
+				App->render->Blit(graphics, skillAndy2.position.x, skillAndy2.position.y, &(skillAndy2.anim.GetCurrentFrame()), fliped);
 				skillAndy2.Update();
-				player_skill_col->rect.h = 90;
-				player_skill_col->rect.w = 35;
+				player_skill_col->rect.h = 60;
+				player_skill_col->rect.w = 25;
 				player_skill_col->SetPos(skillAndy2.position.x + 10, skillAndy2.position.y + 20);
 			}
 			if (st == 35)
@@ -850,7 +867,7 @@ void ModulePlayer::SpecialAttack()
 
 				specialattack_ = false;
 			}
-			if (st == 100)
+			if (st == 200)
 			{
 				player_skill_col->to_delete = true;
 				already_hit = false;
@@ -1086,7 +1103,7 @@ update_status ModulePlayer::Update()
 						st = 0;
 						specialattack.Reset();
 						current_animation = &specialattack;
-						App->audio->playFx(skillFXTerry);
+						App->audio->playFx(skillFX);
 					}
 				}
 
