@@ -3,13 +3,13 @@
 
 #include "Globals.h"
 
-
-#define NUM_MODULES 27
+#define NUM_MODULES 28
 
 class ModuleWindow;
 class ModuleInput;
 class ModuleTextures;
 class ModuleRender;
+class ModuleSceneNeoGeo;
 class ModuleSceneIntro;
 class ModuleSceneChoosePlayer;
 class ModuleSceneMap;
@@ -45,6 +45,7 @@ public:
 	ModuleSceneWestSubway* scene_westsubway;
 	ModuleSceneSoundBeach* scene_soundbeach;
 	ModuleSceneHowardArena* scene_howardarena;
+	ModuleSceneNeoGeo* scene_neogeo;
 	ModuleSceneIntro* scene_intro;
 	ModuleSceneChoosePlayer* scene_chooseplayer;
 	ModuleSceneMap* scene_map;

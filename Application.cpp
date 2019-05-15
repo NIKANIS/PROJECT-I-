@@ -8,6 +8,7 @@
 #include "ModuleSceneWestSubway.h"
 #include "ModuleSceneHowardArena.h"
 #include "ModuleSceneSoundBeach.h"
+#include "ModuleSceneNeoGeo.h"
 #include "ModuleSceneIntro.h"
 #include "ModuleSceneCongrats.h"
 #include "ModuleSceneGameOver.h"
@@ -32,6 +33,7 @@ Application::Application()
 	modules[i++] = render = new ModuleRender();
 	modules[i++] = input = new ModuleInput();
 	modules[i++] = textures = new ModuleTextures();	
+	modules[i++] = scene_neogeo = new ModuleSceneNeoGeo();
 	modules[i++] = scene_intro = new ModuleSceneIntro();
 	modules[i++] = scene_chooseplayer = new ModuleSceneChoosePlayer();
 	modules[i++] = scene_paopao = new ModuleScenePaoPao();
@@ -54,8 +56,7 @@ Application::Application()
 	modules[i++] = fight_manager = new ModuleFightManager();
 	modules[i++] = collision = new ModuleCollision();
 	modules[i++] = round_pl = new ModuleRoundDisplay(0);
-	modules[i++] = round_en = new ModuleRoundDisplay(1);
-	
+	modules[i++] = round_en = new ModuleRoundDisplay(1);	
 	
 }	
 
@@ -70,6 +71,8 @@ bool Application::Init()
 	bool ret = true;
 
 	// Player will be enabled on the first update of a new scene
+	scene_neogeo->Enable();
+	scene_intro->Disable();
 	player->Disable();
 	enemy->Disable();
 	scene_paopao->Disable();
@@ -131,6 +134,7 @@ bool Application::Restart()
 	player->Disable();
 	enemy->Disable();
 	scene_paopao->Disable();
+	scene_intro->Disable();
 	scene_westsubway->Disable();
 	scene_howardarena->Disable();
 	scene_soundbeach->Disable();
