@@ -94,7 +94,7 @@
     <ClInclude Include="ModuleSceneHowardArena.h" />
     <ClInclude Include="ModuleSceneIntro.h" />
     <ClInclude Include="ModuleSceneMap.h" />
-    <ClInclude Include="ModuleSceneNeoGeo.h" />
+    <ClInclude Include="ModuleSceneNeoGeoIntro.h" />
     <ClInclude Include="ModuleScenePaoPao.h" />
     <ClInclude Include="ModuleSceneSoundBeach.h" />
     <ClInclude Include="ModuleSceneWestSubway.h" />
@@ -125,7 +125,7 @@
     <ClCompile Include="ModuleSceneHowardArena.cpp" />
     <ClCompile Include="ModuleSceneIntro.cpp" />
     <ClCompile Include="ModuleSceneMap.cpp" />
-    <ClCompile Include="ModuleSceneNeoGeo.cpp" />
+    <ClCompile Include="ModuleSceneNeoGeoIntro.cpp" />
     <ClCompile Include="ModuleScenePaoPao.cpp" />
     <ClCompile Include="ModuleSceneSoundBeach.cpp" />
     <ClCompile Include="ModuleSceneWestSubway.cpp" />
