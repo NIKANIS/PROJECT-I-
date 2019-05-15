@@ -69,7 +69,7 @@ Mix_Music* const ModuleAudio::loadMusic(const char* path)
 bool ModuleAudio::playMusic(Mix_Music *music)
 { 
 	bool ret = true; 
-	//Mix_PlayMusic(music, -1); 
+	Mix_PlayMusic(music, -1); 
 	return ret;
 }
 
@@ -77,6 +77,6 @@ bool ModuleAudio::playFx(Mix_Chunk *chunk, int channel)
 {
 	bool ret = true;
 
-	//Mix_PlayChannel(channel, chunk, 0); 
+	Mix_PlayChannel(channel, chunk, 0); 
 	return ret;
 }
