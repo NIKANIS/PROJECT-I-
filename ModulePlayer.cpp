@@ -299,6 +299,13 @@ bool ModulePlayer::Start()
 		punchstun.speed = 0.04f;
 		punchstun.loop = false;
 
+		//low kick
+		lowkick.PushBack({1101,160,58,63 });
+		lowkick.PushBack({ 1174,160,92,60 });
+		lowkick.PushBack({ 1101,160,58,63 });
+		lowkick.speed = 0.12f;
+		lowkick.loop = false;
+
 	}
 
 	if (App->scene_chooseplayer->final_player1 == 3)
@@ -689,7 +696,12 @@ void ModulePlayer::Kick()
 			}
 			player_kick_col->to_delete = true;
 		}
-		if (at == 40)
+		if (at == 40 && current_animation != &lowkick)
+		{
+			kicking = false;
+			already_hit = false;
+		}
+		if (at == 30 && current_animation != &kickingstanding)
 		{
 			kicking = false;
 			already_hit = false;
@@ -1023,8 +1035,19 @@ update_status ModulePlayer::Update()
 						crowch.Reset();
 						current_animation = &crowch;
 					}
-					if (App->input->keyboard[SDL_SCANCODE_R] == KEY_STATE::KEY_DOWN && !punching && !kicking && !specialattack_) {
+					if (App->input->keyboard[SDL_SCANCODE_T] == KEY_STATE::KEY_DOWN && !punching && !kicking && !specialattack_) {
 						if (current_animation != &crowchpunch && !jumping)
+						{
+							kicking = true;
+							at = 0;
+							lowkick.Reset();
+							current_animation = &lowkick;
+							//App->audio->playFx(punchFX);
+						}
+					}
+					else if (App->input->keyboard[SDL_SCANCODE_R] == KEY_STATE::KEY_DOWN && !punching && !kicking && !specialattack_)
+					{
+						if (current_animation != &lowkick && !jumping)
 						{
 							punching = true;
 							at = 0;
@@ -1056,12 +1079,12 @@ update_status ModulePlayer::Update()
 					}
 				}
 
-				if (App->input->keyboard[SDL_SCANCODE_S] != KEY_STATE::KEY_REPEAT && current_animation != &crowchpunch) {
+				if (App->input->keyboard[SDL_SCANCODE_S] != KEY_STATE::KEY_REPEAT && current_animation != &crowchpunch && current_animation != &lowkick) {
 					lockX = false;
 					crowchaction = false;
 				}
 
-				if (App->input->keyboard[SDL_SCANCODE_S] == KEY_STATE::KEY_UP && current_animation != &crowchpunch)
+				if (App->input->keyboard[SDL_SCANCODE_S] == KEY_STATE::KEY_UP && current_animation != &crowchpunch && current_animation != &lowkick)
 				{
 					current_animation = &idle;
 				}
@@ -1123,7 +1146,7 @@ update_status ModulePlayer::Update()
 					&& !jumping && !punching && !kicking && !specialattack_)
 					current_animation = &idle;
 
-				if (current_animation != &punchstanding && current_animation != &kickingstanding && current_animation != &crowchpunch)
+				if (current_animation != &punchstanding && current_animation != &kickingstanding && current_animation != &crowchpunch && current_animation != &lowkick)
 				{
 					if (App->scene_chooseplayer->final_player1 == 1)
 					{

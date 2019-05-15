@@ -50,6 +50,7 @@ public:
 	Animation backward;
 	Animation punchstanding;
 	Animation kickingstanding;
+	Animation lowkick;
 	Animation specialattack;
 	Animation die;
 	Animation victory;
