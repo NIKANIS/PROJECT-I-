@@ -521,6 +521,11 @@ void ModulePlayer::Jump() {
 				current_animation = &jumpidown;
 			}
 		}
+
+		if (fliped)
+		{
+			player_col->SetPos(position.x, position.y - 90);
+		}
 	}
 }
 
@@ -591,14 +596,14 @@ void ModulePlayer::Punch()
 			{
 				if (fliped == false)
 					if (current_animation == &crowchpunch)
-						player_punch_col = App->collision->AddCollider({ position.x + 46, position.y - 52, 35, 12 }, COLLIDER_PLAYER_ATTACK, App->player);
+						player_punch_col = App->collision->AddCollider({ position.x + 46, position.y - 52, 32, 16 }, COLLIDER_PLAYER_ATTACK, App->player);
 					else
-						player_punch_col = App->collision->AddCollider({ position.x + 50, position.y - 90, 41, 12 }, COLLIDER_PLAYER_ATTACK, App->player);
+						player_punch_col = App->collision->AddCollider({ position.x + 42, position.y - 82, 48, 12 }, COLLIDER_PLAYER_ATTACK, App->player);
 				else
 					if (current_animation == &crowchpunch)
-						player_punch_col = App->collision->AddCollider({ position.x - 30, position.y - 52, 35, 12 }, COLLIDER_PLAYER_ATTACK, App->player);
+						player_punch_col = App->collision->AddCollider({ position.x - 28, position.y - 52, 32, 16 }, COLLIDER_PLAYER_ATTACK, App->player);
 					else
-						player_punch_col = App->collision->AddCollider({ position.x - 30, position.y - 90, 41, 12 }, COLLIDER_PLAYER_ATTACK, App->player);
+						player_punch_col = App->collision->AddCollider({ position.x - 31, position.y - 82, 48, 12 }, COLLIDER_PLAYER_ATTACK, App->player);
 
 			}
 		}
@@ -1199,14 +1204,13 @@ update_status ModulePlayer::Update()
 							}
 						}
 					}	
-
 					if (App->scene_chooseplayer->final_player1 == 3)
 					{
 						if (current_animation == &crowch || current_animation == &crowchprotecc && crowchaction)
 						{
-							player_col->rect.h = 65;
+							player_col->rect.h = 55;
 							player_col->rect.w = 41;
-							player_col->SetPos(position.x + 5, position.y - 67);
+							player_col->SetPos(position.x + 5, position.y - 55);
 						}
 						else
 						{
@@ -1218,7 +1222,10 @@ update_status ModulePlayer::Update()
 							}
 							else
 							{
-								player_col->SetPos(position.x + 17, position.y - 91);
+								if(!jumping)
+									player_col->SetPos(position.x + 17, position.y - 91);
+								else
+									player_col->SetPos(position.x + 7, position.y - 91);
 								player_col->rect.h = 90;
 								player_col->rect.w = 33;
 							}
