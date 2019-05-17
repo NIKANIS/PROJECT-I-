@@ -754,7 +754,7 @@ void ModuleEnemy::SpecialAttack()
 					skillJoe_.position.x = position.x;
 				}
 				App->particles->AddParticle(skillJoe_, position.x, position.y - 112, COLLIDER_NONE);
-				enemy_skill_col = App->collision->AddCollider({ skillJoe_.position.x, position.y - 52, 45, 60 }, COLLIDER_ENEMY_ATTACK, App->enemy);
+				enemy_skill_col = App->collision->AddCollider({ skillJoe_.position.x, position.y - 52, 45, 60 }, COLLIDER_ENEMY_SKILL, App->enemy);
 
 
 			}
@@ -820,24 +820,24 @@ void ModuleEnemy::SpecialAttack()
 			
 			if (st == 25)
 			{
-				App->particles->AddParticle(App->particles->skill, spatckpos.x + n, spatckpos.y - 40, COLLIDER_ENEMY_ATTACK);
+				App->particles->AddParticle(App->particles->skill, spatckpos.x + n, spatckpos.y - 40, COLLIDER_ENEMY_SKILL);
 			}
 			if (st == 30)
 			{
-				App->particles->AddParticle(App->particles->skill2, spatckpos.x + n, spatckpos.y - 67, COLLIDER_ENEMY_ATTACK);
+				App->particles->AddParticle(App->particles->skill2, spatckpos.x + n, spatckpos.y - 67, COLLIDER_ENEMY_SKILL);
 			}
 			if (st == 35)
 			{
-				App->particles->AddParticle(App->particles->skill3, spatckpos.x + n, spatckpos.y - 95, COLLIDER_ENEMY_ATTACK);
+				App->particles->AddParticle(App->particles->skill3, spatckpos.x + n, spatckpos.y - 95, COLLIDER_ENEMY_SKILL);
 				specialattack_ = false;
 			}
 			if (st == 40)
 			{
-				App->particles->AddParticle(App->particles->skill2, spatckpos.x + n, spatckpos.y - 67, COLLIDER_ENEMY_ATTACK);
+				App->particles->AddParticle(App->particles->skill2, spatckpos.x + n, spatckpos.y - 67, COLLIDER_ENEMY_SKILL);
 			}
 			if (st == 45)
 			{
-				App->particles->AddParticle(App->particles->skill, spatckpos.x + n, spatckpos.y - 40, COLLIDER_ENEMY_ATTACK);
+				App->particles->AddParticle(App->particles->skill, spatckpos.x + n, spatckpos.y - 40, COLLIDER_ENEMY_SKILL);
 			}
 			if (st == 1000)
 				sp = false;
@@ -867,7 +867,7 @@ void ModuleEnemy::SpecialAttack()
 					skillAndy_.position.x = position.x;
 				}
 				App->particles->AddParticle(skillAndy_, position.x, position.y - 112, COLLIDER_NONE);
-				enemy_skill_col = App->collision->AddCollider({ skillAndy_.position.x, position.y - 50, 30, 30 }, COLLIDER_ENEMY_ATTACK, App->enemy);
+				enemy_skill_col = App->collision->AddCollider({ skillAndy_.position.x, position.y - 50, 30, 30 }, COLLIDER_ENEMY_SKILL, App->enemy);
 
 
 			}
@@ -1299,15 +1299,20 @@ void ModuleEnemy::OnCollision(Collider* a, Collider* b, bool colliding)
 				App->player->Damage(20, 1);
 				score += 100;
 			}
+
+		}
+		if (b->type == COLLIDER_PLAYER && a->type == COLLIDER_ENEMY)
+		{
+			body_collide = true;
+		}
+		if (a->type == COLLIDER_ENEMY_SKILL && b->type == COLLIDER_PLAYER && !already_hit)
+		{
+			already_hit = true;
 			if (sp)
 			{
 				App->player->Damage(50, 1);
 				score += 500;
 			}
-		}
-		if (b->type == COLLIDER_PLAYER && a->type == COLLIDER_ENEMY)
-		{
-			body_collide = true;
 		}
 	}
 	else
