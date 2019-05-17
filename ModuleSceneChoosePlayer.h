@@ -18,6 +18,8 @@ public:
 	update_status Update();
 	bool CleanUp();
 	void Timer();
+	void SelectPlayer();
+	void ResetTimer();
 
 public:
 	Mix_Chunk* select = nullptr;
