@@ -43,6 +43,8 @@ ModuleSceneChoosePlayer::ModuleSceneChoosePlayer()
 	selected_andybogard.PushBack({ 200, 395, 50, 123 });
 	selected_andybogard.speed = 0.2f;;
 	selected_andybogard.loop = true;
+
+	timer = { 39, 715, 88, 16 };
 }
 
 ModuleSceneChoosePlayer::~ModuleSceneChoosePlayer()
@@ -79,12 +81,54 @@ bool ModuleSceneChoosePlayer::CleanUp()
 	return true;
 }
 
+void ModuleSceneChoosePlayer::Timer()
+{
+	frames_timer++;
+	
+	if (frames_timer >= 0 && frames_timer < 120)
+	{
+		App->render->Blit(graphicschooseplayer, 102, 71, &timer, 0.0f);
+	}
+	else if (frames_timer >= 120 && frames_timer < 180)
+	{
+		timer = { 39, 755, 88, 16 };
+		App->render->Blit(graphicschooseplayer, 102, 71, &timer, 0.0f);
+	}
+	else if (frames_timer >= 180 && frames_timer < 240)
+	{
+		timer = { 39, 795, 88, 16 };
+		App->render->Blit(graphicschooseplayer, 102, 71, &timer, 0.0f);
+	}
+	else if (frames_timer >= 240 && frames_timer < 300)
+	{
+		timer = { 142, 715, 88, 16 };
+		App->render->Blit(graphicschooseplayer, 102, 71, &timer, 0.0f);
+	}
+	else if (frames_timer >= 300 && frames_timer < 360)
+	{
+		timer = { 142, 755, 88, 16 };
+		App->render->Blit(graphicschooseplayer, 102, 71, &timer, 0.0f);
+	}
+	else if (frames_timer >= 360 && frames_timer < 420)
+	{
+		timer = { 142, 786, 88, 16 };
+		App->render->Blit(graphicschooseplayer, 102, 71, &timer, 0.0f);
+	}
+	
+	if (frames_timer >= 420)
+	{
+	
+	}	
+}
+
 // Update: draw background
 update_status ModuleSceneChoosePlayer::Update()
 {
 	// Draw everything --------------------------------------	
 	App->render->Blit(graphicschooseplayer, 0, 0, &background, 0.0f);
-	App->render->Blit(graphicschooseplayer, SCREEN_WIDTH/2 - player_select_tittle.w/2, 57, &player_select_tittle, 0.0f);
+	App->render->Blit(graphicschooseplayer, SCREEN_WIDTH/2 - player_select_tittle.w/2, 55, &player_select_tittle, 0.0f);
+
+	Timer();
 	
 	if (joehigashi_chosen == true)
 	{
@@ -141,19 +185,19 @@ update_status ModuleSceneChoosePlayer::Update()
 			if (joehigashi_chosen != true)
 			{
 				current_animation = &selected_joehigashi;
-				App->render->Blit(graphicschooseplayer, 25, 32, &(selected_joehigashi.GetCurrentFrame()), false, 0.0f);
+				App->render->Blit(graphicschooseplayer, 25, 37 + 7, &(selected_joehigashi.GetCurrentFrame()), false, 0.0f);
 			}
 
-			App->render->Blit(graphicschooseplayer, 115, 83, &grey_terrybogard, 0.0f);
-			App->render->Blit(graphicschooseplayer, 205, 87, &grey_andybogard, 0.0f);
+			App->render->Blit(graphicschooseplayer, 115, 88 + 7, &grey_terrybogard, 0.0f);
+			App->render->Blit(graphicschooseplayer, 205, 92 + 7, &grey_andybogard, 0.0f);
 
 			if (numberofplayers == 0)
 			{
-				App->render->Blit(graphicschooseplayer, 50, 75, &p1, 0.0f);
+				App->render->Blit(graphicschooseplayer, 50, 80 + 7, &p1, 0.0f);
 			}
 			else if (numberofplayers == 1)
 			{
-				App->render->Blit(graphicschooseplayer, 50, 75, &p2, 0.0f);
+				App->render->Blit(graphicschooseplayer, 50, 80 + 7, &p2, 0.0f);
 			}
 			
 		}	break;
@@ -163,19 +207,19 @@ update_status ModuleSceneChoosePlayer::Update()
 			if (terrybogard_chosen != true)
 			{
 				current_animation = &selected_terrybogard;
-				App->render->Blit(graphicschooseplayer, 115, 37, &(selected_terrybogard.GetCurrentFrame()), false, 0.0f);
+				App->render->Blit(graphicschooseplayer, 115, 42 + 7, &(selected_terrybogard.GetCurrentFrame()), false, 0.0f);
 			}			
 			
-			App->render->Blit(graphicschooseplayer, 25, 78, &grey_joehigashi, 0.0f);
-			App->render->Blit(graphicschooseplayer, 205, 87, &grey_andybogard, 0.0f);
+			App->render->Blit(graphicschooseplayer, 25, 83 + 7, &grey_joehigashi, 0.0f);
+			App->render->Blit(graphicschooseplayer, 205, 92 + 7, &grey_andybogard, 0.0f);
 
 			if (numberofplayers == 0)
 			{
-				App->render->Blit(graphicschooseplayer, 125, 75, &p1, 0.0f);
+				App->render->Blit(graphicschooseplayer, 125, 80 + 7, &p1, 0.0f);
 			}
 			else if (numberofplayers == 1)
 			{
-				App->render->Blit(graphicschooseplayer, 125, 75, &p2, 0.0f);
+				App->render->Blit(graphicschooseplayer, 125, 80 + 7, &p2, 0.0f);
 			}
 			
 		}	break;
@@ -185,19 +229,19 @@ update_status ModuleSceneChoosePlayer::Update()
 			if (andybogard_chosen != true)
 			{
 				current_animation = &selected_andybogard;
-				App->render->Blit(graphicschooseplayer, 205, 41, &(selected_andybogard.GetCurrentFrame()), false, 0.0f);
+				App->render->Blit(graphicschooseplayer, 205, 46 + 7, &(selected_andybogard.GetCurrentFrame()), false, 0.0f);
 			}			
 			
-			App->render->Blit(graphicschooseplayer, 25, 78, &grey_joehigashi, 0.0f);
-			App->render->Blit(graphicschooseplayer, 115, 83, &grey_terrybogard, 0.0f);
+			App->render->Blit(graphicschooseplayer, 25, 83 + 7, &grey_joehigashi, 0.0f);
+			App->render->Blit(graphicschooseplayer, 115, 88 + 7, &grey_terrybogard, 0.0f);
 
 			if (numberofplayers == 0)
 			{
-				App->render->Blit(graphicschooseplayer, 195, 75, &p1, 0.0f);
+				App->render->Blit(graphicschooseplayer, 195, 80 + 7, &p1, 0.0f);
 			}
 			else if (numberofplayers == 1)
 			{
-				App->render->Blit(graphicschooseplayer, 195, 75, &p2, 0.0f);
+				App->render->Blit(graphicschooseplayer, 195, 80 + 7, &p2, 0.0f);
 			}
 			
 		}	break;

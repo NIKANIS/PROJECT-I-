@@ -17,6 +17,7 @@ public:
 	bool Start();
 	update_status Update();
 	bool CleanUp();
+	void Timer();
 
 public:
 	Mix_Chunk* select = nullptr;
@@ -38,6 +39,8 @@ public:
 	SDL_Rect player_select_tittle;
 	SDL_Rect p1;
 	SDL_Rect p2;
+	SDL_Rect timer;
+	int frames_timer = 0;
 	Animation selected_joehigashi;
 	Animation selected_terrybogard;
 	Animation selected_andybogard;
