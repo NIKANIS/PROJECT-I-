@@ -107,15 +107,32 @@ update_status ModuleSceneChoosePlayer::Update()
 		andybogard_chosen = false;
 	}
 
-	if (App->input->keyboard[SDL_SCANCODE_RIGHT] == KEY_STATE::KEY_DOWN && player_selected != 3) {
-		player_selected++;
-		App->audio->playFx(select);
+
+	if (numberofplayers == 0)
+	{
+		if (App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_DOWN && player_selected != 3) {
+			player_selected++;
+			App->audio->playFx(select);
+		}
+
+		if (App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_DOWN && player_selected != 1) {
+			player_selected--;
+			App->audio->playFx(select);
+		}
 	}
 
-	if (App->input->keyboard[SDL_SCANCODE_LEFT] == KEY_STATE::KEY_DOWN && player_selected != 1) {
-		player_selected--;
-		App->audio->playFx(select);
-	}
+	if (numberofplayers == 1)
+	{
+		if (App->input->keyboard[SDL_SCANCODE_RIGHT] == KEY_STATE::KEY_DOWN && player_selected != 3) {
+			player_selected++;
+			App->audio->playFx(select);
+		}
+
+		if (App->input->keyboard[SDL_SCANCODE_LEFT] == KEY_STATE::KEY_DOWN && player_selected != 1) {
+			player_selected--;
+			App->audio->playFx(select);
+		}
+	}	
 
 	switch (player_selected)
 	{
