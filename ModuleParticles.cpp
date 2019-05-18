@@ -178,15 +178,22 @@ void ModuleParticles::OnCollision(Collider* c1, Collider* c2, bool colliding)
 			break;
 		}
 	}
-	if (c1->type == COLLIDER_PLAYER_ATTACK && c2->type == COLLIDER_ENEMY)
+
+	if (c1->type == COLLIDER_PLAYER_SKILL && c2->type == COLLIDER_ENEMY )
 	{
-		App->enemy->Damage(10, 2);
-		App->player->score += 100;
+		if (App->player->sp)
+		{
+			App->enemy->Damage(10, 2);
+			App->player->score += 100;
+		}
 	}
-	if (c1->type == COLLIDER_ENEMY_ATTACK && c2->type == COLLIDER_PLAYER)
+
+	if (c1->type == COLLIDER_ENEMY_SKILL && c2->type == COLLIDER_PLAYER)
 	{
+
 		App->player->Damage(10, 2);
-		App->enemy->score += 100;
+		App->player->score += 100;
+		
 	}
 }
 
