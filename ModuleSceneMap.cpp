@@ -64,6 +64,7 @@ ModuleSceneMap::ModuleSceneMap()
 	map_4.loop = true;
 
 	timer = { 39, 715, 88, 16 };
+	frames_timer = 0;
 }
 
 ModuleSceneMap::~ModuleSceneMap()
