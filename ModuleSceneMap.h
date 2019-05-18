@@ -16,6 +16,9 @@ public:
 	bool Start();
 	update_status Update();
 	bool CleanUp();
+	void Timer();
+	void SelectMap();
+	void ResetTimer();
 
 public:
 	Mix_Chunk* select = nullptr;
@@ -32,6 +35,8 @@ public:
 	SDL_Rect west_sub;
 	SDL_Rect howard_arena;
 	SDL_Rect map_select_tittle;
+	SDL_Rect timer;
+	int frames_timer = 0;
 
 	SDL_Rect pao_pao_selected;
 	SDL_Rect sound_beach_selected;

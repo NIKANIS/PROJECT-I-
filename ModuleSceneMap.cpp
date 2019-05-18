@@ -62,6 +62,8 @@ ModuleSceneMap::ModuleSceneMap()
 	map_4.PushBack({ 599, 659, 96, 64 });
 	map_4.speed = 0.1f;;
 	map_4.loop = true;
+
+	timer = { 39, 715, 88, 16 };
 }
 
 ModuleSceneMap::~ModuleSceneMap()
@@ -91,29 +93,109 @@ bool ModuleSceneMap::CleanUp()
 	return true;
 }
 
+void ModuleSceneMap::ResetTimer()
+{
+	frames_timer = 0;
+	timer = { 39, 715, 88, 16 };
+}
+
+void ModuleSceneMap::SelectMap()
+{
+	switch (map)
+	{
+	case 1:
+	{
+		map_chosen = true;
+		App->audio->playFx(selected);
+		App->fade->FadeToBlack(App->scene_map, (Module*)App->scene_paopao);
+	}	break;
+
+	case 2:
+	{
+		map_chosen = true;
+		App->audio->playFx(selected);
+		App->fade->FadeToBlack(App->scene_map, (Module*)App->scene_soundbeach);
+	}break;
+
+	case 3:
+	{
+		map_chosen = true;
+		App->audio->playFx(selected);
+		App->fade->FadeToBlack(App->scene_map, (Module*)App->scene_westsubway);
+	}	break;
+
+	case 4:
+	{
+		map_chosen = true;
+		App->audio->playFx(selected);
+		App->fade->FadeToBlack(App->scene_map, (Module*)App->scene_howardarena);
+	} break;
+	}
+}
+
+void ModuleSceneMap::Timer()
+{
+	frames_timer++;
+
+	if (frames_timer >= 0 && frames_timer < 120)
+	{
+		App->render->Blit(back_graphics, 102, 71 - 4, &timer, 0.0f);
+	}
+	else if (frames_timer >= 120 && frames_timer < 180)
+	{
+		timer = { 39, 755, 88, 16 };
+		App->render->Blit(back_graphics, 102, 71 - 4, &timer, 0.0f);
+	}
+	else if (frames_timer >= 180 && frames_timer < 240)
+	{
+		timer = { 39, 795, 88, 16 };
+		App->render->Blit(back_graphics, 102, 71 - 4, &timer, 0.0f);
+	}
+	else if (frames_timer >= 240 && frames_timer < 300)
+	{
+		timer = { 142, 715, 88, 16 };
+		App->render->Blit(back_graphics, 102, 71 - 4, &timer, 0.0f);
+	}
+	else if (frames_timer >= 300 && frames_timer < 360)
+	{
+		timer = { 142, 755, 88, 16 };
+		App->render->Blit(back_graphics, 102, 71 - 4, &timer, 0.0f);
+	}
+	else if (frames_timer >= 360/* && frames_timer < 420*/)
+	{
+		timer = { 142, 786, 88, 16 };
+		App->render->Blit(back_graphics, 102, 71 - 4, &timer, 0.0f);
+	}
+
+	if (frames_timer == 380)
+	{
+		SelectMap();
+	}
+}
+
 // Update: draw background
 update_status ModuleSceneMap::Update()
 {
 	// Draw everything --------------------------------------
-	App->render->Blit(back_graphics, 0, 0, &background, false, 0.92f);
-	App->render->Blit(back_graphics, SCREEN_WIDTH / 2 - map_select_tittle.w/2, 60, &map_select_tittle, false, 0.92f);
+	App->render->Blit(back_graphics, 0, -8, &background, false, 0.92f);
+	App->render->Blit(back_graphics, SCREEN_WIDTH / 2 - map_select_tittle.w/2, 56 - 8, &map_select_tittle, false, 0.92f);
 
-	if (App->input->keyboard[SDL_SCANCODE_RIGHT] == KEY_STATE::KEY_DOWN && map != 4) {
+	if (App->input->keyboard[SDL_SCANCODE_RIGHT] == KEY_STATE::KEY_DOWN && map != 4 && map_chosen == false) {
 		App->audio->playFx(select);
 		map++;
 	}
 
-	if (App->input->keyboard[SDL_SCANCODE_LEFT] == KEY_STATE::KEY_DOWN && map != 1) {
+	if (App->input->keyboard[SDL_SCANCODE_LEFT] == KEY_STATE::KEY_DOWN && map != 1 && map_chosen == false) {
 		App->audio->playFx(select);
 		map--;
 	}
 
-	if (App->input->keyboard[SDL_SCANCODE_DOWN] == KEY_STATE::KEY_DOWN && map != 3 && map != 4) {
+	if (App->input->keyboard[SDL_SCANCODE_DOWN] == KEY_STATE::KEY_DOWN && map != 3 && map != 4 && map_chosen == false) {
 		App->audio->playFx(select);
 		map+= 2;
 	}
 
-	if (App->input->keyboard[SDL_SCANCODE_UP] == KEY_STATE::KEY_DOWN && map != 1 && map != 2) {
+	if (App->input->keyboard[SDL_SCANCODE_UP] == KEY_STATE::KEY_DOWN && map != 1 && map != 2 && map_chosen == false) {
 		App->audio->playFx(select);
 		map-= 2;
 	}
@@ -125,7 +207,7 @@ update_status ModuleSceneMap::Update()
 		if(map_chosen == true)
 			App->render->Blit(back_graphics, SCREEN_WIDTH / 2 - 96, 80, &pao_pao_selected, false, 0.92f);
 		else
-			App->render->Blit(back_graphics, SCREEN_WIDTH / 2 - 96, 80, &(map_1.GetCurrentFrame()), false, 0.92f);
+			App->render->Blit(back_graphics, SCREEN_WIDTH / 2 - 96, 80 , &(map_1.GetCurrentFrame()), false, 0.92f);
 		App->render->Blit(back_graphics, SCREEN_WIDTH / 2, 80, &sound_beach, false, 0.92f);
 		App->render->Blit(back_graphics, SCREEN_WIDTH / 2 - 96, 80 + 64, &west_sub, false, 0.92f);
 		App->render->Blit(back_graphics, SCREEN_WIDTH / 2, 80 + 64, &howard_arena, false, 0.92f);
@@ -169,41 +251,11 @@ update_status ModuleSceneMap::Update()
 	}	break;
 	}
 	
-	
-
+	Timer();
 
 	if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN)
 	{
-		switch (map) 
-		{
-		case 1:
-		{
-			map_chosen = true;
-			App->audio->playFx(selected);
-			App->fade->FadeToBlack(App->scene_map, (Module*)App->scene_paopao);
-		}	break;
-
-		case 2:
-		{
-			map_chosen = true;
-			App->audio->playFx(selected);
-			App->fade->FadeToBlack(App->scene_map, (Module*)App->scene_soundbeach);
-		}break;
-
-		case 3:
-		{
-			map_chosen = true;
-			App->audio->playFx(selected);
-			App->fade->FadeToBlack(App->scene_map, (Module*)App->scene_westsubway);
-		}	break;
-
-		case 4:
-		{
-			map_chosen = true;
-			App->audio->playFx(selected);
-			App->fade->FadeToBlack(App->scene_map, (Module*)App->scene_howardarena);
-		} break;
-		}		
+		SelectMap();
 	}
 
 	return UPDATE_CONTINUE;
