@@ -38,6 +38,7 @@ public:
 	void Punch();
 	void Kick();
 	void SpecialAttack();
+	void LowKick();
 
 	SDL_Texture* graphics = nullptr;
 	Animation idle;
@@ -68,6 +69,7 @@ public:
 	bool kicking = false; //true while kicking
 	bool crowchaction = false; //true while crowching
 	bool specialattack_ = false; //true while special attacking
+	bool lowkicking = false;
 	iPoint spatckpos;
 	bool sp = false;
 	bool skillColDone = false;
