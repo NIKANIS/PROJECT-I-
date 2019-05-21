@@ -22,19 +22,10 @@
     <ClCompile Include="ModuleSceneGameOver.cpp">
       <Filter>Modules\Scenes</Filter>
     </ClCompile>
-    <ClCompile Include="ModuleSceneHowardArena.cpp">
-      <Filter>Modules\Scenes</Filter>
-    </ClCompile>
     <ClCompile Include="ModuleSceneIntro.cpp">
       <Filter>Modules\Scenes</Filter>
     </ClCompile>
     <ClCompile Include="ModuleSceneMap.cpp">
-      <Filter>Modules\Scenes</Filter>
-    </ClCompile>
-    <ClCompile Include="ModuleScenePaoPao.cpp">
-      <Filter>Modules\Scenes</Filter>
-    </ClCompile>
-    <ClCompile Include="ModuleSceneWestSubway.cpp">
       <Filter>Modules\Scenes</Filter>
     </ClCompile>
     <ClCompile Include="ModuleAudio.cpp">
@@ -79,11 +70,20 @@
     <ClCompile Include="ModuleParticles.cpp">
       <Filter>Modules\Utility</Filter>
     </ClCompile>
-    <ClCompile Include="ModuleSceneSoundBeach.cpp">
-      <Filter>Modules\Scenes</Filter>
-    </ClCompile>
     <ClCompile Include="ModuleSceneNeoGeoIntro.cpp">
       <Filter>Modules\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleScenePaoPao.cpp">
+      <Filter>Modules\Scenes\MAPS</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleSceneSoundBeach.cpp">
+      <Filter>Modules\Scenes\MAPS</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleSceneWestSubway.cpp">
+      <Filter>Modules\Scenes\MAPS</Filter>
+    </ClCompile>
+    <ClCompile Include="ModuleSceneHowardArena.cpp">
+      <Filter>Modules\Scenes\MAPS</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -117,19 +117,10 @@
     <ClInclude Include="ModuleSceneGameOver.h">
       <Filter>Modules\Scenes</Filter>
     </ClInclude>
-    <ClInclude Include="ModuleSceneHowardArena.h">
-      <Filter>Modules\Scenes</Filter>
-    </ClInclude>
     <ClInclude Include="ModuleSceneIntro.h">
       <Filter>Modules\Scenes</Filter>
     </ClInclude>
     <ClInclude Include="ModuleSceneMap.h">
-      <Filter>Modules\Scenes</Filter>
-    </ClInclude>
-    <ClInclude Include="ModuleScenePaoPao.h">
-      <Filter>Modules\Scenes</Filter>
-    </ClInclude>
-    <ClInclude Include="ModuleSceneWestSubway.h">
       <Filter>Modules\Scenes</Filter>
     </ClInclude>
     <ClInclude Include="ModuleAudio.h">
@@ -174,11 +165,20 @@
     <ClInclude Include="ModuleParticles.h">
       <Filter>Modules\Utility</Filter>
     </ClInclude>
-    <ClInclude Include="ModuleSceneSoundBeach.h">
-      <Filter>Modules\Scenes</Filter>
-    </ClInclude>
     <ClInclude Include="ModuleSceneNeoGeoIntro.h">
       <Filter>Modules\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleScenePaoPao.h">
+      <Filter>Modules\Scenes\MAPS</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleSceneSoundBeach.h">
+      <Filter>Modules\Scenes\MAPS</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleSceneWestSubway.h">
+      <Filter>Modules\Scenes\MAPS</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleSceneHowardArena.h">
+      <Filter>Modules\Scenes\MAPS</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -205,6 +205,9 @@
     </Filter>
     <Filter Include="Modules\Fight Management">
       <UniqueIdentifier>{34783b5a-5015-4a04-a5aa-86edfd54164e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Modules\Scenes\MAPS">
+      <UniqueIdentifier>{9dccaf8f-f06f-4934-a5be-f24b9f42a359}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
