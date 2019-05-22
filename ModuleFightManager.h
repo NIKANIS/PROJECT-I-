@@ -29,6 +29,8 @@ public:
 	SDL_Texture* graphics = nullptr;
 	SDL_Texture* graphicsFight = nullptr;
 	SDL_Texture* graphicsRound1 = nullptr;
+	SDL_Texture* graphicsRound2 = nullptr;
+	SDL_Texture* graphicsRound3 = nullptr;
 
 	SDL_Rect win;
 	SDL_Rect lose;
@@ -38,6 +40,7 @@ public:
 	iPoint position;
 	int cam_pos_x;
 	int winner = 3; // 0 = P1_win, 1 = P2_win, 2 = draw
+	int current_round;
 	int pl_won_rounds;
 	int en_won_rounds;
 	int timer_num;
@@ -50,6 +53,8 @@ public:
 
 	Animation fightAnimX;
 	Animation round1Anim;
+	Animation round2Anim;
+	Animation round3Anim;
 };
 
 #endif

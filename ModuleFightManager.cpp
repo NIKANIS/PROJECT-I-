@@ -47,6 +47,8 @@ ModuleFightManager::ModuleFightManager()
 			for (int j = 0; j < 13; j++)
 			{
 				round1Anim.PushBack({ (304 * j), (224 * i), 304, 224 });
+				round2Anim.PushBack({ (304 * j), (224 * i), 304, 224 });
+				round3Anim.PushBack({ (304 * j), (224 * i), 304, 224 });
 			}
 		}
 		else
@@ -54,10 +56,14 @@ ModuleFightManager::ModuleFightManager()
 			for (int j = 0; j < 9; j++)
 			{
 				round1Anim.PushBack({ (304 * j), (224 * i), 304, 224 });
+				round2Anim.PushBack({ (304 * j), (224 * i), 304, 224 });
+				round3Anim.PushBack({ (304 * j), (224 * i), 304, 224 });
 			}
 		}
 	}
 	round1Anim.loop = false;
+	round2Anim.loop = false;
+	round3Anim.loop = false;
 }
 
 ModuleFightManager::~ModuleFightManager(){}
@@ -67,6 +73,8 @@ bool ModuleFightManager::Start()
 	graphics = App->textures->Load("SPRITES FATAL FURY/UI/UI sprites.png");
 	graphicsFight = App->textures->Load("SPRITES FATAL FURY/UI/Fight57.png");
 	graphicsRound1 = App->textures->Load("SPRITES FATAL FURY/UI/RoundOne87.png");
+	graphicsRound2 = App->textures->Load("SPRITES FATAL FURY/UI/RoundTwo85.png");
+	graphicsRound3 = App->textures->Load("SPRITES FATAL FURY/UI/RoundThree85.png");
 	fightFX = App->audio->loadWAV("AUDIO FATAL FURY/FX[WAV]/Voice/FX_FightVoice.wav");
 	roundFX = App->audio->loadWAV("AUDIO FATAL FURY/FX[WAV]/Voice/FX_ReadyVoice.wav");
 
@@ -75,6 +83,7 @@ bool ModuleFightManager::Start()
 
 	pl_won_rounds = 0;
 	en_won_rounds = 0;
+	current_round = 1;
 	winner = 3;
 	timer_num = 93;
 	timer_counter = 0;
@@ -132,7 +141,12 @@ update_status ModuleFightManager::Update()
 	}
 	if (timer_num >91)
 	{
-		App->render->Blit(graphicsRound1, 0, -20, &(round1Anim.GetCurrentFrame()), false, 0.0f);
+		if(current_round == 1)
+			App->render->Blit(graphicsRound1, 0, -20, &(round1Anim.GetCurrentFrame()), false, 0.0f);
+		if (current_round == 2)
+			App->render->Blit(graphicsRound2, 0, -20, &(round2Anim.GetCurrentFrame()), false, 0.0f);
+		if (current_round == 3)
+			App->render->Blit(graphicsRound3, 0, -20, &(round3Anim.GetCurrentFrame()), false, 0.0f);
 	}
 	
 	if (timer_num == 91)
@@ -152,6 +166,7 @@ update_status ModuleFightManager::Update()
 	{
 		blockpoints = true;
 		en_won_rounds++;
+		current_round++;
 		time_stop = true;
 		f = lose;
 		timer_counter = 0;
@@ -160,6 +175,7 @@ update_status ModuleFightManager::Update()
 	{
 		blockpoints = true;
 		pl_won_rounds++;
+		current_round++;
 		time_stop = true;
 		f = win;
 		timer_counter = 0;
@@ -169,6 +185,7 @@ update_status ModuleFightManager::Update()
 	{
 		blockpoints = true;
 		time_stop = true;
+		current_round++;
 		f = draw;
 		timer_counter = 0;
 	}
@@ -179,18 +196,21 @@ update_status ModuleFightManager::Update()
 		if (App->player->Health() > App->enemy->Health())
 		{
 			pl_won_rounds++;
+			current_round++;
 			f = win;
 			timer_counter = 0;
 		}
 		if (App->player->Health() < App->enemy->Health())
 		{
 			en_won_rounds++;
+			current_round++;
 			f = lose;
 			timer_counter = 0;
 		}
 		if (App->player->Health() == App->enemy->Health())
 		{
 			f = draw;
+			current_round++;
 			timer_counter = 0;
 		}
 	}
