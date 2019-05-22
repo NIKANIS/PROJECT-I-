@@ -28,6 +28,7 @@ public:
 
 	SDL_Texture* graphics = nullptr;
 	SDL_Texture* graphicsFight = nullptr;
+	SDL_Texture* graphicsRound1 = nullptr;
 
 	SDL_Rect win;
 	SDL_Rect lose;
@@ -48,6 +49,7 @@ public:
 	Mix_Chunk* fightFX = nullptr;
 
 	Animation fightAnimX;
+	Animation round1Anim;
 };
 
 #endif

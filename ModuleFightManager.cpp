@@ -20,17 +20,44 @@ ModuleFightManager::ModuleFightManager()
 	lose = { 155,18,126,16 };
 	draw = { 155,35,142,16 };
 	round = {155,52,78,16};
-	//fight = {99,205,173,40};
-
-	for (int i = 0; i < 13 ;i++)
+	
+	for (int i = 0; i < 5 ;i++)
 	{
-		for (int j = 0; j < 4; j++)
+		if (i < 4)
 		{
-			fightAnimX.PushBack({ (300 * j), (150 * i), 300, 150 });
-			
+			for (int j = 0; j < 13; j++)
+			{
+				fightAnimX.PushBack({ (304 * j), (224 * i), 304, 224 });
+			}
+		}
+		else
+		{
+			for (int j = 0; j < 5; j++)
+			{
+				fightAnimX.PushBack({ (304 * j), (224 * i), 304, 224 });
+			}
+		}		
+	}
+	fightAnimX.loop = false;
+
+	for (int i = 0; i < 6; i++)
+	{
+		if (i < 5)
+		{
+			for (int j = 0; j < 13; j++)
+			{
+				round1Anim.PushBack({ (304 * j), (224 * i), 304, 224 });
+			}
+		}
+		else
+		{
+			for (int j = 0; j < 9; j++)
+			{
+				round1Anim.PushBack({ (304 * j), (224 * i), 304, 224 });
+			}
 		}
 	}
-
+	round1Anim.loop = false;
 }
 
 ModuleFightManager::~ModuleFightManager(){}
@@ -39,6 +66,7 @@ bool ModuleFightManager::Start()
 {
 	graphics = App->textures->Load("SPRITES FATAL FURY/UI/UI sprites.png");
 	graphicsFight = App->textures->Load("SPRITES FATAL FURY/UI/Fight57.png");
+	graphicsRound1 = App->textures->Load("SPRITES FATAL FURY/UI/RoundOne87.png");
 	fightFX = App->audio->loadWAV("AUDIO FATAL FURY/FX[WAV]/Voice/FX_FightVoice.wav");
 	roundFX = App->audio->loadWAV("AUDIO FATAL FURY/FX[WAV]/Voice/FX_ReadyVoice.wav");
 
@@ -53,7 +81,7 @@ bool ModuleFightManager::Start()
 	time_stop = false;
 	SDL_Rect none = { 0,0,0,0 };
 	f = none;
-
+	
 	App->player->Enable();
 	App->enemy->Enable();
 	App->fight_timer->Enable();
@@ -104,21 +132,20 @@ update_status ModuleFightManager::Update()
 	}
 	if (timer_num == 93)
 	{
-		f = round;
-		//App->audio->playFx(roundFX);
+		App->render->Blit(graphicsRound1, 0, -20, &(round1Anim.GetCurrentFrame()), false, 0.0f);
 	}
-
-	if (timer_num == 92)
+	
+	if (round1Anim.Finished() == true)
 	{
-		App->render->Blit(graphicsFight, 0, 0, &(fightAnimX.GetCurrentFrame()), false, 0.0f);
-		//App->audio->playFx(fightFX);
+		App->render->Blit(graphicsFight, 0, -20, &(fightAnimX.GetCurrentFrame()), false, 0.0f);
+		App->audio->playFx(fightFX);
 	}
 
-	if (timer_num == 90)
+	/*if (timer_num == 90)
 	{
 		SDL_Rect none = { 0,0,0,0 };
 		f = none;
-	}
+	}*/
 
 
 	if (App->player->Health() == 0 && !blockpoints)
