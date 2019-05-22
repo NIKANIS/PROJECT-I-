@@ -11,6 +11,7 @@
 #include "ModuleSceneCongrats.h"
 #include "ModuleSceneGameOver.h"
 #include "ModulePlayer.h"
+#include "ModuleEnemy.h"
 #include "ModuleFadeToBlack.h"
 #include "ModuleAudio.h"
 #include "ModuleParticles.h"
@@ -75,7 +76,7 @@ update_status ModuleSceneWestSubway::Update()
 	App->render->DrawQuad({ 0,0, SCREEN_WIDTH, SCREEN_HEIGHT }, 0, 0, 0, 80);
 	App->render->Blit(back_graphics, 0, -19, &(background.GetCurrentFrame()), false, 0.92f);
 	App->render->Blit(back_graphics, App->player->Pos_X() - 5, 210, &shadowp1, 0.0f);
-	//App->render->Blit(back_graphics, App->enemy->Pos_X(), 83 + 3, &shadowp2, false, 0.0f);
+	App->render->Blit(back_graphics, App->enemy->Pos_X() - 2, 210, &shadowp2, 0.0f);
 
 	return UPDATE_CONTINUE;
 }
