@@ -27,8 +27,8 @@ The player can choose between three fighters to play versus 8 enemy fighters tha
 								L -> Special Attack
 					     OTHERS
 	F5 -> GodMode On/Off
-	(GodModeOn)-> 	B-> Player 1 lose // N-> Player 2 lose
-			0-> Restart Game
+	(GodModeOn)-> 	F1-> Player 1 lose // F2-> Player 2 lose
+			F10-> Restart Game
 
 ## Changelist of all versions
 ### 0.1
@@ -46,7 +46,8 @@ The player can choose between three fighters to play versus 8 enemy fighters tha
  	Camera limits for the player. Full implemented colliders for the player and its particles. 
 	Player can collide with the enemy. God Mode when pressing F5 to see colliders and direct win/lose.
 ### 0.5
-	Full implemented UI and GodMode. Fixed some bugs and colliders. Pao Pao Cafe with Terry vs Terry. Camera follow players.
+	Full implemented UI and GodMode. Fixed some bugs and colliders. Pao Pao Cafe with Terry vs Terry. 
+	Camera follow players.
 ### 0.6
 	Added choose player and choose map function .
 	Second color Terry Bogard if both players pick the same character.
