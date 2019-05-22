@@ -36,6 +36,8 @@ ModuleScenePaoPao::ModuleScenePaoPao()
 	background.PushBack({ 49, 134, 619, 234 });
 	background.PushBack({ 772, 134, 619, 234 });
 	background.speed = 0.05f;
+
+	shadowp1 = shadowp2 = { 290,70,64,12 };
 }
 
 ModuleScenePaoPao::~ModuleScenePaoPao()
@@ -77,6 +79,8 @@ update_status ModuleScenePaoPao::Update()
 	App->render->DrawQuad({ 0,0, SCREEN_WIDTH, SCREEN_HEIGHT }, 0, 0, 0, 80);
 	// Draw everything --------------------------------------
 	App->render->Blit(back_graphics, 0, 0, &(background.GetCurrentFrame()),false, 0.92f);
+	App->render->Blit(back_graphics, App->player->Pos_X() - 5, 210, &shadowp1, 0.0f);
+	//App->render->Blit(back_graphics, App->enemy->Pos_X(), 83 + 3, &shadowp2, false, 0.0f);
 
 
 	return UPDATE_CONTINUE;

@@ -48,6 +48,10 @@ ModuleSceneHowardArena::ModuleSceneHowardArena()
 	background.PushBack({ 1500, 669, 619, 236 });
 	background.PushBack({ 1500,940, 619, 236 });
 	background.speed = 0.05f;
+
+	shadowp1 = { 156,1203,64,12 };
+	shadowp2 = { 156,1203,64,12 };
+	
 }
 
 ModuleSceneHowardArena::~ModuleSceneHowardArena()
@@ -90,6 +94,8 @@ update_status ModuleSceneHowardArena::Update()
 	App->render->DrawQuad({ 0,0, SCREEN_WIDTH, SCREEN_HEIGHT }, 0, 0, 0, 80);
 	// Draw everything --------------------------------------
 	App->render->Blit(back_graphics, 0, -15, &(background.GetCurrentFrame()), false, 0.92f);
+	App->render->Blit(back_graphics, App->player->Pos_X() - 5, 210, &shadowp1, 0.0f);
+	//App->render->Blit(back_graphics, App->enemy->Pos_X(), 83 + 3, &shadowp2, false, 0.0f);
 
 
 	return UPDATE_CONTINUE;
