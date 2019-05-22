@@ -26,7 +26,7 @@ ModuleFightManager::ModuleFightManager()
 	{
 		for (int j = 0; j < 4; j++)
 		{
-			fightAnimX.PushBack({ (320 * j), (224 * i), 320, 224 });
+			fightAnimX.PushBack({ (300 * j), (150 * i), 300, 150 });
 			
 		}
 	}
