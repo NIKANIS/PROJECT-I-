@@ -11,7 +11,6 @@
 #include "ModuleSceneCongrats.h"
 #include "ModuleSceneGameOver.h"
 #include "ModulePlayer.h"
-#include "ModuleEnemy.h"
 #include "ModuleFadeToBlack.h"
 #include "ModuleAudio.h"
 #include "ModuleParticles.h"
@@ -36,7 +35,7 @@ ModuleSceneWestSubway::ModuleSceneWestSubway()
 	shadowp2 = { 600,406,64,12 };
 }
 
-ModuleSceneWestSubway::~ModuleSceneWestSubway(){}
+ModuleSceneWestSubway::~ModuleSceneWestSubway() {}
 
 // Load assets
 bool ModuleSceneWestSubway::Start()

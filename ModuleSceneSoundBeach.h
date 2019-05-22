@@ -28,4 +28,3 @@ public:
 };
 
 #endif // __MODULESCENESOUNDBEACH_H__
-

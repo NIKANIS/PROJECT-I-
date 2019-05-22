@@ -11,7 +11,6 @@
 #include "ModuleSceneCongrats.h"
 #include "ModuleSceneGameOver.h"
 #include "ModulePlayer.h"
-#include "ModuleEnemy.h"
 #include "ModuleFadeToBlack.h"
 #include "ModuleAudio.h"
 #include "ModuleParticles.h"
@@ -24,7 +23,6 @@
 #include "ModuleSceneChoosePlayer.h"
 #include "ModuleJoeHigashiPlayer.h"
 
-
 ModuleSceneHowardArena::ModuleSceneHowardArena()
 {
 
@@ -33,17 +31,17 @@ ModuleSceneHowardArena::ModuleSceneHowardArena()
 	background.PushBack({ 156,398, 619, 236 });
 	background.PushBack({ 156,669, 619, 236 });
 	background.PushBack({ 156,940, 619, 236 });
-								   
+
 	background.PushBack({ 828, 118, 619, 236 });
 	background.PushBack({ 828,398, 619, 236 });
 	background.PushBack({ 828, 669, 619, 236 });
 	background.PushBack({ 828,940, 619, 236 });
-								   
+
 	background.PushBack({ 1500, 118, 619, 236 });
 	background.PushBack({ 1500,398, 619, 236 });
 	background.PushBack({ 1500, 669, 619, 236 });
 	background.PushBack({ 1500,940, 619, 236 });
-								   
+
 	background.PushBack({ 1500, 118, 619, 236 });
 	background.PushBack({ 1500,398, 619, 236 });
 	background.PushBack({ 1500, 669, 619, 236 });
@@ -52,7 +50,7 @@ ModuleSceneHowardArena::ModuleSceneHowardArena()
 
 	shadowp1 = { 156,1203,64,12 };
 	shadowp2 = { 156,1203,64,12 };
-	
+
 }
 
 ModuleSceneHowardArena::~ModuleSceneHowardArena()

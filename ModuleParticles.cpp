@@ -6,7 +6,6 @@
 #include "ModuleTextures.h"
 #include "ModuleRender.h"
 #include "ModulePlayer.h"
-#include "ModuleEnemy.h"
 #include "ModuleCollision.h"
 #include "ModuleParticles.h"
 #include "ModuleSceneChoosePlayer.h"
@@ -27,23 +26,57 @@ bool ModuleParticles::Start()
 {
 	LOG("Loading particles");
 	
-	graphics = App->textures->Load("SPRITES FATAL FURY/CHARACTERS/1-Terry Bogard/spritesTerryBogard.png");
-	graphics1 = App->textures->Load("SPRITES FATAL FURY/CHARACTERS/1-Terry Bogard/spritesTerryBogard2.png");
-	graphics2 = App->textures->Load("SPRITES FATAL FURY/CHARACTERS/3-Joe Higashi/Sprites joe higashi.png");
+	graphics = App->textures->Load("SPRITES FATAL FURY/CHARACTERS/spritesSpecialAttacks.png");
+
+	//Joe skill
+	skillJoe.anim.PushBack({ 43, 31, 43, 113 }); 
+	skillJoe.anim.PushBack({ 99, 31, 43, 113 }); 
+	skillJoe.anim.speed = 0.04f;
+	skillJoe.anim.loop = false;
+	skillJoe.life = 200;
+
+
+	skillJoe2.anim.PushBack({ 162, 31, 50, 113 });
+	skillJoe2.anim.PushBack({ 228, 31, 50, 113 });
+	skillJoe2.anim.speed = 0.04f;
+	skillJoe2.life = 3000;
+
+
+	skillJoe3.anim.PushBack({ 295, 31, 44, 113 }); //5ta
+	skillJoe3.anim.PushBack({ 383, 31, 44, 113 }); //6ta
+	skillJoe3.anim.speed = 0.04f;
+	skillJoe3.anim.loop = false;
+
+	
 
 	////Terry skill
-	skill.anim.PushBack({ 1022,751,17,41 });
+	skill.anim.PushBack({ 61,187,17,96 });
 	skill.life = 3000;
-	skill.speed.x = 3.0f;
+
 	
-	
-	skill2.anim.PushBack({ 1038,625,17,68});
+	skill2.anim.PushBack({ 80,289,17,96 });
 	skill2.life = 3000;
-	skill2.speed.x = 3.0f;
+
 	
-	skill3.anim.PushBack({ 1054,496,17,96});
+	skill3.anim.PushBack({ 93,187,17,96});
 	skill3.life = 3000;
-	skill3.speed.x = 3.0f;
+
+
+	//Andy skill
+	skillAndy.anim.PushBack({ 42, 750, 23, 97 }); //1ra
+	skillAndy.anim.PushBack({ 78, 750, 40, 97 }); //2nda
+	skillAndy.anim.PushBack({ 118, 750, 57, 97 }); //3ra
+	skillAndy.anim.speed = 0.1f;
+	skillAndy.anim.loop = false;
+	skillAndy.life = 400;
+
+	skillAndy2.anim.PushBack({ 176, 750, 62, 97 }); //4ta
+	skillAndy2.anim.PushBack({ 248, 750, 47, 97 }); //5ta
+	skillAndy2.anim.speed = 0.1f;
+	skillAndy2.life = 3000;
+
+	skillAndy3.anim.PushBack({ 444, 750, 61, 97 }); //6ta
+	skillAndy3.life = 3000;
 
 	return true;
 }
@@ -83,51 +116,8 @@ update_status ModuleParticles::Update()
 		}
 		else if (SDL_GetTicks() >= p->born)
 		{
-			if (App->scene_chooseplayer->final_player1 != App->scene_chooseplayer->final_player2)
-			{
-				if (App->player->sp == true)
-				{
-					//if (App->scene_chooseplayer->final_player1 == 1)
-					//	App->render->Blit(graphics2, p->position.x, p->position.y, &(p->anim.GetCurrentFrame()));
-					if (App->scene_chooseplayer->final_player1 == 2)
-						App->render->Blit(graphics, p->position.x, p->position.y, &(p->anim.GetCurrentFrame()));
-				}
-			
-				if (App->enemy->sp == true)
-				{
-					//if (App->scene_chooseplayer->final_player2 == 1)
-					//	App->render->Blit(graphics2, p->position.x, p->position.y, &(p->anim.GetCurrentFrame()));
-					if (App->scene_chooseplayer->final_player2 == 2)
-						App->render->Blit(graphics, p->position.x, p->position.y, &(p->anim.GetCurrentFrame()));
-				}
-			}
-			
-			if (App->scene_chooseplayer->final_player1 == App->scene_chooseplayer->final_player2)
-			{
-				if (App->player->sp == true)
-				{
-					if (App->scene_chooseplayer->final_player1 == 1)
-					{
-					}
-					if (App->scene_chooseplayer->final_player1 == 2)
-						App->render->Blit(graphics, p->position.x, p->position.y, &(p->anim.GetCurrentFrame()));
-					if (App->scene_chooseplayer->final_player1 == 3)
-					{
-					}
-				}
-			
-				if (App->enemy->sp == true)
-				{
-					if (App->scene_chooseplayer->final_player2 == 1)
-					{
-					}
-					if (App->scene_chooseplayer->final_player2 == 2)
-						App->render->Blit(graphics1, p->position.x, p->position.y, &(p->anim.GetCurrentFrame()));
-					if (App->scene_chooseplayer->final_player2 == 3)
-					{
-					}
-				}
-			}
+
+			App->render->Blit(graphics, active[i]->position.x, active[i]->position.y, &active[i]->anim.GetCurrentFrame(), active[i]->fliped);
 
 			if (p->fx_played == false)
 			{
@@ -139,7 +129,7 @@ update_status ModuleParticles::Update()
 	return UPDATE_CONTINUE;
 }
 
-void ModuleParticles::AddParticle(const Particle& particle, int x, int y, COLLIDER_TYPE collider_type, Uint32 delay)
+void ModuleParticles::AddParticle(const Particle& particle, int x, int y, bool fliped, bool augmented, COLLIDER_TYPE collider_type, Uint32 delay)
 {
 	for (uint i = 0; i < MAX_ACTIVE_PARTICLES; ++i)
 	{
@@ -147,8 +137,17 @@ void ModuleParticles::AddParticle(const Particle& particle, int x, int y, COLLID
 		{
 			Particle* p = new Particle(particle);
 			p->born = SDL_GetTicks() + delay;
+			if (augmented && App->scene_chooseplayer->final_player1 == 2 || App->scene_chooseplayer->final_player2 == 2)
+				p->hits = 5;
+/*			else
+				p->hits = 1;*/
 			p->position.x = x;
 			p->position.y = y;
+			p->fliped = fliped;
+			if (!fliped)
+				p->speed.x = 3.0f;
+			else
+				p->speed.x = -3.0f;
 			if (collider_type != COLLIDER_NONE)
 				p->collider = App->collision->AddCollider(p->anim.GetCurrentFrame(), collider_type, this);
 			active[i] = p;
@@ -170,11 +169,20 @@ void ModuleParticles::OnCollision(Collider* c1, Collider* c2, bool colliding)
 {
 	for (uint i = 0; i < MAX_ACTIVE_PARTICLES; ++i)
 	{
-		// Always destroy particles that collide
 		if (active[i] != nullptr && active[i]->collider == c1)
 		{
-			delete active[i];
+			active[i]->hits--;
+			if (active[i]->hits < 0)
+				active[i]->hits = 0;
+			if (c2->type == COLLIDER_PLAYER || c2->type == COLLIDER_ENEMY)
+				active[i]->hits = 0;
+			if (active[i]->hits == 0)
+			{
+				active[i]->collider->to_delete = true;
+				delete active[i];
+			}
 			active[i] = nullptr;
+
 			break;
 		}
 	}
@@ -192,7 +200,7 @@ void ModuleParticles::OnCollision(Collider* c1, Collider* c2, bool colliding)
 	{
 
 		App->player->Damage(10, 2);
-		App->player->score += 100;
+		App->enemy->score += 100;
 		
 	}
 }

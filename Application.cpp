@@ -13,7 +13,6 @@
 #include "ModuleSceneCongrats.h"
 #include "ModuleSceneGameOver.h"
 #include "ModulePlayer.h"
-#include "ModuleEnemy.h"
 #include "ModuleFadeToBlack.h"
 #include "ModuleAudio.h"
 #include "ModuleParticles.h"
@@ -43,8 +42,8 @@ Application::Application()
 	modules[i++] = scene_congrats = new ModuleSceneCongrats();
 	modules[i++] = scene_gameover = new ModuleSceneGameOver();
 	modules[i++] = scene_map = new ModuleSceneMap();
-	modules[i++] = player = new ModulePlayer();
-	modules[i++] = enemy = new ModuleEnemy();
+	modules[i++] = player = new ModulePlayer(0);
+	modules[i++] = enemy = new ModulePlayer(1);
 	modules[i++] = fade = new ModuleFadeToBlack();
 	modules[i++] = audio = new ModuleAudio();
 	modules[i++] = particles = new ModuleParticles();

@@ -11,7 +11,6 @@
 #include "ModuleSceneCongrats.h"
 #include "ModuleSceneGameOver.h"
 #include "ModulePlayer.h"
-#include "ModuleEnemy.h"
 #include "ModuleFadeToBlack.h"
 #include "ModuleAudio.h"
 #include "ModuleParticles.h"
@@ -23,6 +22,7 @@
 #include "ModuleRoundDisplay.h"
 #include "ModuleSceneChoosePlayer.h"
 #include "ModuleJoeHigashiPlayer.h"
+
 
 
 ModuleScenePaoPao::ModuleScenePaoPao()
@@ -79,7 +79,7 @@ update_status ModuleScenePaoPao::Update()
 {
 	App->render->DrawQuad({ 0,0, SCREEN_WIDTH, SCREEN_HEIGHT }, 0, 0, 0, 80);
 	// Draw everything --------------------------------------
-	App->render->Blit(back_graphics, 0, 0, &(background.GetCurrentFrame()),false, 0.92f);
+	App->render->Blit(back_graphics, 0, 0, &(background.GetCurrentFrame()), false, 0.92f);
 	App->render->Blit(back_graphics, App->player->Pos_X() - 5, 210, &shadowp1, 0.0f);
 	App->render->Blit(back_graphics, App->enemy->Pos_X() - 2, 210, &shadowp2, 0.0f);
 

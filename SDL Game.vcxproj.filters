@@ -10,9 +10,6 @@
     <ClCompile Include="Main.cpp">
       <Filter>Core</Filter>
     </ClCompile>
-    <ClCompile Include="ModuleEnemy.cpp">
-      <Filter>Modules\Player &amp; Enemie</Filter>
-    </ClCompile>
     <ClCompile Include="ModuleSceneChoosePlayer.cpp">
       <Filter>Modules\Scenes</Filter>
     </ClCompile>
@@ -73,17 +70,17 @@
     <ClCompile Include="ModuleSceneNeoGeoIntro.cpp">
       <Filter>Modules\Scenes</Filter>
     </ClCompile>
-    <ClCompile Include="ModuleScenePaoPao.cpp">
-      <Filter>Modules\Scenes\MAPS</Filter>
+    <ClCompile Include="ModuleSceneWestSubway.cpp">
+      <Filter>Modules\Scenes\Maps</Filter>
     </ClCompile>
     <ClCompile Include="ModuleSceneSoundBeach.cpp">
-      <Filter>Modules\Scenes\MAPS</Filter>
+      <Filter>Modules\Scenes\Maps</Filter>
     </ClCompile>
-    <ClCompile Include="ModuleSceneWestSubway.cpp">
-      <Filter>Modules\Scenes\MAPS</Filter>
+    <ClCompile Include="ModuleScenePaoPao.cpp">
+      <Filter>Modules\Scenes\Maps</Filter>
     </ClCompile>
     <ClCompile Include="ModuleSceneHowardArena.cpp">
-      <Filter>Modules\Scenes\MAPS</Filter>
+      <Filter>Modules\Scenes\Maps</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -101,9 +98,6 @@
     </ClInclude>
     <ClInclude Include="p2Point.h">
       <Filter>Containers</Filter>
-    </ClInclude>
-    <ClInclude Include="ModuleEnemy.h">
-      <Filter>Modules\Player &amp; Enemie</Filter>
     </ClInclude>
     <ClInclude Include="Module.h">
       <Filter>Modules</Filter>
@@ -168,17 +162,17 @@
     <ClInclude Include="ModuleSceneNeoGeoIntro.h">
       <Filter>Modules\Scenes</Filter>
     </ClInclude>
-    <ClInclude Include="ModuleScenePaoPao.h">
-      <Filter>Modules\Scenes\MAPS</Filter>
+    <ClInclude Include="ModuleSceneWestSubway.h">
+      <Filter>Modules\Scenes\Maps</Filter>
     </ClInclude>
     <ClInclude Include="ModuleSceneSoundBeach.h">
-      <Filter>Modules\Scenes\MAPS</Filter>
+      <Filter>Modules\Scenes\Maps</Filter>
     </ClInclude>
-    <ClInclude Include="ModuleSceneWestSubway.h">
-      <Filter>Modules\Scenes\MAPS</Filter>
+    <ClInclude Include="ModuleScenePaoPao.h">
+      <Filter>Modules\Scenes\Maps</Filter>
     </ClInclude>
     <ClInclude Include="ModuleSceneHowardArena.h">
-      <Filter>Modules\Scenes\MAPS</Filter>
+      <Filter>Modules\Scenes\Maps</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -206,8 +200,8 @@
     <Filter Include="Modules\Fight Management">
       <UniqueIdentifier>{34783b5a-5015-4a04-a5aa-86edfd54164e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Modules\Scenes\MAPS">
-      <UniqueIdentifier>{9dccaf8f-f06f-4934-a5be-f24b9f42a359}</UniqueIdentifier>
+    <Filter Include="Modules\Scenes\Maps">
+      <UniqueIdentifier>{5114b786-988a-498a-be39-e1cfaff8fc69}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

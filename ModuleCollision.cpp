@@ -3,7 +3,6 @@
 #include "ModuleRender.h"
 #include "ModuleCollision.h"
 #include "ModulePlayer.h"
-#include "ModuleEnemy.h"
 
 
 ModuleCollision::ModuleCollision()
@@ -30,13 +29,13 @@ ModuleCollision::ModuleCollision()
 	matrix[COLLIDER_PLAYER_SKILL][COLLIDER_PLAYER] = false;
 	matrix[COLLIDER_PLAYER_SKILL][COLLIDER_ENEMY] = true;
 	matrix[COLLIDER_PLAYER_SKILL][COLLIDER_PLAYER_SKILL] = false;
-	matrix[COLLIDER_PLAYER_SKILL][COLLIDER_ENEMY_SKILL] = false;
+	matrix[COLLIDER_PLAYER_SKILL][COLLIDER_ENEMY_SKILL] = true;
 
 	matrix[COLLIDER_ENEMY_SKILL][COLLIDER_PLAYER_ATTACK] = true;
 	matrix[COLLIDER_ENEMY_SKILL][COLLIDER_ENEMY_ATTACK] = false;
 	matrix[COLLIDER_ENEMY_SKILL][COLLIDER_PLAYER] = true;
 	matrix[COLLIDER_ENEMY_SKILL][COLLIDER_ENEMY] = false;
-	matrix[COLLIDER_ENEMY_SKILL][COLLIDER_PLAYER_SKILL] = false;
+	matrix[COLLIDER_ENEMY_SKILL][COLLIDER_PLAYER_SKILL] = true;
 	matrix[COLLIDER_ENEMY_SKILL][COLLIDER_ENEMY_SKILL] = false;
 
 	matrix[COLLIDER_PLAYER_ATTACK][COLLIDER_PLAYER_ATTACK] = false;

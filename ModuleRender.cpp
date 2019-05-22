@@ -3,7 +3,6 @@
 #include "ModuleRender.h"
 #include "ModuleWindow.h"
 #include "ModuleInput.h"
-#include "ModuleEnemy.h"
 #include "ModulePlayer.h"
 #include "ModuleLifeBar.h"
 #include "ModulePlayerScore.h"

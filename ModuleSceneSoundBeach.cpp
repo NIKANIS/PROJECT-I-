@@ -11,7 +11,6 @@
 #include "ModuleSceneCongrats.h"
 #include "ModuleSceneGameOver.h"
 #include "ModulePlayer.h"
-#include "ModuleEnemy.h"
 #include "ModuleFadeToBlack.h"
 #include "ModuleAudio.h"
 #include "ModuleParticles.h"
@@ -31,8 +30,8 @@ ModuleSceneSoundBeach::ModuleSceneSoundBeach()
 	//background
 	background.PushBack({ 275, 63, 619, 224 });
 	background.PushBack({ 940, 63, 619, 224 });
-	background.PushBack({ 275, 328, 619, 224 }); 
-	background.PushBack({ 940, 328, 619, 224 }); 
+	background.PushBack({ 275, 328, 619, 224 });
+	background.PushBack({ 940, 328, 619, 224 });
 	background.PushBack({ 275, 593, 619, 224 });
 	background.PushBack({ 940, 593, 619, 224 });
 	background.PushBack({ 275, 858, 619, 224 });

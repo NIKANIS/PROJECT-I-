@@ -20,7 +20,6 @@ class ModuleSceneWestSubway;
 class ModuleSceneHowardArena;
 class ModuleSceneSoundBeach;
 class ModulePlayer;
-class ModuleEnemy;
 class ModuleFadeToBlack;
 class Module;
 class ModuleAudio;
@@ -52,7 +51,7 @@ public:
 	ModuleSceneCongrats* scene_congrats;
 	ModuleSceneGameOver* scene_gameover;
 	ModulePlayer* player;
-	ModuleEnemy* enemy;
+	ModulePlayer* enemy;
 	ModuleFadeToBlack* fade;
 	ModuleAudio* audio;
 	ModuleParticles* particles;

@@ -13,7 +13,7 @@ struct SDL_Texture;
 class ModulePlayer : public Module
 {
 public:
-	ModulePlayer();
+	ModulePlayer(int player);
 	~ModulePlayer();
 
 	bool Start();
@@ -26,21 +26,22 @@ public:
 	void Damage(const int damage, const int type);
 	void godMode();
 
-	int health;
-	int score;
+
 	bool godMode_ = false;
 	iPoint position;
 	Animation* current_animation = nullptr;
 
-public:
+	bool sp = false;
+	int score;
 
-	void Jump();
-	void Punch();
-	void Kick();
-	void SpecialAttack();
-	void LowKick();
+	void OnCollision(Collider*, Collider*, bool colliding) override;
+
+	Mix_Chunk* punchFX = nullptr;
+	Mix_Chunk* skillFX = nullptr;
+	Mix_Chunk* kickFX = nullptr;
 
 	SDL_Texture* graphics = nullptr;
+
 	Animation idle;
 	Animation jumpiup;
 	Animation jumpidown;
@@ -60,7 +61,29 @@ public:
 	Animation punchstun;
 	Animation crowchpunch;
 
+private:
+
+	Collider* player_col = nullptr;
+	Collider* player_punch_col = nullptr;
+	Collider* player_kick_col = nullptr;
+	Collider* player_skill_col = nullptr;
+
+	void Jump();
+	void Punch();
+	void Kick();
+	void SpecialAttack();
+	void LowKick();
+
+	iPoint spatckpos;
+
 	int stuned; //stunt after getting hit 0 = not stuned / 1 = punch stuned / 2 = kick stuned
+	int t = 0; //jumping coldown time
+	int at = 0; //attack coldown time
+	int st = 0;		// specialattack coldown time
+	int vy = 0; //velocity y
+	int player;
+	int health;
+
 	bool body_collide;
 	bool already_hit;
 	bool lockX = false; //locks the sideways movement
@@ -70,32 +93,9 @@ public:
 	bool crowchaction = false; //true while crowching
 	bool specialattack_ = false; //true while special attacking
 	bool lowkicking = false;
-	iPoint spatckpos;
-	bool sp = false;
 	bool skillColDone = false;
 	bool fliped = false;
-	int t = 0; //jumping coldown time
-	int at = 0; //attack coldown time
-	int st = 0;		// specialattack coldown time
-	int vy = 0; //velocity y
-	int player;
-
-	Collider* player_col = nullptr;
-	Collider* player_punch_col = nullptr;
-	Collider* player_kick_col = nullptr;
-	Collider* player_skill_col = nullptr;
-
-	Mix_Chunk* punchFX = nullptr;
-	Mix_Chunk* skillFX = nullptr;
-	Mix_Chunk* kickFX = nullptr;
-
-	Particle skillJoe;
-	Particle skillJoe2;
-
-	Particle skillAndy;
-	Particle skillAndy2;
-
-	void OnCollision(Collider*, Collider*, bool colliding) override;
+	
 };
 
 #endif //__ModulePlayer_H__
