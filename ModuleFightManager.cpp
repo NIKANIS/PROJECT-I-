@@ -40,9 +40,9 @@ ModuleFightManager::ModuleFightManager()
 	}
 	fightAnimX.loop = false;
 
-	for (int i = 0; i < 6; i++)
+	for (int i = 0; i < 8; i++)
 	{
-		if (i < 5)
+		if (i < 7)
 		{
 			for (int j = 0; j < 13; j++)
 			{
@@ -130,7 +130,7 @@ update_status ModuleFightManager::Update()
 			timer_counter = 0;
 		}
 	}
-	if (timer_num == 93)
+	if (timer_num >91)
 	{
 		App->render->Blit(graphicsRound1, 0, -20, &(round1Anim.GetCurrentFrame()), false, 0.0f);
 	}
