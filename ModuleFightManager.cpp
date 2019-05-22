@@ -135,17 +135,17 @@ update_status ModuleFightManager::Update()
 		App->render->Blit(graphicsRound1, 0, -20, &(round1Anim.GetCurrentFrame()), false, 0.0f);
 	}
 	
-	if (round1Anim.Finished() == true)
+	if (timer_num == 91)
 	{
 		App->render->Blit(graphicsFight, 0, -20, &(fightAnimX.GetCurrentFrame()), false, 0.0f);
-		App->audio->playFx(fightFX);
+		//App->audio->playFx(fightFX);
 	}
 
-	/*if (timer_num == 90)
+	if (timer_num == 90)
 	{
 		SDL_Rect none = { 0,0,0,0 };
 		f = none;
-	}*/
+	}
 
 
 	if (App->player->Health() == 0 && !blockpoints)
