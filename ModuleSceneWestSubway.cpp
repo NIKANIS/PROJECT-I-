@@ -31,6 +31,8 @@ ModuleSceneWestSubway::ModuleSceneWestSubway()
 	background.PushBack({ 619, 472, 619, 240 });
 	background.PushBack({ 619, 720, 619, 240 });
 	background.speed = 0.05f;
+	shadowp1 = { 600,406,64,12 };
+	shadowp2 = { 600,406,64,12 };
 }
 
 ModuleSceneWestSubway::~ModuleSceneWestSubway(){}
@@ -72,6 +74,8 @@ update_status ModuleSceneWestSubway::Update()
 	// Draw everything --------------------------------------
 	App->render->DrawQuad({ 0,0, SCREEN_WIDTH, SCREEN_HEIGHT }, 0, 0, 0, 80);
 	App->render->Blit(back_graphics, 0, -19, &(background.GetCurrentFrame()), false, 0.92f);
+	App->render->Blit(back_graphics, App->player->Pos_X() - 5, 210, &shadowp1, 0.0f);
+	//App->render->Blit(back_graphics, App->enemy->Pos_X(), 83 + 3, &shadowp2, false, 0.0f);
 
 	return UPDATE_CONTINUE;
 }

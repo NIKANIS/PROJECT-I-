@@ -39,6 +39,9 @@ ModuleSceneSoundBeach::ModuleSceneSoundBeach()
 	background.speed = 0.07f;
 
 	landscape = { 592, 1246, 665, 104 };
+
+	shadowp1 = { 333,1163,64,12 };
+	shadowp2 = { 333,1163,64,12 };
 }
 
 ModuleSceneSoundBeach::~ModuleSceneSoundBeach() {}
@@ -82,6 +85,8 @@ update_status ModuleSceneSoundBeach::Update()
 	App->render->DrawQuad({ 0,0, SCREEN_WIDTH, SCREEN_HEIGHT }, 0, 0, 0, 80);
 	App->render->Blit(back_graphics, 0, -10, &landscape, true, 0.75f);
 	App->render->Blit(back_graphics, 0, 0, &(background.GetCurrentFrame()), false, 0.9f);
+	App->render->Blit(back_graphics, App->player->Pos_X() - 5, 210, &shadowp1, 0.0f);
+	//App->render->Blit(back_graphics, App->enemy->Pos_X(), 83 + 3, &shadowp2, false, 0.0f);
 
 
 	return UPDATE_CONTINUE;

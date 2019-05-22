@@ -22,6 +22,8 @@ public:
 	//SI hace falta efecte Mix_Chunk*;
 	SDL_Texture* back_graphics = nullptr;
 	SDL_Rect landscape;
+	SDL_Rect shadowp1;
+	SDL_Rect shadowp2;
 	Animation background;
 };
 
