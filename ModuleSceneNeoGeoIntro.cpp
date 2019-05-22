@@ -18,10 +18,7 @@ ModuleSceneNeoGeoIntro::ModuleSceneNeoGeoIntro()
 		for (int j = 0; j < 5; j++)
 		{
 			backgroundanim.PushBack({ (320 * j), (224 * i), 320, 224 });
-			LOG("j++")
 		}
-
-		LOG("i++")
 	}
 
 	backgroundanim.speed = 0.20f;

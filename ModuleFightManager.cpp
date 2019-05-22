@@ -13,13 +13,23 @@
 #include "ModuleSceneChoosePlayer.h"
 
 
+
 ModuleFightManager::ModuleFightManager()
 {
 	win = { 155,1,123,16 };
 	lose = { 155,18,126,16 };
 	draw = { 155,35,142,16 };
 	round = {155,52,78,16};
-	fight = {99,205,173,40};
+	//fight = {99,205,173,40};
+
+	for (int i = 0; i < 13 ;i++)
+	{
+		for (int j = 0; j < 4; j++)
+		{
+			fightAnimX.PushBack({ (320 * j), (224 * i), 320, 224 });
+			
+		}
+	}
 
 }
 
@@ -28,6 +38,7 @@ ModuleFightManager::~ModuleFightManager(){}
 bool ModuleFightManager::Start() 
 {
 	graphics = App->textures->Load("SPRITES FATAL FURY/UI/UI sprites.png");
+	graphicsFight = App->textures->Load("SPRITES FATAL FURY/UI/Fight57.png");
 	fightFX = App->audio->loadWAV("AUDIO FATAL FURY/FX[WAV]/Voice/FX_FightVoice.wav");
 	roundFX = App->audio->loadWAV("AUDIO FATAL FURY/FX[WAV]/Voice/FX_ReadyVoice.wav");
 
@@ -99,7 +110,7 @@ update_status ModuleFightManager::Update()
 
 	if (timer_num == 92)
 	{
-		f = fight;
+		App->render->Blit(graphicsFight, 0, 0, &(fightAnimX.GetCurrentFrame()), false, 0.0f);
 		//App->audio->playFx(fightFX);
 	}
 

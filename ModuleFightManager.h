@@ -5,6 +5,7 @@
 #include "Module.h"
 #include "p2Point.h"
 #include "ModuleAudio.h"
+#include "Animation.h"
 
 struct SDL_Texture;
 
@@ -26,11 +27,12 @@ public:
 public:
 
 	SDL_Texture* graphics = nullptr;
+	SDL_Texture* graphicsFight = nullptr;
+
 	SDL_Rect win;
 	SDL_Rect lose;
 	SDL_Rect draw;
 	SDL_Rect round;
-	SDL_Rect fight;
 	SDL_Rect f;
 	iPoint position;
 	int cam_pos_x;
@@ -44,6 +46,8 @@ public:
 	void Reset();
 	Mix_Chunk* roundFX = nullptr;
 	Mix_Chunk* fightFX = nullptr;
+
+	Animation fightAnimX;
 };
 
 #endif
