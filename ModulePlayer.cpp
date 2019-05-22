@@ -41,29 +41,13 @@ bool ModulePlayer::Start()
 	stuned = 0;
 	
 	if (player == 0)
-		position = { 200,220 };
-	else
-		position = { 400,220 };
-
-	if (player == 0)
 	{
+		position = { 200,220 };
 		App->lifebar->Enable();
 		App->plscore->Enable();
-	}
-
-	if (player == 1)
-	{
-		App->lifebar2->Enable();
-		App->enscore->Enable();
-	}
-	if (player == 0)
-	{
 		if (App->scene_chooseplayer->final_player1 == 1)
 		{
-			if (player == 0)
-				player_col = App->collision->AddCollider({ position.x + 5, position.y - 100, 33, 100 }, COLLIDER_PLAYER, App->player);
-			if (player == 1)
-				player_col = App->collision->AddCollider({ position.x + 5, position.y - 100, 33, 100 }, COLLIDER_ENEMY, App->enemy);
+			player_col = App->collision->AddCollider({ position.x + 5, position.y - 100, 33, 100 }, COLLIDER_PLAYER, App->player);
 			graphics = App->textures->Load("SPRITES FATAL FURY/CHARACTERS/3-Joe Higashi/Sprites joe higashi.png");
 
 			skillFX = App->audio->loadWAV("AUDIO FATAL FURY/FX[WAV]/Voice/Special Attacks/FX_HurricaneUpAttackJoeHigashiVoice.wav");
@@ -182,10 +166,7 @@ bool ModulePlayer::Start()
 
 		if (App->scene_chooseplayer->final_player1 == 2)
 		{
-			if (player == 0)
-				player_col = App->collision->AddCollider({ position.x + 10, position.y - 90, 33, 90 }, COLLIDER_PLAYER, App->player);
-			if (player == 1)
-				player_col = App->collision->AddCollider({ position.x + 10, position.y - 90, 33, 90 }, COLLIDER_ENEMY, App->enemy);
+			player_col = App->collision->AddCollider({ position.x + 10, position.y - 90, 33, 90 }, COLLIDER_PLAYER, App->player);
 			graphics = App->textures->Load("SPRITES FATAL FURY/CHARACTERS/1-Terry Bogard/spritesTerryBogard.png");
 
 			skillFX = App->audio->loadWAV("AUDIO FATAL FURY/FX[WAV]/Voice/Special Attacks/FX_PowerWaveAttackTerryBogardVoice.wav");
@@ -322,10 +303,8 @@ bool ModulePlayer::Start()
 
 		if (App->scene_chooseplayer->final_player1 == 3)
 		{
-			if (player == 0)
-				player_col = App->collision->AddCollider({ position.x + 10, position.y - 90, 33, 90 }, COLLIDER_PLAYER, App->player);
-			if (player == 1)
-				player_col = App->collision->AddCollider({ position.x + 10, position.y - 90, 33, 90 }, COLLIDER_ENEMY, App->enemy);
+			player_col = App->collision->AddCollider({ position.x + 10, position.y - 90, 33, 90 }, COLLIDER_PLAYER, App->player);
+		
 			graphics = App->textures->Load("SPRITES FATAL FURY/CHARACTERS/2-Andy Bogard/Sprites_AndyBogard.png");
 
 			skillFX = App->audio->loadWAV("AUDIO FATAL FURY/FX[WAV]/Voice/Special Attacks/FX_HishokenAttackAndyBogardVoice.wav");
@@ -453,12 +432,13 @@ bool ModulePlayer::Start()
 
 	if (player == 1)
 	{
+		position = { 400,220 };
+		App->lifebar2->Enable();
+		App->enscore->Enable();
 		if (App->scene_chooseplayer->final_player2 == 1)
 		{
-			if (player == 0)
-				player_col = App->collision->AddCollider({ position.x + 5, position.y - 100, 33, 100 }, COLLIDER_PLAYER, App->player);
-			if (player == 1)
-				player_col = App->collision->AddCollider({ position.x + 5, position.y - 100, 33, 100 }, COLLIDER_ENEMY, App->enemy);
+
+			player_col = App->collision->AddCollider({ position.x + 5, position.y - 100, 33, 100 }, COLLIDER_ENEMY, App->enemy);
 			graphics = App->textures->Load("SPRITES FATAL FURY/CHARACTERS/3-Joe Higashi/Sprites joe higashi.png");
 
 			skillFX = App->audio->loadWAV("AUDIO FATAL FURY/FX[WAV]/Voice/Special Attacks/FX_HurricaneUpAttackJoeHigashiVoice.wav");
@@ -577,10 +557,7 @@ bool ModulePlayer::Start()
 
 		if (App->scene_chooseplayer->final_player2 == 2)
 		{
-			if (player == 0)
-				player_col = App->collision->AddCollider({ position.x + 10, position.y - 90, 33, 90 }, COLLIDER_PLAYER, App->player);
-			if (player == 1)
-				player_col = App->collision->AddCollider({ position.x + 10, position.y - 90, 33, 90 }, COLLIDER_ENEMY, App->enemy);
+			player_col = App->collision->AddCollider({ position.x + 10, position.y - 90, 33, 90 }, COLLIDER_ENEMY, App->enemy);
 			graphics = App->textures->Load("SPRITES FATAL FURY/CHARACTERS/1-Terry Bogard/spritesTerryBogard.png");
 
 			skillFX = App->audio->loadWAV("AUDIO FATAL FURY/FX[WAV]/Voice/Special Attacks/FX_PowerWaveAttackTerryBogardVoice.wav");
@@ -716,11 +693,8 @@ bool ModulePlayer::Start()
 		}
 
 		if (App->scene_chooseplayer->final_player2 == 3)
-		{
-			if (player == 0)
-				player_col = App->collision->AddCollider({ position.x + 10, position.y - 90, 33, 90 }, COLLIDER_PLAYER, App->player);
-			if (player == 1)
-				player_col = App->collision->AddCollider({ position.x + 10, position.y - 90, 33, 90 }, COLLIDER_ENEMY, App->enemy);
+		{	
+			player_col = App->collision->AddCollider({ position.x + 10, position.y - 90, 33, 90 }, COLLIDER_ENEMY, App->enemy);
 			graphics = App->textures->Load("SPRITES FATAL FURY/CHARACTERS/2-Andy Bogard/Sprites_AndyBogard.png");
 
 			skillFX = App->audio->loadWAV("AUDIO FATAL FURY/FX[WAV]/Voice/Special Attacks/FX_HishokenAttackAndyBogardVoice.wav");
@@ -2159,16 +2133,17 @@ void ModulePlayer::godMode()
 	if (godMode_ == false)
 		return;
 
-	if (App->input->keyboard[SDL_SCANCODE_B] == KEY_STATE::KEY_DOWN)
+	App->player->health = 100;
+	if (App->input->keyboard[SDL_SCANCODE_F1] == KEY_STATE::KEY_DOWN)
 	{
-		health = 0;
+		App->player->health = 0;
 	}
-	if (App->input->keyboard[SDL_SCANCODE_N] == KEY_STATE::KEY_DOWN)
+	if (App->input->keyboard[SDL_SCANCODE_F2] == KEY_STATE::KEY_DOWN)
 	{
 		App->enemy->health = 0;
 	}
 	// pressing O game is restarted
-	if (App->input->keyboard[SDL_SCANCODE_0] == KEY_STATE::KEY_DOWN)
+	if (App->input->keyboard[SDL_SCANCODE_F10] == KEY_STATE::KEY_DOWN)
 	{
 		App->fade->FadeToBlack((Module*)App->scene_paopao, (Module*)App->scene_intro);
 		App->Restart();
