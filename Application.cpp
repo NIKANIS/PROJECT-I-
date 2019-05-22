@@ -24,6 +24,7 @@
 #include "ModuleRoundDisplay.h"
 #include "ModuleSceneChoosePlayer.h"
 #include "ModuleSceneMap.h"
+#include "ModuleSlowdown.h"
 
 Application::Application()
 {
@@ -55,7 +56,8 @@ Application::Application()
 	modules[i++] = fight_manager = new ModuleFightManager();
 	modules[i++] = collision = new ModuleCollision();
 	modules[i++] = round_pl = new ModuleRoundDisplay(0);
-	modules[i++] = round_en = new ModuleRoundDisplay(1);	
+	modules[i++] = round_en = new ModuleRoundDisplay(1);
+	modules[i++] = slowdown = new ModuleSlowdown();
 	
 }	
 

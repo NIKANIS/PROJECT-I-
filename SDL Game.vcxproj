@@ -97,6 +97,7 @@
     <ClInclude Include="ModuleScenePaoPao.h" />
     <ClInclude Include="ModuleSceneSoundBeach.h" />
     <ClInclude Include="ModuleSceneWestSubway.h" />
+    <ClInclude Include="ModuleSlowdown.h" />
     <ClInclude Include="ModuleTextures.h" />
     <ClInclude Include="ModuleWindow.h" />
     <ClInclude Include="p2Point.h" />
@@ -127,6 +128,7 @@
     <ClCompile Include="ModuleScenePaoPao.cpp" />
     <ClCompile Include="ModuleSceneSoundBeach.cpp" />
     <ClCompile Include="ModuleSceneWestSubway.cpp" />
+    <ClCompile Include="ModuleSlowdown.cpp" />
     <ClCompile Include="ModuleTextures.cpp" />
     <ClCompile Include="ModuleWindow.cpp" />
   </ItemGroup>
