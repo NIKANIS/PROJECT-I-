@@ -9,6 +9,8 @@
 #include "ModuleRoundDisplay.h"
 #include "ModuleFightTimer.h"
 #include "SDL/include/SDL.h"
+#include <cstdlib>
+#include <time.h>
 
 ModuleRender::ModuleRender() : Module()
 {
@@ -16,6 +18,10 @@ ModuleRender::ModuleRender() : Module()
 	camera.y = -46;
 	camera.w = SCREEN_WIDTH;
 	camera.h = SCREEN_HEIGHT;
+
+	camera_offset.x = camera_offset.y = 0;
+
+	srand(time(NULL));
 }
 
 // Destructor
@@ -58,11 +64,15 @@ update_status ModuleRender::PreUpdate()
 update_status ModuleRender::Update()	
 { 
 	SDL_RenderClear(renderer);
+
+	if (shaking)
+		UpdateCameraShake();
 	return update_status::UPDATE_CONTINUE;
 }
 
 update_status ModuleRender::PostUpdate()
 {
+	SDL_SetRenderDrawColor(renderer, 0, 0, 0, SDL_ALPHA_OPAQUE);
 	SDL_RenderPresent(renderer);
 	return update_status::UPDATE_CONTINUE;
 }
@@ -86,8 +96,9 @@ bool ModuleRender::Blit(SDL_Texture* texture, int x, int y, SDL_Rect* section,bo
 {
 	bool ret = true;
 	SDL_Rect rect;
-	rect.x = (camera.x*speed) + x * SCREEN_SIZE;
-	rect.y = (camera.y*speed) + y * SCREEN_SIZE + 28;
+
+	rect.x = (int)((camera.x + camera_offset.x) * speed) + x * SCREEN_SIZE;
+	rect.y = (int)((camera.y + camera_offset.y) * speed) + y * SCREEN_SIZE + 28;
 
 	if(section != NULL)
 	{
@@ -135,8 +146,8 @@ bool ModuleRender::DrawQuad(const SDL_Rect& rect, Uint8 r, Uint8 g, Uint8 b, Uin
 	SDL_Rect rec(rect);
 	if (App->player->godMode_)
 	{
-		rec.x = (int)(camera.x + rect.x * SCREEN_SIZE);
-		rec.y = (int)(camera.y + rect.y * SCREEN_SIZE);
+		rec.x = (int)((camera.x + camera_offset.x) + rect.x * SCREEN_SIZE);
+		rec.y = (int)((camera.y + camera_offset.y) + rect.y * SCREEN_SIZE);
 		rec.w *= SCREEN_SIZE;
 		rec.h *= SCREEN_SIZE;
 	
@@ -149,4 +160,30 @@ bool ModuleRender::DrawQuad(const SDL_Rect& rect, Uint8 r, Uint8 g, Uint8 b, Uin
 	}
 
 	return ret;
+}
+
+void ModuleRender::StartCameraShake(int duration, float magnitude)
+{
+	shaking = true;
+	shake_duration = duration;
+	shake_magnitude = magnitude;
+	shake_timer = 0.0f;
+}
+
+void ModuleRender::UpdateCameraShake()
+{
+
+	if (shake_timer < shake_duration)
+	{
+		shake_timer++;
+		camera_offset.x = ((rand() % 2) - 1) * shake_magnitude;
+		camera_offset.y = ((rand() % 2) - 1) * shake_magnitude;
+	}
+
+	if (shake_timer == shake_duration)
+	{
+		shaking = false;
+		camera_offset.x = 0;
+		camera_offset.y = 0;
+	}
 }
