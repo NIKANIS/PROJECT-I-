@@ -1538,6 +1538,9 @@ update_status ModulePlayer::Update()
 				{
 					if (stuned != 0)
 					{
+						sp = false;
+						st = 0;
+						specialattack_ = false;
 						at++;
 						if (at < 30)
 						{
@@ -2311,7 +2314,7 @@ void ModulePlayer::OnCollision(Collider* a, Collider* b, bool colliding)
 			if (a->type == COLLIDER_PLAYER_ATTACK && b->type == COLLIDER_ENEMY && !already_hit)
 			{
 				already_hit = true;
-				if (kicking)
+				if (kicking || lowkicking)
 				{
 					App->enemy->Damage(30, 2);
 					score += 200;
@@ -2354,7 +2357,7 @@ void ModulePlayer::OnCollision(Collider* a, Collider* b, bool colliding)
 			if (a->type == COLLIDER_ENEMY_ATTACK && b->type == COLLIDER_PLAYER && !already_hit)
 			{
 				already_hit = true;
-				if (kicking)
+				if (kicking || lowkicking)
 				{
 					App->player->Damage(30, 2);
 					score += 200;

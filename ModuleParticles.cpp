@@ -137,10 +137,9 @@ void ModuleParticles::AddParticle(const Particle& particle, int x, int y, bool f
 		{
 			Particle* p = new Particle(particle);
 			p->born = SDL_GetTicks() + delay;
-			if (augmented && App->scene_chooseplayer->final_player1 == 2 || App->scene_chooseplayer->final_player2 == 2)
-				p->hits = 5;
-/*			else
-				p->hits = 1;*/
+			if (augmented)
+				if (App->scene_chooseplayer->final_player1 == 2 || App->scene_chooseplayer->final_player2 == 2)
+					p->hits = 5;
 			p->position.x = x;
 			p->position.y = y;
 			p->fliped = fliped;
@@ -172,16 +171,16 @@ void ModuleParticles::OnCollision(Collider* c1, Collider* c2, bool colliding)
 		if (active[i] != nullptr && active[i]->collider == c1)
 		{
 			active[i]->hits--;
+
 			if (active[i]->hits < 0)
 				active[i]->hits = 0;
-			if (c2->type == COLLIDER_PLAYER || c2->type == COLLIDER_ENEMY)
-				active[i]->hits = 0;
+
 			if (active[i]->hits == 0)
 			{
 				active[i]->collider->to_delete = true;
 				delete active[i];
+				active[i] = nullptr;
 			}
-			active[i] = nullptr;
 
 			break;
 		}
