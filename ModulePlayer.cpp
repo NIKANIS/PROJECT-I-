@@ -371,6 +371,30 @@ void ModulePlayer::LoadTerryAnimations()
 	lowkick.speed = 0.12f;
 	lowkick.loop = false;
 
+	//takedown done
+	takedown_done.PushBack({ 700,820,52,90 });
+	takedown_done.PushBack({ 760,817,62,94 });
+	takedown_done.PushBack({ 827,831,77,87 });
+	takedown_done.PushBack({ 907,830,93,80 });
+	takedown_done.PushBack({ 978,918,52,90 });
+
+	//takedown fail
+	//takedown_fail.PushBack({ 700,820,52,90 });
+	//takedown_fail.PushBack({ 760,817,62,94 });
+	//takedown_fail.PushBack({ 978,918,52,90 });
+
+	//takedown recieved
+	takedown_recieved.PushBack({ 1919,188,67,105 });
+	takedown_recieved.PushBack({ 1828,198,63,95 });
+	takedown_recieved.PushBack({ 1919,303,63,95 });
+	takedown_recieved.PushBack({ 1809,319,101,63 });
+	takedown_recieved.PushBack({ 1682,339,111,43 });
+	takedown_recieved.PushBack({ 1868,445,114,30 });
+	takedown_recieved.PushBack({ 1761,430,95,45 });
+	takedown_recieved.PushBack({ 1658,407,79,68 });
+	takedown_recieved.PushBack({ 1919,505,56,70 });
+	takedown_recieved.PushBack({ 1835,505,56,79 });
+
 }
 void ModulePlayer::LoadAndyAnimations()
 {

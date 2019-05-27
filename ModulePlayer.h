@@ -63,6 +63,8 @@ public:
 	Animation kickstun;
 	Animation punchstun;
 	Animation crowchpunch;
+	Animation takedown_done;
+	Animation takedown_recieved;
 
 private:
 
