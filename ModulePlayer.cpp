@@ -43,785 +43,457 @@ bool ModulePlayer::Start()
 	if (player == 0)
 	{
 		position = { 200,220 };
+		player_col = App->collision->AddCollider({ position.x + 5, position.y - 100, 33, 100 }, COLLIDER_PLAYER, App->player);
 		App->lifebar->Enable();
 		App->plscore->Enable();
 		if (App->scene_chooseplayer->final_player1 == 1)
 		{
-			player_col = App->collision->AddCollider({ position.x + 5, position.y - 100, 33, 100 }, COLLIDER_PLAYER, App->player);
 			graphics = App->textures->Load("SPRITES FATAL FURY/CHARACTERS/3-Joe Higashi/Sprites joe higashi.png");
-
-			skillFX = App->audio->loadWAV("AUDIO FATAL FURY/FX[WAV]/Voice/Special Attacks/FX_HurricaneUpAttackJoeHigashiVoice.wav");
-			punchFX = App->audio->loadWAV("AUDIO FATAL FURY/FX[WAV]/Voice/Attacks/FX_Attack2.wav");
-			kickFX = App->audio->loadWAV("AUDIO FATAL FURY/FX[WAV]/Voice/Attacks/FX_Attack2.wav");
-
-			// idle animation done 
-			idle.PushBack({ 190, 20, 62, 104 }); idle.PushBack({ 269, 18, 61, 106 }); idle.PushBack({ 349, 16, 63, 108 });
-			idle.PushBack({ 429, 18, 61, 106 }); idle.PushBack({ 513, 20, 62, 104 });
-			idle.loop = true; idle.speed = 0.14f;
-
-			// jump idle up done
-			jumpiup.PushBack({ 83, 367, 39, 126 });
-
-			// jump idle down 
-			jumpidown.PushBack({ 140, 367, 49, 81 });
-
-			//jump while moving done
-			jump.PushBack({ 199, 367, 56, 121 });
-
-			//go forward done	
-			forward.PushBack({ 592, 19, 75, 105 }); forward.PushBack({ 681, 11, 65, 113 }); forward.PushBack({ 753, 5, 62, 119 }); forward.PushBack({ 820, 16, 63, 108 });
-			forward.speed = 0.13f; forward.loop = true;
-
-			//go backwards done
-			backward.PushBack({ 28, 144, 60, 102 }); backward.PushBack({ 106, 141, 55, 105 }); backward.PushBack({ 171, 136, 55, 110 }); backward.PushBack({ 236, 140, 56, 106 });
-			backward.speed = 0.13f; backward.loop = true;
-
-			// crowch done
-			crowch.PushBack({ 756, 888, 59, 69 });
-
-			// crowch while going backwards and viceversa
-			crowchprotecc.PushBack({ 825,881,51,74 });
-
-			//punch while standing done	
-			punchstanding.PushBack({ 476, 610, 64, 102 }); punchstanding.PushBack({ 548, 616, 63, 96 }); punchstanding.PushBack({ 622, 616, 97, 96 });
-			punchstanding.PushBack({ 548, 616, 63, 96 }); punchstanding.PushBack({ 476, 610, 64, 102 });
-			punchstanding.speed = 0.15f; punchstanding.loop = false;
-
-			//punch while crowching 
-			crowchpunch.PushBack({ 92,286,55,71 });
-			crowchpunch.PushBack({ 154,288,76,70 });
-			crowchpunch.PushBack({ 92,286,55,71 });
-			crowchpunch.speed = 0.14f;
-			crowchpunch.loop = false;
-
-			//kick while standing done
-			kickingstanding.PushBack({ 412,163,60,84 });
-			kickingstanding.PushBack({ 490,185,52,65 });
-			kickingstanding.PushBack({ 557,153,44,94 });
-			kickingstanding.PushBack({ 626,139,110,106 });
-			kickingstanding.PushBack({ 765,156,54,90 });
-			kickingstanding.speed = 0.13f;
-			kickingstanding.loop = false;
-
-			//special attack while standing done
-			specialattack.PushBack({ 1053, 44, 54, 102 });
-			specialattack.PushBack({ 1132, 83, 80, 63 });
-			specialattack.PushBack({ 1238, 60, 50, 84 });
-			specialattack.PushBack({ 1313, 5, 47, 141 });
-			specialattack.speed = 0.1f;
-			specialattack.loop = false;
-
-			//die
-			die.PushBack({ 856, 495, 75, 101 });
-			die.PushBack({ 103,751,61,94 });
-			die.PushBack({ 177,743,70,87 });
-			die.PushBack({ 432,736,79,65 });
-			die.PushBack({ 554,780,115,36 });
-			die.PushBack({ 2,884,120,24 });
-			die.speed = 0.11f;
-			die.loop = false;
-
-			//victory
-			victory.PushBack({ 573,943,73,62 });
-			victory.PushBack({ 497,923,76,64 });
-			victory.PushBack({ 504,821,94,87 });
-			victory.PushBack({ 504,821,94,87 });
-			victory.speed = 0.08f;
-			victory.loop = false;
-
-			//hit
-			hit.PushBack({ 856, 495, 75, 101 });
-			hit.PushBack({ 782, 510, 67, 86 });
-			hit.PushBack({ 856, 495, 75, 101 });
-			hit.speed = 0.15f;
-			hit.loop = false;
-
-			//kickstun
-			//kickstun.PushBack({ 557, 495, 62, 105 }); 
-			kickstun.PushBack({ 626, 495, 70, 103 });
-			kickstun.PushBack({ 709, 495, 66, 103 });
-			kickstun.PushBack({ 856, 495, 75, 103 });
-			//kickstun.PushBack({ 782, 495, 67, 103 });
-			kickstun.speed = 0.2f;
-			kickstun.loop = false;
-
-			//punchstun
-			//punchstun.PushBack({ 557, 495, 62, 105 });
-			punchstun.PushBack({ 626, 495, 70, 103 });
-			punchstun.PushBack({ 709, 495, 66, 103 });
-			punchstun.PushBack({ 856, 495, 75, 103 });
-			//punchstun.PushBack({ 782, 495, 67, 103 });
-			punchstun.speed = 0.2f;
-			punchstun.loop = false;
-
-			//low kick
-			lowkick.PushBack({ 688,724,59,69 });
-			lowkick.PushBack({ 758,737,57,56 });
-			lowkick.PushBack({ 821,744,81,49 });
-			lowkick.PushBack({ 758,737,57,56 });
-			lowkick.PushBack({ 688,724,59,69 });
-			lowkick.speed = 0.15f;
-			lowkick.loop = false;
+			LoadJoeAnimations();
 		}
 
 		if (App->scene_chooseplayer->final_player1 == 2)
 		{
-			player_col = App->collision->AddCollider({ position.x + 10, position.y - 90, 33, 90 }, COLLIDER_PLAYER, App->player);
 			graphics = App->textures->Load("SPRITES FATAL FURY/CHARACTERS/1-Terry Bogard/spritesTerryBogard.png");
-
-			skillFX = App->audio->loadWAV("AUDIO FATAL FURY/FX[WAV]/Voice/Special Attacks/FX_PowerWaveAttackTerryBogardVoice.wav");
-			punchFX = App->audio->loadWAV("AUDIO FATAL FURY/FX[WAV]/Voice/Attacks/FX_Attack3.wav");
-			kickFX = App->audio->loadWAV("AUDIO FATAL FURY/FX[WAV]/Voice/Attacks/FX_Attack3.wav");
-
-			// idle animation done 
-			idle.PushBack({ 27, 913, 60, 105 });
-			idle.PushBack({ 95, 915, 61, 104 });
-			idle.PushBack({ 164, 914, 60, 104 });
-			idle.PushBack({ 95, 915, 61, 104 });
-			idle.loop = true;
-			idle.speed = 0.13f;
-
-			// jump idle up done
-			jumpiup.PushBack({ 907, 471, 61, 128 });
-
-			// jump idle down 
-			jumpidown.PushBack({ 908, 655, 60, 96 });
-
-			//jump while moving done
-			jump.PushBack({ 828, 565 , 63, 107 });
-
-			//go forward done
-			forward.PushBack({ 1111, 270, 69, 105 });
-			forward.PushBack({ 1193, 271, 59, 104 });
-			forward.PushBack({ 1267, 274, 59, 101 });
-			forward.PushBack({ 1036, 273, 59, 102 });
-			forward.speed = 0.13f;
-			forward.loop = true;
-
-			//go backwards done
-			backward.PushBack({ 1465, 446, 59, 102 });
-			backward.PushBack({ 1396, 445, 55, 104 });
-			backward.PushBack({ 1327, 442, 56, 106 });
-			backward.PushBack({ 1258, 444, 57, 104 });
-			backward.speed = 0.13f;
-			backward.loop = true;
-
-			// crowch done
-			crowch.PushBack({ 440, 606, 52, 63 });
-
-			// crowch while going backwards and viceversa
-			crowchprotecc.PushBack({ 380,607,52,62 });
-
-			//punch while standing done
-			punchstanding.PushBack({ 434, 919, 71, 99 });
-			punchstanding.PushBack({ 507, 919, 61, 100 });
-			punchstanding.PushBack({ 575, 917, 95, 102 });
-			punchstanding.PushBack({ 507, 919, 61, 100 });
-			punchstanding.PushBack({ 434, 919, 71, 99 });
-			punchstanding.speed = 0.15f;
-			punchstanding.loop = false;
-
-			//punch while crowching 
-			crowchpunch.PushBack({ 239,832,57,66 });
-			crowchpunch.PushBack({ 302,835,50,65 });
-			crowchpunch.PushBack({ 359,834,82,64 });
-			crowchpunch.PushBack({ 302,835,50,65 });
-			crowchpunch.PushBack({ 239,832,57,66 });
-			crowchpunch.speed = 0.15f;
-			crowchpunch.loop = false;
-
-			//kick while standing done
-			kickingstanding.PushBack({ 1119,631,59,103 });
-			kickingstanding.PushBack({ 1196,628,47,106 });
-			kickingstanding.PushBack({ 1261,642,47,93 });
-			kickingstanding.PushBack({ 1314,617,57,120 });
-			kickingstanding.PushBack({ 1379,617,42,120 });
-			kickingstanding.PushBack({ 1441,612,116,125 });
-			kickingstanding.PushBack({ 1572,628,62,117 });
-			kickingstanding.PushBack({ 1653,625,57,91 });
-			kickingstanding.speed = 0.20f;
-			kickingstanding.loop = false;
-
-			//special attack while standing done
-			specialattack.PushBack({ 620, 689, 51, 105 });
-			specialattack.PushBack({ 547, 682, 54, 112 });
-			specialattack.PushBack({ 482, 699, 60, 95 });
-			specialattack.PushBack({ 399, 717, 67, 76 });
-			specialattack.PushBack({ 399, 717, 67, 76 });
-			specialattack.PushBack({ 260, 727, 65, 67 });
-			specialattack.PushBack({ 195, 714, 60, 80 });
-			specialattack.speed = 0.15f;
-			specialattack.loop = false;
-
-			//die
-			die.PushBack({ 1929,836,64,155 });
-			die.PushBack({ 1851,836,69,155 });
-			die.PushBack({ 1756,836,84,155 });
-			die.PushBack({ 1644,836,107,155 });
-			die.PushBack({ 1542,836,87,155 });
-			die.PushBack({ 1425,836,102,155 });
-			die.PushBack({ 1303,836,112,155 });
-			die.PushBack({ 1178,836,115,155 });
-			die.speed = 0.15f;
-			die.loop = false;
-
-			//victory
-			victory.PushBack({ 699,324,56,136 });
-			victory.PushBack({ 772,324,56,136 });
-			victory.PushBack({ 839,324,60,136 });
-			victory.PushBack({ 908,324,56,136 });
-			victory.speed = 0.15f;
-			victory.loop = false;
-
-			//hit
-			hit.PushBack({ 20, 473, 67, 104 });
-			hit.PushBack({ 88, 470, 73, 110 });
-			hit.PushBack({ 20, 473, 67, 104 });
-			hit.speed = 0.15f;
-			hit.loop = false;
-
-			//kickstun
-			kickstun.PushBack({ 160,479,64,96 });
-			kickstun.PushBack({ 235,479,69,96 });
-			kickstun.speed = 0.04f;
-			kickstun.loop = false;
-
-			//punchstun
-			punchstun.PushBack({ 88,469,68,106 });
-			punchstun.PushBack({ 24,475,60,100 });
-			punchstun.speed = 0.04f;
-			punchstun.loop = false;
-
-			//low kick
-			lowkick.PushBack({ 1132,154,58,63 });
-			lowkick.PushBack({ 1205,154,92,60 });
-			lowkick.PushBack({ 1132,154,58,63 });
-			lowkick.speed = 0.12f;
-			lowkick.loop = false;
-
+			LoadTerryAnimations();
 		}
 
 		if (App->scene_chooseplayer->final_player1 == 3)
 		{
-			player_col = App->collision->AddCollider({ position.x + 10, position.y - 90, 33, 90 }, COLLIDER_PLAYER, App->player);
-		
 			graphics = App->textures->Load("SPRITES FATAL FURY/CHARACTERS/2-Andy Bogard/Sprites_AndyBogard.png");
-
-			skillFX = App->audio->loadWAV("AUDIO FATAL FURY/FX[WAV]/Voice/Special Attacks/FX_HishokenAttackAndyBogardVoice.wav");
-			punchFX = App->audio->loadWAV("AUDIO FATAL FURY/FX[WAV]/Voice/Attacks/FX_Attack.wav");
-			kickFX = App->audio->loadWAV("AUDIO FATAL FURY/FX[WAV]/Voice/Attacks/FX_Attack.wav");
-
-			// idle animation done
-			idle.PushBack({ 428, 810, 59, 98 });
-			idle.PushBack({ 497, 808, 59, 100 });
-			idle.PushBack({ 428, 810, 59, 98 });
-			idle.PushBack({ 635, 811, 60, 95 });
-			idle.loop = true;
-			idle.speed = 0.13f;
-
-			// jump idle up 
-			jumpiup.PushBack({ 515, 119, 42, 104 });
-
-			// jump idle 
-			jumpidown.PushBack({ 577, 119, 51, 92 });
-
-			//jump while moving 
-			jump.PushBack({ 648, 122, 48, 83 });
-
-			//go forward done
-			forward.PushBack({ 746, 602, 63, 98 });
-			forward.PushBack({ 821, 601, 53, 98 });
-			forward.PushBack({ 878, 602, 62, 98 });
-			forward.PushBack({ 944, 599, 59, 101 });
-			forward.speed = 0.13f;
-			forward.loop = true;
-
-			//go backwards done
-			backward.PushBack({ 744, 473, 50, 100 });
-			backward.PushBack({ 801, 471, 49, 100 });
-			backward.PushBack({ 866, 475, 54, 98 });
-			backward.speed = 0.13f;
-			backward.loop = true;
-
-			// crowch done
-			crowch.PushBack({ 947, 162, 48, 60 });
-
-			// crowch while going backwards and viceversa done
-			crowchprotecc.PushBack({ 944,81,44,64 });
-
-			//punch while standing done
-			punchstanding.PushBack({ 89, 132, 49, 90 });
-			punchstanding.PushBack({ 155, 128, 48, 95 });
-			punchstanding.PushBack({ 220, 127, 93, 95 });
-			punchstanding.PushBack({ 220, 127, 93, 95 });
-			punchstanding.PushBack({ 155, 128, 48, 95 });
-			punchstanding.speed = 0.15f;
-			punchstanding.loop = false;
-
-			//punch while crowching done
-			crowchpunch.PushBack({ 881, 735, 49, 63 });
-			crowchpunch.PushBack({ 942, 736, 78, 62 });
-			crowchpunch.speed = 0.12f;
-			crowchpunch.loop = false;
-
-			//kick while standing DONE
-			kickingstanding.PushBack({ 312,14,44,98 });
-			kickingstanding.PushBack({ 379,25,57,87 });
-			kickingstanding.PushBack({ 449,22,52,90 });
-			kickingstanding.PushBack({ 515,25,113,94 }); //instead of 94, put 75 as normal sprite
-			kickingstanding.PushBack({ 642,12,83,94 });
-			kickingstanding.PushBack({ 748,28,53,79 });
-			kickingstanding.speed = 0.15f;
-			kickingstanding.loop = false;
-
-			//special attack while standing done
-			specialattack.PushBack({ 24, 360, 65, 94 });
-			specialattack.PushBack({ 94, 363, 48, 91 });
-			specialattack.PushBack({ 155, 367, 48, 88 });
-			specialattack.PushBack({ 217, 366, 98, 88 });
-			specialattack.speed = 0.15f;
-			specialattack.loop = false;
-
-			//die done
-			die.PushBack({ 28, 938, 92, 78 });
-			die.PushBack({ 127, 941, 98, 59 });
-			die.PushBack({ 231, 942 ,89, 55 });
-			die.PushBack({ 317, 950, 98, 42 });
-			die.PushBack({ 422, 954, 111, 37 });
-			die.PushBack({ 520, 917, 109, 32 });
-			die.speed = 0.15f;
-			die.loop = false;
-
-			//victory
-			victory.PushBack({ 699,324,56,136 });
-			victory.PushBack({ 772,324,56,136 });
-			victory.PushBack({ 839,324,60,136 });
-			victory.PushBack({ 908,324,56,136 });
-			victory.speed = 0.15f;
-			victory.loop = false;
-
-			//hit
-			hit.PushBack({ 20, 473, 67, 104 });
-			hit.PushBack({ 88, 470, 73, 110 });
-			hit.PushBack({ 20, 473, 67, 104 });
-			hit.speed = 0.15f;
-			hit.loop = false;
-
-			//kickstun doone
-			kickstun.PushBack({ 843, 921, 54, 92 });
-			kickstun.PushBack({ 908, 932, 64, 79 });
-			kickstun.speed = 0.04f;
-			kickstun.loop = false;
-
-			//punchstun done
-			punchstun.PushBack({ 721, 929, 62, 95 });
-			punchstun.PushBack({ 780, 932 ,65, 82 });
-			punchstun.speed = 0.04f;
-			punchstun.loop = false;
-
-			//low kick
-			lowkick.PushBack({ 24,740,53,60 });
-			lowkick.PushBack({ 94,745,66,55 });
-			lowkick.PushBack({ 166,765,119,35 });
-			lowkick.PushBack({ 94,745,66,55 });
-			lowkick.PushBack({ 24,740,53,60 });
-			lowkick.speed = 0.19f;
-			lowkick.loop = false;
+			LoadAndyAnimations();
 		}
 	}
 
 	if (player == 1)
 	{
 		position = { 400,220 };
+		player_col = App->collision->AddCollider({ position.x + 5, position.y - 100, 33, 100 }, COLLIDER_ENEMY, App->enemy);
 		App->lifebar2->Enable();
 		App->enscore->Enable();
 		if (App->scene_chooseplayer->final_player2 == 1)
 		{
-
-			player_col = App->collision->AddCollider({ position.x + 5, position.y - 100, 33, 100 }, COLLIDER_ENEMY, App->enemy);
-			graphics = App->textures->Load("SPRITES FATAL FURY/CHARACTERS/3-Joe Higashi/Sprites joe higashi.png");
-
-			skillFX = App->audio->loadWAV("AUDIO FATAL FURY/FX[WAV]/Voice/Special Attacks/FX_HurricaneUpAttackJoeHigashiVoice.wav");
-			punchFX = App->audio->loadWAV("AUDIO FATAL FURY/FX[WAV]/Voice/Attacks/FX_Attack2.wav");
-			kickFX = App->audio->loadWAV("AUDIO FATAL FURY/FX[WAV]/Voice/Attacks/FX_Attack2.wav");
-
-			// idle animation done 
-			idle.PushBack({ 190, 20, 62, 104 }); idle.PushBack({ 269, 18, 61, 106 }); idle.PushBack({ 349, 16, 63, 108 });
-			idle.PushBack({ 429, 18, 61, 106 }); idle.PushBack({ 513, 20, 62, 104 });
-			idle.loop = true; idle.speed = 0.14f;
-
-			// jump idle up done
-			jumpiup.PushBack({ 83, 367, 39, 126 });
-
-			// jump idle down 
-			jumpidown.PushBack({ 140, 367, 49, 81 });
-
-			//jump while moving done
-			jump.PushBack({ 199, 367, 56, 121 });
-
-			//go forward done	
-			forward.PushBack({ 592, 19, 75, 105 }); forward.PushBack({ 681, 11, 65, 113 }); forward.PushBack({ 753, 5, 62, 119 }); forward.PushBack({ 820, 16, 63, 108 });
-			forward.speed = 0.13f; forward.loop = true;
-
-			//go backwards done
-			backward.PushBack({ 28, 144, 60, 102 }); backward.PushBack({ 106, 141, 55, 105 }); backward.PushBack({ 171, 136, 55, 110 }); backward.PushBack({ 236, 140, 56, 106 });
-			backward.speed = 0.13f; backward.loop = true;
-
-			// crowch done
-			crowch.PushBack({ 756, 888, 59, 69 });
-
-			// crowch while going backwards and viceversa
-			crowchprotecc.PushBack({ 825,881,51,74 });
-
-			//punch while standing done	
-			punchstanding.PushBack({ 476, 610, 64, 102 }); punchstanding.PushBack({ 548, 616, 63, 96 }); punchstanding.PushBack({ 622, 616, 97, 96 });
-			punchstanding.PushBack({ 548, 616, 63, 96 }); punchstanding.PushBack({ 476, 610, 64, 102 });
-			punchstanding.speed = 0.15f; punchstanding.loop = false;
-
-			//punch while crowching 
-			crowchpunch.PushBack({ 92,286,55,71 });
-			crowchpunch.PushBack({ 154,288,76,70 });
-			crowchpunch.PushBack({ 92,286,55,71 });
-			crowchpunch.speed = 0.14f;
-			crowchpunch.loop = false;
-
-			//kick while standing done
-			kickingstanding.PushBack({ 412,163,60,84 });
-			kickingstanding.PushBack({ 490,185,52,65 });
-			kickingstanding.PushBack({ 557,153,44,94 });
-			kickingstanding.PushBack({ 626,139,110,106 });
-			kickingstanding.PushBack({ 765,156,54,90 });
-			kickingstanding.speed = 0.13f;
-			kickingstanding.loop = false;
-
-			//special attack while standing done
-			specialattack.PushBack({ 1053, 44, 54, 102 });
-			specialattack.PushBack({ 1132, 83, 80, 63 });
-			specialattack.PushBack({ 1238, 60, 50, 84 });
-			specialattack.PushBack({ 1313, 5, 47, 141 });
-			specialattack.speed = 0.1f;
-			specialattack.loop = false;
-
-			//die
-			die.PushBack({ 856, 495, 75, 101 });
-			die.PushBack({ 103,751,61,94 });
-			die.PushBack({ 177,743,70,87 });
-			die.PushBack({ 432,736,79,65 });
-			die.PushBack({ 554,780,115,36 });
-			die.PushBack({ 2,884,120,24 });
-			die.speed = 0.11f;
-			die.loop = false;
-
-			//victory
-			victory.PushBack({ 573,943,73,62 });
-			victory.PushBack({ 497,923,76,64 });
-			victory.PushBack({ 504,821,94,87 });
-			victory.PushBack({ 504,821,94,87 });
-			victory.speed = 0.08f;
-			victory.loop = false;
-
-			//hit
-			hit.PushBack({ 856, 495, 75, 101 });
-			hit.PushBack({ 782, 510, 67, 86 });
-			hit.PushBack({ 856, 495, 75, 101 });
-			hit.speed = 0.15f;
-			hit.loop = false;
-
-			//kickstun
-			//kickstun.PushBack({ 557, 495, 62, 105 }); 
-			kickstun.PushBack({ 626, 495, 70, 103 });
-			kickstun.PushBack({ 709, 495, 66, 103 });
-			kickstun.PushBack({ 856, 495, 75, 103 });
-			//kickstun.PushBack({ 782, 495, 67, 103 });
-			kickstun.speed = 0.2f;
-			kickstun.loop = false;
-
-			//punchstun
-			//punchstun.PushBack({ 557, 495, 62, 105 });
-			punchstun.PushBack({ 626, 495, 70, 103 });
-			punchstun.PushBack({ 709, 495, 66, 103 });
-			punchstun.PushBack({ 856, 495, 75, 103 });
-			//punchstun.PushBack({ 782, 495, 67, 103 });
-			punchstun.speed = 0.2f;
-			punchstun.loop = false;
-
-			//low kick
-			lowkick.PushBack({ 688,724,59,69 });
-			lowkick.PushBack({ 758,737,57,56 });
-			lowkick.PushBack({ 821,744,81,49 });
-			lowkick.PushBack({ 758,737,57,56 });
-			lowkick.PushBack({ 688,724,59,69 });
-			lowkick.speed = 0.15f;
-			lowkick.loop = false;
+			if (App->scene_chooseplayer->final_player1 == 1)
+				graphics = App->textures->Load("SPRITES FATAL FURY/CHARACTERS/3-Joe Higashi/Sprites joe higashi.png");
+			else
+				graphics = App->textures->Load("SPRITES FATAL FURY/CHARACTERS/3-Joe Higashi/Sprites joe higashi.png");
+			LoadJoeAnimations();
 		}
 
 		if (App->scene_chooseplayer->final_player2 == 2)
 		{
-			player_col = App->collision->AddCollider({ position.x + 10, position.y - 90, 33, 90 }, COLLIDER_ENEMY, App->enemy);
-			graphics = App->textures->Load("SPRITES FATAL FURY/CHARACTERS/1-Terry Bogard/spritesTerryBogard.png");
-
-			skillFX = App->audio->loadWAV("AUDIO FATAL FURY/FX[WAV]/Voice/Special Attacks/FX_PowerWaveAttackTerryBogardVoice.wav");
-			punchFX = App->audio->loadWAV("AUDIO FATAL FURY/FX[WAV]/Voice/Attacks/FX_Attack3.wav");
-			kickFX = App->audio->loadWAV("AUDIO FATAL FURY/FX[WAV]/Voice/Attacks/FX_Attack3.wav");
-
-			// idle animation done 
-			idle.PushBack({ 27, 913, 60, 105 });
-			idle.PushBack({ 95, 915, 61, 104 });
-			idle.PushBack({ 164, 914, 60, 104 });
-			idle.PushBack({ 95, 915, 61, 104 });
-			idle.loop = true;
-			idle.speed = 0.13f;
-
-			// jump idle up done
-			jumpiup.PushBack({ 907, 471, 61, 128 });
-
-			// jump idle down 
-			jumpidown.PushBack({ 908, 655, 60, 96 });
-
-			//jump while moving done
-			jump.PushBack({ 828, 565 , 63, 107 });
-
-			//go forward done
-			forward.PushBack({ 1111, 270, 69, 105 });
-			forward.PushBack({ 1193, 271, 59, 104 });
-			forward.PushBack({ 1267, 274, 59, 101 });
-			forward.PushBack({ 1036, 273, 59, 102 });
-			forward.speed = 0.13f;
-			forward.loop = true;
-
-			//go backwards done
-			backward.PushBack({ 1465, 446, 59, 102 });
-			backward.PushBack({ 1396, 445, 55, 104 });
-			backward.PushBack({ 1327, 442, 56, 106 });
-			backward.PushBack({ 1258, 444, 57, 104 });
-			backward.speed = 0.13f;
-			backward.loop = true;
-
-			// crowch done
-			crowch.PushBack({ 440, 606, 52, 63 });
-
-			// crowch while going backwards and viceversa
-			crowchprotecc.PushBack({ 380,607,52,62 });
-
-			//punch while standing done
-			punchstanding.PushBack({ 434, 919, 71, 99 });
-			punchstanding.PushBack({ 507, 919, 61, 100 });
-			punchstanding.PushBack({ 575, 917, 95, 102 });
-			punchstanding.PushBack({ 507, 919, 61, 100 });
-			punchstanding.PushBack({ 434, 919, 71, 99 });
-			punchstanding.speed = 0.15f;
-			punchstanding.loop = false;
-
-			//punch while crowching 
-			crowchpunch.PushBack({ 239,832,57,66 });
-			crowchpunch.PushBack({ 302,835,50,65 });
-			crowchpunch.PushBack({ 359,834,82,64 });
-			crowchpunch.PushBack({ 302,835,50,65 });
-			crowchpunch.PushBack({ 239,832,57,66 });
-			crowchpunch.speed = 0.15f;
-			crowchpunch.loop = false;
-
-			//kick while standing done
-			kickingstanding.PushBack({ 1119,631,59,103 });
-			kickingstanding.PushBack({ 1196,628,47,106 });
-			kickingstanding.PushBack({ 1261,642,47,93 });
-			kickingstanding.PushBack({ 1314,617,57,120 });
-			kickingstanding.PushBack({ 1379,617,42,120 });
-			kickingstanding.PushBack({ 1441,612,116,125 });
-			kickingstanding.PushBack({ 1572,628,62,117 });
-			kickingstanding.PushBack({ 1653,625,57,91 });
-			kickingstanding.speed = 0.20f;
-			kickingstanding.loop = false;
-
-			//special attack while standing done
-			specialattack.PushBack({ 620, 689, 51, 105 });
-			specialattack.PushBack({ 547, 682, 54, 112 });
-			specialattack.PushBack({ 482, 699, 60, 95 });
-			specialattack.PushBack({ 399, 717, 67, 76 });
-			specialattack.PushBack({ 399, 717, 67, 76 });
-			specialattack.PushBack({ 260, 727, 65, 67 });
-			specialattack.PushBack({ 195, 714, 60, 80 });
-			specialattack.speed = 0.15f;
-			specialattack.loop = false;
-
-			//die
-			die.PushBack({ 1929,836,64,155 });
-			die.PushBack({ 1851,836,69,155 });
-			die.PushBack({ 1756,836,84,155 });
-			die.PushBack({ 1644,836,107,155 });
-			die.PushBack({ 1542,836,87,155 });
-			die.PushBack({ 1425,836,102,155 });
-			die.PushBack({ 1303,836,112,155 });
-			die.PushBack({ 1178,836,115,155 });
-			die.speed = 0.15f;
-			die.loop = false;
-
-			//victory
-			victory.PushBack({ 699,324,56,136 });
-			victory.PushBack({ 772,324,56,136 });
-			victory.PushBack({ 839,324,60,136 });
-			victory.PushBack({ 908,324,56,136 });
-			victory.speed = 0.15f;
-			victory.loop = false;
-
-			//hit
-			hit.PushBack({ 20, 473, 67, 104 });
-			hit.PushBack({ 88, 470, 73, 110 });
-			hit.PushBack({ 20, 473, 67, 104 });
-			hit.speed = 0.15f;
-			hit.loop = false;
-
-			//kickstun
-			kickstun.PushBack({ 160,479,64,96 });
-			kickstun.PushBack({ 235,479,69,96 });
-			kickstun.speed = 0.04f;
-			kickstun.loop = false;
-
-			//punchstun
-			punchstun.PushBack({ 88,469,68,106 });
-			punchstun.PushBack({ 24,475,60,100 });
-			punchstun.speed = 0.04f;
-			punchstun.loop = false;
-
-			//low kick
-			lowkick.PushBack({ 1132,154,58,63 });
-			lowkick.PushBack({ 1205,154,92,60 });
-			lowkick.PushBack({ 1132,154,58,63 });
-			lowkick.speed = 0.12f;
-			lowkick.loop = false;
-
+			if (App->scene_chooseplayer->final_player1 == 2)
+				graphics = App->textures->Load("SPRITES FATAL FURY/CHARACTERS/1-Terry Bogard/spritesTerryBogard.png");
+			else
+				graphics = App->textures->Load("SPRITES FATAL FURY/CHARACTERS/1-Terry Bogard/spritesTerryBogard.png");
+			LoadTerryAnimations();
 		}
 
 		if (App->scene_chooseplayer->final_player2 == 3)
 		{	
-			player_col = App->collision->AddCollider({ position.x + 10, position.y - 90, 33, 90 }, COLLIDER_ENEMY, App->enemy);
-			graphics = App->textures->Load("SPRITES FATAL FURY/CHARACTERS/2-Andy Bogard/Sprites_AndyBogard.png");
-
-			skillFX = App->audio->loadWAV("AUDIO FATAL FURY/FX[WAV]/Voice/Special Attacks/FX_HishokenAttackAndyBogardVoice.wav");
-			punchFX = App->audio->loadWAV("AUDIO FATAL FURY/FX[WAV]/Voice/Attacks/FX_Attack.wav");
-			kickFX = App->audio->loadWAV("AUDIO FATAL FURY/FX[WAV]/Voice/Attacks/FX_Attack.wav");
-
-			// idle animation done
-			idle.PushBack({ 428, 810, 59, 98 });
-			idle.PushBack({ 497, 808, 59, 100 });
-			idle.PushBack({ 428, 810, 59, 98 });
-			idle.PushBack({ 635, 811, 60, 95 });
-			idle.loop = true;
-			idle.speed = 0.13f;
-
-			// jump idle up 
-			jumpiup.PushBack({ 515, 119, 42, 104 });
-
-			// jump idle 
-			jumpidown.PushBack({ 577, 119, 51, 92 });
-
-			//jump while moving 
-			jump.PushBack({ 648, 122, 48, 83 });
-
-			//go forward done
-			forward.PushBack({ 746, 602, 63, 98 });
-			forward.PushBack({ 821, 601, 53, 98 });
-			forward.PushBack({ 878, 602, 62, 98 });
-			forward.PushBack({ 944, 599, 59, 101 });
-			forward.speed = 0.13f;
-			forward.loop = true;
-
-			//go backwards done
-			backward.PushBack({ 744, 473, 50, 100 });
-			backward.PushBack({ 801, 471, 49, 100 });
-			backward.PushBack({ 866, 475, 54, 98 });
-			backward.speed = 0.13f;
-			backward.loop = true;
-
-			// crowch done
-			crowch.PushBack({ 947, 162, 48, 60 });
-
-			// crowch while going backwards and viceversa done
-			crowchprotecc.PushBack({ 944,81,44,64 });
-
-			//punch while standing done
-			punchstanding.PushBack({ 89, 132, 49, 90 });
-			punchstanding.PushBack({ 155, 128, 48, 95 });
-			punchstanding.PushBack({ 220, 127, 93, 95 });
-			punchstanding.PushBack({ 220, 127, 93, 95 });
-			punchstanding.PushBack({ 155, 128, 48, 95 });
-			punchstanding.speed = 0.15f;
-			punchstanding.loop = false;
-
-			//punch while crowching done
-			crowchpunch.PushBack({ 881, 735, 49, 63 });
-			crowchpunch.PushBack({ 942, 736, 78, 62 });
-			crowchpunch.speed = 0.12f;
-			crowchpunch.loop = false;
-
-			//kick while standing DONE
-			kickingstanding.PushBack({ 312,14,44,98 });
-			kickingstanding.PushBack({ 379,25,57,87 });
-			kickingstanding.PushBack({ 449,22,52,90 });
-			kickingstanding.PushBack({ 515,25,113,94 }); //instead of 94, put 75 as normal sprite
-			kickingstanding.PushBack({ 642,12,83,94 });
-			kickingstanding.PushBack({ 748,28,53,79 });
-			kickingstanding.speed = 0.15f;
-			kickingstanding.loop = false;
-
-			//special attack while standing done
-			specialattack.PushBack({ 24, 360, 65, 94 });
-			specialattack.PushBack({ 94, 363, 48, 91 });
-			specialattack.PushBack({ 155, 367, 48, 88 });
-			specialattack.PushBack({ 217, 366, 98, 88 });
-			specialattack.speed = 0.15f;
-			specialattack.loop = false;
-
-			//die done
-			die.PushBack({ 28, 938, 92, 78 });
-			die.PushBack({ 127, 941, 98, 59 });
-			die.PushBack({ 231, 942 ,89, 55 });
-			die.PushBack({ 317, 950, 98, 42 });
-			die.PushBack({ 422, 954, 111, 37 });
-			die.PushBack({ 520, 917, 109, 32 });
-			die.speed = 0.15f;
-			die.loop = false;
-
-			//victory
-			victory.PushBack({ 699,324,56,136 });
-			victory.PushBack({ 772,324,56,136 });
-			victory.PushBack({ 839,324,60,136 });
-			victory.PushBack({ 908,324,56,136 });
-			victory.speed = 0.15f;
-			victory.loop = false;
-
-			//hit
-			hit.PushBack({ 20, 473, 67, 104 });
-			hit.PushBack({ 88, 470, 73, 110 });
-			hit.PushBack({ 20, 473, 67, 104 });
-			hit.speed = 0.15f;
-			hit.loop = false;
-
-			//kickstun doone
-			kickstun.PushBack({ 843, 921, 54, 92 });
-			kickstun.PushBack({ 908, 932, 64, 79 });
-			kickstun.speed = 0.04f;
-			kickstun.loop = false;
-
-			//punchstun done
-			punchstun.PushBack({ 721, 929, 62, 95 });
-			punchstun.PushBack({ 780, 932 ,65, 82 });
-			punchstun.speed = 0.04f;
-			punchstun.loop = false;
-
-			//low kick
-			lowkick.PushBack({ 24,740,53,60 });
-			lowkick.PushBack({ 94,745,66,55 });
-			lowkick.PushBack({ 166,765,119,35 });
-			lowkick.PushBack({ 94,745,66,55 });
-			lowkick.PushBack({ 24,740,53,60 });
-			lowkick.speed = 0.19f;
-			lowkick.loop = false;
+			if (App->scene_chooseplayer->final_player1 == 3)
+				graphics = App->textures->Load("SPRITES FATAL FURY/CHARACTERS/2-Andy Bogard/Sprites_AndyBogard.png");
+			else
+				graphics = App->textures->Load("SPRITES FATAL FURY/CHARACTERS/2-Andy Bogard/Sprites_AndyBogard.png");
+			LoadAndyAnimations();
 		}
 	}
 
 		
 	return ret;
+}
+
+void ModulePlayer::LoadJoeAnimations()
+{
+	skillFX = App->audio->loadWAV("AUDIO FATAL FURY/FX[WAV]/Voice/Special Attacks/FX_HurricaneUpAttackJoeHigashiVoice.wav");
+	punchFX = App->audio->loadWAV("AUDIO FATAL FURY/FX[WAV]/Voice/Attacks/FX_Attack2.wav");
+	kickFX = App->audio->loadWAV("AUDIO FATAL FURY/FX[WAV]/Voice/Attacks/FX_Attack2.wav");
+
+	// idle animation done 
+	idle.PushBack({ 190, 20, 62, 104 }); idle.PushBack({ 269, 18, 61, 106 }); idle.PushBack({ 349, 16, 63, 108 });
+	idle.PushBack({ 429, 18, 61, 106 }); idle.PushBack({ 513, 20, 62, 104 });
+	idle.loop = true; idle.speed = 0.14f;
+
+	// jump idle up done
+	jumpiup.PushBack({ 83, 367, 39, 126 });
+
+	// jump idle down 
+	jumpidown.PushBack({ 140, 367, 49, 81 });
+
+	//jump while moving done
+	jump.PushBack({ 199, 367, 56, 121 });
+
+	//go forward done	
+	forward.PushBack({ 592, 19, 75, 105 }); forward.PushBack({ 681, 11, 65, 113 }); forward.PushBack({ 753, 5, 62, 119 }); forward.PushBack({ 820, 16, 63, 108 });
+	forward.speed = 0.13f; forward.loop = true;
+
+	//go backwards done
+	backward.PushBack({ 28, 144, 60, 102 }); backward.PushBack({ 106, 141, 55, 105 }); backward.PushBack({ 171, 136, 55, 110 }); backward.PushBack({ 236, 140, 56, 106 });
+	backward.speed = 0.13f; backward.loop = true;
+
+	// crowch done
+	crowch.PushBack({ 756, 888, 59, 69 });
+
+	// crowch while going backwards and viceversa
+	crowchprotecc.PushBack({ 825,881,51,74 });
+
+	//punch while standing done	
+	punchstanding.PushBack({ 476, 610, 64, 102 }); punchstanding.PushBack({ 548, 616, 63, 96 }); punchstanding.PushBack({ 622, 616, 97, 96 });
+	punchstanding.PushBack({ 548, 616, 63, 96 }); punchstanding.PushBack({ 476, 610, 64, 102 });
+	punchstanding.speed = 0.15f; punchstanding.loop = false;
+
+	//punch while crowching 
+	crowchpunch.PushBack({ 92,286,55,71 });
+	crowchpunch.PushBack({ 154,288,76,70 });
+	crowchpunch.PushBack({ 92,286,55,71 });
+	crowchpunch.speed = 0.14f;
+	crowchpunch.loop = false;
+
+	//kick while standing done
+	kickingstanding.PushBack({ 412,163,60,84 });
+	kickingstanding.PushBack({ 490,185,52,65 });
+	kickingstanding.PushBack({ 557,153,44,94 });
+	kickingstanding.PushBack({ 626,139,110,106 });
+	kickingstanding.PushBack({ 765,156,54,90 });
+	kickingstanding.speed = 0.13f;
+	kickingstanding.loop = false;
+
+	//special attack while standing done
+	specialattack.PushBack({ 1053, 44, 54, 102 });
+	specialattack.PushBack({ 1132, 83, 80, 63 });
+	specialattack.PushBack({ 1238, 60, 50, 84 });
+	specialattack.PushBack({ 1313, 5, 47, 141 });
+	specialattack.speed = 0.1f;
+	specialattack.loop = false;
+
+	//die
+	die.PushBack({ 856, 495, 75, 101 });
+	die.PushBack({ 103,751,61,94 });
+	die.PushBack({ 177,743,70,87 });
+	die.PushBack({ 432,736,79,65 });
+	die.PushBack({ 554,780,115,36 });
+	die.PushBack({ 2,884,120,24 });
+	die.speed = 0.11f;
+	die.loop = false;
+
+	//victory
+	victory.PushBack({ 573,943,73,62 });
+	victory.PushBack({ 497,923,76,64 });
+	victory.PushBack({ 504,821,94,87 });
+	victory.PushBack({ 504,821,94,87 });
+	victory.speed = 0.08f;
+	victory.loop = false;
+
+	//hit
+	hit.PushBack({ 856, 495, 75, 101 });
+	hit.PushBack({ 782, 510, 67, 86 });
+	hit.PushBack({ 856, 495, 75, 101 });
+	hit.speed = 0.15f;
+	hit.loop = false;
+
+	//kickstun
+	//kickstun.PushBack({ 557, 495, 62, 105 }); 
+	kickstun.PushBack({ 626, 495, 70, 103 });
+	kickstun.PushBack({ 709, 495, 66, 103 });
+	kickstun.PushBack({ 856, 495, 75, 103 });
+	//kickstun.PushBack({ 782, 495, 67, 103 });
+	kickstun.speed = 0.2f;
+	kickstun.loop = false;
+
+	//punchstun
+	//punchstun.PushBack({ 557, 495, 62, 105 });
+	punchstun.PushBack({ 626, 495, 70, 103 });
+	punchstun.PushBack({ 709, 495, 66, 103 });
+	punchstun.PushBack({ 856, 495, 75, 103 });
+	//punchstun.PushBack({ 782, 495, 67, 103 });
+	punchstun.speed = 0.2f;
+	punchstun.loop = false;
+
+	//low kick
+	lowkick.PushBack({ 688,724,59,69 });
+	lowkick.PushBack({ 758,737,57,56 });
+	lowkick.PushBack({ 821,744,81,49 });
+	lowkick.PushBack({ 758,737,57,56 });
+	lowkick.PushBack({ 688,724,59,69 });
+	lowkick.speed = 0.15f;
+	lowkick.loop = false;
+}
+void ModulePlayer::LoadTerryAnimations()
+{
+	skillFX = App->audio->loadWAV("AUDIO FATAL FURY/FX[WAV]/Voice/Special Attacks/FX_PowerWaveAttackTerryBogardVoice.wav");
+	punchFX = App->audio->loadWAV("AUDIO FATAL FURY/FX[WAV]/Voice/Attacks/FX_Attack3.wav");
+	kickFX = App->audio->loadWAV("AUDIO FATAL FURY/FX[WAV]/Voice/Attacks/FX_Attack3.wav");
+
+	// idle animation done 
+	idle.PushBack({ 27, 913, 60, 105 });
+	idle.PushBack({ 95, 915, 61, 104 });
+	idle.PushBack({ 164, 914, 60, 104 });
+	idle.PushBack({ 95, 915, 61, 104 });
+	idle.loop = true;
+	idle.speed = 0.13f;
+
+	// jump idle up done
+	jumpiup.PushBack({ 907, 471, 61, 128 });
+
+	// jump forward up
+	jumpfup.PushBack({ 841,919,88,103 });
+	jumpfup.PushBack({ 937,919,54,103 });;
+	jumpfup.PushBack({ 999,919,88,103 });
+	jumpfup.PushBack({ 1098,919,54,103 });
+	jumpfup.loop = true;
+	jumpfup.speed = 0.13f;
+
+	//jump backwards up
+
+	jumpbup.PushBack({ 999,919,88,103 });
+	jumpbup.PushBack({ 937,919,54,103 });;
+	jumpbup.PushBack({ 841,919,88,103 });
+	jumpbup.PushBack({ 1098,919,54,103 });
+	jumpbup.loop = true;
+	jumpbup.speed = 0.13f;
+
+	//jump forward and backwards down
+
+	jumpfbdown.PushBack({ 783,919,57,103 });
+
+	// jump idle down 
+	jumpidown.PushBack({ 908, 655, 60, 96 });
+
+	//jump while moving done
+	jump.PushBack({ 828, 565 , 63, 107 });
+
+	//go forward done
+	forward.PushBack({ 1111, 270, 69, 105 });
+	forward.PushBack({ 1193, 271, 59, 104 });
+	forward.PushBack({ 1267, 274, 59, 101 });
+	forward.PushBack({ 1036, 273, 59, 102 });
+	forward.speed = 0.13f;
+	forward.loop = true;
+
+	//go backwards done
+	backward.PushBack({ 1465, 446, 59, 102 });
+	backward.PushBack({ 1396, 445, 55, 104 });
+	backward.PushBack({ 1327, 442, 56, 106 });
+	backward.PushBack({ 1258, 444, 57, 104 });
+	backward.speed = 0.13f;
+	backward.loop = true;
+
+	// crowch done
+	crowch.PushBack({ 440, 606, 52, 63 });
+
+	// crowch while going backwards and viceversa
+	crowchprotecc.PushBack({ 380,607,52,62 });
+
+	//punch while standing done
+	punchstanding.PushBack({ 434, 919, 71, 99 });
+	punchstanding.PushBack({ 507, 919, 61, 100 });
+	punchstanding.PushBack({ 575, 917, 95, 102 });
+	punchstanding.PushBack({ 507, 919, 61, 100 });
+	punchstanding.PushBack({ 434, 919, 71, 99 });
+	punchstanding.speed = 0.15f;
+	punchstanding.loop = false;
+
+	//punch while crowching 
+	crowchpunch.PushBack({ 239,832,57,66 });
+	crowchpunch.PushBack({ 302,835,50,65 });
+	crowchpunch.PushBack({ 359,834,82,64 });
+	crowchpunch.PushBack({ 302,835,50,65 });
+	crowchpunch.PushBack({ 239,832,57,66 });
+	crowchpunch.speed = 0.15f;
+	crowchpunch.loop = false;
+
+	//kick while standing done
+	kickingstanding.PushBack({ 1119,631,59,103 });
+	kickingstanding.PushBack({ 1196,628,47,106 });
+	kickingstanding.PushBack({ 1261,642,47,93 });
+	kickingstanding.PushBack({ 1314,617,57,120 });
+	kickingstanding.PushBack({ 1379,617,42,120 });
+	kickingstanding.PushBack({ 1441,612,116,125 });
+	kickingstanding.PushBack({ 1572,628,62,117 });
+	kickingstanding.PushBack({ 1653,625,57,91 });
+	kickingstanding.speed = 0.20f;
+	kickingstanding.loop = false;
+
+	//special attack while standing done
+	specialattack.PushBack({ 620, 689, 51, 105 });
+	specialattack.PushBack({ 547, 682, 54, 112 });
+	specialattack.PushBack({ 482, 699, 60, 95 });
+	specialattack.PushBack({ 399, 717, 67, 76 });
+	specialattack.PushBack({ 399, 717, 67, 76 });
+	specialattack.PushBack({ 260, 727, 65, 67 });
+	specialattack.PushBack({ 195, 714, 60, 80 });
+	specialattack.speed = 0.15f;
+	specialattack.loop = false;
+
+	//die
+	die.PushBack({ 1929,836,64,155 });
+	die.PushBack({ 1851,836,69,155 });
+	die.PushBack({ 1756,836,84,155 });
+	die.PushBack({ 1644,836,107,155 });
+	die.PushBack({ 1542,836,87,155 });
+	die.PushBack({ 1425,836,102,155 });
+	die.PushBack({ 1303,836,112,155 });
+	die.PushBack({ 1178,836,115,155 });
+	die.speed = 0.15f;
+	die.loop = false;
+
+	//victory
+	victory.PushBack({ 699,324,56,136 });
+	victory.PushBack({ 772,324,56,136 });
+	victory.PushBack({ 839,324,60,136 });
+	victory.PushBack({ 908,324,56,136 });
+	victory.speed = 0.15f;
+	victory.loop = false;
+
+	//hit
+	hit.PushBack({ 20, 473, 67, 104 });
+	hit.PushBack({ 88, 470, 73, 110 });
+	hit.PushBack({ 20, 473, 67, 104 });
+	hit.speed = 0.15f;
+	hit.loop = false;
+
+	//kickstun
+	kickstun.PushBack({ 160,479,64,96 });
+	kickstun.PushBack({ 235,479,69,96 });
+	kickstun.speed = 0.04f;
+	kickstun.loop = false;
+
+	//punchstun
+	punchstun.PushBack({ 88,469,68,106 });
+	punchstun.PushBack({ 24,475,60,100 });
+	punchstun.speed = 0.04f;
+	punchstun.loop = false;
+
+	//low kick
+	lowkick.PushBack({ 1132,154,58,63 });
+	lowkick.PushBack({ 1205,154,92,60 });
+	lowkick.PushBack({ 1132,154,58,63 });
+	lowkick.speed = 0.12f;
+	lowkick.loop = false;
+
+}
+void ModulePlayer::LoadAndyAnimations()
+{
+	skillFX = App->audio->loadWAV("AUDIO FATAL FURY/FX[WAV]/Voice/Special Attacks/FX_HishokenAttackAndyBogardVoice.wav");
+	punchFX = App->audio->loadWAV("AUDIO FATAL FURY/FX[WAV]/Voice/Attacks/FX_Attack.wav");
+	kickFX = App->audio->loadWAV("AUDIO FATAL FURY/FX[WAV]/Voice/Attacks/FX_Attack.wav");
+
+	// idle animation done
+	idle.PushBack({ 428, 810, 59, 98 });
+	idle.PushBack({ 497, 808, 59, 100 });
+	idle.PushBack({ 428, 810, 59, 98 });
+	idle.PushBack({ 635, 811, 60, 95 });
+	idle.loop = true;
+	idle.speed = 0.13f;
+
+	// jump idle up 
+	jumpiup.PushBack({ 515, 119, 42, 104 });
+
+	// jump idle 
+	jumpidown.PushBack({ 577, 119, 51, 92 });
+
+	//jump while moving 
+	jump.PushBack({ 648, 122, 48, 83 });
+
+	//go forward done
+	forward.PushBack({ 746, 602, 63, 98 });
+	forward.PushBack({ 821, 601, 53, 98 });
+	forward.PushBack({ 878, 602, 62, 98 });
+	forward.PushBack({ 944, 599, 59, 101 });
+	forward.speed = 0.13f;
+	forward.loop = true;
+
+	//go backwards done
+	backward.PushBack({ 744, 473, 50, 100 });
+	backward.PushBack({ 801, 471, 49, 100 });
+	backward.PushBack({ 866, 475, 54, 98 });
+	backward.speed = 0.13f;
+	backward.loop = true;
+
+	// crowch done
+	crowch.PushBack({ 947, 162, 48, 60 });
+
+	// crowch while going backwards and viceversa done
+	crowchprotecc.PushBack({ 944,81,44,64 });
+
+	//punch while standing done
+	punchstanding.PushBack({ 89, 132, 49, 90 });
+	punchstanding.PushBack({ 155, 128, 48, 95 });
+	punchstanding.PushBack({ 220, 127, 93, 95 });
+	punchstanding.PushBack({ 220, 127, 93, 95 });
+	punchstanding.PushBack({ 155, 128, 48, 95 });
+	punchstanding.speed = 0.15f;
+	punchstanding.loop = false;
+
+	//punch while crowching done
+	crowchpunch.PushBack({ 881, 735, 49, 63 });
+	crowchpunch.PushBack({ 942, 736, 78, 62 });
+	crowchpunch.speed = 0.12f;
+	crowchpunch.loop = false;
+
+	//kick while standing DONE
+	kickingstanding.PushBack({ 312,14,44,98 });
+	kickingstanding.PushBack({ 379,25,57,87 });
+	kickingstanding.PushBack({ 449,22,52,90 });
+	kickingstanding.PushBack({ 515,25,113,94 }); //instead of 94, put 75 as normal sprite
+	kickingstanding.PushBack({ 642,12,83,94 });
+	kickingstanding.PushBack({ 748,28,53,79 });
+	kickingstanding.speed = 0.15f;
+	kickingstanding.loop = false;
+
+	//special attack while standing done
+	specialattack.PushBack({ 24, 360, 65, 94 });
+	specialattack.PushBack({ 94, 363, 48, 91 });
+	specialattack.PushBack({ 155, 367, 48, 88 });
+	specialattack.PushBack({ 217, 366, 98, 88 });
+	specialattack.speed = 0.15f;
+	specialattack.loop = false;
+
+	//die done
+	die.PushBack({ 28, 938, 92, 78 });
+	die.PushBack({ 127, 941, 98, 59 });
+	die.PushBack({ 231, 942 ,89, 55 });
+	die.PushBack({ 317, 950, 98, 42 });
+	die.PushBack({ 422, 954, 111, 37 });
+	die.PushBack({ 520, 917, 109, 32 });
+	die.speed = 0.15f;
+	die.loop = false;
+
+	//victory
+	victory.PushBack({ 699,324,56,136 });
+	victory.PushBack({ 772,324,56,136 });
+	victory.PushBack({ 839,324,60,136 });
+	victory.PushBack({ 908,324,56,136 });
+	victory.speed = 0.15f;
+	victory.loop = false;
+
+	//hit
+	hit.PushBack({ 20, 473, 67, 104 });
+	hit.PushBack({ 88, 470, 73, 110 });
+	hit.PushBack({ 20, 473, 67, 104 });
+	hit.speed = 0.15f;
+	hit.loop = false;
+
+	//kickstun doone
+	kickstun.PushBack({ 843, 921, 54, 92 });
+	kickstun.PushBack({ 908, 932, 64, 79 });
+	kickstun.speed = 0.04f;
+	kickstun.loop = false;
+
+	//punchstun done
+	punchstun.PushBack({ 721, 929, 62, 95 });
+	punchstun.PushBack({ 780, 932 ,65, 82 });
+	punchstun.speed = 0.04f;
+	punchstun.loop = false;
+
+	//low kick
+	lowkick.PushBack({ 24,740,53,60 });
+	lowkick.PushBack({ 94,745,66,55 });
+	lowkick.PushBack({ 166,765,119,35 });
+	lowkick.PushBack({ 94,745,66,55 });
+	lowkick.PushBack({ 24,740,53,60 });
+	lowkick.speed = 0.19f;
+	lowkick.loop = false;
 }
 
 bool ModulePlayer::CleanUp()
@@ -890,25 +562,32 @@ int ModulePlayer::Pos_X()
 
 void ModulePlayer::Jump() {
 	if (jumping) {
+		lockX = true;
+		if ((position.x*(-SCREEN_SIZE)) < App->render->camera.x || (-SCREEN_SIZE * (position.x + 60)) > (App->render->camera.x - SCREEN_SIZE * SCREEN_WIDTH))
+			position.x += jumpspeed;
 		t++;
 		position.y = 220 - 7 * t + 0.12*(t*t);
 		vy = -7 + 0.24*t;
-		if (position.y >= 220) {
+		if (position.y >= 220) 
+		{
 			jumping = false;
 			position.y = 220;
 		}
-		if (vy > 0) {
+		if (vy > 0) 
 			if (current_animation != &jumpidown && current_animation != &die)
-			{
-				jumpidown.Reset();
-				current_animation = &jumpidown;
-			}
-		}
+				if (jumptype == 0)
+				{
+					jumpidown.Reset();
+					current_animation = &jumpidown;
+				}
+				else
+				{
+					jumpfbdown.Reset();
+					current_animation = &jumpfbdown;
+				}
 
 		if (fliped)
-		{
 			player_col->SetPos(position.x, position.y - 90);
-		}
 	}
 }
 
@@ -1365,7 +1044,7 @@ void ModulePlayer::SpecialAttack()
 					}
 					else
 					{
-						App->particles->AddParticle(App->particles->skillAndy, position.x + 80, position.y - 100, fliped, true, COLLIDER_PLAYER_SKILL);
+						App->particles->AddParticle(App->particles->skillAndy, position.x + 25, position.y - 100, fliped, true, COLLIDER_PLAYER_SKILL);
 					}
 				}
 
@@ -1377,7 +1056,7 @@ void ModulePlayer::SpecialAttack()
 					}
 					else
 					{
-						App->particles->AddParticle(App->particles->skillAndy2, position.x + 110, position.y - 100, fliped, true, COLLIDER_PLAYER_SKILL);
+						App->particles->AddParticle(App->particles->skillAndy2, position.x + 55, position.y - 100, fliped, true, COLLIDER_PLAYER_SKILL);
 					}
 					specialattack_ = false;
 				}
@@ -1462,7 +1141,7 @@ void ModulePlayer::SpecialAttack()
 					}
 					else
 					{
-						App->particles->AddParticle(App->particles->skillAndy, position.x + 80, position.y -100, fliped, true, COLLIDER_ENEMY_SKILL);
+						App->particles->AddParticle(App->particles->skillAndy, position.x + 25, position.y -100, fliped, true, COLLIDER_ENEMY_SKILL);
 					}
 				}
 
@@ -1474,7 +1153,7 @@ void ModulePlayer::SpecialAttack()
 					}
 					else
 					{
-						App->particles->AddParticle(App->particles->skillAndy2, position.x + 110, position.y - 100, fliped, true, COLLIDER_ENEMY_SKILL);
+						App->particles->AddParticle(App->particles->skillAndy2, position.x + 55, position.y - 100, fliped, true, COLLIDER_ENEMY_SKILL);
 					}
 					specialattack_ = false;
 				}
@@ -1703,13 +1382,38 @@ update_status ModulePlayer::Update()
 
 					if (App->input->keyboard[SDL_SCANCODE_W] == KEY_STATE::KEY_DOWN && !jumping && !punching && !kicking && !specialattack_ && !lowkicking)
 					{
-						if (current_animation != &jumpiup)
-						{
-							jumping = true;
-							t = 0;
-							jumpiup.Reset();
-							current_animation = &jumpiup;
-						}
+						jumping = true;
+						t = 0;
+							if (current_animation == &forward)
+							{
+								jumptype = 1;
+								if (!fliped)
+									jumpspeed = 2;
+								else
+									jumpspeed = -2;
+
+								jumpfup.Reset();
+								current_animation = &jumpfup;
+							}
+							else if (current_animation == &backward)
+							{		
+								jumptype = 2;
+								if (!fliped)
+									jumpspeed = -2;
+								else
+									jumpspeed = 2;
+
+								jumpbup.Reset();
+								current_animation = &jumpbup;
+							}
+							else
+							{
+								jumptype = 0;
+								jumpspeed = 0;
+							
+								jumpiup.Reset();
+								current_animation = &jumpiup;
+							}
 					}
 
 					if (App->input->keyboard[SDL_SCANCODE_R] == KEY_STATE::KEY_DOWN && !punching && !kicking && !crowchaction && !specialattack_ && !lowkicking) {
@@ -2025,10 +1729,35 @@ update_status ModulePlayer::Update()
 
 					if (App->input->keyboard[SDL_SCANCODE_UP] == KEY_STATE::KEY_DOWN && !jumping && !punching && !kicking && !specialattack_ && !lowkicking)
 					{
-						if (current_animation != &jumpiup)
+						jumping = true;
+						t = 0;
+						if (current_animation == &forward)
 						{
-							jumping = true;
-							t = 0;
+							jumptype = 1;
+							if (!fliped)
+								jumpspeed = 2;
+							else
+								jumpspeed = -2;
+
+							jumpfup.Reset();
+							current_animation = &jumpfup;
+						}
+						else if (current_animation == &backward)
+						{
+							jumptype = 2;
+							if (!fliped)
+								jumpspeed = -2;
+							else
+								jumpspeed = 2;
+
+							jumpbup.Reset();
+							current_animation = &jumpbup;
+						}
+						else
+						{
+							jumptype = 0;
+							jumpspeed = 0;
+
 							jumpiup.Reset();
 							current_animation = &jumpiup;
 						}

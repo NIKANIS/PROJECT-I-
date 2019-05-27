@@ -44,7 +44,10 @@ public:
 
 	Animation idle;
 	Animation jumpiup;
+	Animation jumpfup;
+	Animation jumpbup;
 	Animation jumpidown;
+	Animation jumpfbdown;
 	Animation jump;
 	Animation crowch;
 	Animation crowchprotecc;
@@ -73,6 +76,9 @@ private:
 	void Kick();
 	void SpecialAttack();
 	void LowKick();
+	void LoadJoeAnimations();
+	void LoadTerryAnimations();
+	void LoadAndyAnimations();
 
 	iPoint spatckpos;
 
@@ -83,6 +89,8 @@ private:
 	int vy = 0; //velocity y
 	int player;
 	int health;
+	int jumptype; //0 = idle jump / 1 = forward jump / 2 = backwards jump
+	int jumpspeed = 2;
 
 	bool body_collide;
 	bool already_hit;
