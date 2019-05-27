@@ -118,7 +118,8 @@ void ModulePlayer::LoadJoeAnimations()
 	jumpiup.PushBack({ 83, 367, 39, 126 });
 
 	// jump forward up
-	jumpfup.PushBack({152,495,73,80});
+	jumpfup.PushBack({ 952,612,64,103 });
+	jumpfup.PushBack({152,495,73,80});	
 	jumpfup.PushBack({ 237,495,65,80 });
 	jumpfup.PushBack({ 318,495,73,80 });
 	jumpfup.PushBack({ 83,495,65,80 });
@@ -127,6 +128,7 @@ void ModulePlayer::LoadJoeAnimations()
 
 	//jump backwards up
 
+	jumpbup.PushBack({ 412,476,50,124 });
 	jumpbup.PushBack({ 318,495,73,80 });
 	jumpbup.PushBack({ 237,495,65,80 });
 	jumpbup.PushBack({ 152,495,73,80 });
