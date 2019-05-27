@@ -117,11 +117,29 @@ void ModulePlayer::LoadJoeAnimations()
 	// jump idle up done
 	jumpiup.PushBack({ 83, 367, 39, 126 });
 
+	// jump forward up
+	jumpfup.PushBack({152,495,73,80});
+	jumpfup.PushBack({ 237,495,65,80 });
+	jumpfup.PushBack({ 318,495,73,80 });
+	jumpfup.PushBack({ 83,495,65,80 });
+	jumpfup.loop = true;
+	jumpfup.speed = 0.13f;
+
+	//jump backwards up
+
+	jumpbup.PushBack({ 318,495,73,80 });
+	jumpbup.PushBack({ 237,495,65,80 });
+	jumpbup.PushBack({ 152,495,73,80 });
+	jumpbup.PushBack({ 83,495,65,80});
+	jumpbup.loop = true;
+	jumpbup.speed = 0.13f;
+
+	//jump forward and backwards down
+
+	jumpfbdown.PushBack({ 411,475,51,125 });
+
 	// jump idle down 
 	jumpidown.PushBack({ 140, 367, 49, 81 });
-
-	//jump while moving done
-	jump.PushBack({ 199, 367, 56, 121 });
 
 	//go forward done	
 	forward.PushBack({ 592, 19, 75, 105 }); forward.PushBack({ 681, 11, 65, 113 }); forward.PushBack({ 753, 5, 62, 119 }); forward.PushBack({ 820, 16, 63, 108 });
@@ -237,7 +255,7 @@ void ModulePlayer::LoadTerryAnimations()
 
 	// jump forward up
 	jumpfup.PushBack({ 841,919,88,103 });
-	jumpfup.PushBack({ 937,919,54,103 });;
+	jumpfup.PushBack({ 937,919,54,103 });
 	jumpfup.PushBack({ 999,919,88,103 });
 	jumpfup.PushBack({ 1098,919,54,103 });
 	jumpfup.loop = true;
@@ -246,7 +264,7 @@ void ModulePlayer::LoadTerryAnimations()
 	//jump backwards up
 
 	jumpbup.PushBack({ 999,919,88,103 });
-	jumpbup.PushBack({ 937,919,54,103 });;
+	jumpbup.PushBack({ 937,919,54,103 });
 	jumpbup.PushBack({ 841,919,88,103 });
 	jumpbup.PushBack({ 1098,919,54,103 });
 	jumpbup.loop = true;
@@ -258,9 +276,6 @@ void ModulePlayer::LoadTerryAnimations()
 
 	// jump idle down 
 	jumpidown.PushBack({ 908, 655, 60, 96 });
-
-	//jump while moving done
-	jump.PushBack({ 828, 565 , 63, 107 });
 
 	//go forward done
 	forward.PushBack({ 1111, 270, 69, 105 });
@@ -389,11 +404,30 @@ void ModulePlayer::LoadAndyAnimations()
 	// jump idle up 
 	jumpiup.PushBack({ 515, 119, 42, 104 });
 
+	// jump forward up
+	jumpfup.PushBack({932,822,68,94});
+	jumpfup.PushBack({ 1003,822,56,94 });	
+	jumpfup.PushBack({ 802,822,68,94 });
+	jumpfup.PushBack({ 872,822,56,94 });
+	jumpfup.loop = true;
+	jumpfup.speed = 0.13f;
+
+	//jump backwards up
+
+	jumpbup.PushBack({ 802,822,68,94 });
+	jumpbup.PushBack({ 1003,822,56,94 });
+	jumpbup.PushBack({ 932,822,68,94 });
+	jumpbup.PushBack({ 872,822,56,94 });
+	jumpbup.loop = true;
+	jumpbup.speed = 0.13f;
+
+	//jump forward and backwards down
+
+	jumpfbdown.PushBack({729,822,56,94});
+
+
 	// jump idle 
 	jumpidown.PushBack({ 577, 119, 51, 92 });
-
-	//jump while moving 
-	jump.PushBack({ 648, 122, 48, 83 });
 
 	//go forward done
 	forward.PushBack({ 746, 602, 63, 98 });
