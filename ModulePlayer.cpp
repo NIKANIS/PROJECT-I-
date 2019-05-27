@@ -74,7 +74,7 @@ bool ModulePlayer::Start()
 		if (App->scene_chooseplayer->final_player2 == 1)
 		{
 			if (App->scene_chooseplayer->final_player1 == 1)
-				graphics = App->textures->Load("SPRITES FATAL FURY/CHARACTERS/3-Joe Higashi/Sprites joe higashi.png");
+				graphics = App->textures->Load("SPRITES FATAL FURY/CHARACTERS/3-Joe Higashi/Sprites joe higashi2.png");
 			else
 				graphics = App->textures->Load("SPRITES FATAL FURY/CHARACTERS/3-Joe Higashi/Sprites joe higashi.png");
 			LoadJoeAnimations();
@@ -83,7 +83,7 @@ bool ModulePlayer::Start()
 		if (App->scene_chooseplayer->final_player2 == 2)
 		{
 			if (App->scene_chooseplayer->final_player1 == 2)
-				graphics = App->textures->Load("SPRITES FATAL FURY/CHARACTERS/1-Terry Bogard/spritesTerryBogard.png");
+				graphics = App->textures->Load("SPRITES FATAL FURY/CHARACTERS/1-Terry Bogard/spritesTerryBogard2.png");
 			else
 				graphics = App->textures->Load("SPRITES FATAL FURY/CHARACTERS/1-Terry Bogard/spritesTerryBogard.png");
 			LoadTerryAnimations();
@@ -92,7 +92,7 @@ bool ModulePlayer::Start()
 		if (App->scene_chooseplayer->final_player2 == 3)
 		{	
 			if (App->scene_chooseplayer->final_player1 == 3)
-				graphics = App->textures->Load("SPRITES FATAL FURY/CHARACTERS/2-Andy Bogard/Sprites_AndyBogard.png");
+				graphics = App->textures->Load("SPRITES FATAL FURY/CHARACTERS/2-Andy Bogard/Sprites_AndyBogard2.png");
 			else
 				graphics = App->textures->Load("SPRITES FATAL FURY/CHARACTERS/2-Andy Bogard/Sprites_AndyBogard.png");
 			LoadAndyAnimations();
