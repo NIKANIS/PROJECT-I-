@@ -31,6 +31,9 @@ public:
 	SDL_Texture* graphicsRound1 = nullptr;
 	SDL_Texture* graphicsRound2 = nullptr;
 	SDL_Texture* graphicsRound3 = nullptr;
+	SDL_Texture* graphicsYouWin = nullptr;
+	SDL_Texture* graphicsYouLose = nullptr;
+	SDL_Texture* graphicsDrawGame = nullptr;
 
 	SDL_Rect win;
 	SDL_Rect lose;
@@ -55,6 +58,9 @@ public:
 	Animation round1Anim;
 	Animation round2Anim;
 	Animation round3Anim;
+	Animation youWinAnim;
+	Animation youLoseAnim;
+	Animation DrawAnim;
 };
 
 #endif

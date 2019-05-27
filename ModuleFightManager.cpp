@@ -64,6 +64,63 @@ ModuleFightManager::ModuleFightManager()
 	round1Anim.loop = false;
 	round2Anim.loop = false;
 	round3Anim.loop = false;
+
+	for (int i = 0; i < 15; i++)
+	{
+		if (i < 14)
+		{
+			for (int j = 0; j < 13; j++)
+			{
+				youWinAnim.PushBack({ (304 * j), (224 * i), 304, 224 });
+			}
+		}
+		else
+		{
+			for (int j = 0; j < 12; j++)
+			{
+				youWinAnim.PushBack({ (304 * j), (224 * i), 304, 224 });
+			}
+		}
+	}
+	youWinAnim.loop = false;
+
+	for (int i = 0; i < 9; i++)
+	{
+		if (i < 8)
+		{
+			for (int j = 0; j < 13; j++)
+			{
+				youLoseAnim.PushBack({ (304 * j), (224 * i), 304, 224 });
+			}
+		}
+		else
+		{
+			for (int j = 0; j < 5; j++)
+			{
+				youLoseAnim.PushBack({ (304 * j), (224 * i), 304, 224 });
+			}
+		}
+	}
+	youLoseAnim.loop = false;
+
+	for (int i = 0; i < 14; i++)
+	{
+		if (i < 13)
+		{
+			for (int j = 0; j < 13; j++)
+			{
+				DrawAnim.PushBack({ (304 * j), (224 * i), 304, 224 });
+			}
+		}
+		else
+		{
+			for (int j = 0; j < 1; j++)
+			{
+				DrawAnim.PushBack({ (304 * j), (224 * i), 304, 224 });
+			}
+		}
+	}
+	DrawAnim.loop = false;
 }
 
 ModuleFightManager::~ModuleFightManager(){}
@@ -75,6 +132,9 @@ bool ModuleFightManager::Start()
 	graphicsRound1 = App->textures->Load("SPRITES FATAL FURY/UI/RoundOne87.png");
 	graphicsRound2 = App->textures->Load("SPRITES FATAL FURY/UI/RoundTwo85.png");
 	graphicsRound3 = App->textures->Load("SPRITES FATAL FURY/UI/RoundThree85.png");
+	graphicsYouWin = App->textures->Load("SPRITES FATAL FURY/UI/Youwin194.png");
+	graphicsYouLose = App->textures->Load("SPRITES FATAL FURY/UI/Youlose96.png");
+	graphicsDrawGame = App->textures->Load("SPRITES FATAL FURY/UI/DrawGame170.png");
 	fightFX = App->audio->loadWAV("AUDIO FATAL FURY/FX[WAV]/Voice/FX_FightVoice.wav");
 	roundFX = App->audio->loadWAV("AUDIO FATAL FURY/FX[WAV]/Voice/FX_ReadyVoice.wav");
 
