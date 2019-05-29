@@ -257,18 +257,18 @@ void ModulePlayer::LoadTerryAnimations()
 
 	// jump forward up
 	jumpfup.PushBack({ 841,919,88,103 });
-	jumpfup.PushBack({ 937,919,54,103 });
-	jumpfup.PushBack({ 999,919,88,103 });
-	jumpfup.PushBack({ 1098,919,54,103 });
+	jumpfup.PushBack({ 937 + 233,919 - 163,54,103 });
+	jumpfup.PushBack({ 999 + 233,919 - 163,88,103 });
+	jumpfup.PushBack({ 1098 + 233,919 - 163,54,103 });
 	jumpfup.loop = true;
 	jumpfup.speed = 0.13f;
 
 	//jump backwards up
 
-	jumpbup.PushBack({ 999,919,88,103 });
-	jumpbup.PushBack({ 937,919,54,103 });
+	jumpbup.PushBack({ 999 + 233,919 - 163,88,103 });
+	jumpbup.PushBack({ 937 + 233,919 - 163,54,103 });
 	jumpbup.PushBack({ 841,919,88,103 });
-	jumpbup.PushBack({ 1098,919,54,103 });
+	jumpbup.PushBack({ 1098 + 233,919 - 163,54,103 });
 	jumpbup.loop = true;
 	jumpbup.speed = 0.13f;
 
@@ -657,26 +657,9 @@ void ModulePlayer::Punch()
 		at++;
 		if (at == 1 && current_animation == &crowchpunch)
 		{
-			if (App->scene_chooseplayer->final_player1 == 1)
-			{
-				player_col->rect.h = 65;
-				player_col->rect.w = 41;
-				player_col->SetPos(position.x + 5, position.y - 67);
-			}
-
-			if (App->scene_chooseplayer->final_player1 == 2)
-			{
-				player_col->rect.h = 65;
-				player_col->rect.w = 41;
-				player_col->SetPos(position.x + 5, position.y - 67);
-			}
-			if (App->scene_chooseplayer->final_player1 == 3)
-			{
-				player_col->rect.h = 65;
-				player_col->rect.w = 41;
-				player_col->SetPos(position.x + 5, position.y - 67);
-			}
-
+			player_col->rect.h = 65;
+			player_col->rect.w = 41;
+			player_col->SetPos(position.x + 5, position.y - 67);
 		}
 		if (at == 12)
 		{
@@ -801,6 +784,11 @@ void ModulePlayer::Punch()
 			crowchaction = false;
 			already_hit = false;
 		}
+	}
+	else
+	{
+	if (player_punch_col != nullptr)
+		player_punch_col->to_delete = true;
 	}
 }
 
@@ -1280,6 +1268,9 @@ update_status ModulePlayer::Update()
 						sp = false;
 						st = 0;
 						specialattack_ = false;
+						punching = false;
+						kicking = false;
+						lowkicking = false;
 						at++;
 						if (at < 30)
 						{
@@ -1303,6 +1294,7 @@ update_status ModulePlayer::Update()
 						if (at == 60)
 						{
 							stuned = 0;
+							at = 0;
 						}
 						if (App->scene_chooseplayer->final_player1 == 1)
 						{
@@ -1627,6 +1619,12 @@ update_status ModulePlayer::Update()
 				{
 					if (stuned != 0)
 					{
+						sp = false;
+						st = 0;
+						specialattack_ = false;
+						punching = false;
+						kicking = false;
+						lowkicking = false;
 						at++;
 						if (at < 30)
 						{
