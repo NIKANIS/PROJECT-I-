@@ -215,9 +215,7 @@ update_status ModuleFightManager::Update()
 	if (App->render->camera.x >= 0)
 		App->render->camera.x = 0;
 	if (App->render->camera.x <= -(640 - SCREEN_WIDTH)*SCREEN_SIZE)
-		App->render->camera.x = -(640 - SCREEN_WIDTH)*SCREEN_SIZE;
-
-	
+		App->render->camera.x = -(640 - SCREEN_WIDTH)*SCREEN_SIZE;	
 
 	if (timer_num != 0 && !time_stop)
 	{
@@ -257,7 +255,7 @@ update_status ModuleFightManager::Update()
 		en_won_rounds++;
 		current_round++;
 		time_stop = true;
-		f = lose;
+		//App->render->Blit(graphicsYouLose, 0, -20, &(youLoseAnim.GetCurrentFrame()), false, 0.0f); AIXÒ HAURIA DE FUNCIONAR PERÒ NO FUNCIONA, SUPOSO PERQUE NOMÈS FA BLIT DURANT UN FRAME, PERO NO SE COM ARREGLARHO PERQUE NO ENTENC EL CODI
 		timer_counter = 0;
 	}
 	else if (App->enemy->Health() == 0 && !blockpoints)
@@ -266,7 +264,7 @@ update_status ModuleFightManager::Update()
 		pl_won_rounds++;
 		current_round++;
 		time_stop = true;
-		f = win;
+		//App->render->Blit(graphicsYouWin, 0, -20, &(youWinAnim.GetCurrentFrame()), false, 0.0f);
 		timer_counter = 0;
 	}
 
@@ -275,7 +273,7 @@ update_status ModuleFightManager::Update()
 		blockpoints = true;
 		time_stop = true;
 		current_round++;
-		f = draw;
+		//App->render->Blit(graphicsDrawGame, 0, -20, &(DrawAnim.GetCurrentFrame()), false, 0.0f);
 		timer_counter = 0;
 	}
 
@@ -286,19 +284,19 @@ update_status ModuleFightManager::Update()
 		{
 			pl_won_rounds++;
 			current_round++;
-			f = win;
+			//App->render->Blit(graphicsYouWin, 0, -20, &(youWinAnim.GetCurrentFrame()), false, 0.0f);
 			timer_counter = 0;
 		}
 		if (App->player->Health() < App->enemy->Health())
 		{
 			en_won_rounds++;
 			current_round++;
-			f = lose;
+			//App->render->Blit(graphicsYouLose, 0, -20, &(youLoseAnim.GetCurrentFrame()), false, 0.0f);
 			timer_counter = 0;
 		}
 		if (App->player->Health() == App->enemy->Health())
 		{
-			f = draw;
+			//App->render->Blit(graphicsDrawGame, 0, -20, &(DrawAnim.GetCurrentFrame()), false, 0.0f);
 			current_round++;
 			timer_counter = 0;
 		}		
