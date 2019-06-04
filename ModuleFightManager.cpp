@@ -121,6 +121,31 @@ ModuleFightManager::ModuleFightManager()
 		}
 	}
 	DrawAnim.loop = false;
+
+	PixelFadeOut.PushBack({ 0,0,304,224  });
+	PixelFadeOut.PushBack({ 304,0,304,224  });
+	PixelFadeOut.PushBack({ 608,0,304,224  });
+	PixelFadeOut.PushBack({ 0,224,304,224  });
+	PixelFadeOut.PushBack({ 304,224,304,224 });
+	PixelFadeOut.PushBack({ 608,224,304,224  });
+	PixelFadeOut.PushBack({ 0,448,304,224 });
+			 
+	PixelFadeOut.speed = 0.2f;
+	PixelFadeOut.loop = false;
+
+	PixelFadeIn.PushBack({ 0,448,304,224 });
+	PixelFadeIn.PushBack({ 608,224,304,224 });
+	PixelFadeIn.PushBack({ 304,224,304,224 });
+	PixelFadeIn.PushBack({ 0,224,304,224 });
+	PixelFadeIn.PushBack({ 608,0,304,224 });
+	PixelFadeIn.PushBack({ 304,0,304,224 });
+	PixelFadeIn.PushBack({ 0,0,304,224 });	
+			 
+	PixelFadeIn.speed = 0.2f;
+	PixelFadeIn.loop = false;
+
+	//App->render->Blit(graphicsPixelFade, 0, 0, &(PixelFadeIn.GetCurrentFrame()), false, 0.0f); COM PROGRAMAR EL FADE IN I FADE OUT DE PIXELS. NO ENTENC EL CODI QUE ESTÀ ESCRIT EN EL FIGHT MANAGER I NO SE COM PUC AFEGIR AQUESTES FUNCIONS
+	//App->render->Blit(graphicsPixelFade, 0, 0, &(PixelFadeOut.GetCurrentFrame()), false, 0.0f);
 }
 
 ModuleFightManager::~ModuleFightManager(){}
@@ -135,6 +160,7 @@ bool ModuleFightManager::Start()
 	graphicsYouWin = App->textures->Load("SPRITES FATAL FURY/UI/Youwin194.png");
 	graphicsYouLose = App->textures->Load("SPRITES FATAL FURY/UI/Youlose96.png");
 	graphicsDrawGame = App->textures->Load("SPRITES FATAL FURY/UI/DrawGame170.png");
+	graphicsPixelFade = App->textures->Load("SPRITES FATAL FURY/UI/Introductiontotheround7.png");
 	fightFX = App->audio->loadWAV("AUDIO FATAL FURY/FX[WAV]/Voice/FX_FightVoice.wav");
 	roundFX = App->audio->loadWAV("AUDIO FATAL FURY/FX[WAV]/Voice/FX_ReadyVoice.wav");
 
@@ -190,6 +216,9 @@ update_status ModuleFightManager::Update()
 		App->render->camera.x = 0;
 	if (App->render->camera.x <= -(640 - SCREEN_WIDTH)*SCREEN_SIZE)
 		App->render->camera.x = -(640 - SCREEN_WIDTH)*SCREEN_SIZE;
+
+	
+
 	if (timer_num != 0 && !time_stop)
 	{
 		timer_counter++;
@@ -272,7 +301,7 @@ update_status ModuleFightManager::Update()
 			f = draw;
 			current_round++;
 			timer_counter = 0;
-		}
+		}		
 	}
 
 	if (blockpoints)
@@ -281,6 +310,7 @@ update_status ModuleFightManager::Update()
 		if (timer_counter >= 90/* && winner != 0 && winner != 1*/)
 		{
 			Reset();
+
 			if (winner == 0)
 			{
 				if (App->scene_map->map == 1)
@@ -303,8 +333,7 @@ update_status ModuleFightManager::Update()
 					App->fade->FadeToBlack((Module*)App->scene_westsubway, (Module*)App->scene_gameover);
 				if (App->scene_map->map == 4)
 					App->fade->FadeToBlack((Module*)App->scene_howardarena, (Module*)App->scene_gameover);
-			}
-				
+			}				
 		}
 	}
 	if (pl_won_rounds >= 2 && pl_won_rounds > en_won_rounds)
@@ -322,8 +351,7 @@ update_status ModuleFightManager::Update()
 			App->fade->FadeToBlack((Module*)App->scene_westsubway, (Module*)App->scene_congrats);
 		if (App->scene_map->map == 4)
 			App->fade->FadeToBlack((Module*)App->scene_howardarena, (Module*)App->scene_congrats);
-	}	
-		
+	}			
 
 	if (winner == 1)
 	{
@@ -336,9 +364,8 @@ update_status ModuleFightManager::Update()
 		if (App->scene_map->map == 4)
 			App->fade->FadeToBlack((Module*)App->scene_howardarena, (Module*)App->scene_gameover);
 	}
-		
 
-	App->render->Blit(graphics, position.x - (f.w / 2) , position.y - (f.h / 2) - 48, &f,false, 0.0f);
+	App->render->Blit(graphics, position.x - (f.w / 2) , position.y - (f.h / 2) - 48, &f,false, 0.0f);	
 
 	return update_status::UPDATE_CONTINUE;
 	

@@ -34,6 +34,7 @@ public:
 	SDL_Texture* graphicsYouWin = nullptr;
 	SDL_Texture* graphicsYouLose = nullptr;
 	SDL_Texture* graphicsDrawGame = nullptr;
+	SDL_Texture* graphicsPixelFade = nullptr;
 
 	SDL_Rect win;
 	SDL_Rect lose;
@@ -61,6 +62,8 @@ public:
 	Animation youWinAnim;
 	Animation youLoseAnim;
 	Animation DrawAnim;
+	Animation PixelFadeIn;
+	Animation PixelFadeOut;
 };
 
 #endif
