@@ -65,6 +65,7 @@ public:
 	Animation crowchpunch;
 	Animation takedown_done;
 	Animation takedown_recieved;
+	Animation takedown_fail;
 
 private:
 
@@ -78,6 +79,7 @@ private:
 	void Kick();
 	void SpecialAttack();
 	void LowKick();
+	void TakeDown();
 	void LoadJoeAnimations();
 	void LoadTerryAnimations();
 	void LoadAndyAnimations();
@@ -89,6 +91,7 @@ private:
 	int at = 0; //attack coldown time
 	int st = 0;		// specialattack coldown time
 	int vy = 0; //velocity y
+	int tktempo = 0;
 	int player;
 	int health;
 	int jumptype; //0 = idle jump / 1 = forward jump / 2 = backwards jump
@@ -102,7 +105,8 @@ private:
 	bool kicking = false; //true while kicking
 	bool crowchaction = false; //true while crowching
 	bool specialattack_ = false; //true while special attacking
-	bool lowkicking = false;
+	bool lowkicking = false; //true while lowkicking
+	bool takingdown = false; // true while taking down the opponent o failing the takedown
 	bool skillColDone = false;
 	bool fliped = false;
 	
