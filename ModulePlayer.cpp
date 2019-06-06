@@ -301,7 +301,7 @@ void ModulePlayer::LoadTerryAnimations()
 	// crowch while going backwards and viceversa
 	crowchprotecc.PushBack({ 380,607,52,62 });
 
-	//punch while standing done
+	//punch while standing
 	punchstanding.PushBack({ 434, 919, 71, 99 });
 	punchstanding.PushBack({ 507, 919, 61, 100 });
 	punchstanding.PushBack({ 575, 917, 95, 102 });
@@ -674,6 +674,14 @@ void ModulePlayer::Punch()
 			player_col->rect.w = 41;
 			player_col->SetPos(position.x + 5, position.y - 67);
 		}
+		//if(at == 1 && jumping)
+		//{
+
+		//	player_punch_col = App->collision->AddCollider({ position.x + 50, position.y - 90, 41, 12 }, COLLIDER_PLAYER_ATTACK, App->player);
+		//	player_col->rect.h = 65;
+		//	player_col->rect.w = 41;
+		//	player_col->SetPos(position.x + 5, position.y - 67);
+		//}
 		if (at == 12)
 		{
 			if (player == 0)
@@ -681,6 +689,8 @@ void ModulePlayer::Punch()
 				if (App->scene_chooseplayer->final_player1 == 1)
 				{
 					if (fliped == false)
+					{
+	
 						if (current_animation == &crowchpunch)
 							player_punch_col = App->collision->AddCollider({ position.x + 40, position.y - 60, 35, 12 }, COLLIDER_PLAYER_ATTACK, App->player);
 						else
@@ -688,6 +698,8 @@ void ModulePlayer::Punch()
 							player_punch_col = App->collision->AddCollider({ position.x + 50, position.y - 87, 45, 12 }, COLLIDER_PLAYER_ATTACK, App->player);
 							player_col->SetPos(position.x + 17, position.y - 100);
 						}
+					}
+
 
 					else
 						if (current_animation == &crowchpunch)
@@ -701,10 +713,14 @@ void ModulePlayer::Punch()
 				if (App->scene_chooseplayer->final_player1 == 2)
 				{
 					if (fliped == false)
+					{
+
 						if (current_animation == &crowchpunch)
 							player_punch_col = App->collision->AddCollider({ position.x + 46, position.y - 52, 35, 12 }, COLLIDER_PLAYER_ATTACK, App->player);
 						else
 							player_punch_col = App->collision->AddCollider({ position.x + 50, position.y - 90, 41, 12 }, COLLIDER_PLAYER_ATTACK, App->player);
+
+					}
 					else
 						if (current_animation == &crowchpunch)
 							player_punch_col = App->collision->AddCollider({ position.x - 30, position.y - 52, 35, 12 }, COLLIDER_PLAYER_ATTACK, App->player);
@@ -1232,7 +1248,7 @@ void ModulePlayer::TakeDown()
 	if (takingdown == true && current_animation == &takedown_fail)
 	{
 		tktempo++;
-		if (tktempo == 40)
+		if (tktempo == 20)
 		{
 			takingdown = false;
 		}
@@ -1500,6 +1516,29 @@ update_status ModulePlayer::Update()
 							
 								jumpiup.Reset();
 								current_animation = &jumpiup;
+							}
+
+
+							//if (App->input->keyboard[SDL_SCANCODE_T] == KEY_STATE::KEY_DOWN && !punching && !kicking && !specialattack_ && !lowkicking && !takingdown) {
+							//	if (current_animation != &crowchpunch && !jumping)
+							//	{
+							//		kick = true;
+							//		at = 0;
+							//		lowkick.Reset();
+							//		current_animation = &lowkick;
+							//		////App->audio->playFx(punchFX);
+							//	}
+							//}
+							if (App->input->keyboard[SDL_SCANCODE_R] == KEY_STATE::KEY_DOWN && !punching && !kicking && !specialattack_ && !lowkicking && !takingdown)
+							{
+								if (current_animation != &crowchpunch)
+								{
+									punching = true;
+									at = 0;
+									crowchpunch.Reset();
+									current_animation = &crowchpunch;
+									App->audio->playFx(punchFX);
+								}
 							}
 					}
 

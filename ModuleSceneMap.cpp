@@ -108,7 +108,7 @@ void ModuleSceneMap::SelectMap()
 	{
 		map_chosen = true;
 		App->audio->playFx(selected);
-		App->fade->FadeToBlack(App->scene_map, (Module*)App->scene_paopao);
+		App->fade->FadeToBlack(App->scene_map, (Module*)App->scene_paopao, 1.0f);
 	}	break;
 
 	case 2:
@@ -252,12 +252,13 @@ update_status ModuleSceneMap::Update()
 	}	break;
 	}
 	
-	Timer();
-
+	
 	if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN)
 	{
 		SelectMap();
 	}
+
+	Timer();
 
 	return UPDATE_CONTINUE;
 }
