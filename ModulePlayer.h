@@ -66,6 +66,9 @@ public:
 	Animation takedown_done;
 	Animation takedown_recieved;
 	Animation takedown_fail;
+	Animation airkick;
+	Animation airpunchstraight;
+	Animation airpunchdiagonal;
 
 private:
 
