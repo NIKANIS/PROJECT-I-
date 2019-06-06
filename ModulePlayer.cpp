@@ -237,6 +237,53 @@ void ModulePlayer::LoadJoeAnimations()
 	lowkick.PushBack({ 688,724,59,69 });
 	lowkick.speed = 0.15f;
 	lowkick.loop = false;
+
+	//takedown done
+	takedown_done.PushBack({ 476, 610, 64, 102 });
+	takedown_done.PushBack({ 1257 - 25, 540, 57 + 25, 102 });
+	takedown_done.PushBack({ 1415 - 25, 540, 59 + 25, 101 });
+	takedown_done.PushBack({ 1107 - 25, 669, 72 + 25, 71 });
+	takedown_done.PushBack({ 1235 - 25, 673, 90 + 25, 63 });
+	takedown_done.speed = 0.13f;
+	takedown_done.loop = false;
+
+	//takedown fail
+	takedown_fail.PushBack({ 476, 610, 64, 102 });
+	takedown_fail.PushBack({ 1257 - 25, 540, 57 + 25, 102 });
+	takedown_fail.PushBack({ 476, 610, 64, 102 });
+	takedown_fail.speed = 0.11f;
+	takedown_fail.loop = false;
+
+	//takedown recieved
+	takedown_recieved.PushBack({ 1692,593,74,100 });
+	takedown_recieved.PushBack({ 1784,599,61,94 });
+	takedown_recieved.PushBack({ 1854,606,70,87 });
+	takedown_recieved.PushBack({ 1868,731,80,65 });
+	takedown_recieved.PushBack({ 1784,706,74,98 });
+	takedown_recieved.PushBack({ 1877,721,79,65 });
+	takedown_recieved.PushBack({ 1659,822,115,36 });
+	takedown_recieved.PushBack({ 1798,828,120,24 });
+	takedown_recieved.PushBack({ 1672,884,59,52 });
+	takedown_recieved.PushBack({ 1774,874,60,62 });
+	takedown_recieved.PushBack({ 1868,874,56,84 });
+	takedown_recieved.speed = 0.15f;
+	takedown_recieved.loop = false;
+
+	//air punch diagonal (hacia delante y hacia atrás)
+	airpunchdiagonal.PushBack({ 1118,899,70,98 });
+	airpunchdiagonal.PushBack({ 1203,912,42,85 });
+	airpunchdiagonal.PushBack({ 1442,798,54,90 });
+	airpunchdiagonal.speed = 0.15f;
+	airpunchdiagonal.loop = false;
+
+	//air punch saltando recto
+	airpunchdiagonal.PushBack({ 1105,773,59,106 });
+	airpunchdiagonal.PushBack({ 1188,770,71,112 });
+	airpunchdiagonal.PushBack({ 1105,773,59,106 });
+	airpunchdiagonal.PushBack({ 1359,758,56,121 });
+	airpunchdiagonal.PushBack({ 1442,798,54,90 });
+	airpunchstraight.speed = 0.15f;
+	airpunchstraight.loop = false;
 }
 void ModulePlayer::LoadTerryAnimations()
 {
@@ -422,6 +469,22 @@ void ModulePlayer::LoadTerryAnimations()
 	takedown_recieved.PushBack({ 1835,505,56,79 });
 	takedown_recieved.speed = 0.15f;
 	takedown_recieved.loop = false;
+
+	//air punch diagonal (hacia delante y hacia atrás)
+	airpunchdiagonal.PushBack({ 1813,8,78,88 });
+	airpunchdiagonal.PushBack({ 1903,8,57,89 });
+	airpunchdiagonal.PushBack({ 1971,3,57,94 });	
+	airpunchdiagonal.speed = 0.15f;
+	airpunchdiagonal.loop = false;
+
+	//air punch saltando recto
+	airpunchstraight.PushBack({ 1802,616,51,103 });
+	airpunchstraight.PushBack({ 1877,618,83,99 });
+	airpunchstraight.PushBack({ 1802,616,51,103 });
+	airpunchstraight.PushBack({ 1796,728,57,103 });
+	airpunchdiagonal.PushBack({ 1971,3,57,94 });
+	airpunchstraight.speed = 0.15f;
+	airpunchstraight.loop = false;
 
 }
 void ModulePlayer::LoadAndyAnimations()
