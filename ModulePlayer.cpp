@@ -780,7 +780,7 @@ void ModulePlayer::Punch()
 					{
 						if (current_animation == &airpunchstraight)
 						{
-							player_punch_col = App->collision->AddCollider({ position.x + 40, position.y - 60, 35, 12 }, COLLIDER_, source);
+							player_punch_col = App->collision->AddCollider({ position.x + 43, position.y - 90, 35, 12 }, COLLIDER_, source);
 						}																											
 						if (current_animation == &crowchpunch)																		
 							player_punch_col = App->collision->AddCollider({ position.x + 40, position.y - 60, 35, 12 }, COLLIDER_, source);
@@ -794,7 +794,7 @@ void ModulePlayer::Punch()
 					{
 						if (current_animation == &airpunchstraight)
 						{
-							player_punch_col = App->collision->AddCollider({ position.x + 40, position.y - 60, 35, 12 }, COLLIDER_, source);
+							player_punch_col = App->collision->AddCollider({ position.x + 40, position.y - 90, 35, 12 }, COLLIDER_, source);
 						}																											
 						if (current_animation == &crowchpunch)																		
 							player_punch_col = App->collision->AddCollider({ position.x - 24, position.y - 60, 35, 12 }, COLLIDER_, source);
@@ -812,7 +812,7 @@ void ModulePlayer::Punch()
 					{
 						if (current_animation == &airpunchstraight)
 						{
-							player_punch_col = App->collision->AddCollider({ position.x + 40, position.y - 60, 35, 12 }, COLLIDER_, source);
+							player_punch_col = App->collision->AddCollider({ position.x + 43, position.y - 90, 35, 12 }, COLLIDER_, source);
 						}																										
 						if (current_animation == &crowchpunch)																	
 							player_punch_col = App->collision->AddCollider({ position.x + 46, position.y - 52, 35, 12 }, COLLIDER_, source);
@@ -824,7 +824,7 @@ void ModulePlayer::Punch()
 					{
 						if (current_animation == &airpunchstraight)
 						{
-							player_punch_col = App->collision->AddCollider({ position.x + 40, position.y - 60, 35, 12 }, COLLIDER_, source);
+							player_punch_col = App->collision->AddCollider({ position.x - 18, position.y - 90, 35, 12 }, COLLIDER_, source);
 						}																											
 						if (current_animation == &crowchpunch)																		
 							player_punch_col = App->collision->AddCollider({ position.x - 30, position.y - 52, 35, 12 }, COLLIDER_, source);
@@ -836,6 +836,10 @@ void ModulePlayer::Punch()
 				{
 					if (fliped == false)
 					{
+						if (current_animation == &airpunchstraight)
+						{
+							player_punch_col = App->collision->AddCollider({ position.x + 43, position.y - 90, 35, 12 }, COLLIDER_, source);
+						}
 						if (current_animation == &crowchpunch)
 							player_punch_col = App->collision->AddCollider({ position.x + 46, position.y - 52, 32, 16 }, COLLIDER_, source);
 						if (current_animation == &punchstanding)													
@@ -843,7 +847,11 @@ void ModulePlayer::Punch()
 					}																												
 																																	
 					else																											
-					{																												
+					{		
+						if (current_animation == &airpunchstraight)
+						{
+							player_punch_col = App->collision->AddCollider({ position.x - 18, position.y - 90, 35, 12 }, COLLIDER_, source);
+						}
 						if (current_animation == &crowchpunch)																		
 							player_punch_col = App->collision->AddCollider({ position.x - 28, position.y - 52, 32, 16 }, COLLIDER_, source);
 						if (current_animation == &punchstanding)																	
@@ -1589,15 +1597,15 @@ update_status ModulePlayer::Update()
 					}
 
 					if (App->input->keyboard[SDL_SCANCODE_R] == KEY_STATE::KEY_DOWN && !punching && !kicking && !crowchaction && !specialattack_ && !lowkicking && !takingdown) {
-						//if (current_animation != &punchstanding && !jumping && !takingdown)
-						//{
-						//	punching = true;
-						//	at = 0;
-						//	punchstanding.Reset();
-						//	current_animation = &punchstanding;
-						//	App->audio->playFx(punchFX);
-						//}
-						if (current_animation != &airpunchstraight )//&& jumping)
+						if (current_animation != &punchstanding && !jumping && !takingdown)
+						{
+							punching = true;
+							at = 0;
+							punchstanding.Reset();
+							current_animation = &punchstanding;
+							App->audio->playFx(punchFX);
+						}
+						if (current_animation != &airpunchstraight && jumping)
 						{
 							punching = true;
 							at = 0;
