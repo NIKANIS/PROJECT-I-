@@ -92,9 +92,6 @@ update_status ModuleInput::PreUpdate()
 bool ModuleInput::CleanUp()
 {
 	LOG("Quitting SDL input event subsystem");
-	if (controller[0] != nullptr) SDL_GameControllerClose(controller[0]);
-	if (controller[1] != nullptr) SDL_GameControllerClose(controller[1]);
-
 	SDL_QuitSubSystem(SDL_INIT_EVENTS);
 	SDL_QuitSubSystem(SDL_INIT_GAMECONTROLLER);
 	return true;

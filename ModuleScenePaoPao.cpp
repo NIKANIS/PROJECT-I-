@@ -68,7 +68,6 @@ bool ModuleScenePaoPao::CleanUp()
 	App->textures->Unload(back_graphics);
 	App->collision->CleanUp();
 	App->player->Reset();
-	App->enemy->Reset();
 	App->render->camera.x = 0;
 	App->render->camera.y = -46;
 
