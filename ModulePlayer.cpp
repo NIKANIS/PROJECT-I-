@@ -285,6 +285,22 @@ void ModulePlayer::LoadJoeAnimations()
 	airpunchstraight.PushBack({ 1442,798,54,90 });
 	airpunchstraight.speed = 0.15f;
 	airpunchstraight.loop = false;
+
+	//air kick saltando recto
+	airkickstraight.PushBack({ 1559,412,59,100 });
+	airkickstraight.PushBack({ 1632,413,81,99 });
+	airkickstraight.PushBack({ 1559,412,59,100 });
+	airkickstraight.PushBack({ 199,367,56,121 });
+	airkickstraight.PushBack({ 945,393,54,90 });
+	airkickstraight.speed = 0.15f;
+	airkickstraight.loop = false;
+
+	//air kick saltando diagonal (hacia delante y hacia atrás)
+	airkickdiagonal.PushBack({ 394,379,84,95 });
+	airkickdiagonal.PushBack({ 338,364,50,124 });
+	airkickdiagonal.PushBack({ 945,393,54,90 });
+	airkickdiagonal.speed = 0.15f;
+	airkickdiagonal.loop = false;
 }
 void ModulePlayer::LoadTerryAnimations()
 {
