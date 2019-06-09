@@ -665,9 +665,17 @@ void ModulePlayer::LoadAndyAnimations()
 
 bool ModulePlayer::CleanUp()
 {
-	App->lifebar->Disable();
-	App->plscore->Disable();
 	App->textures->Unload(graphics);
+	if (player == 0)
+	{
+		App->lifebar->Disable();
+		App->plscore->Disable();
+	}
+	else
+	{
+		App->lifebar2->Disable();
+		App->enscore->Disable();
+	}
 
 	return true;
 }

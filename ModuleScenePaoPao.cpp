@@ -67,7 +67,8 @@ bool ModuleScenePaoPao::CleanUp()
 	App->audio->Disable();
 	App->textures->Unload(back_graphics);
 	App->collision->CleanUp();
-	App->player->Reset();
+	App->player->Disable();
+	App->enemy->Disable();
 	App->render->camera.x = 0;
 	App->render->camera.y = -46;
 
