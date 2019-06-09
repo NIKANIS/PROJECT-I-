@@ -52,5 +52,10 @@ The player can choose between three fighters to play versus 8 enemy fighters tha
 	Added choose player and choose map function .
 	Second color Terry Bogard if both players pick the same character.
 	Implementation in development of the characters Andy Bogard and Joe Higash
+## 0.7 
+	Added air kicks and punch for Terry, implementing in other characters.
+	Added diagonal jump for all players.
+	Introducing GamePad Input(No functionality already) & TakeDowns
+	
 
 -https://github.com/NIKANIS/PROJECT-I-
