@@ -49,7 +49,9 @@ public:
 	int en_won_rounds;
 	int timer_num;
 	int timer_counter;
+	int ft = 0; //final round counter
 	bool time_stop;
+	bool round_start = false;
 	bool blockpoints; 
 	void Reset();
 	Mix_Chunk* roundFX = nullptr;

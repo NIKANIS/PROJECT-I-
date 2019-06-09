@@ -205,6 +205,13 @@ void ModuleFightManager::Reset()
 	timer_counter = 0;
 	time_stop = false;
 	blockpoints = false;
+	round_start = true;
+	youWinAnim.Reset();
+	youLoseAnim.Reset();
+	DrawAnim.Reset();
+	fightAnimX.Reset();
+	PixelFadeOut.Reset();
+	ft = 0;
 	SDL_Rect none = { 0,0,0,0 };
 	f = none;
 }
@@ -215,7 +222,70 @@ update_status ModuleFightManager::Update()
 	if (App->render->camera.x >= 0)
 		App->render->camera.x = 0;
 	if (App->render->camera.x <= -(640 - SCREEN_WIDTH)*SCREEN_SIZE)
-		App->render->camera.x = -(640 - SCREEN_WIDTH)*SCREEN_SIZE;	
+		App->render->camera.x = -(640 - SCREEN_WIDTH)*SCREEN_SIZE;
+	if (round_start)
+	{
+		ft++;
+		App->render->Blit(graphicsPixelFade, 0, 0, &(PixelFadeIn.GetCurrentFrame()), false, 0.0f);
+		if (ft == 40)
+		{
+			round_start = false;
+			PixelFadeIn.Reset();
+			ft = 0;
+		}
+	}
+	if (time_stop)
+	{
+		ft++;
+		if (App->enemy->Health() == 0)
+			App->render->Blit(graphicsYouWin, 0, -20, &(youWinAnim.GetCurrentFrame()), false, 0.0f);
+		if (timer_num == 0 && App->player->Health() > App->enemy->Health())
+			App->render->Blit(graphicsYouWin, 0, -20, &(youWinAnim.GetCurrentFrame()), false, 0.0f);
+
+		if (App->player->Health() == 0)
+			App->render->Blit(graphicsYouLose, 0, -20, &(youLoseAnim.GetCurrentFrame()), false, 0.0f);
+		if (timer_num == 0 && App->enemy->Health() > App->player->Health())
+			App->render->Blit(graphicsYouLose, 0, -20, &(youLoseAnim.GetCurrentFrame()), false, 0.0f);
+
+		if (timer_num == 0 && App->enemy->Health() == App->player->Health())
+			App->render->Blit(graphicsDrawGame, 0, -20, &(DrawAnim.GetCurrentFrame()), false, 0.0f);
+
+		if (ft > 120)
+		{
+			App->render->Blit(graphicsPixelFade, 0, 0, &(PixelFadeOut.GetCurrentFrame()), false, 0.0f);
+			if (pl_won_rounds >= 2 && pl_won_rounds > en_won_rounds)
+				winner = 0;
+			if (en_won_rounds >= 2 && pl_won_rounds < en_won_rounds)
+				winner = 1;
+
+			if (winner == 0)
+			{
+				if (App->scene_map->map == 1)
+					App->fade->FadeToBlack((Module*)App->scene_paopao, (Module*)App->scene_congrats);
+				if (App->scene_map->map == 2)
+					App->fade->FadeToBlack((Module*)App->scene_soundbeach, (Module*)App->scene_congrats);
+				if (App->scene_map->map == 3)
+					App->fade->FadeToBlack((Module*)App->scene_westsubway, (Module*)App->scene_congrats);
+				if (App->scene_map->map == 4)
+					App->fade->FadeToBlack((Module*)App->scene_howardarena, (Module*)App->scene_congrats);
+			}
+
+			if (winner == 1)
+			{
+				if (App->scene_map->map == 1)
+					App->fade->FadeToBlack((Module*)App->scene_paopao, (Module*)App->scene_gameover);
+				if (App->scene_map->map == 2)
+					App->fade->FadeToBlack((Module*)App->scene_soundbeach, (Module*)App->scene_gameover);
+				if (App->scene_map->map == 3)
+					App->fade->FadeToBlack((Module*)App->scene_westsubway, (Module*)App->scene_gameover);
+				if (App->scene_map->map == 4)
+					App->fade->FadeToBlack((Module*)App->scene_howardarena, (Module*)App->scene_gameover);
+			}
+		}
+		if (ft == 160 && winner != 0 && winner != 1)
+			Reset();
+	}
+
 
 	if (timer_num != 0 && !time_stop)
 	{
@@ -268,15 +338,6 @@ update_status ModuleFightManager::Update()
 		timer_counter = 0;
 	}
 
-	if (App->player->Health() == 0 && App->enemy->Health() == 0 && !blockpoints)
-	{
-		blockpoints = true;
-		time_stop = true;
-		current_round++;
-		//App->render->Blit(graphicsDrawGame, 0, -20, &(DrawAnim.GetCurrentFrame()), false, 0.0f);
-		timer_counter = 0;
-	}
-
 	if (timer_num == 0 && !blockpoints)
 	{
 		blockpoints = true;
@@ -284,6 +345,7 @@ update_status ModuleFightManager::Update()
 		{
 			pl_won_rounds++;
 			current_round++;
+			time_stop = true;
 			//App->render->Blit(graphicsYouWin, 0, -20, &(youWinAnim.GetCurrentFrame()), false, 0.0f);
 			timer_counter = 0;
 		}
@@ -291,76 +353,15 @@ update_status ModuleFightManager::Update()
 		{
 			en_won_rounds++;
 			current_round++;
-			//App->render->Blit(graphicsYouLose, 0, -20, &(youLoseAnim.GetCurrentFrame()), false, 0.0f);
+			time_stop = true;
 			timer_counter = 0;
 		}
 		if (App->player->Health() == App->enemy->Health())
 		{
-			//App->render->Blit(graphicsDrawGame, 0, -20, &(DrawAnim.GetCurrentFrame()), false, 0.0f);
 			current_round++;
+			time_stop = true;
 			timer_counter = 0;
 		}		
-	}
-
-	if (blockpoints)
-	{
-		timer_counter++;
-		if (timer_counter >= 90/* && winner != 0 && winner != 1*/)
-		{
-			Reset();
-
-			if (winner == 0)
-			{
-				if (App->scene_map->map == 1)
-					App->fade->FadeToBlack((Module*)App->scene_paopao, (Module*)App->scene_congrats);
-				if (App->scene_map->map == 2)
-					App->fade->FadeToBlack((Module*)App->scene_soundbeach, (Module*)App->scene_congrats);
-				if (App->scene_map->map == 3)
-					App->fade->FadeToBlack((Module*)App->scene_westsubway, (Module*)App->scene_congrats);
-				if (App->scene_map->map == 4)
-					App->fade->FadeToBlack((Module*)App->scene_howardarena, (Module*)App->scene_congrats);
-			}
-	
-			if (winner == 1)
-			{
-				if (App->scene_map->map == 1)
-					App->fade->FadeToBlack((Module*)App->scene_paopao, (Module*)App->scene_gameover);
-				if (App->scene_map->map == 2)
-					App->fade->FadeToBlack((Module*)App->scene_soundbeach, (Module*)App->scene_gameover);
-				if (App->scene_map->map == 3)
-					App->fade->FadeToBlack((Module*)App->scene_westsubway, (Module*)App->scene_gameover);
-				if (App->scene_map->map == 4)
-					App->fade->FadeToBlack((Module*)App->scene_howardarena, (Module*)App->scene_gameover);
-			}				
-		}
-	}
-	if (pl_won_rounds >= 2 && pl_won_rounds > en_won_rounds)
-		winner = 0;
-	if (en_won_rounds >= 2 && pl_won_rounds < en_won_rounds)
-		winner = 1;
-
-	if (winner == 0)
-	{
-		if(App->scene_map->map == 1)
-			App->fade->FadeToBlack((Module*)App->scene_paopao, (Module*)App->scene_congrats);
-		if (App->scene_map->map == 2)
-			App->fade->FadeToBlack((Module*)App->scene_soundbeach, (Module*)App->scene_congrats);
-		if (App->scene_map->map == 3)
-			App->fade->FadeToBlack((Module*)App->scene_westsubway, (Module*)App->scene_congrats);
-		if (App->scene_map->map == 4)
-			App->fade->FadeToBlack((Module*)App->scene_howardarena, (Module*)App->scene_congrats);
-	}			
-
-	if (winner == 1)
-	{
-		if (App->scene_map->map == 1)
-			App->fade->FadeToBlack((Module*)App->scene_paopao, (Module*)App->scene_gameover);
-		if (App->scene_map->map == 2)
-			App->fade->FadeToBlack((Module*)App->scene_soundbeach, (Module*)App->scene_gameover);
-		if (App->scene_map->map == 3)
-			App->fade->FadeToBlack((Module*)App->scene_westsubway, (Module*)App->scene_gameover);
-		if (App->scene_map->map == 4)
-			App->fade->FadeToBlack((Module*)App->scene_howardarena, (Module*)App->scene_gameover);
 	}
 
 	App->render->Blit(graphics, position.x - (f.w / 2) , position.y - (f.h / 2) - 48, &f,false, 0.0f);	
