@@ -84,6 +84,7 @@ private:
 	void Kick();
 	void SpecialAttack();
 	void LowKick();
+	void AirKick();
 	void TakeDown();
 	void LoadJoeAnimations();
 	void LoadTerryAnimations();
@@ -111,6 +112,7 @@ private:
 	bool crowchaction = false; //true while crowching
 	bool specialattack_ = false; //true while special attacking
 	bool lowkicking = false; //true while lowkicking
+	bool airkicking = false;
 	bool takingdown = false; // true while taking down the opponent o failing the takedown
 	bool skillColDone = false;
 	bool fliped = false;
