@@ -142,10 +142,7 @@ ModuleFightManager::ModuleFightManager()
 	PixelFadeIn.PushBack({ 0,0,304,224 });	
 			 
 	PixelFadeIn.speed = 0.2f;
-	PixelFadeIn.loop = false;
-
-	//App->render->Blit(graphicsPixelFade, 0, 0, &(PixelFadeIn.GetCurrentFrame()), false, 0.0f); COM PROGRAMAR EL FADE IN I FADE OUT DE PIXELS. NO ENTENC EL CODI QUE ESTÀ ESCRIT EN EL FIGHT MANAGER I NO SE COM PUC AFEGIR AQUESTES FUNCIONS
-	//App->render->Blit(graphicsPixelFade, 0, 0, &(PixelFadeOut.GetCurrentFrame()), false, 0.0f);
+	PixelFadeIn.loop = false;	
 }
 
 ModuleFightManager::~ModuleFightManager(){}
@@ -226,7 +223,7 @@ update_status ModuleFightManager::Update()
 	if (round_start)
 	{
 		ft++;
-		App->render->Blit(graphicsPixelFade, 0, 0, &(PixelFadeIn.GetCurrentFrame()), false, 0.0f);
+		App->render->Blit(graphicsPixelFade, 0, -30, &(PixelFadeIn.GetCurrentFrame()), false, 0.0f);
 		if (ft == 40)
 		{
 			round_start = false;
@@ -238,21 +235,21 @@ update_status ModuleFightManager::Update()
 	{
 		ft++;
 		if (App->enemy->Health() == 0)
-			App->render->Blit(graphicsYouWin, 0, -20, &(youWinAnim.GetCurrentFrame()), false, 0.0f);
+			App->render->Blit(graphicsYouWin, 0, -30, &(youWinAnim.GetCurrentFrame()), false, 0.0f);
 		if (timer_num == 0 && App->player->Health() > App->enemy->Health())
-			App->render->Blit(graphicsYouWin, 0, -20, &(youWinAnim.GetCurrentFrame()), false, 0.0f);
+			App->render->Blit(graphicsYouWin, 0, -30, &(youWinAnim.GetCurrentFrame()), false, 0.0f);
 
 		if (App->player->Health() == 0)
-			App->render->Blit(graphicsYouLose, 0, -20, &(youLoseAnim.GetCurrentFrame()), false, 0.0f);
+			App->render->Blit(graphicsYouLose, 0, -30, &(youLoseAnim.GetCurrentFrame()), false, 0.0f);
 		if (timer_num == 0 && App->enemy->Health() > App->player->Health())
-			App->render->Blit(graphicsYouLose, 0, -20, &(youLoseAnim.GetCurrentFrame()), false, 0.0f);
+			App->render->Blit(graphicsYouLose, 0, -30, &(youLoseAnim.GetCurrentFrame()), false, 0.0f);
 
 		if (timer_num == 0 && App->enemy->Health() == App->player->Health())
-			App->render->Blit(graphicsDrawGame, 0, -20, &(DrawAnim.GetCurrentFrame()), false, 0.0f);
+			App->render->Blit(graphicsDrawGame, 0, -30, &(DrawAnim.GetCurrentFrame()), false, 0.0f);
 
 		if (ft > 120)
 		{
-			App->render->Blit(graphicsPixelFade, 0, 0, &(PixelFadeOut.GetCurrentFrame()), false, 0.0f);
+			App->render->Blit(graphicsPixelFade, 0, -30, &(PixelFadeOut.GetCurrentFrame()), false, 0.0f);
 			if (pl_won_rounds >= 2 && pl_won_rounds > en_won_rounds)
 				winner = 0;
 			if (en_won_rounds >= 2 && pl_won_rounds < en_won_rounds)
@@ -299,16 +296,16 @@ update_status ModuleFightManager::Update()
 	if (timer_num >91)
 	{
 		if(current_round == 1)
-			App->render->Blit(graphicsRound1, 0, -20, &(round1Anim.GetCurrentFrame()), false, 0.0f);
+			App->render->Blit(graphicsRound1, 0, -30, &(round1Anim.GetCurrentFrame()), false, 0.0f);
 		if (current_round == 2)
-			App->render->Blit(graphicsRound2, 0, -20, &(round2Anim.GetCurrentFrame()), false, 0.0f);
+			App->render->Blit(graphicsRound2, 0, -30, &(round2Anim.GetCurrentFrame()), false, 0.0f);
 		if (current_round == 3)
-			App->render->Blit(graphicsRound3, 0, -20, &(round3Anim.GetCurrentFrame()), false, 0.0f);
+			App->render->Blit(graphicsRound3, 0, -30, &(round3Anim.GetCurrentFrame()), false, 0.0f);
 	}
 	
 	if (timer_num == 91)
 	{
-		App->render->Blit(graphicsFight, 0, -20, &(fightAnimX.GetCurrentFrame()), false, 0.0f);
+		App->render->Blit(graphicsFight, 0, -30, &(fightAnimX.GetCurrentFrame()), false, 0.0f);
 		//App->audio->playFx(fightFX);
 	}
 
@@ -324,8 +321,7 @@ update_status ModuleFightManager::Update()
 		blockpoints = true;
 		en_won_rounds++;
 		current_round++;
-		time_stop = true;
-		//App->render->Blit(graphicsYouLose, 0, -20, &(youLoseAnim.GetCurrentFrame()), false, 0.0f); AIXÒ HAURIA DE FUNCIONAR PERÒ NO FUNCIONA, SUPOSO PERQUE NOMÈS FA BLIT DURANT UN FRAME, PERO NO SE COM ARREGLARHO PERQUE NO ENTENC EL CODI
+		time_stop = true;		
 		timer_counter = 0;
 	}
 	else if (App->enemy->Health() == 0 && !blockpoints)
@@ -334,7 +330,6 @@ update_status ModuleFightManager::Update()
 		pl_won_rounds++;
 		current_round++;
 		time_stop = true;
-		//App->render->Blit(graphicsYouWin, 0, -20, &(youWinAnim.GetCurrentFrame()), false, 0.0f);
 		timer_counter = 0;
 	}
 
@@ -346,7 +341,6 @@ update_status ModuleFightManager::Update()
 			pl_won_rounds++;
 			current_round++;
 			time_stop = true;
-			//App->render->Blit(graphicsYouWin, 0, -20, &(youWinAnim.GetCurrentFrame()), false, 0.0f);
 			timer_counter = 0;
 		}
 		if (App->player->Health() < App->enemy->Health())
