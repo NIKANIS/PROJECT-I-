@@ -40,7 +40,7 @@ public:
 	bool Init();
 	update_status PreUpdate();
 	bool CleanUp();
-	bool JoystickGetPos(SDL_GameController * gamepad, AXIS direction);
+	bool JoystickGetPos(SDL_GameController * gamepad, AXIS axisDir);
 	bool ButtonTrigger(SDL_GameController * gamepad, SDL_GameControllerButton button);
 
 public:

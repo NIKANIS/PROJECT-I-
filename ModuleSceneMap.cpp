@@ -29,7 +29,6 @@
 ModuleSceneMap::ModuleSceneMap()
 {
 	background	 =	{ 8, 5, 308, 240 };
-
 	pao_pao		 =	{ 299, 523, 96, 64};
 	sound_beach  =	{399, 523, 96, 64};
 	west_sub	 =	{499, 523,96, 64};
@@ -181,31 +180,23 @@ update_status ModuleSceneMap::Update()
 	App->render->Blit(back_graphics, 0, -8, &background, false, 0.92f);
 	App->render->Blit(back_graphics, SCREEN_WIDTH / 2 - map_select_tittle.w/2, 56 - 8, &map_select_tittle, false, 0.92f);
 
-	if (App->input->keyboard[SDL_SCANCODE_RIGHT] == KEY_STATE::KEY_DOWN && map != 4 && map_chosen == false 
-		|| App->input->ButtonTrigger(App->input->controller[0], SDL_CONTROLLER_BUTTON_DPAD_RIGHT) && map != 4 && map_chosen == false
-		|| App->input->ButtonTrigger(App->input->controller[1], SDL_CONTROLLER_BUTTON_DPAD_RIGHT) && map != 4 && map_chosen == false)
+	if (App->input->keyboard[SDL_SCANCODE_RIGHT] == KEY_STATE::KEY_DOWN && map != 4 && map_chosen == false )
 	{
 		App->audio->playFx(select);
 		map++;
 	}
 
-	if (App->input->keyboard[SDL_SCANCODE_LEFT] == KEY_STATE::KEY_DOWN && map != 1 && map_chosen == false
-		|| App->input->ButtonTrigger(App->input->controller[0], SDL_CONTROLLER_BUTTON_DPAD_LEFT) && map != 1 && map_chosen == false
-		|| App->input->ButtonTrigger(App->input->controller[1], SDL_CONTROLLER_BUTTON_DPAD_LEFT) && map != 1 && map_chosen == false) {
+	if (App->input->keyboard[SDL_SCANCODE_LEFT] == KEY_STATE::KEY_DOWN && map != 1 && map_chosen == false) {
 		App->audio->playFx(select);
 		map--;
 	}
 
-	if (App->input->keyboard[SDL_SCANCODE_DOWN] == KEY_STATE::KEY_DOWN && map != 3 && map != 4 && map_chosen == false
-		|| App->input->ButtonTrigger(App->input->controller[0], SDL_CONTROLLER_BUTTON_DPAD_DOWN) && map != 3 && map != 4 && map_chosen == false
-		|| App->input->ButtonTrigger(App->input->controller[1], SDL_CONTROLLER_BUTTON_DPAD_DOWN) && map != 3 && map != 4 && map_chosen == false) {
+	if (App->input->keyboard[SDL_SCANCODE_DOWN] == KEY_STATE::KEY_DOWN && map != 3 && map != 4 && map_chosen == false) {
 		App->audio->playFx(select);
 		map+= 2;
 	}
 
-	if (App->input->keyboard[SDL_SCANCODE_UP] == KEY_STATE::KEY_DOWN && map != 1 && map != 2 && map_chosen == false
-		|| App->input->ButtonTrigger(App->input->controller[0], SDL_CONTROLLER_BUTTON_DPAD_UP) && map != 1 && map != 2 && map_chosen == false
-		|| App->input->ButtonTrigger(App->input->controller[1], SDL_CONTROLLER_BUTTON_DPAD_UP) && map != 1 && map != 2 && map_chosen == false) {
+	if (App->input->keyboard[SDL_SCANCODE_UP] == KEY_STATE::KEY_DOWN && map != 1 && map != 2 && map_chosen == false) {
 		App->audio->playFx(select);
 		map-= 2;
 	}
@@ -262,7 +253,7 @@ update_status ModuleSceneMap::Update()
 	}
 	
 	
-	if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN)
+	if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN ||App->input->ButtonTrigger(App->input->controller[0], SDL_CONTROLLER_BUTTON_A))
 	{
 		SelectMap();
 	}

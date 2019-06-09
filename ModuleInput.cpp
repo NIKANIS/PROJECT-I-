@@ -1,6 +1,8 @@
 #include "Globals.h"
 #include "Application.h"
 #include "ModuleInput.h"
+#include <stdio.h>
+#include <string.h>
 #include "SDL/include/SDL.h"
 
 ModuleInput::ModuleInput() : Module()
@@ -21,7 +23,7 @@ bool ModuleInput::Init()
 	bool ret = true;
 	SDL_Init(0);
 
-	if (SDL_InitSubSystem(SDL_INIT_JOYSTICK | SDL_INIT_GAMECONTROLLER) < 0)
+	if (SDL_InitSubSystem(SDL_INIT_GAMECONTROLLER) < 0)
 	{
 		LOG("SDL_EVENTS could not initialize! SDL_Error: %s\n", SDL_GetError());
 		ret = false;
@@ -39,7 +41,7 @@ bool ModuleInput::Init()
 // Called every draw update
 update_status ModuleInput::PreUpdate()
 {
-	SDL_PumpEvents();
+	
 
 	for (int i = 0; i < SDL_NumJoysticks(); i++) {
 		if (SDL_IsGameController(i)) {
@@ -50,6 +52,8 @@ update_status ModuleInput::PreUpdate()
 			}
 		}
 	}
+
+	SDL_PumpEvents();
 
 	const Uint8* keys = SDL_GetKeyboardState(NULL);
 
@@ -82,15 +86,11 @@ update_status ModuleInput::PreUpdate()
 bool ModuleInput::CleanUp()
 {
 	LOG("Quitting SDL input event subsystem");
-	SDL_QuitSubSystem(SDL_INIT_EVENTS);
-
 	if (controller[0] != nullptr) SDL_GameControllerClose(controller[0]);
 	if (controller[1] != nullptr) SDL_GameControllerClose(controller[1]);
 
-	LOG("Quitting SDL input event subsystem");
 	SDL_QuitSubSystem(SDL_INIT_EVENTS);
 	SDL_QuitSubSystem(SDL_INIT_GAMECONTROLLER);
-	return true;
 	return true;
 }
 
@@ -101,15 +101,14 @@ bool ModuleInput::JoystickGetPos(SDL_GameController* gamepad, AXIS axisDir) {
 	int xAxis = SDL_GameControllerGetAxis(gamepad, SDL_CONTROLLER_AXIS_LEFTX);
 	int yAxis = SDL_GameControllerGetAxis(gamepad, SDL_CONTROLLER_AXIS_LEFTY);
 
-	if (xAxis > deadzone && axisDir == AXIS_RIGHT) ret = true;
-	if (xAxis < -deadzone && axisDir == AXIS_LEFT) ret = true;
-
-	if (yAxis < -deadzone && axisDir == AXIS_UP) ret = true;
-	if (yAxis > deadzone && axisDir == AXIS_DOWN) ret = true;
+	if (yAxis < -deadzone && axisDir == AXIS_UP)	ret = true;
+	if (yAxis > deadzone && axisDir == AXIS_DOWN)	ret = true;
+	if (xAxis > deadzone && axisDir == AXIS_RIGHT)	ret = true;
+	if (xAxis < -deadzone && axisDir == AXIS_LEFT)	ret = true;
 
 	if (yAxis < -deadzone && xAxis > deadzone && axisDir == AXIS_UPRIGHT)		ret = true;
 	if (yAxis > deadzone && xAxis > -deadzone && axisDir == AXIS_DOWNLEFT)		ret = true;
-	if (yAxis > deadzone && xAxis > deadzone && axisDir == AXIS_LEFTUP)		ret = true;
+	if (yAxis > deadzone && xAxis > deadzone && axisDir == AXIS_LEFTUP)			ret = true;
 	if (yAxis < -deadzone && xAxis > -deadzone && axisDir == AXIS_RIGHTDOWN)	ret = true;
 	return ret;
 }
@@ -132,7 +131,8 @@ SDL_CONTROLLER_BUTTON_DPAD_LEFT
 SDL_CONTROLLER_BUTTON_DPAD_RIGHT
 SDL_CONTROLLER_BUTTON_MAX
 */
-bool ModuleInput::ButtonTrigger(SDL_GameController * gamepad, SDL_GameControllerButton button) {
+
+bool ModuleInput::ButtonTrigger(SDL_GameController* gamepad, SDL_GameControllerButton button) {
 	if (gamepad == controller[0]) {
 		if (SDL_GameControllerGetButton(controller[0], button) == 1) {
 			if (New_A[button]) {
@@ -147,7 +147,8 @@ bool ModuleInput::ButtonTrigger(SDL_GameController * gamepad, SDL_GameController
 		}
 
 	}
-	else if (gamepad == controller[1]) {
+	else if (gamepad == controller[1]) 
+	{
 		if (SDL_GameControllerGetButton(controller[1], button) == 1) {
 			if (New_B[button]) {
 				New_B[button] = false;
@@ -159,7 +160,6 @@ bool ModuleInput::ButtonTrigger(SDL_GameController * gamepad, SDL_GameController
 				New_B[button] = true;
 			}
 		}
-
 	}
 
 	return false;

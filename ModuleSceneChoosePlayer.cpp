@@ -248,12 +248,12 @@ update_status ModuleSceneChoosePlayer::Update()
 
 	if (numberofplayers == 1)
 	{
-		if (App->input->keyboard[SDL_SCANCODE_RIGHT] == KEY_STATE::KEY_DOWN || App->input->ButtonTrigger(App->input->controller[1], SDL_CONTROLLER_BUTTON_DPAD_RIGHT) && player_selected != 3) {
+		if (App->input->keyboard[SDL_SCANCODE_RIGHT] == KEY_STATE::KEY_DOWN || App->input->ButtonTrigger(App->input->controller[0], SDL_CONTROLLER_BUTTON_DPAD_RIGHT) && player_selected != 3) {
 			player_selected++;
 			App->audio->playFx(select);
 		}
 
-		if (App->input->keyboard[SDL_SCANCODE_LEFT] == KEY_STATE::KEY_DOWN || App->input->ButtonTrigger(App->input->controller[1], SDL_CONTROLLER_BUTTON_DPAD_LEFT) && player_selected != 1) {
+		if (App->input->keyboard[SDL_SCANCODE_LEFT] == KEY_STATE::KEY_DOWN || App->input->ButtonTrigger(App->input->controller[0], SDL_CONTROLLER_BUTTON_DPAD_LEFT) && player_selected != 1) {
 			player_selected--;
 			App->audio->playFx(select);
 		}
@@ -328,9 +328,10 @@ update_status ModuleSceneChoosePlayer::Update()
 		}	break;
 	}
 
-	if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN) {
+	if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN) 
+	{
 		SelectPlayer();
-	}	
+	}
 
 	Timer();
 		
