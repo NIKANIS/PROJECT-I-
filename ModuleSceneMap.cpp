@@ -253,7 +253,7 @@ update_status ModuleSceneMap::Update()
 	}
 	
 	
-	if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN ||App->input->ButtonTrigger(App->input->controller[0], SDL_CONTROLLER_BUTTON_A))
+	if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN)
 	{
 		SelectMap();
 	}
