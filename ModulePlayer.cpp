@@ -1805,6 +1805,10 @@ void ModulePlayer::TakeDown()
 				App->enemy->Damage(30, 3);
 			else
 				App->player->Damage(30, 3);
+		if (tktempo == 40)
+		{
+			App->render->StartCameraShake(20.0f, 5.0f);
+		}
 		if (tktempo == 80)
 		{
 			takingdown = false;

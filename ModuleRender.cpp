@@ -173,7 +173,6 @@ void ModuleRender::StartCameraShake(int duration, float magnitude)
 
 void ModuleRender::UpdateCameraShake()
 {
-
 	if (shake_timer < shake_duration)
 	{
 		shake_timer++;
