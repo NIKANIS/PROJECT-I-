@@ -92,6 +92,7 @@ bool Application::Init()
 	fight_manager->Disable();
 	round_pl->Disable();
 	round_en->Disable();
+	
 
 	for(int i = 0; i < NUM_MODULES && ret == true; ++i)
 		ret = modules[i]->Init();
@@ -151,6 +152,7 @@ bool Application::Restart()
 	fight_manager->Disable();
 	round_pl->Disable();
 	round_en->Disable();
+	
 
 	return ret;
 }

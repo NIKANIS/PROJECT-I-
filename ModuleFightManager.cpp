@@ -18,7 +18,23 @@ ModuleFightManager::ModuleFightManager()
 	win = { 155,1,123,16 };
 	lose = { 155,18,126,16 };
 	draw = { 155,35,142,16 };
-	round = {155,52,78,16};
+	round = { 155,52,78,16};
+	bonus = { 155, 69, 78 ,16};
+	total = { 155, 120, 78, 16};
+	life = { 155, 86, 62, 16};
+	time = { 155, 103, 62, 16 };
+	int a = 155;
+	int b = 171;
+	for (int u = 0; u < 10; u++)
+	{
+		score_numbers[u] = { a, b , 14,16 };
+		a += 15;
+		if (u == 4)
+		{
+			a = 155;
+			b += 17;
+		}
+	}
 	
 	for (int i = 0; i < 5 ;i++)
 	{
@@ -177,7 +193,7 @@ bool ModuleFightManager::Start()
 	App->enemy->Enable();
 	App->fight_timer->Enable();
 	App->round_pl->Enable();
-	App->round_en->Enable();
+	App->round_en->Enable();	
 	return true;
 }
 
