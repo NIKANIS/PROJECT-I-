@@ -1660,6 +1660,11 @@ void ModulePlayer::TakeDown()
 	else if (takingdown == true && current_animation == &takedown_done)
 	{
 		tktempo++;
+		if (tktempo == 1)
+			if (player == 0)
+				App->enemy->Damage(30, 3);
+			else
+				App->player->Damage(30, 3);
 		if (tktempo == 80)
 		{
 			takingdown = false;
@@ -1730,47 +1735,63 @@ update_status ModulePlayer::Update()
 						lowkicking = false;
 						takingdown = false;
 						at++;
-						if (at < 30)
+						if (stuned != 3)
 						{
-							if (!fliped)
-								position.x -= 2;
-							else
-								position.x += 2;
-						}
-						if (current_animation != &kickstun && stuned == 2)
-						{
-							kickstun.Reset();
-							current_animation = &kickstun;
-							at = 0;
-						}
-						if (current_animation != &punchstun && stuned == 1)
-						{
-							punchstun.Reset();
-							current_animation = &punchstun;
-							at = 0;
-						}
-						if (at == 60)
-						{
-							stuned = 0;
-							at = 0;
-						}
-						if (App->scene_chooseplayer->final_player1 == 1)
-						{
-							player_col->SetPos(position.x + 17, position.y - 100);
-						}
-						if (App->scene_chooseplayer->final_player1 == 2)
-						{
-							player_col->SetPos(position.x + 17, position.y - 91);
-						}
-						if (App->scene_chooseplayer->final_player1 == 3)
-						{
-							player_col->SetPos(position.x + 17, position.y - 91);
-						}
+							if (at < 30)
+							{
+								if (!fliped)
+									position.x -= 2;
+								else
+									position.x += 2;
+							}
+							if (current_animation != &kickstun && stuned == 2)
+							{
+								kickstun.Reset();
+								current_animation = &kickstun;
+								at = 0;
+							}
+							if (current_animation != &punchstun && stuned == 1)
+							{
+								punchstun.Reset();
+								current_animation = &punchstun;
+								at = 0;
+							}
+							if (at == 60)
+							{
+								stuned = 0;
+								at = 0;
+							}
+							if (App->scene_chooseplayer->final_player1 == 1)
+							{
+								player_col->SetPos(position.x + 17, position.y - 100);
+							}
+							if (App->scene_chooseplayer->final_player1 == 2)
+							{
+								player_col->SetPos(position.x + 17, position.y - 91);
+							}
+							if (App->scene_chooseplayer->final_player1 == 3)
+							{
+								player_col->SetPos(position.x + 17, position.y - 91);
+							}
 
-						if (position.x < 0)
-							position.x = 0;
-						if (position.x > 600)
-							position.x = 600;
+							if (position.x < 0)
+								position.x = 0;
+							if (position.x > 600)
+								position.x = 600;
+						}
+						else
+						{
+							if (current_animation != &takedown_recieved)
+							{
+								takedown_recieved.Reset();
+								current_animation = &takedown_recieved;
+							}
+							if (at == 50)
+							{
+								stuned = 0;
+								at = 0;
+							}
+						}
 					}
 				}
 				else
@@ -2139,47 +2160,65 @@ update_status ModulePlayer::Update()
 						punching = false;
 						kicking = false;
 						lowkicking = false;
+						takingdown = false;
 						at++;
-						if (at < 30)
+						if (stuned != 3)
 						{
-							if (!fliped)
-								position.x -= 2;
-							else
-								position.x += 2;
-						}
-						if (current_animation != &kickstun && stuned == 2)
-						{
-							kickstun.Reset();
-							current_animation = &kickstun;
-							at = 0;
-						}
-						if (current_animation != &punchstun && stuned == 1)
-						{
-							punchstun.Reset();
-							current_animation = &punchstun;
-							at = 0;
-						}
-						if (at == 60)
-						{
-							stuned = 0;
-						}
-						if (App->scene_chooseplayer->final_player1 == 1)
-						{
-							player_col->SetPos(position.x + 17, position.y - 100);
-						}
-						if (App->scene_chooseplayer->final_player1 == 2)
-						{
-							player_col->SetPos(position.x + 17, position.y - 91);
-						}
-						if (App->scene_chooseplayer->final_player1 == 3)
-						{
-							player_col->SetPos(position.x + 17, position.y - 91);
-						}
+							if (at < 30)
+							{
+								if (!fliped)
+									position.x -= 2;
+								else
+									position.x += 2;
+							}
+							if (current_animation != &kickstun && stuned == 2)
+							{
+								kickstun.Reset();
+								current_animation = &kickstun;
+								at = 0;
+							}
+							if (current_animation != &punchstun && stuned == 1)
+							{
+								punchstun.Reset();
+								current_animation = &punchstun;
+								at = 0;
+							}
+							if (at == 60)
+							{
+								stuned = 0;
+								at = 0;
+							}
+							if (App->scene_chooseplayer->final_player1 == 1)
+							{
+								player_col->SetPos(position.x + 17, position.y - 100);
+							}
+							if (App->scene_chooseplayer->final_player1 == 2)
+							{
+								player_col->SetPos(position.x + 17, position.y - 91);
+							}
+							if (App->scene_chooseplayer->final_player1 == 3)
+							{
+								player_col->SetPos(position.x + 17, position.y - 91);
+							}
 
-						if (position.x < 0)
-							position.x = 0;
-						if (position.x > 600)
-							position.x = 600;
+							if (position.x < 0)
+								position.x = 0;
+							if (position.x > 600)
+								position.x = 600;
+						}
+						else
+						{
+							if (current_animation != &takedown_recieved)
+							{
+								takedown_recieved.Reset();
+								current_animation = &takedown_recieved;
+							}
+							if (at == 50)
+							{
+								stuned = 0;
+								at = 0;
+							}
+						}
 					}
 				}
 				else
@@ -2404,6 +2443,24 @@ update_status ModulePlayer::Update()
 							specialattack.Reset();
 							current_animation = &specialattack;
 							App->audio->playFx(skillFX);
+						}
+					}
+
+					if (App->input->keyboard[SDL_SCANCODE_N] == KEY_STATE::KEY_DOWN && !punching && !jumping && !crowchaction && !sp && !lowkicking && !takingdown)
+					{
+						if (current_animation != &kickingstanding && !jumping && !crowchaction && !specialattack_ && current_animation != &takedown_fail && current_animation != &takedown_done && body_collide == true)
+						{
+							takingdown = true;
+							tktempo = 0;
+							takedown_done.Reset();
+							current_animation = &takedown_done;
+						}
+						else if (current_animation != &kickingstanding && !jumping && !crowchaction && !specialattack_ && body_collide == false)
+						{
+							takingdown = true;
+							tktempo = 0;
+							takedown_fail.Reset();
+							current_animation = &takedown_fail;
 						}
 					}
 
