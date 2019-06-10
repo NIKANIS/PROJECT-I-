@@ -331,6 +331,7 @@ update_status ModuleSceneChoosePlayer::Update()
 	if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN) 
 	{
 		SelectPlayer();
+		player_selected = 2;
 	}
 
 	Timer();

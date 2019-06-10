@@ -82,9 +82,6 @@ update_status ModuleParticles::Update()
 		else if (SDL_GetTicks() >= p->born)
 		{
 
-			App->render->Blit(graphics, p->position.x, p->position.y, &(p->anim.GetCurrentFrame()));
-	
-
 			if (App->scene_chooseplayer->final_player1 == App->scene_chooseplayer->final_player2)
 			{
 				if (App->player->sp == true)
@@ -98,6 +95,11 @@ update_status ModuleParticles::Update()
 					if (App->scene_chooseplayer->final_player2 == 2)
 						App->render->Blit(graphics1, p->position.x, p->position.y, &(p->anim.GetCurrentFrame()));
 				}
+			}
+
+			else
+			{
+				App->render->Blit(graphics, p->position.x, p->position.y, &(p->anim.GetCurrentFrame()));
 			}
 
 			if (p->fx_played == false)

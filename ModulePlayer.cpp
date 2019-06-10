@@ -347,6 +347,19 @@ void ModulePlayer::LoadJoeAnimations()
 	skillJoe2_.life = 6000;
 	skillJoe2_.speed.x = 3.0f;
 	skillJoe2_.anim.speed = 0.1f;
+
+	//JoeSpecial Kick
+	JoeSpecialKick.PushBack({ 1053, 183, 60, 85 });
+	JoeSpecialKick.PushBack({ 1113, 206, 52, 62 }); 
+	JoeSpecialKick.PushBack({ 1179, 173, 44, 94 });
+	JoeSpecialKick.speed = 0.15f;
+	JoeSpecialKick.loop = false;
+
+	JoeSpecialKick2.PushBack({ 1246, 162, 112, 106 });
+	JoeSpecialKick2.PushBack({ 1383, 162, 110, 106 });
+	JoeSpecialKick2.PushBack({ 1526, 162, 114, 106 });
+	JoeSpecialKick2.speed = 0.15f;
+	JoeSpecialKick2.loop = false;
 }
 void ModulePlayer::LoadTerryAnimations()
 {
@@ -1760,6 +1773,20 @@ void ModulePlayer::SpecialAttack()
 	
 }
 
+void ModulePlayer::SpecialAttack2()
+{
+	if (specialattack2_ == true)
+	{
+		st++;
+		if (st == 30)
+		{
+			current_animation = &JoeSpecialKick2;
+		}
+		if (st == 200)
+			sp = false;
+	}
+}
+
 void ModulePlayer::TakeDown() 
 {
 	if (takingdown == true && current_animation == &takedown_fail)
@@ -1952,6 +1979,7 @@ update_status ModulePlayer::Update()
 					LowKick();
 					AirKick();
 					TakeDown();
+					SpecialAttack2();
 
 					if (App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT && !lockX && !punching && !kicking && !specialattack_ && current_animation != &crowch && !lowkicking && !takingdown)
 					{
@@ -1974,6 +2002,8 @@ update_status ModulePlayer::Update()
 								current_animation = &backward;
 							}
 						}
+
+
 					}
 
 					if (App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT && !lockX && !punching && !kicking && !specialattack_ && current_animation != &crowch && !lowkicking && !takingdown)
@@ -2188,6 +2218,19 @@ update_status ModulePlayer::Update()
 							current_animation = &takedown_fail;
 							takedown_fail.Reset();
 						}
+					}
+
+					if (App->input->keyboard[SDL_SCANCODE_Q] == KEY_STATE::KEY_DOWN && App->scene_chooseplayer->final_player1 == 1)
+					{
+						if (current_animation != &JoeSpecialKick)
+						{
+							specialattack2_ = true;
+							st = 0;
+							current_animation = &JoeSpecialKick;
+							JoeSpecialKick.Reset();
+							App->audio->playFx(skillFX);
+						}
+
 					}
 
 					if (App->input->keyboard[SDL_SCANCODE_S] == KEY_STATE::KEY_IDLE
