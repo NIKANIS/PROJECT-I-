@@ -11,6 +11,9 @@ The player can choose between three fighters to play versus 8 enemy fighters tha
 
 -David Rami
 
+## TEAM PHOTO
+![](https://lh3.googleusercontent.com/pn-17VS_OT4YVqz__Df8kQKjgPT5FehWDj1oBYtKlGyiGnWIQnvN_gEhiSq_WObWZ5mHJAvTS93tdR-do2gY3MKGrNsiClZOYEdbjP4al0NxA5dYLjOPmV7FsrEr1xQtPSdVFqLw)
+
 ## Controls
 
 					    PLAYER 1
