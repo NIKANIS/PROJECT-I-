@@ -3,13 +3,19 @@ Fatal Fury is a fighting game released in 1991 by SNK.
 The player can choose between three fighters to play versus 8 enemy fighters that would need to beat to fight against the final boss.
 
 ## TEAM MEMBERS
--David Gómez: Art
 
--Nikos Rodriguez: Design
+### David Gómez
+- Art
 
--Bernat Moreno: Audio
+### Nikos Rodriguez
+- Design
 
--David Rami: UI
+### Bernat Moreno
+- Audio
+
+### David Rami
+- UI
+
 
 ## TEAM PHOTO
 ![](https://lh3.googleusercontent.com/pn-17VS_OT4YVqz__Df8kQKjgPT5FehWDj1oBYtKlGyiGnWIQnvN_gEhiSq_WObWZ5mHJAvTS93tdR-do2gY3MKGrNsiClZOYEdbjP4al0NxA5dYLjOPmV7FsrEr1xQtPSdVFqLw)
@@ -18,8 +24,10 @@ The player can choose between three fighters to play versus 8 enemy fighters tha
 ...
 
 
-## DOWNLOAD
-[Click here to download the last version of the game](https://github.com/NIKANIS/PROJECT-I-.git)
+
+Download the last version of the game [HERE](https://github.com/NIKANIS/PROJECT-I-.git)
+
+For more information see our wiki page [HERE](https://github.com/NIKANIS/PROJECT-I-.wiki.git)
 
 ## Controls
 
