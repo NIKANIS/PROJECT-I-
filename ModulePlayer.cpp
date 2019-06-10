@@ -85,7 +85,7 @@ bool ModulePlayer::Start()
 		{
 			if (App->scene_chooseplayer->final_player1 == 2)
 			{
-				graphics = App->textures->Load("SPRITES FATAL FURY/CHARACTERS/1-Terry Bogard/spritesTerryBogard2 not updated.png");
+				graphics = App->textures->Load("SPRITES FATAL FURY/CHARACTERS/1-Terry Bogard/spritesTerryBogard2.png");
 			}
 			else
 				graphics = App->textures->Load("SPRITES FATAL FURY/CHARACTERS/1-Terry Bogard/spritesTerryBogard.png");
