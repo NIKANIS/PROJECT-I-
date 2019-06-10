@@ -1009,6 +1009,13 @@ void ModulePlayer::LowKick()
 	if (lowkicking == true && current_animation == &lowkick)
 	{
 		at++;
+		if (App->scene_chooseplayer->final_player1 == 1 && at < 12|| App->scene_chooseplayer->final_player2 == 1 && at < 12)
+		{
+			if (!fliped)
+				position.x += 3.0f;
+			else
+				position.x -= 3.0f;
+		}
 		if (at == 12)
 		{
 			if (player == 0)
