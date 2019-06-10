@@ -72,6 +72,8 @@ public:
 	Animation airkickdiagonal;
 	Animation airpunchstraight;
 	Animation airpunchdiagonal;
+	Animation JoeSpecialKick;
+	Animation JoeSpecialKick2;
 	
 
 private:
@@ -99,9 +101,12 @@ private:
 	void Punch();
 	void Kick();
 	void SpecialAttack();
+	void SpecialAttack2();
 	void LowKick();
 	void AirKick();
 	void TakeDown();
+
+
 	void LoadJoeAnimations();
 	void LoadTerryAnimations();
 	void LoadAndyAnimations();
@@ -129,6 +134,7 @@ private:
 	bool kicking = false; //true while kicking
 	bool crowchaction = false; //true while crowching
 	bool specialattack_ = false; //true while special attacking
+	bool specialattack2_ = false;
 	bool lowkicking = false; //true while lowkicking
 	bool airkicking = false;
 	bool takingdown = false; // true while taking down the opponent o failing the takedown
