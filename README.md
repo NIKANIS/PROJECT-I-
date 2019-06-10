@@ -45,13 +45,16 @@ The player can choose between three fighters to play versus 8 enemy fighters tha
 ### 0.4 
  	Camera limits for the player. Full implemented colliders for the player and its particles. 
 	Player can collide with the enemy. God Mode when pressing F5 to see colliders and direct win/lose.
+	
 ### 0.5
 	Full implemented UI and GodMode. Fixed some bugs and colliders. Pao Pao Cafe with Terry vs Terry. 
 	Camera follow players.
+	
 ### 0.6
 	Added choose player and choose map function .
 	Second color Terry Bogard if both players pick the same character.
 	Implementation in development of the characters Andy Bogard and Joe Higash
+	
 ## 0.7 
 	Added air kicks and punch for Terry, implementing in other characters.
 	Added diagonal jump for all players.
@@ -59,24 +62,5 @@ The player can choose between three fighters to play versus 8 enemy fighters tha
 	
 
 -https://github.com/NIKANIS/PROJECT-I-
-aaaaaaaaaaaaaaa
-aaaaaaa
-a
-a
-a
-a
-a
-a
-a
 
-a
-a
-a
-a
-a
-a
-a
-
-
-aa
 
