@@ -117,8 +117,8 @@ private:
 	int health;
 	int jumptype; //0 = idle jump / 1 = forward jump / 2 = backwards jump
 	int jumpspeed = 2;
-	int width = 60;
-	int draw_pos_x = position.x - (60 - width);
+	int width = 0;
+	int draw_pos_x = 0;
 
 	bool body_collide;
 	bool already_hit;
