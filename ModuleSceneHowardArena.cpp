@@ -21,7 +21,6 @@
 #include "ModuleCollision.h"
 #include "ModuleRoundDisplay.h"
 #include "ModuleSceneChoosePlayer.h"
-#include "ModuleJoeHigashiPlayer.h"
 
 ModuleSceneHowardArena::ModuleSceneHowardArena()
 {

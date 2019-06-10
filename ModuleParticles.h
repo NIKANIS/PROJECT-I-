@@ -22,9 +22,8 @@ struct Particle
 	iPoint speed;
 	Uint32 born = 0;
 	Uint32 life = 0;
-	int hits = 1;
-	bool fliped = false;
 	bool fx_played = false;
+
 	Particle();
 	Particle(const Particle& p);
 	~Particle();
@@ -41,12 +40,14 @@ public:
 	update_status Update();
 	bool CleanUp();
 	void OnCollision(Collider* c1, Collider* c2, bool colliding);
-	void AddParticle(const Particle& particle, int x, int y, bool fliped, bool augmented, COLLIDER_TYPE collider_type = COLLIDER_NONE, Uint32 delay = 0);
+	void AddParticle(const Particle& particle, int x, int y, COLLIDER_TYPE collider_type = COLLIDER_NONE, Uint32 delay = 0);
 	void DeleteAll();
 
 private:
 
 	SDL_Texture* graphics = nullptr;
+	SDL_Texture* graphics1 = nullptr;
+	SDL_Texture* graphics2 = nullptr;
 	Particle* active[MAX_ACTIVE_PARTICLES];
 
 public:
@@ -54,14 +55,6 @@ public:
 	Particle skill;
 	Particle skill2;
 	Particle skill3;
-
-	Particle skillJoe;
-	Particle skillJoe2;
-	Particle skillJoe3;
-
-	Particle skillAndy;
-	Particle skillAndy2;
-	Particle skillAndy3;
 
 };
 

@@ -8,7 +8,6 @@
 #include "ModuleRoundDisplay.h"
 #include "ModuleFadeToBlack.h"
 #include "ModuleSceneMap.h"
-#include "ModuleJoeHigashiPlayer.h"
 #include "ModuleAudio.h"
 #include "ModuleSceneChoosePlayer.h"
 

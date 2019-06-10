@@ -100,7 +100,7 @@ bool ModuleRender::Blit(SDL_Texture* texture, int x, int y, SDL_Rect* section,bo
 	rect.x = (int)((camera.x + camera_offset.x) * speed) + x * SCREEN_SIZE;
 	rect.y = (int)((camera.y + camera_offset.y) * speed) + y * SCREEN_SIZE + 28;
 
-	if(section != NULL)
+	if (section != NULL)
 	{
 		rect.w = section->w;
 		rect.h = section->h;
@@ -127,7 +127,7 @@ bool ModuleRender::Blit(SDL_Texture* texture, int x, int y, SDL_Rect* section,bo
 	}
 	if (flip == true)
 	{
-		if (SDL_RenderCopyEx(renderer, texture, section, &rect, 0.0,pivot,SDL_FLIP_HORIZONTAL) != 0)
+		if (SDL_RenderCopyEx(renderer, texture, section, &rect, 0.0, pivot, SDL_FLIP_HORIZONTAL) != 0)
 		{
 			LOG("Cannot blit to screen. SDL_RenderCopy error: %s", SDL_GetError());
 			ret = false;
@@ -161,6 +161,7 @@ bool ModuleRender::DrawQuad(const SDL_Rect& rect, Uint8 r, Uint8 g, Uint8 b, Uin
 
 	return ret;
 }
+
 
 void ModuleRender::StartCameraShake(int duration, float magnitude)
 {
