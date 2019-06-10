@@ -1,4 +1,6 @@
-﻿# FATAL FURY by RandomCali 
+﻿![](https://lh6.googleusercontent.com/cWLGYdJBs8YWg6pQGDXlVKcSI7-2f2TY7VKHQT-_eHSy3iunFwlmnjknqRerqjtQU3mj2YUXCde-ijsQ0dK8L5xFZhMdQGtMMSraxj_9sFbcia6uZgRDPELTQda5ODBGSZzIwr91hpy7iVMpNA)
+
+# FATAL FURY by RandomCali 
 Fatal Fury is a fighting game released in 1991 by SNK. 
 The player can choose between three fighters to play versus 8 enemy fighters that would need to beat to fight against the final boss.
 
@@ -6,28 +8,34 @@ The player can choose between three fighters to play versus 8 enemy fighters tha
 
 ### David Gómez
 - Art
+- [GitHub account](https://github.com/davidgomezupc)
 
 ### Nikos Rodriguez
 - Design
+- [GitHub account](https://github.com/NIKANIS)
 
 ### Bernat Moreno
 - Audio
+- [GitHub account](https://github.com/bernatmoreno)
 
 ### David Rami
 - UI
+- [GitHub account](https://github.com/Paideieitor)
 
 
 ## TEAM PHOTO
 ![](https://lh3.googleusercontent.com/pn-17VS_OT4YVqz__Df8kQKjgPT5FehWDj1oBYtKlGyiGnWIQnvN_gEhiSq_WObWZ5mHJAvTS93tdR-do2gY3MKGrNsiClZOYEdbjP4al0NxA5dYLjOPmV7FsrEr1xQtPSdVFqLw)
 
 ## GAMEPLAY VIDEO
-...
+(put the gameplay video)
 
 
+## LINKS
+See our GitHub repository [HERE](https://github.com/NIKANIS/PROJECT-I-.git)
 
-Download the last version of the game [HERE](https://github.com/NIKANIS/PROJECT-I-.git)
+For more information see our wiki page [HERE](https://github.com/NIKANIS/PROJECT-I-/wiki)
 
-For more information see our wiki page [HERE](https://github.com/NIKANIS/PROJECT-I-.wiki.git)
+Download the last version of the game HERE(put the link of the last version)
 
 ## Controls
 

@@ -79,6 +79,9 @@ bool ModulePlayer::Start()
 			else
 				graphics = App->textures->Load("SPRITES FATAL FURY/CHARACTERS/3-Joe Higashi/Sprites joe higashi.png");
 			LoadJoeAnimations();
+
+			width = 62;
+			draw_pos_x = position.x - (62 - width);
 		}
 
 		if (App->scene_chooseplayer->final_player2 == 2)
@@ -90,6 +93,9 @@ bool ModulePlayer::Start()
 			else
 				graphics = App->textures->Load("SPRITES FATAL FURY/CHARACTERS/1-Terry Bogard/spritesTerryBogard.png");
 			LoadTerryAnimations();
+
+			width = 60;
+			draw_pos_x = position.x - (60 - width);
 		}
 
 		if (App->scene_chooseplayer->final_player2 == 3)
@@ -99,6 +105,9 @@ bool ModulePlayer::Start()
 			else
 				graphics = App->textures->Load("SPRITES FATAL FURY/CHARACTERS/2-Andy Bogard/Sprites_AndyBogard.png");
 			LoadAndyAnimations();
+
+			width = 59;
+			draw_pos_x = position.x - (59 - width);
 		}
 	}
 
