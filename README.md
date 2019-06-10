@@ -30,7 +30,7 @@ The player can choose between three fighters to play versus 8 enemy fighters tha
 (put the gameplay video)
 
 
-
+## LINKS
 See our GitHub repository [HERE](https://github.com/NIKANIS/PROJECT-I-.git)
 
 For more information see our wiki page [HERE](https://github.com/NIKANIS/PROJECT-I-/wiki)
