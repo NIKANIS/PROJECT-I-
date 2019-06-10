@@ -6,15 +6,19 @@ The player can choose between three fighters to play versus 8 enemy fighters tha
 
 ### David Gómez
 - Art
+- [GitHub account] (https://github.com/davidgomezupc)
 
 ### Nikos Rodriguez
 - Design
+- [GitHub account] (https://github.com/NIKANIS)
 
 ### Bernat Moreno
 - Audio
+- [GitHub account] (https://github.com/bernatmoreno)
 
 ### David Rami
 - UI
+- [GitHub account] (https://github.com/Paideieitor)
 
 
 ## TEAM PHOTO
