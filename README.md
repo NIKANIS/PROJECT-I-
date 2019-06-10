@@ -14,6 +14,13 @@ The player can choose between three fighters to play versus 8 enemy fighters tha
 ## TEAM PHOTO
 ![](https://lh3.googleusercontent.com/pn-17VS_OT4YVqz__Df8kQKjgPT5FehWDj1oBYtKlGyiGnWIQnvN_gEhiSq_WObWZ5mHJAvTS93tdR-do2gY3MKGrNsiClZOYEdbjP4al0NxA5dYLjOPmV7FsrEr1xQtPSdVFqLw)
 
+## GAMEPLAY VIDEO
+...
+
+
+## DOWNLOAD
+[Click here to download the last version of the game](https://github.com/NIKANIS/PROJECT-I-.git)
+
 ## Controls
 
 					    PLAYER 1
