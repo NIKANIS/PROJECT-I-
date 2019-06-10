@@ -2603,8 +2603,17 @@ update_status ModulePlayer::Update()
 	}
 
 	SDL_Rect r = current_animation->GetCurrentFrame();
+	draw_pos_x = position.x - (r.w - width);
 
-	App->render->Blit(graphics, position.x, position.y - r.h, &r, fliped);
+	if (fliped == true)
+	{
+		App->render->Blit(graphics, position.x, position.y - r.h, &r, fliped);
+		width = r.w;
+	}
+	else
+	{
+		App->render->Blit(graphics, position.x, position.y - r.h, &r, fliped);
+	}	
 	
 	return UPDATE_CONTINUE;
 }
