@@ -177,7 +177,7 @@ bool ModuleFightManager::Start()
 	App->enemy->Enable();
 	App->fight_timer->Enable();
 	App->round_pl->Enable();
-	App->round_en->Enable();
+	App->round_en->Enable();	
 	return true;
 }
 

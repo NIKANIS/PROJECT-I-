@@ -16,6 +16,7 @@
 #include "ModuleFightTimer.h"
 #include "ModuleSceneChoosePlayer.h"
 #include "ModuleSceneMap.h"
+#include "ModuleSlowdown.h"
 
 #include "SDL/include/SDL_timer.h"
 
@@ -1768,9 +1769,7 @@ void ModulePlayer::SpecialAttack()
 
 			}
 		}
-		}
-	
-	
+	}	
 }
 
 void ModulePlayer::SpecialAttack2()
@@ -2914,9 +2913,18 @@ update_status ModulePlayer::Update()
 void ModulePlayer::Damage(const int damage, const int type)
 {
 	if (current_animation == &backward || current_animation == &crowchprotecc)
+	{
 		health -= damage / 2;
+	}		
 	else
+	{
+		if (damage > health)
+		{		
+			App->slowdown->StartSlowdown(60, 60);
+		}
 		health -= damage;
+	}
+		
 	stuned = type;
 }
 
