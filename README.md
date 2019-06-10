@@ -60,7 +60,4 @@ The player can choose between three fighters to play versus 8 enemy fighters tha
 	Added diagonal jump for all players.
 	Introducing GamePad Input(No functionality already) & TakeDowns
 	
-
 -https://github.com/NIKANIS/PROJECT-I-
-
-
