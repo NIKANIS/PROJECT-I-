@@ -40,6 +40,11 @@ public:
 	SDL_Rect lose;
 	SDL_Rect draw;
 	SDL_Rect round;
+	SDL_Rect bonus;
+	SDL_Rect life;
+	SDL_Rect time;
+	SDL_Rect total;
+	SDL_Rect score_numbers[10];
 	SDL_Rect f;
 	iPoint position;
 	int cam_pos_x;
