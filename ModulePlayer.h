@@ -66,6 +66,7 @@ public:
 	Animation crowchpunch;
 	Animation takedown_done;
 	Animation takedown_recieved;
+	Animation takedown_recieved2;
 	Animation takedown_fail;
 	Animation airkickstraight;
 	Animation airkickdiagonal;

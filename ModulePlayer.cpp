@@ -275,11 +275,14 @@ void ModulePlayer::LoadJoeAnimations()
 	takedown_recieved.PushBack({ 1877,721,79,65 });
 	takedown_recieved.PushBack({ 1659,822,115,36 });
 	takedown_recieved.PushBack({ 1798,828,120,24 });
-	takedown_recieved.PushBack({ 1672,884,59,52 });
-	takedown_recieved.PushBack({ 1774,874,60,62 });
-	takedown_recieved.PushBack({ 1868,874,56,84 });
 	takedown_recieved.speed = 0.15f;
 	takedown_recieved.loop = false;
+
+	takedown_recieved2.PushBack({ 1672,884,59,52 });
+	takedown_recieved2.PushBack({ 1774,874,60,62 });
+	takedown_recieved2.PushBack({ 1868,874,56,84 });
+	takedown_recieved2.speed = 0.15f;
+	takedown_recieved2.loop = false;
 
 	//air punch diagonal (hacia delante y hacia atrás)
 	airpunchdiagonal.PushBack({ 1118,899,70,98 });
@@ -523,12 +526,15 @@ void ModulePlayer::LoadTerryAnimations()
 	takedown_recieved.PushBack({ 1809,319,101,63 });
 	takedown_recieved.PushBack({ 1682,339,111,43 });
 	takedown_recieved.PushBack({ 1868,445,114,30 });
-	takedown_recieved.PushBack({ 1761,430,95,45 });
-	takedown_recieved.PushBack({ 1658,407,79,68 });
-	takedown_recieved.PushBack({ 1919,505,56,70 });
-	takedown_recieved.PushBack({ 1835,505,56,79 });
 	takedown_recieved.speed = 0.15f;
 	takedown_recieved.loop = false;
+
+	takedown_recieved2.PushBack({ 1761,430,95,45 });
+	takedown_recieved2.PushBack({ 1658,407,79,68 });
+	takedown_recieved2.PushBack({ 1919,505,56,70 });
+	takedown_recieved2.PushBack({ 1835,505,56,79 });
+	takedown_recieved2.speed = 0.15f;
+	takedown_recieved2.loop = false;
 
 	//air punch diagonal (hacia delante y hacia atrás)
 	airpunchdiagonal.PushBack({ 1813,8,78,88 });
@@ -1701,26 +1707,28 @@ update_status ModulePlayer::Update()
 	{
 		if (player == 0)
 		{
-			if (App->enemy->Pos_X() <= Pos_X())
-			{
-				fliped = true;
-			}
-			else
-			{
-				fliped = false;
-			}
+			if (!takingdown)
+				if (App->enemy->Pos_X() <= Pos_X())
+				{
+					fliped = true;
+				}
+				else
+				{
+					fliped = false;
+				}
 		}
 
 		if (player == 1)
 		{
-			if (App->player->Pos_X() <= Pos_X())
-			{
-				fliped = true;
-			}
-			else
-			{
-				fliped = false;
-			}
+			if (!takingdown)
+				if (App->player->Pos_X() <= Pos_X())
+				{
+					fliped = true;
+				}
+				else
+				{
+					fliped = false;
+				}
 		}
 
 	}
@@ -1797,15 +1805,50 @@ update_status ModulePlayer::Update()
 						}
 						else
 						{
-							if (current_animation != &takedown_recieved)
+							t++;
+							if (at == 1)
 							{
+								vy = 5;
 								takedown_recieved.Reset();
 								current_animation = &takedown_recieved;
+
+								if (fliped)
+									jumpspeed = 2;
+								else
+									jumpspeed = -2;
 							}
-							if (at == 50)
+							if (at < 120)
+							{
+								if (vy != 2)
+								{
+									position.y = 220 - vy * t + 0.12*(t*t);
+									position.x -= jumpspeed;
+									if (position.y >= 220 && at < 120)
+									{
+										t = 0;
+										vy--;
+									}
+								}
+								else
+								{
+									position.y = 220;
+								}
+							}
+							if (at >= 120 && position.y == 220)
+							{
+								position.y = 220;
+								jumpspeed = 0;
+								if (current_animation == &takedown_recieved)
+								{
+									takedown_recieved2.Reset();
+									current_animation = &takedown_recieved2;
+								}
+							}
+							if (at == 150)
 							{
 								stuned = 0;
 								at = 0;
+								t = 0;
 							}
 						}
 					}
@@ -2224,15 +2267,50 @@ update_status ModulePlayer::Update()
 						}
 						else
 						{
-							if (current_animation != &takedown_recieved)
+							t++;
+							if (at == 1)
 							{
+								vy = 5;
 								takedown_recieved.Reset();
 								current_animation = &takedown_recieved;
+
+								if (fliped)
+									jumpspeed = 2;
+								else
+									jumpspeed = -2;
 							}
-							if (at == 50)
+							if (at < 120)
+							{
+								if (vy != 2)
+								{
+									position.y = 220 - vy * t + 0.12*(t*t);
+									position.x -= jumpspeed;
+									if (position.y >= 220 && at < 120)
+									{
+										t = 0;
+										vy--;
+									}
+								}
+								else
+								{
+									position.y = 220;
+								}
+							}
+							if (at >= 120 && position.y == 220)
+							{
+								position.y = 220;
+								jumpspeed = 0;
+								if (current_animation == &takedown_recieved)
+								{
+									takedown_recieved2.Reset();
+									current_animation = &takedown_recieved2;
+								}
+							}
+							if (at == 150)
 							{
 								stuned = 0;
 								at = 0;
+								t = 0;
 							}
 						}
 					}
