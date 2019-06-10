@@ -43,6 +43,7 @@ bool ModulePlayer::Start()
 	
 	if (player == 0)
 	{
+		character = App->scene_chooseplayer->final_player1;
 		position = { 200,220 };
 		player_col = App->collision->AddCollider({ position.x + 5, position.y - 100, 33, 100 }, COLLIDER_PLAYER, App->player);
 		App->lifebar->Enable();
@@ -68,6 +69,7 @@ bool ModulePlayer::Start()
 
 	if (player == 1)
 	{
+		character = App->scene_chooseplayer->final_player2;
 		position = { 400,220 };
 		player_col = App->collision->AddCollider({ position.x + 5, position.y - 100, 33, 100 }, COLLIDER_ENEMY, App->enemy);
 		App->lifebar2->Enable();
@@ -900,7 +902,7 @@ void ModulePlayer::Punch()
 				source = App->enemy;
 			}
 
-			if (App->scene_chooseplayer->final_player1 == 1)
+			if (character == 1)
 			{
 				if (fliped == false)
 				{
@@ -939,7 +941,7 @@ void ModulePlayer::Punch()
 				}
 
 			}
-			if (App->scene_chooseplayer->final_player1 == 2)
+			if (character == 2)
 			{
 				if (fliped == false)
 				{
@@ -971,7 +973,7 @@ void ModulePlayer::Punch()
 						player_punch_col = App->collision->AddCollider({ position.x - 30, position.y - 90, 41, 12 }, COLLIDER_, source);
 				}
 			}
-			if (App->scene_chooseplayer->final_player1 == 3)
+			if (character == 3)
 			{
 				if (fliped == false)
 				{
@@ -1000,109 +1002,6 @@ void ModulePlayer::Punch()
 					if (current_animation == &crowchpunch)																		
 						player_punch_col = App->collision->AddCollider({ position.x - 28, position.y - 52, 32, 16 }, COLLIDER_, source);
 					if (current_animation == &punchstanding)																	
-						player_punch_col = App->collision->AddCollider({ position.x - 31, position.y - 82, 48, 12 }, COLLIDER_, source);
-				}
-			}
-			if (App->scene_chooseplayer->final_player2 == 1)
-			{
-				if (fliped == false)
-				{
-					if (current_animation == &airpunchstraight)
-					{
-						player_punch_col = App->collision->AddCollider({ position.x + 43, position.y - 90, 35, 12 }, COLLIDER_, source);
-					}
-					if (current_animation == &airpunchdiagonal)
-					{
-						player_punch_col = App->collision->AddCollider({ position.x + 43, position.y - 90, 35, 12 }, COLLIDER_, source);
-					}
-					if (current_animation == &crowchpunch)
-						player_punch_col = App->collision->AddCollider({ position.x + 40, position.y - 60, 35, 12 }, COLLIDER_, source);
-					if (current_animation == &punchstanding)
-					{
-						player_punch_col = App->collision->AddCollider({ position.x + 50, position.y - 87, 45, 12 }, COLLIDER_, source);
-						player_col->SetPos(position.x + 17, position.y - 100);
-					}
-				}
-				else
-				{
-					if (current_animation == &airpunchstraight)
-						player_punch_col = App->collision->AddCollider({ position.x + 40, position.y - 90, 35, 12 }, COLLIDER_, source);
-
-					if (current_animation == &airpunchdiagonal)
-						player_punch_col = App->collision->AddCollider({ position.x + 43, position.y - 90, 35, 12 }, COLLIDER_, source);
-
-					if (current_animation == &crowchpunch)
-						player_punch_col = App->collision->AddCollider({ position.x - 24, position.y - 60, 35, 12 }, COLLIDER_, source);
-
-					if (current_animation == &punchstanding)
-					{
-						player_punch_col = App->collision->AddCollider({ position.x - 30, position.y - 87, 45, 12 }, COLLIDER_, source);
-						player_col->SetPos(position.x + 15, position.y - 100);
-					}
-				}
-
-			}
-			if (App->scene_chooseplayer->final_player2 == 2)
-			{
-				if (fliped == false)
-				{
-					if (current_animation == &airpunchstraight)
-						player_punch_col = App->collision->AddCollider({ position.x + 43, position.y - 90, 35, 12 }, COLLIDER_, source);
-
-					if (current_animation == &airpunchdiagonal)
-						player_punch_col = App->collision->AddCollider({ position.x + 43, position.y - 60, 35, 16 }, COLLIDER_, source);
-
-					if (current_animation == &crowchpunch)
-						player_punch_col = App->collision->AddCollider({ position.x + 46, position.y - 52, 35, 12 }, COLLIDER_, source);
-
-					if (current_animation == &punchstanding)
-						player_punch_col = App->collision->AddCollider({ position.x + 50, position.y - 90, 41, 12 }, COLLIDER_, source);
-
-				}
-				else
-				{
-					if (current_animation == &airpunchstraight)
-					{
-						player_punch_col = App->collision->AddCollider({ position.x - 18, position.y - 90, 35, 12 }, COLLIDER_, source);
-					}
-					if (current_animation == &airpunchdiagonal)
-						player_punch_col = App->collision->AddCollider({ position.x + 43, position.y - 90, 35, 12 }, COLLIDER_, source);
-
-					if (current_animation == &crowchpunch)
-						player_punch_col = App->collision->AddCollider({ position.x - 30, position.y - 52, 35, 12 }, COLLIDER_, source);
-					if (current_animation == &punchstanding)
-						player_punch_col = App->collision->AddCollider({ position.x - 30, position.y - 90, 41, 12 }, COLLIDER_, source);
-				}
-			}
-			if (App->scene_chooseplayer->final_player2 == 3)
-			{
-				if (fliped == false)
-				{
-					if (current_animation == &airpunchstraight)
-					{
-						player_punch_col = App->collision->AddCollider({ position.x + 43, position.y - 90, 35, 12 }, COLLIDER_, source);
-					}
-					if (current_animation == &airpunchdiagonal)
-						player_punch_col = App->collision->AddCollider({ position.x + 43, position.y - 90, 35, 12 }, COLLIDER_, source);
-
-					if (current_animation == &crowchpunch)
-						player_punch_col = App->collision->AddCollider({ position.x + 46, position.y - 52, 32, 16 }, COLLIDER_, source);
-					if (current_animation == &punchstanding)
-						player_punch_col = App->collision->AddCollider({ position.x + 42, position.y - 82, 48, 12 }, COLLIDER_, source);
-				}
-
-				else
-				{
-					if (current_animation == &airpunchstraight)
-					{
-						player_punch_col = App->collision->AddCollider({ position.x - 18, position.y - 90, 35, 12 }, COLLIDER_, source);
-					}
-					if (current_animation == &airpunchdiagonal)
-						player_punch_col = App->collision->AddCollider({ position.x + 43, position.y - 90, 35, 12 }, COLLIDER_, source);
-
-					if (current_animation == &crowchpunch)
-						player_punch_col = App->collision->AddCollider({ position.x - 28, position.y - 52, 32, 16 }, COLLIDER_, source);
-					if (current_animation == &punchstanding)
 						player_punch_col = App->collision->AddCollider({ position.x - 31, position.y - 82, 48, 12 }, COLLIDER_, source);
 				}
 			}
@@ -1139,13 +1038,13 @@ void ModulePlayer::LowKick()
 	if (lowkicking == true && current_animation == &lowkick)
 	{
 		at++;
-		if (App->scene_chooseplayer->final_player1 == 1 && at < 12|| App->scene_chooseplayer->final_player2 == 1 && at < 12)
-		{
-			if (!fliped)
-				position.x += 3.0f;
-			else
-				position.x -= 3.0f;
-		}
+		//if (App->scene_chooseplayer->final_player1 == 1 && at < 12|| App->scene_chooseplayer->final_player2 == 1 && at < 12)
+		//{
+		//	if (!fliped)
+		//		position.x += 3.0f;
+		//	else
+		//		position.x -= 3.0f;
+		//}
 		if (at == 12)
 		{
 			if (player == 0)
@@ -1248,7 +1147,7 @@ void ModulePlayer::Kick()
 			}
 			player_col->rect.h = 110;
 			player_col->rect.w = 50;
-			if (App->scene_chooseplayer->final_player1 == 1)
+			if (character == 1)
 			{
 				if (fliped == false)
 				{
@@ -1261,7 +1160,7 @@ void ModulePlayer::Kick()
 					player_col->SetPos(position.x + 20, position.y - 100);					
 				}
 			}
-			if (App->scene_chooseplayer->final_player1 == 2)
+			if (character == 2)
 			{
 				if (fliped == false)
 				{
@@ -1274,7 +1173,7 @@ void ModulePlayer::Kick()
 					player_col->SetPos(position.x + 20, position.y - 121);	
 				}
 			}
-			if (App->scene_chooseplayer->final_player1 == 3)
+			if (character == 3)
 			{
 				if (fliped == false)
 				{
@@ -1507,386 +1406,212 @@ void ModulePlayer::SpecialAttack()
 	if (sp == true) {
 		st++;
 		int n;
+		COLLIDER_TYPE COLLIDER_ = COLLIDER_NONE;
+		ModulePlayer* source = nullptr;
 		if (player == 0)
 		{
-			if (App->scene_chooseplayer->final_player1 == 1)
-			{
-				if (st == 1)
-				{
-					if (!fliped)
-					{
-						skillJoe.speed.x = 3.0f;
-						skillJoe2.speed.x = 3.0f;
-					}
-					else
-					{
-						skillJoe.speed.x = -3.0f;
-						skillJoe2.speed.x = -3.0f;
-					}
-				}
-
-				if (st == 25)
-				{
-					skillJoe.position.x = position.x + 25;
-					skillJoe.position.y = position.y - 112;
-					if (fliped)
-					{
-						skillJoe.position.x = position.x;
-					}
-					App->particles->AddParticle(skillJoe, position.x, position.y - 112, COLLIDER_NONE);
-					player_skill_col = App->collision->AddCollider({ skillJoe.position.x, position.y - 52, 45, 60 }, COLLIDER_PLAYER_SKILL, App->player);
-
-
-				}
-				if (st >= 25 && st < 35)
-				{
-					if (st < 26)
-						App->render->Blit(graphics, skillJoe.position.x, skillJoe.position.y + 60, &(skillJoe.anim.GetCurrentFrame()), fliped);
-					else
-						App->render->Blit(graphics, skillJoe.position.x, skillJoe.position.y + 23, &(skillJoe.anim.GetCurrentFrame()), fliped);
-					skillJoe.Update();
-					skillJoe2.position.x = skillJoe.position.x;
-					skillJoe2.position.y = skillJoe.position.y;
-					player_skill_col->SetPos(skillJoe.position.x, skillJoe.position.y + 52);
-				}
-
-				if (st >= 35)
-				{
-					App->render->Blit(graphics, skillJoe2.position.x, skillJoe2.position.y, &(skillJoe2.anim.GetCurrentFrame()), fliped);
-					skillJoe2.Update();
-					player_skill_col->rect.h = 90;
-					player_skill_col->rect.w = 35;
-					player_skill_col->SetPos(skillJoe2.position.x + 10, skillJoe2.position.y + 20);
-				}
-				if (st == 35)
-				{
-
-					specialattack_ = false;
-				}
-				if (st == 100)
-				{
-					player_skill_col->to_delete = true;
-					already_hit = false;
-				}
-
-				if (st == 500)
-					sp = false;
-
-			}
-
-			if (App->scene_chooseplayer->final_player1 == 2)
-			{
-				if (!fliped)
-					n = 55;
-				else
-					n = -10;
-
-				if (st == 1)
-				{
-					spatckpos.x = position.x;
-					spatckpos.y = position.y;
-					if (!fliped)
-					{
-						App->particles->skill.speed.x = 3.0f;
-						App->particles->skill2.speed.x = 3.0f;
-						App->particles->skill3.speed.x = 3.0f;
-					}
-					else
-					{
-						App->particles->skill.speed.x = -3.0f;
-						App->particles->skill2.speed.x = -3.0f;
-						App->particles->skill3.speed.x = -3.0f;
-					}
-				}
-
-				if (st == 25)
-				{
-					App->particles->AddParticle(App->particles->skill, spatckpos.x + n, spatckpos.y - 40, COLLIDER_PLAYER_SKILL);
-				}
-				if (st == 30)
-				{
-					App->particles->AddParticle(App->particles->skill2, spatckpos.x + n, spatckpos.y - 67, COLLIDER_PLAYER_SKILL);
-				}
-				if (st == 35)
-				{
-					App->particles->AddParticle(App->particles->skill3, spatckpos.x + n, spatckpos.y - 95, COLLIDER_PLAYER_SKILL);
-					specialattack_ = false;
-				}
-				if (st == 40)
-				{
-					App->particles->AddParticle(App->particles->skill2, spatckpos.x + n, spatckpos.y - 67, COLLIDER_PLAYER_SKILL);
-				}
-				if (st == 45)
-				{
-					App->particles->AddParticle(App->particles->skill, spatckpos.x + n, spatckpos.y - 40, COLLIDER_PLAYER_SKILL);
-				}
-				if (st == 1000)
-					sp = false;
-			}
-
-			if (App->scene_chooseplayer->final_player1 == 3)
-			{
-				if (st == 1)
-				{
-					if (!fliped)
-					{
-						skillAndy.speed.x = 3.0f;
-						skillAndy2.speed.x = 3.0f;
-					}
-					else
-					{
-						skillAndy.speed.x = -3.0f;
-						skillAndy2.speed.x = -3.0f;
-					}
-				}
-
-				if (st == 25)
-				{
-					skillAndy.position.x = position.x + 80;
-					skillAndy.position.y = position.y - 112;
-					if (fliped)
-					{
-						skillAndy.position.x = position.x;
-					}
-					App->particles->AddParticle(skillAndy, position.x, position.y - 112, COLLIDER_NONE);
-					player_skill_col = App->collision->AddCollider({ skillAndy.position.x, position.y - 50, 30, 30 }, COLLIDER_PLAYER_SKILL, App->player);
-
-
-				}
-				if (st >= 25 && st < 35)
-				{
-					if (st < 26)
-						App->render->Blit(graphics, skillAndy.position.x, skillAndy.position.y + 60, &(skillAndy.anim.GetCurrentFrame()), fliped);
-					else
-						App->render->Blit(graphics, skillAndy.position.x, skillAndy.position.y + 23, &(skillAndy.anim.GetCurrentFrame()), fliped);
-					skillAndy.Update();
-					skillAndy2.position.x = skillAndy.position.x;
-					skillAndy2.position.y = skillAndy.position.y;
-					player_skill_col->SetPos(skillAndy.position.x, skillAndy.position.y + 20);
-				}
-
-				if (st >= 35)
-				{
-					App->render->Blit(graphics, skillAndy2.position.x, skillAndy2.position.y, &(skillAndy2.anim.GetCurrentFrame()), fliped);
-					skillAndy2.Update();
-					player_skill_col->rect.h = 60;
-					player_skill_col->rect.w = 25;
-					player_skill_col->SetPos(skillAndy2.position.x + 10, skillAndy2.position.y + 20);
-				}
-				if (st == 35)
-				{
-
-					specialattack_ = false;
-				}
-				if (st == 200)
-				{
-					player_skill_col->to_delete = true;
-					already_hit = false;
-				}
-
-				if (st == 500)
-					sp = false;
-
-			}
+			COLLIDER_ = COLLIDER_PLAYER_SKILL;
+			source = App->player;
 		}
-		if (player == 1)
+		else
 		{
-			if (App->scene_chooseplayer->final_player2 == 1)
-			{
-				if (st == 1)
-				{
-					if (!fliped)
-					{
-						n = 10;
-						skillJoe.speed.x = 3.0f;
-						skillJoe2.speed.x = 3.0f;
-					}
-					else
-					{
-						n = 0;
-						skillJoe_.speed.x = -3.0f;
-						skillJoe2_.speed.x = -3.0f;
-					}
-				}
-
-				if (st == 25)
-				{
-					skillJoe_.position.x = position.x + 25;
-					skillJoe_.position.y = position.y - 112;
-					if (fliped)
-					{
-						skillJoe_.position.x = position.x;
-					}
-					App->particles->AddParticle(skillJoe_, position.x, position.y - 112, COLLIDER_NONE);
-					enemy_skill_col = App->collision->AddCollider({ skillJoe_.position.x, position.y - 52, 45, 60 }, COLLIDER_ENEMY_SKILL, App->enemy);
-
-
-				}
-				if (st >= 25 && st < 35)
-				{
-					if (st < 26)
-						App->render->Blit(graphics, skillJoe_.position.x, skillJoe_.position.y + 60, &(skillJoe_.anim.GetCurrentFrame()), fliped);
-					else
-						App->render->Blit(graphics, skillJoe_.position.x, skillJoe_.position.y + 23, &(skillJoe_.anim.GetCurrentFrame()), fliped);
-					skillJoe_.Update();
-					skillJoe2_.position.x = skillJoe_.position.x;
-					skillJoe2_.position.y = skillJoe_.position.y;
-					enemy_skill_col->SetPos(skillJoe_.position.x, skillJoe_.position.y + 52);
-				}
-
-				if (st >= 35)
-				{
-					App->render->Blit(graphics, skillJoe2_.position.x, skillJoe2_.position.y, &(skillJoe2_.anim.GetCurrentFrame()), fliped);
-					skillJoe2_.Update();
-					enemy_skill_col->rect.h = 90;
-					enemy_skill_col->rect.w = 35;
-					enemy_skill_col->SetPos(skillJoe2_.position.x + 10, skillJoe2_.position.y + 20);
-				}
-				if (st == 35)
-				{
-					specialattack_ = false;
-				}
-				if (st == 100)
-				{
-					enemy_skill_col->to_delete = true;
-					already_hit = false;
-				}
-
-				if (st == 500)
-					sp = false;
-
-			}
-
-			if (App->scene_chooseplayer->final_player2 == 2)
+			COLLIDER_ = COLLIDER_ENEMY_SKILL;
+			source = App->enemy;
+		}
+		if (character == 1)
+		{
+			if (st == 1)
 			{
 				if (!fliped)
-					n = 55;
+				{
+					skillJoe.speed.x = 3.0f;
+					skillJoe2.speed.x = 3.0f;
+				}
 				else
-					n = -10;
-
-				if (st == 1)
 				{
-					spatckpos.x = position.x;
-					spatckpos.y = position.y;
-					if (!fliped)
-					{
-						App->particles->skill.speed.x = 3.0f;
-						App->particles->skill2.speed.x = 3.0f;
-						App->particles->skill3.speed.x = 3.0f;
-					}
-					else
-					{
-						App->particles->skill.speed.x = -3.0f;
-						App->particles->skill2.speed.x = -3.0f;
-						App->particles->skill3.speed.x = -3.0f;
-					}
+					skillJoe.speed.x = -3.0f;
+					skillJoe2.speed.x = -3.0f;
 				}
-
-				if (st == 25)
-				{
-					App->particles->AddParticle(App->particles->skill, spatckpos.x + n, spatckpos.y - 40, COLLIDER_ENEMY_SKILL);
-				}
-				if (st == 30)
-				{
-					App->particles->AddParticle(App->particles->skill2, spatckpos.x + n, spatckpos.y - 67, COLLIDER_ENEMY_SKILL);
-				}
-				if (st == 35)
-				{
-					App->particles->AddParticle(App->particles->skill3, spatckpos.x + n, spatckpos.y - 95, COLLIDER_ENEMY_SKILL);
-					specialattack_ = false;
-				}
-				if (st == 40)
-				{
-					App->particles->AddParticle(App->particles->skill2, spatckpos.x + n, spatckpos.y - 67, COLLIDER_ENEMY_SKILL);
-				}
-				if (st == 45)
-				{
-					App->particles->AddParticle(App->particles->skill, spatckpos.x + n, spatckpos.y - 40, COLLIDER_ENEMY_SKILL);
-				}
-				if (st == 1000)
-					sp = false;
 			}
 
-			if (App->scene_chooseplayer->final_player2 == 3)
+			if (st == 25)
 			{
-				if (st == 1)
+				skillJoe.position.x = position.x + 25;
+				skillJoe.position.y = position.y - 112;
+				if (fliped)
 				{
-					if (!fliped)
-					{
-						skillAndy_.speed.x = 3.0f;
-						skillAndy2_.speed.x = 3.0f;
-					}
-					else
-					{
-						skillAndy_.speed.x = -3.0f;
-						skillAndy2_.speed.x = -3.0f;
-					}
+					skillJoe.position.x = position.x;
 				}
-				if (st == 25)
-				{
-					skillAndy_.position.x = position.x + 80;
-					skillAndy_.position.y = position.y - 112;
-					if (fliped)
-					{
-						skillAndy_.position.x = position.x;
-					}
-					App->particles->AddParticle(skillAndy_, position.x, position.y - 112, COLLIDER_NONE);
-					enemy_skill_col = App->collision->AddCollider({ skillAndy_.position.x, position.y - 50, 30, 30 }, COLLIDER_ENEMY_SKILL, App->enemy);
+				App->particles->AddParticle(skillJoe, position.x, position.y - 112, COLLIDER_NONE);
+				player_skill_col = App->collision->AddCollider({ skillJoe.position.x, position.y - 52, 45, 60 }, COLLIDER_, source);
 
-
-				}
-				if (st >= 25 && st < 35)
-				{
-					if (st < 26)
-						App->render->Blit(graphics, skillAndy_.position.x, skillAndy_.position.y + 60, &(skillAndy_.anim.GetCurrentFrame()), fliped);
-					else
-						App->render->Blit(graphics, skillAndy_.position.x, skillAndy_.position.y + 23, &(skillAndy_.anim.GetCurrentFrame()), fliped);
-					skillAndy_.Update();
-					skillAndy2_.position.x = skillAndy_.position.x;
-					skillAndy2_.position.y = skillAndy_.position.y;
-					enemy_skill_col->SetPos(skillAndy_.position.x, skillAndy_.position.y + 20);
-				}
-
-				if (st >= 35)
-				{
-					App->render->Blit(graphics, skillAndy2_.position.x, skillAndy2_.position.y, &(skillAndy2_.anim.GetCurrentFrame()), fliped);
-					skillAndy2_.Update();
-					enemy_skill_col->rect.h = 60;
-					enemy_skill_col->rect.w = 25;
-					enemy_skill_col->SetPos(skillAndy2_.position.x + 10, skillAndy2_.position.y + 20);
-				}
-				if (st == 35)
-				{
-					specialattack_ = false;
-				}
-				if (st == 200)
-				{
-					enemy_skill_col->to_delete = true;
-					already_hit = false;
-				}
-
-				if (st == 500)
-					sp = false;
 
 			}
+			if (st >= 25 && st < 35)
+			{
+				if (st < 26)
+					App->render->Blit(graphics, skillJoe.position.x, skillJoe.position.y + 60, &(skillJoe.anim.GetCurrentFrame()), fliped);
+				else
+					App->render->Blit(graphics, skillJoe.position.x, skillJoe.position.y + 23, &(skillJoe.anim.GetCurrentFrame()), fliped);
+				skillJoe.Update();
+				skillJoe2.position.x = skillJoe.position.x;
+				skillJoe2.position.y = skillJoe.position.y;
+				player_skill_col->SetPos(skillJoe.position.x, skillJoe.position.y + 52);
+			}
+
+			if (st >= 35)
+			{
+				App->render->Blit(graphics, skillJoe2.position.x, skillJoe2.position.y, &(skillJoe2.anim.GetCurrentFrame()), fliped);
+				skillJoe2.Update();
+				player_skill_col->rect.h = 90;
+				player_skill_col->rect.w = 35;
+				player_skill_col->SetPos(skillJoe2.position.x + 10, skillJoe2.position.y + 20);
+			}
+			if (st == 35)
+			{
+
+				specialattack_ = false;
+			}
+			if (st == 100)
+			{
+				player_skill_col->to_delete = true;
+				already_hit = false;
+			}
+
+			if (st == 500)
+				sp = false;
+
 		}
+		if (character == 2)
+		{
+			if (!fliped)
+				n = 55;
+			else
+				n = -10;
+
+			if (st == 1)
+			{
+				spatckpos.x = position.x;
+				spatckpos.y = position.y;
+				if (!fliped)
+				{
+					App->particles->skill.speed.x = 3.0f;
+					App->particles->skill2.speed.x = 3.0f;
+					App->particles->skill3.speed.x = 3.0f;
+				}
+				else
+				{
+					App->particles->skill.speed.x = -3.0f;
+					App->particles->skill2.speed.x = -3.0f;
+					App->particles->skill3.speed.x = -3.0f;
+				}
+			}
+
+			if (st == 25)
+			{
+				App->particles->AddParticle(App->particles->skill, spatckpos.x + n, spatckpos.y - 40, COLLIDER_);
+			}
+			if (st == 30)
+			{
+				App->particles->AddParticle(App->particles->skill2, spatckpos.x + n, spatckpos.y - 67, COLLIDER_);
+			}
+			if (st == 35)
+			{
+				App->particles->AddParticle(App->particles->skill3, spatckpos.x + n, spatckpos.y - 95, COLLIDER_);
+				specialattack_ = false;
+			}
+			if (st == 40)
+			{
+				App->particles->AddParticle(App->particles->skill2, spatckpos.x + n, spatckpos.y - 67, COLLIDER_);
+			}
+			if (st == 45)
+			{
+				App->particles->AddParticle(App->particles->skill, spatckpos.x + n, spatckpos.y - 40, COLLIDER_);
+			}
+			if (st == 1000)
+				sp = false;
 		}
+		if (character == 3)
+		{
+			if (st == 1)
+			{
+				if (!fliped)
+				{
+					skillAndy.speed.x = 3.0f;
+					skillAndy2.speed.x = 3.0f;
+				}
+				else
+				{
+					skillAndy.speed.x = -3.0f;
+					skillAndy2.speed.x = -3.0f;
+				}
+			}
+
+			if (st == 25)
+			{
+				skillAndy.position.x = position.x + 80;
+				skillAndy.position.y = position.y - 112;
+				if (fliped)
+				{
+					skillAndy.position.x = position.x;
+				}
+				App->particles->AddParticle(skillAndy, position.x, position.y - 112, COLLIDER_NONE);
+				player_skill_col = App->collision->AddCollider({ skillAndy.position.x, position.y - 50, 30, 30 }, COLLIDER_, source);
+
+
+			}
+			if (st >= 25 && st < 35)
+			{
+				if (st < 26)
+					App->render->Blit(graphics, skillAndy.position.x, skillAndy.position.y + 60, &(skillAndy.anim.GetCurrentFrame()), fliped);
+				else
+					App->render->Blit(graphics, skillAndy.position.x, skillAndy.position.y + 23, &(skillAndy.anim.GetCurrentFrame()), fliped);
+				skillAndy.Update();
+				skillAndy2.position.x = skillAndy.position.x;
+				skillAndy2.position.y = skillAndy.position.y;
+				player_skill_col->SetPos(skillAndy.position.x, skillAndy.position.y + 20);
+			}
+
+			if (st >= 35)
+			{
+				App->render->Blit(graphics, skillAndy2.position.x, skillAndy2.position.y, &(skillAndy2.anim.GetCurrentFrame()), fliped);
+				skillAndy2.Update();
+				player_skill_col->rect.h = 60;
+				player_skill_col->rect.w = 25;
+				player_skill_col->SetPos(skillAndy2.position.x + 10, skillAndy2.position.y + 20);
+			}
+			if (st == 35)
+			{
+
+				specialattack_ = false;
+			}
+			if (st == 200)
+			{
+				player_skill_col->to_delete = true;
+				already_hit = false;
+			}
+
+			if (st == 500)
+				sp = false;
+
+		}
+	}
 	
 	
 }
 
 void ModulePlayer::SpecialAttack2()
 {
-	if (specialattack2_ == true)
-	{
-		st++;
-		if (st == 30)
-		{
-			current_animation = &JoeSpecialKick2;
-		}
-		if (st == 200)
-			sp = false;
-	}
+	//if (sp == true)
+	//{
+	//	st++;
+	//	if (st == 12)
+	//	{
+	//		current_animation = &JoeSpecialKick2;
+	//	}
+	//	if (st == 200)
+	//		sp = false;
+	//}
 }
 
 void ModulePlayer::TakeDown() 
@@ -2347,7 +2072,7 @@ update_status ModulePlayer::Update()
 
 					if (current_animation != &punchstanding && current_animation != &kickingstanding && current_animation != &crowchpunch && !lowkicking && !takingdown)
 					{
-						if (App->scene_chooseplayer->final_player1 == 1)
+						if (character == 1)
 						{
 							if (current_animation == &crowch || current_animation == &crowchprotecc && crowchaction)
 							{
@@ -2378,7 +2103,7 @@ update_status ModulePlayer::Update()
 								}
 							}
 						}
-						if (App->scene_chooseplayer->final_player1 == 2)
+						if (character == 2)
 						{
 							if (current_animation == &crowch || current_animation == &crowchprotecc && crowchaction)
 							{
@@ -2402,7 +2127,7 @@ update_status ModulePlayer::Update()
 								}
 							}
 						}
-						if (App->scene_chooseplayer->final_player1 == 3)
+						if (character == 3)
 						{
 							if (current_animation == &crowch || current_animation == &crowchprotecc && crowchaction)
 							{
@@ -2808,7 +2533,7 @@ update_status ModulePlayer::Update()
 
 					if (current_animation != &punchstanding && current_animation != &kickingstanding && current_animation != &crowchpunch && !lowkicking)
 					{
-						if (App->scene_chooseplayer->final_player1 == 1)
+						if (character == 1)
 						{
 							if (current_animation == &crowch || current_animation == &crowchprotecc && crowchaction)
 							{
@@ -2840,7 +2565,7 @@ update_status ModulePlayer::Update()
 								}
 							}
 						}
-						if (App->scene_chooseplayer->final_player1 == 2)
+						if (character == 2)
 						{
 							if (current_animation == &crowch || current_animation == &crowchprotecc && crowchaction)
 							{
@@ -2864,91 +2589,7 @@ update_status ModulePlayer::Update()
 								}
 							}
 						}
-						if (App->scene_chooseplayer->final_player1 == 3)
-						{
-							if (current_animation == &crowch || current_animation == &crowchprotecc && crowchaction)
-							{
-								player_col->rect.h = 55;
-								player_col->rect.w = 41;
-								player_col->SetPos(position.x + 5, position.y - 55);
-							}
-							else
-							{
-								if (!fliped)
-								{
-									player_col->SetPos(position.x + 10, position.y - 91);
-									player_col->rect.h = 90;
-									player_col->rect.w = 33;
-								}
-								else
-								{
-									if (!jumping)
-										player_col->SetPos(position.x + 17, position.y - 91);
-									else
-										player_col->SetPos(position.x + 7, position.y - 91);
-									player_col->rect.h = 90;
-									player_col->rect.w = 33;
-								}
-							}
-						}
-
-						if (App->scene_chooseplayer->final_player2 == 1)
-						{
-							if (current_animation == &crowch || current_animation == &crowchprotecc && crowchaction)
-							{
-								player_col->rect.h = 65;
-								player_col->rect.w = 41;
-								if (!fliped)
-								{
-									player_col->SetPos(position.x + 5, position.y - 67);
-								}
-								else
-								{
-									player_col->SetPos(position.x + 14, position.y - 67);
-								}
-
-							}
-							else
-							{
-								if (!fliped)
-								{
-									player_col->SetPos(position.x + 5, position.y - 100);
-									player_col->rect.h = 100;
-									player_col->rect.w = 33;
-								}
-								else
-								{
-									player_col->SetPos(position.x + 27, position.y - 100);
-									player_col->rect.h = 100;
-									player_col->rect.w = 33;
-								}
-							}
-						}
-						if (App->scene_chooseplayer->final_player2 == 2)
-						{
-							if (current_animation == &crowch || current_animation == &crowchprotecc && crowchaction)
-							{
-								player_col->rect.h = 65;
-								player_col->rect.w = 41;
-								player_col->SetPos(position.x + 5, position.y - 67);
-							}
-							else
-							{
-								if (!fliped)
-								{
-									player_col->SetPos(position.x + 10, position.y - 91);
-									player_col->rect.h = 90;
-									player_col->rect.w = 33;
-								}
-								else
-								{
-									player_col->SetPos(position.x + 17, position.y - 91);
-									player_col->rect.h = 90;
-									player_col->rect.w = 33;
-								}
-							}
-						}
-						if (App->scene_chooseplayer->final_player2 == 3)
+						if (character == 3)
 						{
 							if (current_animation == &crowch || current_animation == &crowchprotecc && crowchaction)
 							{
