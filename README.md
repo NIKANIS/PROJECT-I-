@@ -57,33 +57,38 @@ Download the last version of the game HERE(put the link of the last version)
 			F10-> Restart Game
 
 ## Changelist of all versions
-### 0.1
+### v0.1
 	Scroll Pao Pao Cafe scene with moduleAudio ready.
 	
-### 0.2
+### v0.2
 	Terry throw a punch, kick and make the skill animation. 
 	Also added some scenes like game over scene and congrats scene but cannot acces to them yet.
 	
-### 0.3
+### v0.3
 	Can move the player, added colliders for attacks. Skill haven't got collider yet. 
 	Full implemented animations. Some relevant sounds FX like skill, punch and kick.
 	
-### 0.4 
+### v0.4 
  	Camera limits for the player. Full implemented colliders for the player and its particles. 
 	Player can collide with the enemy. God Mode when pressing F5 to see colliders and direct win/lose.
 	
-### 0.5
+### v0.5
 	Full implemented UI and GodMode. Fixed some bugs and colliders. Pao Pao Cafe with Terry vs Terry. 
 	Camera follow players.
 	
-### 0.6
+### v0.6
 	Added choose player and choose map function .
 	Second color Terry Bogard if both players pick the same character.
 	Implementation in development of the characters Andy Bogard and Joe Higash
 	
-### 0.7 
+### v0.7 
 	Added air kicks and punch for Terry, implementing in other characters.
 	Added diagonal jump for all players.
 	Introducing GamePad Input(No functionality already) & TakeDowns
+
+### v0.8
+	Air kicks and punch for all characters.
+	Takedown implemented
+	Adding Joe Higashi skills.
 	
 -https://github.com/NIKANIS/PROJECT-I-
