@@ -295,8 +295,8 @@ void ModulePlayer::LoadJoeAnimations()
 	airpunchstraight.PushBack({ 1105,773,59,106 });
 	airpunchstraight.PushBack({ 1188,770,71,112 });
 	airpunchstraight.PushBack({ 1105,773,59,106 });
-	airpunchstraight.PushBack({ 1359,758,56,121 });
-	airpunchstraight.PushBack({ 1442,798,54,90 });
+	/*airpunchstraight.PushBack({ 1359,758,56,121 });
+	airpunchstraight.PushBack({ 1442,798,54,90 });*/
 	airpunchstraight.speed = 0.15f;
 	airpunchstraight.loop = false;
 
@@ -304,15 +304,15 @@ void ModulePlayer::LoadJoeAnimations()
 	airkickstraight.PushBack({ 1559,412,59,100 });
 	airkickstraight.PushBack({ 1632,413,81,99 });
 	airkickstraight.PushBack({ 1559,412,59,100 });
-	airkickstraight.PushBack({ 199,367,56,121 });
-	airkickstraight.PushBack({ 945,393,54,90 });
+	/*airkickstraight.PushBack({ 199,367,56,121 });
+	airkickstraight.PushBack({ 945,393,54,90 });*/
 	airkickstraight.speed = 0.15f;
 	airkickstraight.loop = false;
 
 	//air kick saltando diagonal (hacia delante y hacia atrás)
-	airkickdiagonal.PushBack({ 394,379,84,95 });
 	airkickdiagonal.PushBack({ 338,364,50,124 });
-	airkickdiagonal.PushBack({ 945,393,54,90 });
+	airkickdiagonal.PushBack({ 394,379,84,95 });
+	//airkickdiagonal.PushBack({ 945,393,54,90 });
 	airkickdiagonal.speed = 0.15f;
 	airkickdiagonal.loop = false;
 
@@ -547,24 +547,24 @@ void ModulePlayer::LoadTerryAnimations()
 	airpunchstraight.PushBack({ 1802,616,51,103 });
 	airpunchstraight.PushBack({ 1877,618,83,99 });
 	airpunchstraight.PushBack({ 1802,616,51,103 });
-	airpunchstraight.PushBack({ 1796,728,57,103 });
-	airpunchstraight.PushBack({ 1971,3,57,94 });
+/*	airpunchstraight.PushBack({ 1796,728,57,103 });
+	airpunchstraight.PushBack({ 1971,3,57,94 });*/
 	airpunchstraight.speed = 0.15f;
 	airpunchstraight.loop = false;
 
 	//air kick saltando recto
 	airkickstraight.PushBack({ 1486,169,57,103 });
 	airkickstraight.PushBack({ 1556,169,72,93 });
-	airkickstraight.PushBack({ 1486,169,57,103 });
-	airkickstraight.PushBack({ 1641,168,57,94 });
+	/*airkickstraight.PushBack({ 1486,169,57,103 });
+	airkickstraight.PushBack({ 1641,168,57,94 });*/
 	airkickstraight.speed = 0.15f;
 	airkickstraight.loop = false;
 
 	//air kick saltando diagonal (hacia delante y hacia atrás)
 	airkickdiagonal.PushBack({ 1903,8,57,89 });
 	airkickdiagonal.PushBack({ 1458,295,113,69 });
-	airkickdiagonal.PushBack({ 1903,8,57,89 });
-	airkickdiagonal.PushBack({ 1641,168,57,94 });
+	/*airkickdiagonal.PushBack({ 1903,8,57,89 });
+	airkickdiagonal.PushBack({ 1641,168,57,94 });*/
 	airkickdiagonal.speed = 0.15f;
 	airkickdiagonal.loop = false;
 
@@ -825,12 +825,31 @@ void ModulePlayer::Jump() {
 		t++;
 		position.y = 220 - 7 * t + 0.12*(t*t);
 		vy = -7 + 0.24*t;
-		if (position.y >= 220) 
+		if (position.y >= 220)
 		{
+			if (player_kick_col != nullptr)
+				player_kick_col->to_delete = true;
+			if (player_punch_col != nullptr)
+				player_punch_col->to_delete = true;
 			jumping = false;
+			airkicking = false;
+			airpunching = false;
+			jt = 0;
+			at = 0;
+			already_hit = false;
 			position.y = 220;
 		}
-		if (vy > 0) 
+		if (airkicking || airpunching)
+		{
+			jt++;
+			if (player_kick_col != nullptr)
+			{
+				player_kick_col->rect.x += jumpspeed;
+				player_kick_col->rect.y = 220 - 7 * t + 0.12*(t*t);
+			}
+		}
+
+		if (vy > 0 && !airkicking && !airpunching)
 			if (current_animation != &jumpidown && current_animation != &die && current_animation != &takedown_fail)
 				if (jumptype == 0)
 				{
@@ -842,6 +861,25 @@ void ModulePlayer::Jump() {
 					jumpfbdown.Reset();
 					current_animation = &jumpfbdown;
 				}
+		if (jt == 20)
+		{
+			if (player_kick_col != nullptr)
+				player_kick_col->to_delete = true;
+			if (player_punch_col != nullptr)
+				player_punch_col->to_delete = true;
+			if (current_animation != &jumpidown && current_animation != &die && current_animation != &takedown_fail)
+				if (jumptype == 0)
+				{
+					jumpidown.Reset();
+					current_animation = &jumpidown;
+				}
+				else
+				{
+					jumpfbdown.Reset();
+					current_animation = &jumpfbdown;
+				}
+			jt = 0;
+		}
 
 		if (fliped)
 			player_col->SetPos(position.x, position.y - 90);
@@ -852,7 +890,7 @@ void ModulePlayer::Punch()
 {
 	if (punching == true) {
 		at++;
-		if (already_hit && !crowchaction)
+		if (already_hit && !crowchaction && !airpunching)
 		{
 			if (!fliped)
 				position.x--;
@@ -862,9 +900,9 @@ void ModulePlayer::Punch()
 
 		if (at == 1 && current_animation == &crowchpunch)
 		{
-			player_col->rect.h = 65;
-			player_col->rect.w = 41;
-			player_col->SetPos(position.x + 5, position.y - 67);
+				player_col->rect.h = 65;
+				player_col->rect.w = 41;
+				player_col->SetPos(position.x + 5, position.y - 67);
 		}
 		if (current_animation == &airpunchstraight && jumping)
 		{
@@ -886,213 +924,111 @@ void ModulePlayer::Punch()
 				COLLIDER_ = COLLIDER_ENEMY_ATTACK;
 				source = App->enemy;
 			}
-
-			if (App->scene_chooseplayer->final_player1 == 1)
-			{
-				if (fliped == false)
-				{
-					if (current_animation == &airpunchstraight)
-					{
-						player_punch_col = App->collision->AddCollider({ position.x + 43, position.y - 90, 35, 12 }, COLLIDER_, source);
-					}	
-					if (current_animation == &airpunchdiagonal)
-					{
-						player_punch_col = App->collision->AddCollider({ position.x + 43, position.y - 90, 35, 12 }, COLLIDER_, source);
-					}
-					if (current_animation == &crowchpunch)																		
-						player_punch_col = App->collision->AddCollider({ position.x + 40, position.y - 60, 35, 12 }, COLLIDER_, source);
-					if(current_animation == &punchstanding)																		
-					{																											
-						player_punch_col = App->collision->AddCollider({ position.x + 50, position.y - 87, 45, 12 }, COLLIDER_, source);
-						player_col->SetPos(position.x + 17, position.y - 100);
-					}
-				}
-				else
-				{
-					if (current_animation == &airpunchstraight)
-						player_punch_col = App->collision->AddCollider({ position.x + 40, position.y - 90, 35, 12 }, COLLIDER_, source);
-
-					if (current_animation == &airpunchdiagonal)
-						player_punch_col = App->collision->AddCollider({ position.x + 43, position.y - 90, 35, 12 }, COLLIDER_, source);
 				
-					if (current_animation == &crowchpunch)
-						player_punch_col = App->collision->AddCollider({ position.x - 24, position.y - 60, 35, 12 }, COLLIDER_, source);
-					
-					if (current_animation == &punchstanding)																	
-					{																											
-						player_punch_col = App->collision->AddCollider({ position.x - 30, position.y - 87, 45, 12 }, COLLIDER_, source);
-						player_col->SetPos(position.x + 15, position.y - 100);
-					}
-				}
-
-			}
-			if (App->scene_chooseplayer->final_player1 == 2)
-			{
-				if (fliped == false)
+			if (player == 0 && App->scene_chooseplayer->final_player1 == 1 || player == 1 && App->scene_chooseplayer->final_player2 == 1)
 				{
-					if (current_animation == &airpunchstraight)
-						player_punch_col = App->collision->AddCollider({ position.x + 43, position.y - 90, 35, 12 }, COLLIDER_, source);	
+					if (fliped == false)
+					{
+						if (current_animation == &airpunchstraight)
+						{
+							player_punch_col = App->collision->AddCollider({ position.x + 43, position.y - 90, 35, 12 }, COLLIDER_, source);
+						}
+						if (current_animation == &airpunchdiagonal)
+						{
+							player_punch_col = App->collision->AddCollider({ position.x + 43, position.y - 90, 35, 12 }, COLLIDER_, source);
+						}
+						if (current_animation == &crowchpunch)
+							player_punch_col = App->collision->AddCollider({ position.x + 40, position.y - 60, 35, 12 }, COLLIDER_, source);
+						if (current_animation == &punchstanding)
+						{
+							player_punch_col = App->collision->AddCollider({ position.x + 50, position.y - 87, 45, 12 }, COLLIDER_, source);
+							player_col->SetPos(position.x + 17, position.y - 100);
+						}
+					}
+					else
+					{
+						if (current_animation == &airpunchstraight)
+							player_punch_col = App->collision->AddCollider({ position.x + 40, position.y - 90, 35, 12 }, COLLIDER_, source);
 
-					if (current_animation == &airpunchdiagonal)
-						player_punch_col = App->collision->AddCollider({ position.x + 43, position.y - 60, 35, 16 }, COLLIDER_, source);
+						if (current_animation == &airpunchdiagonal)
+							player_punch_col = App->collision->AddCollider({ position.x + 43, position.y - 90, 35, 12 }, COLLIDER_, source);
 
-					if (current_animation == &crowchpunch)																	
-						player_punch_col = App->collision->AddCollider({ position.x + 46, position.y - 52, 35, 12 }, COLLIDER_, source);
+						if (current_animation == &crowchpunch)
+							player_punch_col = App->collision->AddCollider({ position.x - 24, position.y - 60, 35, 12 }, COLLIDER_, source);
 
-					if (current_animation == &punchstanding)																
-						player_punch_col = App->collision->AddCollider({ position.x + 50, position.y - 90, 41, 12 }, COLLIDER_, source);
+						if (current_animation == &punchstanding)
+						{
+							player_punch_col = App->collision->AddCollider({ position.x - 30, position.y - 87, 45, 12 }, COLLIDER_, source);
+							player_col->SetPos(position.x + 15, position.y - 100);
+						}
+					}
 
 				}
-				else
+			if (player == 0 && App->scene_chooseplayer->final_player1 == 2 || player == 1 && App->scene_chooseplayer->final_player2 == 2)
 				{
-					if (current_animation == &airpunchstraight)
+					if (fliped == false)
 					{
-						player_punch_col = App->collision->AddCollider({ position.x - 18, position.y - 90, 35, 12 }, COLLIDER_, source);
-					}		
-					if (current_animation == &airpunchdiagonal)
-						player_punch_col = App->collision->AddCollider({ position.x + 43, position.y - 90, 35, 12 }, COLLIDER_, source);
+						if (current_animation == &airpunchstraight)
+							player_punch_col = App->collision->AddCollider({ position.x + 43, position.y - 90, 35, 12 }, COLLIDER_, source);
 
-					if (current_animation == &crowchpunch)																		
-						player_punch_col = App->collision->AddCollider({ position.x - 30, position.y - 52, 35, 12 }, COLLIDER_, source);
-					if (current_animation == &punchstanding)																	
-						player_punch_col = App->collision->AddCollider({ position.x - 30, position.y - 90, 41, 12 }, COLLIDER_, source);
+						if (current_animation == &airpunchdiagonal)
+							player_punch_col = App->collision->AddCollider({ position.x + 43, position.y - 60, 35, 16 }, COLLIDER_, source);
+
+						if (current_animation == &crowchpunch)
+							player_punch_col = App->collision->AddCollider({ position.x + 46, position.y - 52, 35, 12 }, COLLIDER_, source);
+
+						if (current_animation == &punchstanding)
+							player_punch_col = App->collision->AddCollider({ position.x + 50, position.y - 90, 41, 12 }, COLLIDER_, source);
+
+					}
+					else
+					{
+						if (current_animation == &airpunchstraight)
+						{
+							player_punch_col = App->collision->AddCollider({ position.x - 18, position.y - 90, 35, 12 }, COLLIDER_, source);
+						}
+						if (current_animation == &airpunchdiagonal)
+							player_punch_col = App->collision->AddCollider({ position.x + 43, position.y - 90, 35, 12 }, COLLIDER_, source);
+
+						if (current_animation == &crowchpunch)
+							player_punch_col = App->collision->AddCollider({ position.x - 30, position.y - 52, 35, 12 }, COLLIDER_, source);
+						if (current_animation == &punchstanding)
+							player_punch_col = App->collision->AddCollider({ position.x - 30, position.y - 90, 41, 12 }, COLLIDER_, source);
+					}
 				}
-			}
-			if (App->scene_chooseplayer->final_player1 == 3)
-			{
-				if (fliped == false)
+			if (player == 0 && App->scene_chooseplayer->final_player1 == 3 || player == 1 && App->scene_chooseplayer->final_player2 == 3)
 				{
-					if (current_animation == &airpunchstraight)
+					if (fliped == false)
 					{
-						player_punch_col = App->collision->AddCollider({ position.x + 43, position.y - 90, 35, 12 }, COLLIDER_, source);
-					}
-					if (current_animation == &airpunchdiagonal)
-						player_punch_col = App->collision->AddCollider({ position.x + 43, position.y - 90, 35, 12 }, COLLIDER_, source);
+						if (current_animation == &airpunchstraight)
+						{
+							player_punch_col = App->collision->AddCollider({ position.x + 43, position.y - 90, 35, 12 }, COLLIDER_, source);
+						}
+						if (current_animation == &airpunchdiagonal)
+							player_punch_col = App->collision->AddCollider({ position.x + 43, position.y - 90, 35, 12 }, COLLIDER_, source);
 
-					if (current_animation == &crowchpunch)
-						player_punch_col = App->collision->AddCollider({ position.x + 46, position.y - 52, 32, 16 }, COLLIDER_, source);
-					if (current_animation == &punchstanding)													
-						player_punch_col = App->collision->AddCollider({ position.x + 42, position.y - 82, 48, 12 }, COLLIDER_, source);
-				}																												
-																																
-				else																											
-				{		
-					if (current_animation == &airpunchstraight)
-					{
-						player_punch_col = App->collision->AddCollider({ position.x - 18, position.y - 90, 35, 12 }, COLLIDER_, source);
+						if (current_animation == &crowchpunch)
+							player_punch_col = App->collision->AddCollider({ position.x + 46, position.y - 52, 32, 16 }, COLLIDER_, source);
+						if (current_animation == &punchstanding)
+							player_punch_col = App->collision->AddCollider({ position.x + 42, position.y - 82, 48, 12 }, COLLIDER_, source);
 					}
-					if (current_animation == &airpunchdiagonal)
-						player_punch_col = App->collision->AddCollider({ position.x + 43, position.y - 90, 35, 12 }, COLLIDER_, source);
 
-					if (current_animation == &crowchpunch)																		
-						player_punch_col = App->collision->AddCollider({ position.x - 28, position.y - 52, 32, 16 }, COLLIDER_, source);
-					if (current_animation == &punchstanding)																	
-						player_punch_col = App->collision->AddCollider({ position.x - 31, position.y - 82, 48, 12 }, COLLIDER_, source);
-				}
-			}
-			if (App->scene_chooseplayer->final_player2 == 1)
-			{
-				if (fliped == false)
-				{
-					if (current_animation == &airpunchstraight)
+					else
 					{
-						player_punch_col = App->collision->AddCollider({ position.x + 43, position.y - 90, 35, 12 }, COLLIDER_, source);
-					}
-					if (current_animation == &airpunchdiagonal)
-					{
-						player_punch_col = App->collision->AddCollider({ position.x + 43, position.y - 90, 35, 12 }, COLLIDER_, source);
-					}
-					if (current_animation == &crowchpunch)
-						player_punch_col = App->collision->AddCollider({ position.x + 40, position.y - 60, 35, 12 }, COLLIDER_, source);
-					if (current_animation == &punchstanding)
-					{
-						player_punch_col = App->collision->AddCollider({ position.x + 50, position.y - 87, 45, 12 }, COLLIDER_, source);
-						player_col->SetPos(position.x + 17, position.y - 100);
-					}
-				}
-				else
-				{
-					if (current_animation == &airpunchstraight)
-						player_punch_col = App->collision->AddCollider({ position.x + 40, position.y - 90, 35, 12 }, COLLIDER_, source);
+						if (current_animation == &airpunchstraight)
+						{
+							player_punch_col = App->collision->AddCollider({ position.x - 18, position.y - 90, 35, 12 }, COLLIDER_, source);
+						}
+						if (current_animation == &airpunchdiagonal)
+							player_punch_col = App->collision->AddCollider({ position.x + 43, position.y - 90, 35, 12 }, COLLIDER_, source);
 
-					if (current_animation == &airpunchdiagonal)
-						player_punch_col = App->collision->AddCollider({ position.x + 43, position.y - 90, 35, 12 }, COLLIDER_, source);
-
-					if (current_animation == &crowchpunch)
-						player_punch_col = App->collision->AddCollider({ position.x - 24, position.y - 60, 35, 12 }, COLLIDER_, source);
-
-					if (current_animation == &punchstanding)
-					{
-						player_punch_col = App->collision->AddCollider({ position.x - 30, position.y - 87, 45, 12 }, COLLIDER_, source);
-						player_col->SetPos(position.x + 15, position.y - 100);
+						if (current_animation == &crowchpunch)
+							player_punch_col = App->collision->AddCollider({ position.x - 28, position.y - 52, 32, 16 }, COLLIDER_, source);
+						if (current_animation == &punchstanding)
+							player_punch_col = App->collision->AddCollider({ position.x - 31, position.y - 82, 48, 12 }, COLLIDER_, source);
 					}
 				}
 
-			}
-			if (App->scene_chooseplayer->final_player2 == 2)
-			{
-				if (fliped == false)
-				{
-					if (current_animation == &airpunchstraight)
-						player_punch_col = App->collision->AddCollider({ position.x + 43, position.y - 90, 35, 12 }, COLLIDER_, source);
-
-					if (current_animation == &airpunchdiagonal)
-						player_punch_col = App->collision->AddCollider({ position.x + 43, position.y - 60, 35, 16 }, COLLIDER_, source);
-
-					if (current_animation == &crowchpunch)
-						player_punch_col = App->collision->AddCollider({ position.x + 46, position.y - 52, 35, 12 }, COLLIDER_, source);
-
-					if (current_animation == &punchstanding)
-						player_punch_col = App->collision->AddCollider({ position.x + 50, position.y - 90, 41, 12 }, COLLIDER_, source);
-
-				}
-				else
-				{
-					if (current_animation == &airpunchstraight)
-					{
-						player_punch_col = App->collision->AddCollider({ position.x - 18, position.y - 90, 35, 12 }, COLLIDER_, source);
-					}
-					if (current_animation == &airpunchdiagonal)
-						player_punch_col = App->collision->AddCollider({ position.x + 43, position.y - 90, 35, 12 }, COLLIDER_, source);
-
-					if (current_animation == &crowchpunch)
-						player_punch_col = App->collision->AddCollider({ position.x - 30, position.y - 52, 35, 12 }, COLLIDER_, source);
-					if (current_animation == &punchstanding)
-						player_punch_col = App->collision->AddCollider({ position.x - 30, position.y - 90, 41, 12 }, COLLIDER_, source);
-				}
-			}
-			if (App->scene_chooseplayer->final_player2 == 3)
-			{
-				if (fliped == false)
-				{
-					if (current_animation == &airpunchstraight)
-					{
-						player_punch_col = App->collision->AddCollider({ position.x + 43, position.y - 90, 35, 12 }, COLLIDER_, source);
-					}
-					if (current_animation == &airpunchdiagonal)
-						player_punch_col = App->collision->AddCollider({ position.x + 43, position.y - 90, 35, 12 }, COLLIDER_, source);
-
-					if (current_animation == &crowchpunch)
-						player_punch_col = App->collision->AddCollider({ position.x + 46, position.y - 52, 32, 16 }, COLLIDER_, source);
-					if (current_animation == &punchstanding)
-						player_punch_col = App->collision->AddCollider({ position.x + 42, position.y - 82, 48, 12 }, COLLIDER_, source);
-				}
-
-				else
-				{
-					if (current_animation == &airpunchstraight)
-					{
-						player_punch_col = App->collision->AddCollider({ position.x - 18, position.y - 90, 35, 12 }, COLLIDER_, source);
-					}
-					if (current_animation == &airpunchdiagonal)
-						player_punch_col = App->collision->AddCollider({ position.x + 43, position.y - 90, 35, 12 }, COLLIDER_, source);
-
-					if (current_animation == &crowchpunch)
-						player_punch_col = App->collision->AddCollider({ position.x - 28, position.y - 52, 32, 16 }, COLLIDER_, source);
-					if (current_animation == &punchstanding)
-						player_punch_col = App->collision->AddCollider({ position.x - 31, position.y - 82, 48, 12 }, COLLIDER_, source);
-				}
-			}
 		}
 		if (at == 20)
 		{
@@ -1111,6 +1047,7 @@ void ModulePlayer::Punch()
 		{
 			punching = false;
 			crowchaction = false;
+			airpunching = false;
 			already_hit = false;
 		}
 	}
@@ -1144,8 +1081,7 @@ void ModulePlayer::LowKick()
 							   
 					else	   
 						player_kick_col = App->collision->AddCollider({ position.x - 24, position.y - 20, 35, 12 }, COLLIDER_PLAYER_ATTACK, App->player);
-				}
-				
+				}	
 				if (App->scene_chooseplayer->final_player1 == 2)
 				{
 					if (fliped == false)
@@ -1235,44 +1171,90 @@ void ModulePlayer::Kick()
 			}
 			player_col->rect.h = 110;
 			player_col->rect.w = 50;
-			if (App->scene_chooseplayer->final_player1 == 1)
+			if (player == 0)
 			{
-				if (fliped == false)
+				if (App->scene_chooseplayer->final_player1 == 1)
 				{
-					player_kick_col = App->collision->AddCollider({ position.x + 50, position.y - 85, 55, 17 }, COLLIDER_, source);
-					player_col->SetPos(position.x, position.y - 100);				
+					if (fliped == false)
+					{
+						player_kick_col = App->collision->AddCollider({ position.x + 50, position.y - 85, 55, 17 }, COLLIDER_, source);
+						player_col->SetPos(position.x, position.y - 100);
+					}
+					else
+					{
+						player_kick_col = App->collision->AddCollider({ position.x - 25, position.y - 85, 55, 17 }, COLLIDER_, source);
+						player_col->SetPos(position.x + 20, position.y - 100);
+					}
 				}
-				else
+				if (App->scene_chooseplayer->final_player1 == 2)
 				{
-					player_kick_col = App->collision->AddCollider({ position.x - 25, position.y - 85, 55, 17 }, COLLIDER_, source);
-					player_col->SetPos(position.x + 20, position.y - 100);					
+					if (fliped == false)
+					{
+						player_kick_col = App->collision->AddCollider({ position.x + 50, position.y - 85, 49, 17 }, COLLIDER_, source);
+						player_col->SetPos(position.x, position.y - 121);
+					}
+					else
+					{
+						player_kick_col = App->collision->AddCollider({ position.x - 25, position.y - 85, 49, 17 }, COLLIDER_, source);
+						player_col->SetPos(position.x + 20, position.y - 121);
+					}
 				}
-			}
-			if (App->scene_chooseplayer->final_player1 == 2)
-			{
-				if (fliped == false)
+				if (App->scene_chooseplayer->final_player1 == 3)
 				{
-					player_kick_col = App->collision->AddCollider({ position.x + 50, position.y - 85, 49, 17 }, COLLIDER_, source);
-					player_col->SetPos(position.x, position.y - 121);
-				}
-				else
-				{
-					player_kick_col = App->collision->AddCollider({ position.x - 25, position.y - 85, 49, 17 }, COLLIDER_, source);
-					player_col->SetPos(position.x + 20, position.y - 121);	
-				}
-			}
-			if (App->scene_chooseplayer->final_player1 == 3)
-			{
-				if (fliped == false)
-				{
+					if (fliped == false)
+					{
 
-					player_kick_col = App->collision->AddCollider({ position.x + 50, position.y - 85, 49, 17 }, COLLIDER_, source);
-					player_col->SetPos(position.x, position.y - 121);
+						player_kick_col = App->collision->AddCollider({ position.x + 50, position.y - 85, 49, 17 }, COLLIDER_, source);
+						player_col->SetPos(position.x, position.y - 121);
+					}
+					else
+					{
+						player_kick_col = App->collision->AddCollider({ position.x - 25, position.y - 85, 49, 17 }, COLLIDER_, source);
+						player_col->SetPos(position.x + 20, position.y - 121);
+					}
 				}
-				else
+			}
+			if (player == 1)
+			{
+				if (App->scene_chooseplayer->final_player2 == 1)
 				{
-					player_kick_col = App->collision->AddCollider({ position.x - 25, position.y - 85, 49, 17 }, COLLIDER_, source);
-					player_col->SetPos(position.x + 20, position.y - 121);				
+					if (fliped == false)
+					{
+						player_kick_col = App->collision->AddCollider({ position.x + 50, position.y - 85, 55, 17 }, COLLIDER_, source);
+						player_col->SetPos(position.x, position.y - 100);
+					}
+					else
+					{
+						player_kick_col = App->collision->AddCollider({ position.x - 25, position.y - 85, 55, 17 }, COLLIDER_, source);
+						player_col->SetPos(position.x + 20, position.y - 100);
+					}
+				}
+				if (App->scene_chooseplayer->final_player2 == 2)
+				{
+					if (fliped == false)
+					{
+						player_kick_col = App->collision->AddCollider({ position.x + 50, position.y - 85, 49, 17 }, COLLIDER_, source);
+						player_col->SetPos(position.x, position.y - 121);
+					}
+					else
+					{
+						player_kick_col = App->collision->AddCollider({ position.x - 25, position.y - 85, 49, 17 }, COLLIDER_, source);
+						player_col->SetPos(position.x + 20, position.y - 121);
+					}
+				}
+				if (App->scene_chooseplayer->final_player2 == 3)
+				{
+					if (fliped == false)
+					{
+
+						player_kick_col = App->collision->AddCollider({ position.x + 50, position.y - 85, 49, 17 }, COLLIDER_, source);
+						player_col->SetPos(position.x, position.y - 121);
+					}
+					else
+					{
+						player_kick_col = App->collision->AddCollider({ position.x - 25, position.y - 85, 49, 17 }, COLLIDER_, source);
+						player_col->SetPos(position.x + 20, position.y - 121);
+					}
 				}
 			}
 		}
@@ -1317,174 +1299,90 @@ void ModulePlayer::AirKick()
 			}
 			player_col->rect.h = 110;
 			player_col->rect.w = 50;
-			if (App->scene_chooseplayer->final_player1 == 1)
-			{
-				if (fliped == false)
+
+			if (player == 0 && App->scene_chooseplayer->final_player1 == 1 || player == 1 && App->scene_chooseplayer->final_player2 == 1)
 				{
-					if (current_animation == &airkickstraight)
+					if (fliped == false)
 					{
-						player_kick_col = App->collision->AddCollider({ position.x + 44, position.y - 70, 35, 20 }, COLLIDER_, source);
+						if (current_animation == &airkickstraight)
+						{
+							player_kick_col = App->collision->AddCollider({ position.x + 44, position.y - 70, 35, 20 }, COLLIDER_, source);
+						}
+						if (current_animation == &airkickdiagonal)
+						{
+							player_kick_col = App->collision->AddCollider({ position.x + 50, position.y - 40, 49, 17 }, COLLIDER_, source);
+						}
 					}
-					if (current_animation == &airkickdiagonal)
+					else
 					{
-						player_kick_col = App->collision->AddCollider({ position.x + 50, position.y - 40, 49, 17 }, COLLIDER_, source);
+						if (current_animation == &airkickstraight)
+						{
+							player_kick_col = App->collision->AddCollider({ position.x + 44, position.y - 70, 35, 20 }, COLLIDER_, source);
+						}
+						if (current_animation == &airkickdiagonal)
+						{
+							player_kick_col = App->collision->AddCollider({ position.x + 50, position.y - 40, 49, 17 }, COLLIDER_, source);
+						}
 					}
 				}
-				else
+			if (player == 0 && App->scene_chooseplayer->final_player1 == 2 || player == 1 && App->scene_chooseplayer->final_player2 == 2)
 				{
-					if (current_animation == &airkickstraight)
+					if (fliped == false)
 					{
-						player_kick_col = App->collision->AddCollider({ position.x + 44, position.y - 70, 35, 20 }, COLLIDER_, source);
+						if (current_animation == &airkickstraight)
+						{
+							player_kick_col = App->collision->AddCollider({ position.x + 44, position.y - 70, 35, 20 }, COLLIDER_, source);
+						}
+						if (current_animation == &airkickdiagonal)
+						{
+							player_kick_col = App->collision->AddCollider({ position.x + 50, position.y - 40, 49, 17 }, COLLIDER_, source);
+						}
 					}
-					if (current_animation == &airkickdiagonal)
+					else
 					{
-						player_kick_col = App->collision->AddCollider({ position.x + 50, position.y - 40, 49, 17 }, COLLIDER_, source);
+						if (current_animation == &airkickstraight)
+						{
+							player_kick_col = App->collision->AddCollider({ position.x - 18, position.y - 70, 35, 20 }, COLLIDER_, source);
+						}
+						if (current_animation == &airkickdiagonal)
+						{
+							player_kick_col = App->collision->AddCollider({ position.x - 49, position.y - 40, 49, 17 }, COLLIDER_, source);
+						}
 					}
 				}
-			}
-			if (App->scene_chooseplayer->final_player1 == 2)
-			{
-				if (fliped == false)
+			if (player == 0 && App->scene_chooseplayer->final_player1 == 3 || player == 1 && App->scene_chooseplayer->final_player2 == 3)
 				{
-					if (current_animation == &airkickstraight)
+					if (fliped == false)
 					{
-						player_kick_col = App->collision->AddCollider({ position.x + 44, position.y - 70, 35, 20 }, COLLIDER_, source);
+						if (current_animation == &airkickstraight)
+						{
+							player_kick_col = App->collision->AddCollider({ position.x + 44, position.y - 70, 35, 20 }, COLLIDER_, source);
+						}
+						if (current_animation == &airkickdiagonal)
+						{
+							player_kick_col = App->collision->AddCollider({ position.x + 50, position.y - 40, 49, 17 }, COLLIDER_, source);
+						}
 					}
-					if (current_animation == &airkickdiagonal)
+					else
 					{
-						player_kick_col = App->collision->AddCollider({ position.x + 50, position.y - 40, 49, 17 }, COLLIDER_, source);
+						if (current_animation == &airkickstraight)
+						{
+							player_kick_col = App->collision->AddCollider({ position.x + 44, position.y - 70, 35, 20 }, COLLIDER_, source);
+						}
+						if (current_animation == &airkickdiagonal)
+						{
+							player_kick_col = App->collision->AddCollider({ position.x + 50, position.y - 40, 49, 17 }, COLLIDER_, source);
+						}
 					}
 				}
-				else
-				{
-					if (current_animation == &airkickstraight)
-					{
-						player_kick_col = App->collision->AddCollider({ position.x - 18, position.y - 70, 35, 20 }, COLLIDER_, source);
-					}
-					if (current_animation == &airkickdiagonal)
-					{
-						player_kick_col = App->collision->AddCollider({ position.x - 49, position.y - 40, 49, 17 }, COLLIDER_, source);
-					}
-				}
-			}
-			if (App->scene_chooseplayer->final_player1 == 3)
-			{
-				if (fliped == false)
-				{
-					if (current_animation == &airkickstraight)
-					{
-						player_kick_col = App->collision->AddCollider({ position.x + 44, position.y - 70, 35, 20 }, COLLIDER_, source);
-					}
-					if (current_animation == &airkickdiagonal)
-					{
-						player_kick_col = App->collision->AddCollider({ position.x + 50, position.y - 40, 49, 17 }, COLLIDER_, source);
-					}
-				}
-				else
-				{
-					if (current_animation == &airkickstraight)
-					{
-						player_kick_col = App->collision->AddCollider({ position.x + 44, position.y - 70, 35, 20 }, COLLIDER_, source);
-					}
-					if (current_animation == &airkickdiagonal)
-					{
-						player_kick_col = App->collision->AddCollider({ position.x + 50, position.y - 40, 49, 17 }, COLLIDER_, source);
-					}
-				}
-			}
-			if (App->scene_chooseplayer->final_player2 == 1)
-			{
-				if (fliped == false)
-				{
-					if (current_animation == &airkickstraight)
-					{
-						player_kick_col = App->collision->AddCollider({ position.x + 44, position.y - 70, 35, 20 }, COLLIDER_, source);
-					}
-					if (current_animation == &airkickdiagonal)
-					{
-						player_kick_col = App->collision->AddCollider({ position.x + 50, position.y - 40, 49, 17 }, COLLIDER_, source);
-					}
-				}
-				else
-				{
-					if (current_animation == &airkickstraight)
-					{
-						player_kick_col = App->collision->AddCollider({ position.x + 44, position.y - 70, 35, 20 }, COLLIDER_, source);
-					}
-					if (current_animation == &airkickdiagonal)
-					{
-						player_kick_col = App->collision->AddCollider({ position.x + 50, position.y - 40, 49, 17 }, COLLIDER_, source);
-					}
-				}
-			}
-			if (App->scene_chooseplayer->final_player2 == 2)
-			{
-				if (fliped == false)
-				{
-					if (current_animation == &airkickstraight)
-					{
-						player_kick_col = App->collision->AddCollider({ position.x + 44, position.y - 70, 35, 20 }, COLLIDER_, source);
-					}
-					if (current_animation == &airkickdiagonal)
-					{
-						player_kick_col = App->collision->AddCollider({ position.x + 50, position.y - 40, 49, 17 }, COLLIDER_, source);
-					}
-				}
-				else
-				{
-					if (current_animation == &airkickstraight)
-					{
-						player_kick_col = App->collision->AddCollider({ position.x - 18, position.y - 70, 35, 20 }, COLLIDER_, source);
-					}
-					if (current_animation == &airkickdiagonal)
-					{
-						player_kick_col = App->collision->AddCollider({ position.x - 49, position.y - 40, 49, 17 }, COLLIDER_, source);
-					}
-				}
-			}
-			if (App->scene_chooseplayer->final_player2 == 3)
-			{
-				if (fliped == false)
-				{
-					if (current_animation == &airkickstraight)
-					{
-						player_kick_col = App->collision->AddCollider({ position.x + 44, position.y - 70, 35, 20 }, COLLIDER_, source);
-					}
-					if (current_animation == &airkickdiagonal)
-					{
-						player_kick_col = App->collision->AddCollider({ position.x + 50, position.y - 40, 49, 17 }, COLLIDER_, source);
-					}
-				}
-				else
-				{
-					if (current_animation == &airkickstraight)
-					{
-						player_kick_col = App->collision->AddCollider({ position.x + 44, position.y - 70, 35, 20 }, COLLIDER_, source);
-					}
-					if (current_animation == &airkickdiagonal)
-					{
-						player_kick_col = App->collision->AddCollider({ position.x + 50, position.y - 40, 49, 17 }, COLLIDER_, source);
-					}
-				}
-			}
-		}
-		if (at == 25 && fliped)
-		{
-			position.x -= 44;
-		}
-		if (at == 20)
-		{
-			if (fliped)
-			{
-				position.x += 44;
-			}
-			if (player_kick_col != nullptr)
-				player_kick_col->to_delete = true;
+
 		}
 		if (at == 80)
 		{
 			airkicking = false;
 			already_hit = false;
+			if (player_kick_col != nullptr)
+				player_kick_col->to_delete = true;
 		}
 	}
 }
@@ -2201,7 +2099,7 @@ update_status ModulePlayer::Update()
 							}
 					}
 
-					if (App->input->keyboard[SDL_SCANCODE_R] == KEY_STATE::KEY_DOWN && !punching && !kicking && !crowchaction && !specialattack_ && !lowkicking && !takingdown) 
+					if (App->input->keyboard[SDL_SCANCODE_R] == KEY_STATE::KEY_DOWN && !punching && !kicking && !crowchaction && !specialattack_ && !lowkicking && !takingdown && !airkicking && !airpunching)
 					{
 						if (current_animation != &punchstanding && !jumping && !takingdown)
 						{
@@ -2214,6 +2112,7 @@ update_status ModulePlayer::Update()
 						if (current_animation != &airpunchstraight && jumping && jumptype == 0)
 						{
 							punching = true;
+							airpunching = true;
 							at = 0;
 							airpunchstraight.Reset();
 							current_animation = &airpunchstraight;
@@ -2223,6 +2122,7 @@ update_status ModulePlayer::Update()
 						if (current_animation != &airpunchdiagonal && jumping && jumptype == 1 || jumptype == 2)
 						{
 							punching = true;
+							airpunching = true;
 							at = 0;
 							airpunchdiagonal.Reset();
 							current_animation = &airpunchdiagonal;
@@ -2231,7 +2131,7 @@ update_status ModulePlayer::Update()
 						
 					}
 
-					if (App->input->keyboard[SDL_SCANCODE_T] == KEY_STATE::KEY_DOWN && !punching  && !crowchaction && !specialattack_ && !lowkicking && !takingdown) 
+					if (App->input->keyboard[SDL_SCANCODE_T] == KEY_STATE::KEY_DOWN && !punching  && !crowchaction && !specialattack_ && !lowkicking && !takingdown && !airkicking && !airpunching)
 					{
 						if (current_animation != &kickingstanding && !jumping && !crowchaction && !specialattack_ && !takingdown)
 						{
@@ -2663,7 +2563,7 @@ update_status ModulePlayer::Update()
 						}
 					}
 
-					if (App->input->keyboard[SDL_SCANCODE_J] == KEY_STATE::KEY_DOWN && !punching && !kicking && !crowchaction && !specialattack_ && !lowkicking) {
+					if (App->input->keyboard[SDL_SCANCODE_J] == KEY_STATE::KEY_DOWN && !punching && !kicking && !crowchaction && !specialattack_ && !lowkicking && !airkicking && !airpunching) {
 						if (current_animation != &punchstanding && !jumping && !takingdown)
 						{
 							punching = true;
@@ -2672,10 +2572,10 @@ update_status ModulePlayer::Update()
 							current_animation = &punchstanding;
 							App->audio->playFx(punchFX);
 						}
-
 						if (current_animation != &airpunchstraight && jumping && jumptype == 0)
 						{
 							punching = true;
+							airpunching = true;
 							at = 0;
 							airpunchstraight.Reset();
 							current_animation = &airpunchstraight;
@@ -2685,6 +2585,7 @@ update_status ModulePlayer::Update()
 						if (current_animation != &airpunchdiagonal && jumping && jumptype == 1 || jumptype == 2)
 						{
 							punching = true;
+							airpunching = true;
 							at = 0;
 							airpunchdiagonal.Reset();
 							current_animation = &airpunchdiagonal;
@@ -2692,7 +2593,7 @@ update_status ModulePlayer::Update()
 						}
 					}
 
-					if (App->input->keyboard[SDL_SCANCODE_K] == KEY_STATE::KEY_DOWN && !punching && !crowchaction && !specialattack_ && !lowkicking) 
+					if (App->input->keyboard[SDL_SCANCODE_K] == KEY_STATE::KEY_DOWN && !punching && !crowchaction && !specialattack_ && !lowkicking && !airpunching && !airkicking && !airpunching)
 					{
 						if (current_animation != &kickingstanding && !jumping && !crowchaction && !specialattack_ && !takingdown)
 						{
@@ -3106,4 +3007,3 @@ void ModulePlayer::OnCollision(Collider* a, Collider* b, bool colliding)
 		}
 	}
 }
-

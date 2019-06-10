@@ -111,6 +111,7 @@ private:
 	int stuned; //stunt after getting hit 0 = not stuned / 1 = punch stuned / 2 = kick stuned
 	int t = 0; //jumping coldown time
 	int at = 0; //attack coldown time
+	int jt = 0;
 	int st = 0;		// specialattack coldown time
 	int vy = 0; //velocity y
 	int tktempo = 0;
@@ -131,6 +132,7 @@ private:
 	bool specialattack_ = false; //true while special attacking
 	bool lowkicking = false; //true while lowkicking
 	bool airkicking = false;
+	bool airpunching = false;
 	bool takingdown = false; // true while taking down the opponent o failing the takedown
 	bool skillColDone = false;
 	bool fliped = false;
