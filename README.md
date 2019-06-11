@@ -1,4 +1,4 @@
-﻿![](https://lh4.googleusercontent.com/xFg3sWeeGEVHyY6UzxoaVhut5N9Jny9_7Dd_0xqqTU9IsH44wAdpgUYL51QI8RabKi1_-Z3W1OM6sCkRqh9LyuHobKGKHR-bJ-veGGPI)
+﻿![](https://lh3.googleusercontent.com/yU7MrhiaFYht1BrckwnK3PqM7Ga-Y95iIMQ0fUV5Yp8nueO6fKCfzxq_ttAPbWfO_Rk1A6bG8yp_KQjb9I22nAj-v4LONWHL3lok6NI3)
 
 # FATAL FURY by RandomCali 
 Fatal Fury is a fighting game released in 1991 by SNK. 
