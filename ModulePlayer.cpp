@@ -2756,7 +2756,7 @@ update_status ModulePlayer::Update()
 							crowch.Reset();
 							current_animation = &crowch;
 						}
-						if (App->input->keyboard[SDL_SCANCODE_L] == KEY_STATE::KEY_DOWN && !punching && !kicking && !specialattack_ && !lowkicking && !takingdown
+						if (App->input->keyboard[SDL_SCANCODE_K] == KEY_STATE::KEY_DOWN && !punching && !kicking && !specialattack_ && !lowkicking && !takingdown
 							|| App->input->P2_controll[BUTTON_A] == KEY_STATE::KEY_DOWN && !punching && !kicking && !specialattack_ && !lowkicking && !takingdown) {
 							if (current_animation != &crowchpunch && !jumping)
 							{
@@ -2767,7 +2767,7 @@ update_status ModulePlayer::Update()
 								////App->audio->playFx(punchFX);
 							}
 						}
-						else if (App->input->keyboard[SDL_SCANCODE_R] == KEY_STATE::KEY_DOWN && !punching && !kicking && !specialattack_ && !lowkicking && !takingdown
+						else if (App->input->keyboard[SDL_SCANCODE_J] == KEY_STATE::KEY_DOWN && !punching && !kicking && !specialattack_ && !lowkicking && !takingdown
 							|| App->input->P2_controll[BUTTON_X] == KEY_STATE::KEY_DOWN && !punching && !kicking && !specialattack_ && !lowkicking && !takingdown)
 						{
 							if (current_animation != &lowkick && !jumping)
