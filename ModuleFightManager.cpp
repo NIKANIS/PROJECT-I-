@@ -194,6 +194,7 @@ bool ModuleFightManager::Start()
 	App->fight_timer->Enable();
 	App->round_pl->Enable();
 	App->round_en->Enable();	
+	App->collision->Enable();
 	return true;
 }
 

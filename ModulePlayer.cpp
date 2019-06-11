@@ -1425,8 +1425,10 @@ void ModulePlayer::SpecialAttack()
 					skillJoe.position.x = position.x;
 				}
 				App->particles->AddParticle(skillJoe, position.x, position.y - 112, COLLIDER_NONE);
-				player_skill_col = App->collision->AddCollider({ skillJoe.position.x, position.y - 52, 45, 60 }, COLLIDER_, source);
-
+				if(!fliped)
+					player_skill_col = App->collision->AddCollider({ skillJoe.position.x, position.y - 52, 45, 60 }, COLLIDER_, source);
+				else
+					player_skill_col = App->collision->AddCollider({ skillJoe.position.x - width, position.y - 52, 45, 60 }, COLLIDER_, source);
 
 			}
 			if (st >= 25 && st < 35)
@@ -1438,7 +1440,10 @@ void ModulePlayer::SpecialAttack()
 				skillJoe.Update();
 				skillJoe2.position.x = skillJoe.position.x;
 				skillJoe2.position.y = skillJoe.position.y;
-				player_skill_col->SetPos(skillJoe.position.x, skillJoe.position.y + 52);
+				if(!fliped)
+					player_skill_col->SetPos(skillJoe.position.x, skillJoe.position.y + 52);
+				else
+					player_skill_col->SetPos(skillJoe.position.x - width, skillJoe.position.y + 52);
 			}
 
 			if (st >= 35)
@@ -1447,7 +1452,11 @@ void ModulePlayer::SpecialAttack()
 				skillJoe2.Update();
 				player_skill_col->rect.h = 90;
 				player_skill_col->rect.w = 35;
-				player_skill_col->SetPos(skillJoe2.position.x + 10, skillJoe2.position.y + 20);
+				if(!fliped)
+					player_skill_col->SetPos(skillJoe2.position.x + 10, skillJoe2.position.y + 20);
+				else
+					player_skill_col->SetPos(skillJoe2.position.x + 10 - width, skillJoe2.position.y + 20);
+
 			}
 			if (st == 35)
 			{
@@ -1599,7 +1608,7 @@ void ModulePlayer::SpecialAttack2()
 		}
 		if (character == 2)
 		{
-			if (current_animation != &TerrySpecialKick)
+			if (st2 == 1)
 			{
 				TerrySpecialKick.Reset();
 				current_animation = &TerrySpecialKick;
@@ -1640,9 +1649,14 @@ void ModulePlayer::SpecialAttack2()
 
 			if (st2 == 50)
 			{
-				sp2 = false;
 				specialattack_ = false;
 				already_hit = false;
+				/*sp2 = false;
+				st2 = 0;*/
+			}
+			if (st2 == 200)
+			{
+				sp2 = false;
 				st2 = 0;
 			}
 		}
@@ -1656,8 +1670,7 @@ void ModulePlayer::SpecialAttack3()
 		COLLIDER_TYPE COLLIDER_ = COLLIDER_NONE;
 		ModulePlayer* source = nullptr;
 		int f;
-
-		st2++;
+		st3++;
 		if (player == 0)
 		{
 			COLLIDER_ = COLLIDER_PLAYER_ATTACK;
@@ -1670,8 +1683,7 @@ void ModulePlayer::SpecialAttack3()
 		}
 		if (character == 2)
 		{
-			st3++;
-
+			
 			if (st3 == 1)
 			{
 				TerrySpecialPunch1.Reset();
@@ -1694,27 +1706,32 @@ void ModulePlayer::SpecialAttack3()
 				current_animation = &TerrySpecialPunch2;
 				player_kick_col = App->collision->AddCollider({ position.x + f, position.y - 90, 35, 16 }, COLLIDER_, source);
 			}
-			if (st3 > 60)
+			if (st3 > 60 && st3 < 150)
 			{
 				int ff;
 				if (!fliped)
 					ff = 1;
 				else
 					ff = -1;
-				if (!body_collide)
+				if (!stopsp3)
 				{
 					position.x += 5 * ff;
 					if (player_kick_col != nullptr)
 						player_kick_col->rect.x += 5*ff;
 				}
 			}
-			if (st3 == 150 || body_collide)
+			if (st3 == 150 || stopsp3)
 			{
 				if (player_kick_col != nullptr)
 					player_kick_col->to_delete = true;
-				sp3 = false;
 				specialattack_ = false;
 				already_hit = false;
+				/*sp3 = false;
+				st3 = 0;*/
+			}
+			if (st3 == 300)
+			{
+				sp3 = false;
 				st3 = 0;
 			}
 		}
@@ -1807,8 +1824,19 @@ update_status ModulePlayer::Update()
 				{
 					if (stuned != 0)
 					{
+						if (player_kick_col != nullptr)
+							player_kick_col->to_delete = true;
+						if (player_punch_col != nullptr)
+							player_punch_col->to_delete = true;
 						sp = false;
+						sp2 = false;
+						sp3 = false;
+						sp4 = false;
 						st = 0;
+						st2 = 0;
+						st3 = 0;
+						st4 = 0;
+
 						specialattack_ = false;
 						punching = false;
 						kicking = false;
@@ -2137,7 +2165,7 @@ update_status ModulePlayer::Update()
 						}
 					}
 
-					if (App->input->keyboard[SDL_SCANCODE_Y] == KEY_STATE::KEY_DOWN && !punching && !jumping && !crowchaction && !sp && !sp2 && !sp3 && !sp4 && !lowkicking && !takingdown && !kicking) {
+					if (App->input->keyboard[SDL_SCANCODE_Y] == KEY_STATE::KEY_DOWN && !punching && !jumping && !crowchaction && !sp && !lowkicking && !takingdown && !kicking && !specialattack_) {
 						specialattack_ = true;
 						sp = true;
 						st = 0;
@@ -2146,13 +2174,13 @@ update_status ModulePlayer::Update()
 						App->audio->playFx(skillFX);
 					}
 
-					if (App->input->keyboard[SDL_SCANCODE_G] == KEY_STATE::KEY_DOWN && !punching && !jumping && !crowchaction && !sp && !sp2 && !sp3 && !sp4 && !lowkicking && !takingdown && !kicking) {
+					if (App->input->keyboard[SDL_SCANCODE_G] == KEY_STATE::KEY_DOWN && !punching && !jumping && !crowchaction && !sp2 && !lowkicking && !takingdown && !kicking && !specialattack_) {
 						sp2 = true;
 						specialattack_ = true;
 						st2 = 0;
 					}
 
-					if (App->input->keyboard[SDL_SCANCODE_Z] == KEY_STATE::KEY_DOWN && !punching && !jumping && !crowchaction && !sp && !sp2 && !sp3 && !sp4 && !lowkicking && !takingdown && !kicking) {
+					if (App->input->keyboard[SDL_SCANCODE_Z] == KEY_STATE::KEY_DOWN && !punching && !jumping && !crowchaction && !sp3 && !lowkicking && !takingdown && !kicking && !specialattack_) {
 						sp3 = true;
 						specialattack_ = true;
 						st3 = 0;
@@ -2570,7 +2598,8 @@ update_status ModulePlayer::Update()
 						}
 					}
 
-					if (App->input->keyboard[SDL_SCANCODE_J] == KEY_STATE::KEY_DOWN && !punching && !kicking && !crowchaction && !specialattack_ && !lowkicking && !airkicking && !airpunching) {
+					if (App->input->keyboard[SDL_SCANCODE_J] == KEY_STATE::KEY_DOWN && !punching && !kicking && !crowchaction && !specialattack_ && !lowkicking && !airkicking && !airpunching
+						|| App->input->P2_controll[BUTTON_X] == KEY_STATE::KEY_DOWN & !punching && !kicking && !crowchaction && !specialattack_ && !lowkicking && !takingdown && !airkicking && !airpunching) {
 						if (current_animation != &punchstanding && !jumping && !takingdown)
 						{
 							punching = true;
@@ -2600,7 +2629,8 @@ update_status ModulePlayer::Update()
 						}
 					}
 
-					if (App->input->keyboard[SDL_SCANCODE_K] == KEY_STATE::KEY_DOWN && !punching && !crowchaction && !specialattack_ && !lowkicking && !airpunching && !airkicking && !airpunching)
+					if (App->input->keyboard[SDL_SCANCODE_K] == KEY_STATE::KEY_DOWN && !punching && !crowchaction && !specialattack_ && !lowkicking && !airpunching && !airkicking && !airpunching
+						|| App->input->P2_controll[BUTTON_A] == KEY_STATE::KEY_DOWN && !punching && !crowchaction && !specialattack_ && !lowkicking && !takingdown && !airkicking && !airpunching)
 					{
 						if (current_animation != &kickingstanding && !jumping && !crowchaction && !specialattack_ && !takingdown)
 						{
@@ -2629,7 +2659,7 @@ update_status ModulePlayer::Update()
 						}
 					}
 
-					if (App->input->keyboard[SDL_SCANCODE_L] == KEY_STATE::KEY_DOWN && !punching && !jumping && !crowchaction && !sp && !sp2 && !sp3 && !sp4 && !lowkicking && !takingdown && !kicking) {
+					if (App->input->keyboard[SDL_SCANCODE_L] == KEY_STATE::KEY_DOWN && !punching && !jumping && !crowchaction && !sp && !lowkicking && !takingdown && !kicking && !specialattack_) {
 						specialattack_ = true;
 						sp = true;
 						st = 0;
@@ -2638,20 +2668,20 @@ update_status ModulePlayer::Update()
 						App->audio->playFx(skillFX);
 					}
 
-					if (App->input->keyboard[SDL_SCANCODE_M] == KEY_STATE::KEY_DOWN && !punching && !jumping && !crowchaction && !sp && !sp2 && !sp3 && !sp4 && !lowkicking && !takingdown && !kicking) {
+					if (App->input->keyboard[SDL_SCANCODE_M] == KEY_STATE::KEY_DOWN && !punching && !jumping && !crowchaction && !sp2 && !lowkicking && !takingdown && !kicking && !specialattack_) {
 						sp2 = true;
 						specialattack_ = true;
-						st = 0;
-
+						st2 = 0;
 					}
 
-					if (App->input->keyboard[SDL_SCANCODE_P] == KEY_STATE::KEY_DOWN && !punching && !jumping && !crowchaction && !sp && !sp2 && !sp3 && !sp4 && !lowkicking && !takingdown && !kicking) {
+					if (App->input->keyboard[SDL_SCANCODE_P] == KEY_STATE::KEY_DOWN && !punching && !jumping && !crowchaction && !sp3 && !lowkicking && !takingdown && !kicking && !specialattack_) {
 						sp3 = true;
 						specialattack_ = true;
 						st3 = 0;
 					}
 
-					if (App->input->keyboard[SDL_SCANCODE_N] == KEY_STATE::KEY_DOWN && !punching && !jumping && !crowchaction && !sp && !lowkicking && !takingdown && !specialattack_)
+					if (App->input->keyboard[SDL_SCANCODE_N] == KEY_STATE::KEY_DOWN && !punching && !jumping && !crowchaction && !sp && !lowkicking && !takingdown && !specialattack_
+						|| App->input->P2_controll[BUTTON_B] == KEY_STATE::KEY_DOWN && !punching && !jumping && !crowchaction && !sp && !lowkicking && !takingdown && !specialattack_)
 					{
 						if (current_animation != &kickingstanding && !jumping && !crowchaction && !specialattack_ && current_animation != &takedown_fail && current_animation != &takedown_done && body_collide == true)
 						{
@@ -2669,9 +2699,9 @@ update_status ModulePlayer::Update()
 						}
 					}
 
-					if (App->input->keyboard[SDL_SCANCODE_S] == KEY_STATE::KEY_IDLE
-						&& App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_IDLE
-						&& App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_IDLE
+					if (App->input->keyboard[SDL_SCANCODE_DOWN] == KEY_STATE::KEY_IDLE
+						&& App->input->keyboard[SDL_SCANCODE_LEFT] == KEY_STATE::KEY_IDLE
+						&& App->input->keyboard[SDL_SCANCODE_RIGHT] == KEY_STATE::KEY_IDLE
 						&& !jumping && !punching && !kicking && !specialattack_ && !lowkicking && !takingdown
 						&& App->input->P2_controll[BUTTON_DPAD_DOWN] == KEY_STATE::KEY_IDLE
 						&& App->input->P2_controll[BUTTON_DPAD_LEFT] == KEY_STATE::KEY_IDLE
@@ -2883,6 +2913,7 @@ void ModulePlayer::OnCollision(Collider* a, Collider* b, bool colliding)
 				if (sp3)
 				{
 					App->enemy->Damage(30, 2);
+					stopsp3 = true;
 					score += 200;
 				}
 			}
