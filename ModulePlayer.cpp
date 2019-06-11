@@ -850,6 +850,7 @@ void ModulePlayer::Jump() {
 			jumping = false;
 			airkicking = false;
 			airpunching = false;
+			punching = false;
 			jt = 0;
 			at = 0;
 			already_hit = false;
@@ -858,7 +859,7 @@ void ModulePlayer::Jump() {
 		if (airkicking || airpunching)
 		{
 			jt++;
-			if (player_kick_col != nullptr)
+			if (player_kick_col != nullptr && airkicking)
 			{
 				player_kick_col->rect.x += jumpspeed;
 				player_kick_col->rect.y = 220 - 7 * t + 0.12*(t*t);
@@ -907,7 +908,7 @@ void ModulePlayer::Punch()
 	if (punching == true) {
 		at++;
 		if (already_hit && !crowchaction && !airpunching)
-		{
+		{ 
 			if (!fliped)
 				position.x--;
 			else
