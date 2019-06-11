@@ -26,6 +26,7 @@ bool ModuleInput::Init()
 	bool ret = true;
 	SDL_Init(0);
 	SDL_Init(SDL_INIT_GAMECONTROLLER);
+	SDL_Init(SDL_INIT_JOYSTICK);
 	if (SDL_InitSubSystem(SDL_INIT_EVENTS) < 0)
 	{
 		LOG("SDL_EVENTS could not initialize! SDL_Error: %s\n", SDL_GetError());
@@ -67,6 +68,7 @@ bool ModuleInput::Init()
 // Called every draw update
 update_status ModuleInput::PreUpdate()
 {
+
 	SDL_PumpEvents();
 	const Uint8* keys = SDL_GetKeyboardState(NULL);
 	Uint8 buttons[MAX_BUTTONS];
@@ -169,3 +171,32 @@ bool ModuleInput::CleanUp()
 	SDL_QuitSubSystem(SDL_INIT_EVENTS);
 	return true;
 }
+
+bool ModuleInput::JoystickGetPos(SDL_GameController * gamepad, AXIS axis) 
+{
+
+	bool ret = false;
+	if (gamepad != nullptr)
+	{
+		int deadzone_x = 7849;
+		int deadzone_y = 15698;
+
+		int xAxis = SDL_GameControllerGetAxis(gamepad, SDL_CONTROLLER_AXIS_LEFTX);
+		int yAxis = SDL_GameControllerGetAxis(gamepad, SDL_CONTROLLER_AXIS_LEFTY);
+
+		if (xAxis > deadzone_x && axis == RIGHT) ret = true;
+		if (xAxis < -deadzone_x && axis == LEFT) ret = true;
+		if (yAxis < -deadzone_y && axis == UP) ret = true;
+		if (yAxis > deadzone_y && axis == DOWN) ret = true;
+
+		if (yAxis < -deadzone_x && xAxis > deadzone_x && axis == UPRIGHT)		ret = true;
+		if (yAxis > deadzone_x && xAxis > -deadzone_x && axis == DOWNLEFT)		ret = true;
+		if (yAxis > deadzone_x && xAxis > deadzone_x && axis == LEFTUP)		ret = true;
+		if (yAxis < -deadzone_x && xAxis > -deadzone_x && axis == RIGHTDOWN)	ret = true;
+
+	}
+	
+	return ret;
+
+}
+
