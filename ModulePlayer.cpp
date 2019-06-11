@@ -378,6 +378,27 @@ void ModulePlayer::LoadJoeAnimations()
 	JoeSpecialKnee.PushBack({ 1346, 395, 107, 93 });
 	JoeSpecialKnee.speed = 0.15f;
 	JoeSpecialKnee.loop = false;
+
+	//Joe Multiple Punch
+	JoeMultiplePunch.PushBack({ 1049, 281, 53, 102 });
+	JoeMultiplePunch.PushBack({ 1115, 281, 85, 102 });
+	JoeMultiplePunch.PushBack({ 1200, 281, 82, 102 });
+	JoeMultiplePunch.PushBack({ 1294, 281, 83, 102 });
+	JoeMultiplePunch.PushBack({ 1049, 281, 53, 102 });
+	JoeMultiplePunch.PushBack({ 1460, 275, 82, 108 });
+	JoeMultiplePunch.speed = 0.15f;
+	JoeMultiplePunch.loop = false;
+
+	//Joe Yellow Punch
+	JoeYellowPunch.PushBack({ 1049, 281, 53, 102 });
+	JoeYellowPunch.PushBack({ 1622, 287, 63, 96 });
+	JoeYellowPunch.PushBack({ 1697, 287, 100, 96 });
+	JoeYellowPunch.PushBack({ 1804, 287, 97, 96 });
+	JoeYellowPunch.PushBack({ 1889, 175, 97, 96 });
+	JoeYellowPunch.PushBack({ 1863, 395, 97, 96 });
+	JoeYellowPunch.speed = 0.15f;
+	JoeYellowPunch.loop = false;
+
 }
 void ModulePlayer::LoadTerryAnimations()
 {
