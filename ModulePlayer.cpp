@@ -511,8 +511,8 @@ void ModulePlayer::LoadTerryAnimations()
 	die.PushBack({ 1644,836,107,155 });
 	die.PushBack({ 1542,836,87,155 });
 	die.PushBack({ 1425,836,102,155 });
-	die.PushBack({ 1303,836,112,155 });
-	die.PushBack({ 1178,836,115,155 });
+	die.PushBack({ 1304,860,112,155 });
+	die.PushBack({ 1179,860,115,155 });
 	die.speed = 0.15f;
 	die.loop = false;
 
