@@ -53,18 +53,24 @@ bool ModulePlayer::Start()
 		{
 			graphics = App->textures->Load("SPRITES FATAL FURY/CHARACTERS/3-Joe Higashi/Sprites joe higashi.png");
 			LoadJoeAnimations();
+
+			width = 62;
 		}
 
 		if (App->scene_chooseplayer->final_player1 == 2)
 		{
 			graphics = App->textures->Load("SPRITES FATAL FURY/CHARACTERS/1-Terry Bogard/spritesTerryBogard.png");
 			LoadTerryAnimations();
+
+			width = 60;
 		}
 
 		if (App->scene_chooseplayer->final_player1 == 3)
 		{
 			graphics = App->textures->Load("SPRITES FATAL FURY/CHARACTERS/2-Andy Bogard/Sprites_AndyBogard.png");
 			LoadAndyAnimations();
+
+			width = 59;
 		}
 	}
 
@@ -850,6 +856,7 @@ void ModulePlayer::Jump() {
 			jumping = false;
 			airkicking = false;
 			airpunching = false;
+			punching = false;
 			jt = 0;
 			at = 0;
 			already_hit = false;
@@ -858,7 +865,7 @@ void ModulePlayer::Jump() {
 		if (airkicking || airpunching)
 		{
 			jt++;
-			if (player_kick_col != nullptr)
+			if (player_kick_col != nullptr && airkicking)
 			{
 				player_kick_col->rect.x += jumpspeed;
 				player_kick_col->rect.y = 220 - 7 * t + 0.12*(t*t);
@@ -907,7 +914,7 @@ void ModulePlayer::Punch()
 	if (punching == true) {
 		at++;
 		if (already_hit && !crowchaction && !airpunching)
-		{
+		{ 
 			if (!fliped)
 				position.x--;
 			else
@@ -2570,8 +2577,8 @@ update_status ModulePlayer::Update()
 	{
 		App->render->Blit(graphics, position.x + width, position.y - r.h, &r, fliped);
 	}
-	else {
-
+	else 
+	{
 		App->render->Blit(graphics, position.x, position.y - r.h, &r, fliped);
 	}
 	return UPDATE_CONTINUE;
