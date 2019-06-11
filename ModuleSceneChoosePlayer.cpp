@@ -113,7 +113,7 @@ void ModuleSceneChoosePlayer::SelectPlayer()
 			
 		}
 
-		if (player_selected == 3)
+		/*if (player_selected == 3)
 		{
 			andybogard_chosen = true;
 			App->render->Blit(graphicschooseplayer, 205, 92 + 3, &purple_andybogard, 0.0f);
@@ -121,7 +121,7 @@ void ModuleSceneChoosePlayer::SelectPlayer()
 			App->render->Blit(graphicschooseplayer, 195, 80 + 3, &p1, 0.0f);
 			final_player1 = 3;
 			
-		}
+		}*/
 
 	}	break;
 
@@ -147,7 +147,7 @@ void ModuleSceneChoosePlayer::SelectPlayer()
 			
 		}
 
-		if (player_selected == 3)
+		/*if (player_selected == 3)
 		{
 			andybogard_chosen = true;
 			App->render->Blit(graphicschooseplayer, 205, 92 + 3, &purple_andybogard, 0.0f);
@@ -155,7 +155,7 @@ void ModuleSceneChoosePlayer::SelectPlayer()
 			App->render->Blit(graphicschooseplayer, 195, 80 + 3, &p2, 0.0f);
 			final_player2 = 3;
 			
-		}
+		}*/
 
 	}	break;
 	}
@@ -224,18 +224,18 @@ update_status ModuleSceneChoosePlayer::Update()
 		terrybogard_chosen = false;
 	}
 
-	if (andybogard_chosen == true)
+	/*if (andybogard_chosen == true)
 	{
 		App->audio->playFx(selected);
 		SDL_Delay(1000);
 		ResetTimer();
 		andybogard_chosen = false;
-	}
+	}*/
 
 
 	if (numberofplayers == 0)
 	{
-		if (App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_DOWN  && player_selected != 3 || App->input->controll[BUTTON_DPAD_RIGHT] == KEY_STATE::KEY_DOWN && player_selected != 3) {
+		if (App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_DOWN  && player_selected != 2 || App->input->controll[BUTTON_DPAD_RIGHT] == KEY_STATE::KEY_DOWN && player_selected != 2) {
 				player_selected++;
 				App->audio->playFx(select);
 		}
@@ -248,7 +248,7 @@ update_status ModuleSceneChoosePlayer::Update()
 
 	if (numberofplayers == 1)
 	{
-		if (App->input->keyboard[SDL_SCANCODE_RIGHT] == KEY_STATE::KEY_DOWN && player_selected != 3 || App->input->P2_controll[BUTTON_DPAD_RIGHT] == KEY_STATE::KEY_DOWN && player_selected != 3) {
+		if (App->input->keyboard[SDL_SCANCODE_RIGHT] == KEY_STATE::KEY_DOWN && player_selected != 2 || App->input->P2_controll[BUTTON_DPAD_RIGHT] == KEY_STATE::KEY_DOWN && player_selected != 2) {
 			player_selected++;
 			App->audio->playFx(select);
 		}
@@ -305,7 +305,7 @@ update_status ModuleSceneChoosePlayer::Update()
 			
 		}	break;
 
-		case 3:
+		/*case 3:
 		{
 			if (andybogard_chosen != true)
 			{
@@ -325,7 +325,7 @@ update_status ModuleSceneChoosePlayer::Update()
 				App->render->Blit(graphicschooseplayer, 195, 80 + 3, &p2, 0.0f);
 			}
 			
-		}	break;
+		}	break;*/
 	}
 
 	if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN || App->input->controll[BUTTON_A] == KEY_STATE::KEY_DOWN || App->input->P2_controll[BUTTON_A] == KEY_STATE::KEY_DOWN)
