@@ -23,7 +23,8 @@ bool ModuleCombos::CleanUp() {
 	return true;
 }
 
-update_status ModuleCombos::Update() {
+update_status ModuleCombos::Update() 
+{
 
 
 
@@ -32,16 +33,40 @@ update_status ModuleCombos::Update() {
 
 bool ModuleCombos::SpecialAttack3(int player) 
 {
-
-		if (App->input->JoystickGetPos(App->input->controller,DOWN) == true)
+	App->player->score = SplashFountCount;
+		actual_frameP1SF++;
+		if (actual_frameP1SF <= 120) 
 		{
-			return true;
+			if (SplashFountCount == 0)
+				if (App->input->JoystickGetPos(App->input->controller, DOWN) == true)
+						SplashFountCount++;
+				
+			/*if (SplashFountCount == 1)
+				if (App->input->JoystickGetPos(App->input->controller, DOWNLEFT) == true) 
+						SplashFountCount++;*/
+				
+			if (SplashFountCount == 1)
+				if (App->input->JoystickGetPos(App->input->controller, LEFT) == true) 
+						SplashFountCount++;
+				
+			if (SplashFountCount == 2)
+				if (App->input->controll[BUTTON_X] == KEY_DOWN)
+				{
+					SplashFountCount = 0;
+					return true;
+				}
 		}
-		return false;
+		else 
+		{
+			actual_frameP1SF = 0;
+			SplashFountCount = 0;
+			return false;
+		}
+	
 	
 }
 
-bool ModuleCombos::CheckPunchP2() {
+/*bool ModuleCombos::CheckPunchP2() {
 	if (App->input->Pad2.button_state[SDL_CONTROLLER_BUTTON_A] == KEY_DOWN) {
 		return true;
 	}
@@ -180,4 +205,4 @@ bool ModuleCombos::CheckPowerGraduationP2() {
 		PowerGraditionCount2 = 0;
 		return false;
 	}
-}
+}*/
