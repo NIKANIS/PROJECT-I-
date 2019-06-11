@@ -31,8 +31,10 @@ enum BUTTONS
 	BUTTON_BACK,
 };
 
+
 enum AXIS
 {
+
 	UP,
 	UPRIGHT,
 	RIGHT,
@@ -53,6 +55,9 @@ public:
 	bool Init();
 	update_status PreUpdate();
 	bool CleanUp();
+	bool JoystickGetPos(SDL_GameController * gamepad, AXIS axis);
+
+
 
 public:
 	KEY_STATE keyboard[MAX_KEYS];
@@ -60,6 +65,13 @@ public:
 	KEY_STATE P2_controll[MAX_BUTTONS];
 	SDL_GameController *controller = nullptr;
 	SDL_GameController *P2_controller = nullptr;
+
+
+	bool isNew_A[16] = { true };
+
+	bool isNew_B[16] = { true };
+
+	bool isNew_Direction[8] = { true };
 
 };
 
