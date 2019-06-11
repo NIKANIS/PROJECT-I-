@@ -54,7 +54,7 @@ update_status ModuleSceneNeoGeoIntro::Update()
 {
 	App->render->Blit(graphics, 0, 0, &(backgroundanim.GetCurrentFrame()), 0.0f);
 
-	if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN )
+	if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN || App->input->game_pad[SDL_CONTROLLER_BUTTON_A][0] || App->input->game_pad[SDL_CONTROLLER_BUTTON_A][1])
 	{
 		App->fade->FadeToBlack(App->scene_neogeo, App->scene_intro);
 	}

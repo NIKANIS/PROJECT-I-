@@ -41,18 +41,6 @@ bool ModuleInput::Init()
 // Called every draw update
 update_status ModuleInput::PreUpdate()
 {
-	
-
-	for (int i = 0; i < SDL_NumJoysticks(); i++) {
-		if (SDL_IsGameController(i)) {
-			controller[i] = SDL_GameControllerOpen(i);
-			if (controller[i] == NULL) {
-				LOG("Can't open controller %s", SDL_GetError());
-
-			}
-		}
-	}
-
 	SDL_PumpEvents();
 
 	const Uint8* keys = SDL_GetKeyboardState(NULL);
@@ -75,15 +63,77 @@ update_status ModuleInput::PreUpdate()
 		}
 	}
 
-	//for (int i = 0; i < 8; i++) {
-	//	if (App->input->JoystickGetPos(App->input->controller[0], (AXIS)i) == false)
-	//		App->input->New_Direction[i] = true;
-	//}
+	for (int i = 0; i < MAX_BUTTONS; ++i) {
+		game_pad[i][GAME_PAD_1] = SDL_GameControllerGetButton(controller_player_1, (SDL_GameControllerButton)i);
+		game_pad[i][GAME_PAD_2] = SDL_GameControllerGetButton(controller_player_2, (SDL_GameControllerButton)i);
+	}
+
+	for (int i = 0; i < MAX_BUTTONS; ++i)
+	{
+
+		for (int j = 0; j < MAX_GAME_PAD; ++j) {
+			if (game_pad[i][j] == 1)
+			{
+				if (game_pad[i][j] == KEY_IDLE)
+					game_pad[i][j] == KEY_DOWN;
+				//break;
+
+				else {
+					game_pad[i][j] == KEY_REPEAT;
+					//break;
+				}
+			}
+			else
+			{
+
+				if (game_pad[i][j] == KEY_REPEAT || game_pad[i][j] == KEY_DOWN) {
+					game_pad[i][j] == KEY_UP;
+					//break;
+				}
+				else {
+					game_pad[i][j] == KEY_IDLE;
+					//break;
+				}
+
+			}
+		}
+
+	}
+	while (SDL_PollEvent(&Events) == 1) {
+
+		switch (Events.type) {
+		case SDL_CONTROLLERDEVICEADDED: {
+			int num_joystincks = SDL_NumJoysticks();
+			for (int i = 0; i < num_joystincks; ++i) {
+				if (SDL_GameControllerGetAttached(controller_player_1) == SDL_FALSE) {
+					controller_player_1 = SDL_GameControllerOpen(i);
+					break;
+				}
+				if (SDL_GameControllerGetAttached(controller_player_2) == SDL_FALSE) {
+					controller_player_2 = SDL_GameControllerOpen(i + 1);
+					break;
+				}
+			}
+
+			break; }
+		case SDL_CONTROLLERDEVICEREMOVED:
+			if (SDL_GameControllerGetAttached(controller_player_1) == SDL_FALSE) {
+				SDL_GameControllerClose(controller_player_1);
+				controller_player_1 = nullptr;
+			}
+			if (SDL_GameControllerGetAttached(controller_player_2) == SDL_FALSE) {
+				SDL_GameControllerClose(controller_player_2);
+				controller_player_2 = nullptr;
+			}
+			break;
+		}
+	}
 
 
-	if (keyboard[SDL_SCANCODE_ESCAPE])
+	if (keyboard[SDL_SCANCODE_ESCAPE]) {
+
 		return update_status::UPDATE_STOP;
-
+	}
 
 	return update_status::UPDATE_CONTINUE;
 }
@@ -93,81 +143,25 @@ bool ModuleInput::CleanUp()
 {
 	LOG("Quitting SDL input event subsystem");
 	SDL_QuitSubSystem(SDL_INIT_EVENTS);
-	SDL_QuitSubSystem(SDL_INIT_GAMECONTROLLER);
 	return true;
 }
 
-//bool ModuleInput::JoystickGetPos(SDL_GameController* gamepad, AXIS axisDir) {
-//	bool ret = false;
-//
-//	int deadzone = 7849;
-//	int xAxis = SDL_GameControllerGetAxis(gamepad, SDL_CONTROLLER_AXIS_LEFTX);
-//	int yAxis = SDL_GameControllerGetAxis(gamepad, SDL_CONTROLLER_AXIS_LEFTY);
-//
-//	if (yAxis < -deadzone && axisDir == AXIS_UP)	ret = true;
-//	if (yAxis > deadzone && axisDir == AXIS_DOWN)	ret = true;
-//	if (xAxis > deadzone && axisDir == AXIS_RIGHT)	ret = true;
-//	if (xAxis < -deadzone && axisDir == AXIS_LEFT)	ret = true;
-//
-//	if (yAxis < -deadzone && xAxis > deadzone && axisDir == AXIS_UPRIGHT)		ret = true;
-//	if (yAxis > deadzone && xAxis > -deadzone && axisDir == AXIS_DOWNLEFT)		ret = true;
-//	if (yAxis > deadzone && xAxis > deadzone && axisDir == AXIS_LEFTUP)			ret = true;
-//	if (yAxis < -deadzone && xAxis > -deadzone && axisDir == AXIS_RIGHTDOWN)	ret = true;
-//	return ret;
-//}
-///* estos son los valores que hay que ponerle al segundo parametro de la función, cada uno es un boton del mando
-//SDL_CONTROLLER_BUTTON_INVALID
-//SDL_CONTROLLER_BUTTON_A
-//SDL_CONTROLLER_BUTTON_B
-//SDL_CONTROLLER_BUTTON_X
-//SDL_CONTROLLER_BUTTON_Y
-//SDL_CONTROLLER_BUTTON_BACK
-//SDL_CONTROLLER_BUTTON_GUIDE
-//SDL_CONTROLLER_BUTTON_START
-//SDL_CONTROLLER_BUTTON_LEFTSTICK
-//SDL_CONTROLLER_BUTTON_RIGHTSTICK
-//SDL_CONTROLLER_BUTTON_LEFTSHOULDER
-//SDL_CONTROLLER_BUTTON_RIGHTSHOULDER
-//SDL_CONTROLLER_BUTTON_DPAD_UP
-//SDL_CONTROLLER_BUTTON_DPAD_DOWN
-//SDL_CONTROLLER_BUTTON_DPAD_LEFT
-//SDL_CONTROLLER_BUTTON_DPAD_RIGHT
-//SDL_CONTROLLER_BUTTON_MAX
-//*/
-//
-//bool ModuleInput::ButtonTrigger(SDL_GameController* gamepad, SDL_GameControllerButton button) {
-//	if (gamepad != nullptr)
-//	{
-//		if (gamepad == controller[0]) {
-//			if (SDL_GameControllerGetButton(controller[0], button) == 1) {
-//				if (New_A[button]) {
-//					New_A[button] = false;
-//					return true;
-//				}
-//			}
-//			else if (SDL_GameControllerGetButton(controller[0], button) == 0) {
-//				if (New_A[button] == false) {
-//					New_A[button] = true;
-//				}
-//			}
-//
-//		}
-//		else if (gamepad == controller[1])
-//		{
-//			if (SDL_GameControllerGetButton(controller[1], button) == 1) {
-//				if (New_B[button]) {
-//					New_B[button] = false;
-//					return true;
-//				}
-//			}
-//			else if (SDL_GameControllerGetButton(controller[1], button) == 0) {
-//				if (New_B[button] == false) {
-//					New_B[button] = true;
-//				}
-//			}
-//		}
-//	}
-//	
-//
-//	return false;
-//}
+/* estos son los valores que hay que ponerle al segundo parametro de la función, cada uno es un boton del mando
+SDL_CONTROLLER_BUTTON_INVALID
+SDL_CONTROLLER_BUTTON_A
+SDL_CONTROLLER_BUTTON_B
+SDL_CONTROLLER_BUTTON_X
+SDL_CONTROLLER_BUTTON_Y
+SDL_CONTROLLER_BUTTON_BACK
+SDL_CONTROLLER_BUTTON_GUIDE
+SDL_CONTROLLER_BUTTON_START
+SDL_CONTROLLER_BUTTON_LEFTSTICK
+SDL_CONTROLLER_BUTTON_RIGHTSTICK
+SDL_CONTROLLER_BUTTON_LEFTSHOULDER
+SDL_CONTROLLER_BUTTON_RIGHTSHOULDER
+SDL_CONTROLLER_BUTTON_DPAD_UP
+SDL_CONTROLLER_BUTTON_DPAD_DOWN
+SDL_CONTROLLER_BUTTON_DPAD_LEFT
+SDL_CONTROLLER_BUTTON_DPAD_RIGHT
+SDL_CONTROLLER_BUTTON_MAX
+*/

@@ -1,12 +1,18 @@
+
 #ifndef __ModuleInput_H__
 #define __ModuleInput_H__
 
 #include "Module.h"
 #include "Globals.h"
 #include "SDL\include\SDL_scancode.h"
-#include "SDL\include\SDL_gamecontroller.h"
+#include "SDL/include/SDL_events.h"
 
 #define MAX_KEYS 300
+#define MAX_BUTTONS 15
+
+#define GAME_PAD_1 0
+#define GAME_PAD_2 1
+#define MAX_GAME_PAD 2
 
 enum KEY_STATE
 {
@@ -40,16 +46,16 @@ public:
 	bool Init();
 	update_status PreUpdate();
 	bool CleanUp();
-	//bool JoystickGetPos(SDL_GameController * gamepad, AXIS axisDir);
-	//bool ButtonTrigger(SDL_GameController * gamepad, SDL_GameControllerButton button);
-
 public:
 	KEY_STATE keyboard[MAX_KEYS];
-	bool New_A[16] = { true };
-	bool New_B[16] = { true };
-	bool New_Direction[8] = { true };
+	SDL_Event Events;
+	Uint8 game_pad[MAX_BUTTONS][MAX_GAME_PAD];
 
-	SDL_GameController* controller[2];
+	SDL_GameController* controller_player_1 = nullptr;
+	SDL_GameController* controller_player_2 = nullptr;
+
+private:
+	int controller_1_index;
 };
 
 #endif // __ModuleInput_H__

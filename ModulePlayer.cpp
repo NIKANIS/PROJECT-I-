@@ -84,7 +84,7 @@ bool ModulePlayer::Start()
 			LoadJoeAnimations();
 
 			width = 62;
-			draw_pos_x = position.x - (62 - width);
+			//draw_pos_x = position.x - (62 - width);
 		}
 
 		if (App->scene_chooseplayer->final_player2 == 2)
@@ -98,7 +98,7 @@ bool ModulePlayer::Start()
 			LoadTerryAnimations();
 
 			width = 60;
-			draw_pos_x = position.x - (60 - width);
+			//draw_pos_x = position.x - (60 - width);
 		}
 
 		if (App->scene_chooseplayer->final_player2 == 3)
@@ -110,7 +110,7 @@ bool ModulePlayer::Start()
 			LoadAndyAnimations();
 
 			width = 59;
-			draw_pos_x = position.x - (59 - width);
+			//draw_pos_x = position.x - (59 - width);
 		}
 	}
 
@@ -825,10 +825,10 @@ int ModulePlayer::Score()
 int ModulePlayer::Pos_X()
 {
 	if (punching == true && fliped && at >= 13 && at <= 18) 
-		return (position.x + 34);
+		return (position.x);
 
 	if (kicking == true && fliped && at >= 25 && at <= 29) 
-		return (position.x + 44);
+		return (position.x);
 
 	return position.x;
 }
@@ -2566,19 +2566,14 @@ update_status ModulePlayer::Update()
 	}
 
 	SDL_Rect r = current_animation->GetCurrentFrame();
-	draw_pos_x = position.x - (r.w - width);
-
-	if (fliped == true)
-	{
-		width = r.w;
-		App->render->Blit(graphics, draw_pos_x, position.y - r.h, &r, fliped);
-		
-	}
-	else
-	{
-		App->render->Blit(graphics, position.x, position.y - r.h, &r, fliped);
-	}	
 	
+	if (fliped)
+	{
+		App->render->Blit(graphics, position.x + width , position.y - r.h, &r, fliped);
+	}
+	else {
+		App->render->Blit(graphics, position.x, position.y - r.h, &r, fliped);
+	}
 	return UPDATE_CONTINUE;
 }
 

@@ -125,7 +125,7 @@ private:
 	int jumptype; //0 = idle jump / 1 = forward jump / 2 = backwards jump
 	int jumpspeed = 2;
 	int width = 0;
-	int draw_pos_x = 0;
+	//int draw_pos_x = 0;
 	int character;
 
 	bool body_collide;
