@@ -129,6 +129,9 @@ private:
 	int at = 0; //attack coldown time
 	int jt = 0;
 	int st = 0;		// specialattack coldown time
+	int st2 = 0;
+	int st3 = 0;
+	int st4 = 0;
 	int vy = 0; //velocity y
 	int tktempo = 0;
 	int player;
