@@ -117,5 +117,9 @@ Download the last version of the game HERE(put the link of the last version)
 	Added State Machine for combos
 	3 combos for Terry Bogard and 3 for Joe Higashi
 	Fixed bugs
+
+
+
+Link to the web -> https://nikanis.github.io/PROJECT-I-/
 	
 
