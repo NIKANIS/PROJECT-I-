@@ -1754,9 +1754,12 @@ void ModulePlayer::SpecialAttack3()
 					ff = -1;
 				if (!stopsp3)
 				{
-					position.x += 5 * ff;
-					if (player_kick_col != nullptr)
-						player_kick_col->rect.x += 5 * ff;
+					if ((position.x*(-SCREEN_SIZE)) < App->render->camera.x && (-SCREEN_SIZE * (position.x + 60)) > (App->render->camera.x - SCREEN_SIZE * SCREEN_WIDTH))
+					{
+						position.x += 5 * ff;
+						if (player_kick_col != nullptr)
+							player_kick_col->rect.x += 5 * ff;
+					}
 				}
 			}
 			if (stopsp3)
@@ -1816,9 +1819,12 @@ void ModulePlayer::SpecialAttack3()
 					ff = -1;
 				if (!stopsp3)
 				{
-					position.x += 5 * ff;
-					if (player_kick_col != nullptr)
-						player_kick_col->rect.x += 5*ff;
+					if ((position.x*(-SCREEN_SIZE)) < App->render->camera.x && (-SCREEN_SIZE * (position.x + 60)) > (App->render->camera.x - SCREEN_SIZE * SCREEN_WIDTH))
+					{
+						position.x += 5 * ff;
+						if (player_kick_col != nullptr)
+							player_kick_col->rect.x += 5 * ff;
+					}
 				}
 			}
 			if (stopsp3)
