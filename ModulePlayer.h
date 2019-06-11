@@ -153,6 +153,7 @@ private:
 	bool crowchaction = false; //true while crowching
 	bool specialattack_ = false; //true while special attacking
 	bool specialattack2_ = false;
+	bool specialattack3_ = false;
 	bool lowkicking = false; //true while lowkicking
 	bool airkicking = false;
 	bool airpunching = false;

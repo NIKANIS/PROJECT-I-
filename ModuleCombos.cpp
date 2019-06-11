@@ -37,7 +37,7 @@ bool ModuleCombos::SpecialAttack3(int player)
 		actual_frameP1SF++;
 		if (actual_frameP1SF <= 120) 
 		{
-			if (SplashFountCount == 0)
+			switch (SplashFountCount == 0)
 				if (App->input->JoystickGetPos(App->input->controller, DOWN) == true)
 						SplashFountCount++;
 				
