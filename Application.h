@@ -31,6 +31,7 @@ class ModuleFightManager;
 class ModuleCollision;
 class ModuleRoundDisplay;
 class ModuleSlowdown;
+class ModuleCombos;
 
 class Application
 {
@@ -66,6 +67,7 @@ public:
 	ModuleRoundDisplay* round_pl;
 	ModuleRoundDisplay* round_en;
 	ModuleSlowdown* slowdown;
+	ModuleCombos* combos;
 
 public:
 

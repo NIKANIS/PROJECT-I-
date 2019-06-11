@@ -25,6 +25,7 @@
 #include "ModuleSceneChoosePlayer.h"
 #include "ModuleSceneMap.h"
 #include "ModuleSlowdown.h"
+#include "ModuleCombos.h"
 
 Application::Application()
 {
@@ -58,6 +59,7 @@ Application::Application()
 	modules[i++] = fight_manager = new ModuleFightManager();
 	modules[i++] = collision = new ModuleCollision();
 	modules[i++] = slowdown = new ModuleSlowdown();
+	//modules[i++] = combos = new ModuleCombos();
 	
 }	
 

@@ -85,6 +85,9 @@
     <ClCompile Include="ModuleSceneNeoGeoIntro.cpp">
       <Filter>Modules\Scenes\Intro &amp; Outro</Filter>
     </ClCompile>
+    <ClCompile Include="ModuleCombos.cpp">
+      <Filter>Modules\Fight Management</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h">
@@ -179,6 +182,9 @@
     </ClInclude>
     <ClInclude Include="ModuleSceneNeoGeoIntro.h">
       <Filter>Modules\Scenes\Intro &amp; Outro</Filter>
+    </ClInclude>
+    <ClInclude Include="ModuleCombos.h">
+      <Filter>Modules\Fight Management</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
