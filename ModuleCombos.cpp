@@ -33,37 +33,303 @@ update_status ModuleCombos::Update()
 
 bool ModuleCombos::SpecialAttack3(int player) 
 {
-	App->player->score = SplashFountCount;
+	if (player == 0)
+	{
 		actual_frameP1SF++;
-		if (actual_frameP1SF <= 120) 
+		if (actual_frameP1SF <= 60)
 		{
-			switch (SplashFountCount == 0)
-				if (App->input->JoystickGetPos(App->input->controller, DOWN) == true)
-						SplashFountCount++;
-				
-			/*if (SplashFountCount == 1)
-				if (App->input->JoystickGetPos(App->input->controller, DOWNLEFT) == true) 
-						SplashFountCount++;*/
-				
-			if (SplashFountCount == 1)
-				if (App->input->JoystickGetPos(App->input->controller, LEFT) == true) 
-						SplashFountCount++;
-				
-			if (SplashFountCount == 2)
-				if (App->input->controll[BUTTON_X] == KEY_DOWN)
+			switch (SplashFountCount)
+			{
+				case 0:
 				{
-					SplashFountCount = 0;
-					return true;
-				}
+					if (App->input->JoystickGetPos(App->input->controller, DOWN) == true)
+						SplashFountCount++;
+				}break;
+
+				case 1:
+				{
+					if (App->input->JoystickGetPos(App->input->controller, LEFT) == true)
+						SplashFountCount++;
+				}break;
+				
+				case 2:
+				{
+					if (App->input->controll[BUTTON_A] == KEY_STATE::KEY_DOWN)
+					{
+						SplashFountCount = 0;
+						return true;
+					}
+				}break;
+			}
 		}
-		else 
+		else
 		{
 			actual_frameP1SF = 0;
 			SplashFountCount = 0;
 			return false;
 		}
-	
-	
+	}
+	else
+	{
+		actual_frameP1SF++;
+		if (actual_frameP1SF <= 60)
+		{
+			switch (SplashFountCount)
+			{
+			case 0:
+			{
+				if (App->input->JoystickGetPos(App->input->P2_controller, DOWN) == true)
+					SplashFountCount++;
+			}break;
+			case 1:
+			{
+				if (App->input->JoystickGetPos(App->input->P2_controller, LEFT) == true)
+					SplashFountCount++;
+			}break;
+			case 2:
+			{
+
+				if (App->input->P2_controll[BUTTON_A] == KEY_DOWN)
+				{
+					SplashFountCount = 0;
+					return true;
+				}
+			}break;
+			}
+		}
+		else
+		{
+			actual_frameP1SF = 0;
+			SplashFountCount = 0;
+			return false;
+		}
+	}
+	return false;
+}
+
+bool ModuleCombos::SpecialAttack(int player)
+{
+	if (player == 0)
+	{
+		actual_frameSP++;
+		if (actual_frameSP <= 30)
+		{
+			switch (SPCount)
+			{
+			case 0:
+			{
+				if (App->input->JoystickGetPos(App->input->controller, DOWN) == true)
+					SPCount++;
+			}break;
+			case 1:
+			{
+				if (App->input->JoystickGetPos(App->input->controller, RIGHT) == true)
+					SPCount++;
+			}break;
+			case 2:
+			{
+
+				if (App->input->controll[BUTTON_X] == KEY_DOWN)
+				{
+					SPCount = 0;
+					return true;
+				}
+			}break;
+			}
+		}
+		else
+		{
+			actual_frameSP = 0;
+			SPCount = 0;
+			return false;
+		}
+	}
+	else
+	{
+		actual_frameSP++;
+		if (actual_frameSP <= 30)
+		{
+			switch (SPCount)
+			{
+			case 0:
+			{
+				if (App->input->JoystickGetPos(App->input->P2_controller, DOWN) == true)
+					SPCount++;
+			}break;
+			case 1:
+			{
+				if (App->input->JoystickGetPos(App->input->P2_controller, RIGHT) == true)
+					SPCount++;
+			}break;
+			case 2:
+			{
+
+				if (App->input->P2_controll[BUTTON_X] == KEY_DOWN)
+				{
+					SPCount = 0;
+					return true;
+				}
+			}break;
+			}
+		}
+		else
+		{
+			actual_frameSP = 0;
+			SPCount = 0;
+			return false;
+		}
+	}
+	return false;
+}
+
+bool ModuleCombos::SpT(int player)
+{
+	if (player == 0)
+	{
+		actual_frameSPT++;
+		if (actual_frameSPT <= 120)
+		{
+			switch (SPTCount)
+			{
+			case 0:
+			{
+				if (App->input->JoystickGetPos(App->input->controller, LEFT) == true)
+					SPTCount++;
+			}break;
+			case 1:
+			{
+				if (App->input->JoystickGetPos(App->input->controller, RIGHT) == true)
+					SPTCount++;
+			}break;
+			case 2:
+			{
+
+				if (App->input->controll[BUTTON_A] == KEY_DOWN)
+				{
+					SPTCount = 0;
+					return true;
+				}
+			}break;
+			}
+		}
+		else
+		{
+			actual_frameSPT = 0;
+			SPTCount = 0;
+			return false;
+		}
+	}
+	else
+	{
+		actual_frameSPT++;
+		if (actual_frameSPT <= 120)
+		{
+			switch (SPTCount)
+			{
+			case 0:
+			{
+				if (App->input->JoystickGetPos(App->input->P2_controller, LEFT) == true)
+					SPTCount++;
+			}break;
+			case 1:
+			{
+				if (App->input->JoystickGetPos(App->input->P2_controller, RIGHT) == true)
+					SPTCount++;
+			}break;
+			case 2:
+			{
+
+				if (App->input->P2_controll[BUTTON_A] == KEY_DOWN)
+				{
+					SPTCount = 0;
+					return true;
+				}
+			}break;
+			}
+		}
+		else
+		{
+			actual_frameSPT = 0;
+			SPTCount = 0;
+			return false;
+		}
+	}
+	return false;
+}
+
+bool ModuleCombos::SpJ(int player)
+{
+	if (player == 0)
+	{
+		actual_frameSPJ++;
+		if (actual_frameSPJ <= 30)
+		{
+			switch (SPJCount)
+			{
+			case 0:
+			{
+				if (App->input->controll[BUTTON_X] == KEY_DOWN)
+					SPJCount++;
+			}break;
+			case 1:
+			{
+				if (App->input->controll[BUTTON_X] == KEY_DOWN)
+					SPJCount++;
+			}break;
+			case 2:
+			{
+
+				if (App->input->controll[BUTTON_X] == KEY_DOWN)
+				{
+					SPJCount = 0;
+					return true;
+				}
+			}break;
+			}
+		}
+		else
+		{
+			actual_frameSPJ = 0;
+			SPJCount = 0;
+			return false;
+		}
+	}
+	else
+	{
+		actual_frameSPJ++;
+		if (actual_frameSPJ <= 30)
+		{
+			switch (SPJCount)
+			{
+			case 0:
+			{
+				if (App->input->P2_controll[BUTTON_X] == KEY_DOWN)
+					SPJCount++;
+			}break;
+			case 1:
+			{
+				if (App->input->P2_controll[BUTTON_X] == KEY_DOWN)
+					SPJCount++;
+			}break;
+			case 2:
+			{
+
+				if (App->input->P2_controll[BUTTON_X] == KEY_DOWN)
+				{
+					SPJCount = 0;
+					return true;
+				}
+			}break;
+			}
+		}
+		else
+		{
+			actual_frameSPJ = 0;
+			SPJCount = 0;
+			return false;
+		}
+	}
+	return false;
 }
 
 /*bool ModuleCombos::CheckPunchP2() {

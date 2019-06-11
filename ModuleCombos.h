@@ -20,6 +20,10 @@ public:
 	bool CleanUp();
 
 	bool SpecialAttack3(int player);
+	bool SpecialAttack(int player);
+	bool SpT(int player);
+	bool SpJ(int player);
+
 	/*bool CheckPunchP2();
 
 	bool CheckSplashFountP1();
@@ -30,18 +34,15 @@ public:
 
 public:
 	int actual_frameP1SF = 0;
-	int actual_frameP2SF = 0;
+	int actual_frameSP = 0;
 
-	int actual_frameP1PG = 0;
-	int actual_frameP2PG = 0;
+	int actual_frameSPT = 0;
+	int actual_frameSPJ = 0;
 
 	int SplashFountCount = 0;
-	int SplashFountCount2 = 0;
+	int SPCount = 0;
 
-	int PowerGraditionCount = 0;
-	int PowerGraditionCount2 = 0;
-
-	int HoldGP1 = 0;
-	int HoldGP2 = 0;
+	int SPTCount = 0;
+	int SPJCount = 0;
 };
 #endif // __ModuleCombos_H__

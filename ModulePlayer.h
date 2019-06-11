@@ -113,7 +113,6 @@ private:
 	void SpecialAttack();
 	void SpecialAttack2();
 	void SpecialAttack3();
-	void SpecialAttack4();
 	void LowKick();
 	void AirKick();
 	void TakeDown();
@@ -152,8 +151,6 @@ private:
 	bool kicking = false; //true while kicking
 	bool crowchaction = false; //true while crowching
 	bool specialattack_ = false; //true while special attacking
-	bool specialattack2_ = false;
-	bool specialattack3_ = false;
 	bool lowkicking = false; //true while lowkicking
 	bool airkicking = false;
 	bool airpunching = false;
