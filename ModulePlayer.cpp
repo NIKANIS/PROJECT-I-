@@ -1958,16 +1958,28 @@ update_status ModulePlayer::Update()
 								if (stuned != 4)
 								{
 									if (!fliped)
-										position.x -= 2;
+									{
+										if ((position.x*(-SCREEN_SIZE)) < App->render->camera.x && (-SCREEN_SIZE * (position.x + 60)) > (App->render->camera.x - SCREEN_SIZE * SCREEN_WIDTH))
+											position.x -= 2;
+									}
 									else
-										position.x += 2;
+									{
+										if ((position.x*(-SCREEN_SIZE)) < App->render->camera.x && (-SCREEN_SIZE * (position.x + 60)) > (App->render->camera.x - SCREEN_SIZE * SCREEN_WIDTH))
+											position.x += 2;
+									}
 								}
 								else
 								{
 									if (!fliped)
-										position.x -= 1;
+									{
+										if ((position.x*(-SCREEN_SIZE)) < App->render->camera.x && (-SCREEN_SIZE * (position.x + 60)) > (App->render->camera.x - SCREEN_SIZE * SCREEN_WIDTH))
+											position.x -= 1;
+									}
 									else
-										position.x += 1;
+									{
+										if ((position.x*(-SCREEN_SIZE)) < App->render->camera.x && (-SCREEN_SIZE * (position.x + 60)) > (App->render->camera.x - SCREEN_SIZE * SCREEN_WIDTH))
+											position.x += 1;
+									}
 								}
 							}
 							if (current_animation != &kickstun && stuned == 2)
@@ -2544,16 +2556,28 @@ update_status ModulePlayer::Update()
 								if (stuned != 4)
 								{
 									if (!fliped)
-										position.x -= 2;
+									{
+										if ((position.x*(-SCREEN_SIZE)) < App->render->camera.x && (-SCREEN_SIZE * (position.x + 60)) > (App->render->camera.x - SCREEN_SIZE * SCREEN_WIDTH))
+											position.x -= 2;
+									}
 									else
-										position.x += 2;
+									{
+										if ((position.x*(-SCREEN_SIZE)) < App->render->camera.x && (-SCREEN_SIZE * (position.x + 60)) > (App->render->camera.x - SCREEN_SIZE * SCREEN_WIDTH))
+											position.x += 2;
+									}
 								}
 								else
 								{
 									if (!fliped)
-										position.x -= 1;
+									{
+										if ((position.x*(-SCREEN_SIZE)) < App->render->camera.x && (-SCREEN_SIZE * (position.x + 60)) > (App->render->camera.x - SCREEN_SIZE * SCREEN_WIDTH))
+											position.x -= 1;
+									}
 									else
-										position.x += 1;
+									{
+										if ((position.x*(-SCREEN_SIZE)) < App->render->camera.x && (-SCREEN_SIZE * (position.x + 60)) > (App->render->camera.x - SCREEN_SIZE * SCREEN_WIDTH))
+											position.x += 1;
+									}
 								}
 							}
 							if (current_animation != &kickstun && stuned == 2)
