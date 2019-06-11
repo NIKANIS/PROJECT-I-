@@ -112,7 +112,7 @@ bool ModuleCombos::SpecialAttack(int player)
 	if (player == 0)
 	{
 		actual_frameSP++;
-		if (actual_frameSP <= 30)
+		if (actual_frameSP <= 20)
 		{
 			switch (SPCount)
 			{
@@ -147,7 +147,7 @@ bool ModuleCombos::SpecialAttack(int player)
 	else
 	{
 		actual_frameSP++;
-		if (actual_frameSP <= 30)
+		if (actual_frameSP <= 20)
 		{
 			switch (SPCount)
 			{

@@ -2086,6 +2086,9 @@ update_status ModulePlayer::Update()
 							sp = true;
 							specialattack_ = true;
 							st = 0;
+							specialattack.Reset();
+							current_animation = &specialattack;
+							App->audio->playFx(skillFX);
 						}
 					}
 					if (!sp2 && !jumping && !specialattack_ && character == 2)
@@ -2653,6 +2656,9 @@ update_status ModulePlayer::Update()
 							sp = true;
 							specialattack_ = true;
 							st = 0;
+							specialattack.Reset();
+							current_animation = &specialattack;
+							App->audio->playFx(skillFX);
 						}
 					}
 					if (!sp2 && !jumping && !specialattack_ && character == 2)
