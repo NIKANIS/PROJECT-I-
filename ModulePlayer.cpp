@@ -996,7 +996,7 @@ void ModulePlayer::Punch()
 				COLLIDER_ = COLLIDER_ENEMY_ATTACK;
 				source = App->enemy;
 			}
-
+	
 			if (character == 1)
 			{
 				if (fliped == false)
@@ -1007,7 +1007,7 @@ void ModulePlayer::Punch()
 					}	
 					if (current_animation == &airpunchdiagonal)
 					{
-						player_punch_col = App->collision->AddCollider({ position.x + 43, position.y - 90, 35, 12 }, COLLIDER_, source);
+						player_punch_col = App->collision->AddCollider({ position.x + 40, position.y - 20, 35, 12 }, COLLIDER_, source);
 					}
 					if (current_animation == &crowchpunch)																		
 						player_punch_col = App->collision->AddCollider({ position.x + 40, position.y - 60, 35, 12 }, COLLIDER_, source);
@@ -1020,10 +1020,10 @@ void ModulePlayer::Punch()
 				else
 				{
 					if (current_animation == &airpunchstraight)
-						player_punch_col = App->collision->AddCollider({ position.x + 40, position.y - 90, 35, 12 }, COLLIDER_, source);
+						player_punch_col = App->collision->AddCollider({ position.x - 24, position.y - 20, 35, 12 }, COLLIDER_, source);
 
 					if (current_animation == &airpunchdiagonal)
-						player_punch_col = App->collision->AddCollider({ position.x + 43, position.y - 90, 35, 12 }, COLLIDER_, source);
+						player_punch_col = App->collision->AddCollider({ position.x - 20, position.y - 10, 35, 12 }, COLLIDER_, source);
 				
 					if (current_animation == &crowchpunch)
 						player_punch_col = App->collision->AddCollider({ position.x - 24, position.y - 60, 35, 12 }, COLLIDER_, source);
@@ -1041,10 +1041,10 @@ void ModulePlayer::Punch()
 				if (fliped == false)
 				{
 					if (current_animation == &airpunchstraight)
-						player_punch_col = App->collision->AddCollider({ position.x + 43, position.y - 90, 35, 12 }, COLLIDER_, source);	
+						player_punch_col = App->collision->AddCollider({ position.x + 43, position.y - 90, 35, 12 }, COLLIDER_, source);
 
 					if (current_animation == &airpunchdiagonal)
-						player_punch_col = App->collision->AddCollider({ position.x + 43, position.y - 60, 35, 16 }, COLLIDER_, source);
+						player_punch_col = App->collision->AddCollider({ position.x + 43, position.y - 60 + 50, 35, 16 }, COLLIDER_, source);
 
 					if (current_animation == &crowchpunch)																	
 						player_punch_col = App->collision->AddCollider({ position.x + 46, position.y - 52, 35, 12 }, COLLIDER_, source);
@@ -1057,10 +1057,10 @@ void ModulePlayer::Punch()
 				{
 					if (current_animation == &airpunchstraight)
 					{
-						player_punch_col = App->collision->AddCollider({ position.x - 18, position.y - 90, 35, 12 }, COLLIDER_, source);
+						player_punch_col = App->collision->AddCollider({ position.x - 24, position.y - 20, 35, 12 }, COLLIDER_, source);
 					}		
 					if (current_animation == &airpunchdiagonal)
-						player_punch_col = App->collision->AddCollider({ position.x + 43, position.y - 90, 35, 12 }, COLLIDER_, source);
+						player_punch_col = App->collision->AddCollider({ position.x + 43 - 70, position.y - 90 + 60, 35, 12 }, COLLIDER_, source);
 
 					if (current_animation == &crowchpunch)																		
 						player_punch_col = App->collision->AddCollider({ position.x - 30, position.y - 52, 35, 12 }, COLLIDER_, source);
@@ -1306,7 +1306,7 @@ void ModulePlayer::AirKick()
 					{
 						if (current_animation == &airkickstraight)
 						{
-							player_kick_col = App->collision->AddCollider({ position.x + 44, position.y - 70, 35, 20 }, COLLIDER_, source);
+							player_kick_col = App->collision->AddCollider({ position.x + 44, position.y - 90, 35, 20 }, COLLIDER_, source);
 						}
 						if (current_animation == &airkickdiagonal)
 						{

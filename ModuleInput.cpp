@@ -14,12 +14,10 @@ ModuleInput::ModuleInput() : Module()
 		P2_controll[i] = KEY_IDLE;
 }
 
-// Destructor
 ModuleInput::~ModuleInput()
 {
 }
 
-// Called before render is available
 bool ModuleInput::Init()
 {
 	LOG("Init SDL input event system");

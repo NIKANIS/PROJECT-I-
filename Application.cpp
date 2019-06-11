@@ -59,7 +59,7 @@ Application::Application()
 	modules[i++] = fight_manager = new ModuleFightManager();
 	modules[i++] = collision = new ModuleCollision();
 	modules[i++] = slowdown = new ModuleSlowdown();
-	//modules[i++] = combos = new ModuleCombos();
+	modules[i++] = combos = new ModuleCombos();
 	
 }	
 
