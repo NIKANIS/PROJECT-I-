@@ -373,11 +373,15 @@ void ModulePlayer::LoadJoeAnimations()
 	//JoeSpecial Knee
 	JoeSpecialKnee.PushBack({ 1046, 405, 49, 89 });
 	JoeSpecialKnee.PushBack({ 1104, 408, 50, 80 });
-	JoeSpecialKnee.PushBack({ 1166, 401, 72, 93 });
-	JoeSpecialKnee.PushBack({ 1245, 399, 92, 93 });
-	JoeSpecialKnee.PushBack({ 1346, 395, 107, 93 });
 	JoeSpecialKnee.speed = 0.15f;
 	JoeSpecialKnee.loop = false;
+
+	//JoeSpecial Knee2
+	JoeSpecialKnee2.PushBack({ 1166, 401, 72, 93 });
+	JoeSpecialKnee2.PushBack({ 1245, 399, 92, 93 });
+	JoeSpecialKnee2.PushBack({ 1346, 395, 107, 93 });
+	JoeSpecialKnee2.speed = 0.15f;
+	JoeSpecialKnee2.loop = true;
 
 	//Joe Multiple Punch
 	JoeMultiplePunch.PushBack({ 1049, 281, 53, 102 });
@@ -1716,6 +1720,67 @@ void ModulePlayer::SpecialAttack3()
 		{
 			COLLIDER_ = COLLIDER_ENEMY_ATTACK;
 			source = App->enemy;
+		}
+		if (character == 1)
+		{
+			if (st3 == 1)
+			{
+				JoeSpecialKnee.Reset();
+				current_animation = &JoeSpecialKnee;
+			}
+			int f;
+			if (!fliped)
+			{
+				f = 50;
+
+			}
+			else
+			{
+				f = -40;
+
+			}
+			if (st3 == 60)
+			{
+				JoeSpecialKnee2.Reset();
+				current_animation = &JoeSpecialKnee2;
+				player_kick_col = App->collision->AddCollider({ position.x + f, position.y - 90, 35, 16 }, COLLIDER_, source);
+			}
+			if (st3 > 60 && st3 < 150)
+			{
+				int ff;
+				if (!fliped)
+					ff = 1;
+				else
+					ff = -1;
+				if (!stopsp3)
+				{
+					position.x += 5 * ff;
+					if (player_kick_col != nullptr)
+						player_kick_col->rect.x += 5 * ff;
+				}
+			}
+			if (stopsp3)
+			{
+				if (player_kick_col != nullptr)
+					player_kick_col->to_delete = true;
+				specialattack_ = false;
+				already_hit = false;
+				stopsp3 = false;
+				sp3 = false;
+				st3 = 151;
+			}
+			if (st3 == 150)
+			{
+				if (player_kick_col != nullptr)
+					player_kick_col->to_delete = true;
+				specialattack_ = false;
+				already_hit = false;
+			}
+			if (st3 == 300)
+			{
+				sp3 = false;
+				st3 = 0;
+			}
 		}
 		if (character == 2)
 		{
