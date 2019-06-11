@@ -110,8 +110,14 @@ bool ModuleRender::Blit(SDL_Texture* texture, int x, int y, SDL_Rect* section,bo
 		SDL_QueryTexture(texture, NULL, NULL, &rect.w, &rect.h);
 	}
 
-	rect.w *= SCREEN_SIZE;
-	rect.h *= SCREEN_SIZE;
+	if (!flip) {
+		rect.w *= SCREEN_SIZE;
+		rect.h *= SCREEN_SIZE;
+	}
+	else {
+		rect.w *= -SCREEN_SIZE;
+		rect.h *= SCREEN_SIZE;
+	}
 
 
 	SDL_Point p = { App->enemy->position.x / 2,  App->enemy->position.y / 2 };
@@ -127,7 +133,7 @@ bool ModuleRender::Blit(SDL_Texture* texture, int x, int y, SDL_Rect* section,bo
 	}
 	if (flip == true)
 	{
-		if (SDL_RenderCopyEx(renderer, texture, section, &rect, 0.0, pivot, SDL_FLIP_HORIZONTAL) != 0)
+		if (SDL_RenderCopyEx(renderer, texture, section, &rect, NULL, NULL, SDL_FLIP_NONE) != 0)
 		{
 			LOG("Cannot blit to screen. SDL_RenderCopy error: %s", SDL_GetError());
 			ret = false;
