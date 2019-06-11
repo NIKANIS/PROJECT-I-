@@ -1585,7 +1585,6 @@ void ModulePlayer::SpecialAttack2()
 	{
 		COLLIDER_TYPE COLLIDER_ = COLLIDER_NONE;
 		ModulePlayer* source = nullptr;
-		int f;
 
 		st2++;
 		if (player == 0)
@@ -1607,6 +1606,7 @@ void ModulePlayer::SpecialAttack2()
 			}
 			if (st2 == 20)
 			{
+				int f;
 				if (!fliped)
 				{
 					f = 43;
@@ -1644,6 +1644,78 @@ void ModulePlayer::SpecialAttack2()
 				specialattack_ = false;
 				already_hit = false;
 				st2 = 0;
+			}
+		}
+	}
+}
+
+void ModulePlayer::SpecialAttack3()
+{
+	if (sp3)
+	{
+		COLLIDER_TYPE COLLIDER_ = COLLIDER_NONE;
+		ModulePlayer* source = nullptr;
+		int f;
+
+		st2++;
+		if (player == 0)
+		{
+			COLLIDER_ = COLLIDER_PLAYER_ATTACK;
+			source = App->player;
+		}
+		else
+		{
+			COLLIDER_ = COLLIDER_ENEMY_ATTACK;
+			source = App->enemy;
+		}
+		if (character == 2)
+		{
+			st3++;
+
+			if (st3 == 1)
+			{
+				TerrySpecialPunch1.Reset();
+				current_animation = &TerrySpecialPunch1;
+			}
+			int f;
+			if (!fliped)
+			{
+				f = 50;
+
+			}
+			else
+			{
+				f = -40;
+
+			}
+			if (st3 == 60)
+			{
+				TerrySpecialPunch2.Reset();
+				current_animation = &TerrySpecialPunch2;
+				player_punch_col = App->collision->AddCollider({ position.x + f, position.y - 90, 35, 12 }, COLLIDER_, source);
+			}
+			if (st3 > 60)
+			{
+				int ff;
+				if (!fliped)
+					ff = 1;
+				else
+					ff = -1;
+				if (!body_collide)
+				{
+					position.x += 5 * ff;
+					if (player_punch_col != nullptr)
+						player_punch_col->rect.x += 5 * ff;
+				}
+			}
+			if (st3 == 150 || body_collide)
+			{
+				if (player_punch_col != nullptr)
+					player_punch_col->to_delete = true;
+				sp3 = false;
+				specialattack_ = false;
+				already_hit = false;
+				st3 = 0;
 			}
 		}
 	}
@@ -1846,6 +1918,7 @@ update_status ModulePlayer::Update()
 					AirKick();
 					TakeDown();
 					SpecialAttack2();
+					SpecialAttack3();
 
 					if (App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT && !lockX && !punching && !kicking && !specialattack_ && current_animation != &crowch && !lowkicking && !takingdown)
 					{
@@ -2057,12 +2130,15 @@ update_status ModulePlayer::Update()
 					}
 
 					if (App->input->keyboard[SDL_SCANCODE_Y] == KEY_STATE::KEY_DOWN && !punching && !jumping && !crowchaction && !sp && !lowkicking && !takingdown && !kicking) {
-						specialattack_ = true;
+						/*specialattack_ = true;
 						sp = true;
 						st = 0;
 						specialattack.Reset();
 						current_animation = &specialattack;
-						App->audio->playFx(skillFX);
+						App->audio->playFx(skillFX);*/
+						sp3 = true;
+						st3 = 0;
+						specialattack_ = true;
 					}
 
 					if (App->input->keyboard[SDL_SCANCODE_G] == KEY_STATE::KEY_DOWN && !punching && !jumping && !crowchaction && !sp2 && !lowkicking && !takingdown && !kicking) {
@@ -2329,6 +2405,7 @@ update_status ModulePlayer::Update()
 					AirKick();
 					TakeDown();
 					SpecialAttack2();
+					SpecialAttack3();
 
 					if (App->input->keyboard[SDL_SCANCODE_LEFT] == KEY_STATE::KEY_REPEAT && !lockX && !punching && !kicking && !specialattack_ && current_animation != &crowch && !lowkicking)
 					{
