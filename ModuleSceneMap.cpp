@@ -180,23 +180,33 @@ update_status ModuleSceneMap::Update()
 	App->render->Blit(back_graphics, 0, -8, &background, false, 0.92f);
 	App->render->Blit(back_graphics, SCREEN_WIDTH / 2 - map_select_tittle.w/2, 56 - 8, &map_select_tittle, false, 0.92f);
 
-	if (App->input->keyboard[SDL_SCANCODE_RIGHT] == KEY_STATE::KEY_DOWN && map != 4 && map_chosen == false )
+	if (App->input->keyboard[SDL_SCANCODE_RIGHT] == KEY_STATE::KEY_DOWN && map != 4 && map_chosen == false 
+		|| App->input->controll[BUTTON_DPAD_RIGHT] == KEY_STATE::KEY_DOWN && map != 4 && map_chosen == false
+		|| App->input->P2_controll[BUTTON_DPAD_RIGHT] == KEY_STATE::KEY_DOWN && map != 4 && map_chosen == false)
 	{
 		App->audio->playFx(select);
 		map++;
 	}
 
-	if (App->input->keyboard[SDL_SCANCODE_LEFT] == KEY_STATE::KEY_DOWN && map != 1 && map_chosen == false) {
+	if (App->input->keyboard[SDL_SCANCODE_LEFT] == KEY_STATE::KEY_DOWN && map != 1 && map_chosen == false
+		|| App->input->controll[BUTTON_DPAD_LEFT] == KEY_STATE::KEY_DOWN && map != 1 && map_chosen == false
+		|| App->input->P2_controll[BUTTON_DPAD_LEFT] == KEY_STATE::KEY_DOWN && map != 1 && map_chosen == false)
+{
 		App->audio->playFx(select);
 		map--;
 	}
 
-	if (App->input->keyboard[SDL_SCANCODE_DOWN] == KEY_STATE::KEY_DOWN && map != 3 && map != 4 && map_chosen == false) {
+	if (App->input->keyboard[SDL_SCANCODE_DOWN] == KEY_STATE::KEY_DOWN && map != 3 && map != 4 && map_chosen == false
+		|| App->input->controll[BUTTON_DPAD_DOWN] == KEY_STATE::KEY_DOWN && map != 3 && map != 4 && map_chosen == false
+		|| App->input->P2_controll[BUTTON_DPAD_DOWN] == KEY_STATE::KEY_DOWN && map != 3 && map != 4 && map_chosen == false) {
 		App->audio->playFx(select);
 		map+= 2;
 	}
 
-	if (App->input->keyboard[SDL_SCANCODE_UP] == KEY_STATE::KEY_DOWN && map != 1 && map != 2 && map_chosen == false) {
+	if (App->input->keyboard[SDL_SCANCODE_UP] == KEY_STATE::KEY_DOWN && map != 1 && map != 2 && map_chosen == false
+		|| App->input->controll[BUTTON_DPAD_UP] == KEY_STATE::KEY_DOWN && map != 1 && map != 2 && map_chosen == false
+		|| App->input->P2_controll[BUTTON_DPAD_UP] == KEY_STATE::KEY_DOWN && map != 1 && map != 2 && map_chosen == false) 
+	{
 		App->audio->playFx(select);
 		map-= 2;
 	}
@@ -253,7 +263,7 @@ update_status ModuleSceneMap::Update()
 	}
 	
 	
-	if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN)
+	if (App->input->keyboard[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN || App->input->controll[BUTTON_A] == KEY_STATE::KEY_DOWN || App->input->P2_controll[BUTTON_A] == KEY_STATE::KEY_DOWN)
 	{
 		SelectMap();
 	}
