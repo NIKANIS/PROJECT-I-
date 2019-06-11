@@ -142,6 +142,7 @@ private:
 	//int draw_pos_x = 0;
 	int character;
 
+	bool stopsp3 = false;
 	bool body_collide;
 	bool already_hit;
 	bool lockX = false; //locks the sideways movement

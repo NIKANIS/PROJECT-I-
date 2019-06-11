@@ -1651,6 +1651,8 @@ void ModulePlayer::SpecialAttack2()
 			{
 				specialattack_ = false;
 				already_hit = false;
+				/*sp2 = false;
+				st2 = 0;*/
 			}
 			if (st2 == 200)
 			{
@@ -1711,19 +1713,21 @@ void ModulePlayer::SpecialAttack3()
 					ff = 1;
 				else
 					ff = -1;
-				if (!body_collide)
+				if (!stopsp3)
 				{
 					position.x += 5 * ff;
 					if (player_kick_col != nullptr)
 						player_kick_col->rect.x += 5*ff;
 				}
 			}
-			if (st3 == 150 || body_collide)
+			if (st3 == 150 || stopsp3)
 			{
 				if (player_kick_col != nullptr)
 					player_kick_col->to_delete = true;
 				specialattack_ = false;
 				already_hit = false;
+				/*sp3 = false;
+				st3 = 0;*/
 			}
 			if (st3 == 300)
 			{
@@ -2909,6 +2913,7 @@ void ModulePlayer::OnCollision(Collider* a, Collider* b, bool colliding)
 				if (sp3)
 				{
 					App->enemy->Damage(30, 2);
+					stopsp3 = true;
 					score += 200;
 				}
 			}
