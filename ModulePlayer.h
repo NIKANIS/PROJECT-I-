@@ -32,6 +32,9 @@ public:
 	Animation* current_animation = nullptr;
 
 	bool sp = false;
+	bool sp2 = false;
+	bool sp3 = false;
+	bool sp4 = false;
 	int score;
 
 	void OnCollision(Collider*, Collider*, bool colliding) override;
@@ -108,6 +111,8 @@ private:
 	void Kick();
 	void SpecialAttack();
 	void SpecialAttack2();
+	void SpecialAttack3();
+	void SpecialAttack4();
 	void LowKick();
 	void AirKick();
 	void TakeDown();
