@@ -27,7 +27,6 @@ The player can choose between three fighters to play versus 8 enemy fighters tha
 ![](https://lh3.googleusercontent.com/pn-17VS_OT4YVqz__Df8kQKjgPT5FehWDj1oBYtKlGyiGnWIQnvN_gEhiSq_WObWZ5mHJAvTS93tdR-do2gY3MKGrNsiClZOYEdbjP4al0NxA5dYLjOPmV7FsrEr1xQtPSdVFqLw)
 
 ## GAMEPLAY VIDEO
-(put the gameplay video)
 
 [![Watch the video](https://lh3.googleusercontent.com/yU7MrhiaFYht1BrckwnK3PqM7Ga-Y95iIMQ0fUV5Yp8nueO6fKCfzxq_ttAPbWfO_Rk1A6bG8yp_KQjb9I22nAj-v4LONWHL3lok6NI3)](https://www.youtube.com/watch?v=VAx4oo3i87c)
 
