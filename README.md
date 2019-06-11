@@ -27,9 +27,7 @@ The player can choose between three fighters to play versus 8 enemy fighters tha
 ![](https://lh3.googleusercontent.com/pn-17VS_OT4YVqz__Df8kQKjgPT5FehWDj1oBYtKlGyiGnWIQnvN_gEhiSq_WObWZ5mHJAvTS93tdR-do2gY3MKGrNsiClZOYEdbjP4al0NxA5dYLjOPmV7FsrEr1xQtPSdVFqLw)
 
 ## GAMEPLAY VIDEO
-
-[![Watch the video](https://www.youtube.com/watch?v=VAx4oo3i87c)](https://www.youtube.com/watch?v=VAx4oo3i87c)
-
+<iframe width="740" height="590" src="https://www.youtube.com/watch?v=VAx4oo3i87c" frameborder="0" allowfullscreen></iframe> 
 
 ## LINKS
 See our GitHub repository [HERE](https://github.com/NIKANIS/PROJECT-I-.git) - https://github.com/NIKANIS/PROJECT-I-
