@@ -27,34 +27,53 @@ The player can choose between three fighters to play versus 8 enemy fighters tha
 ![](https://lh3.googleusercontent.com/pn-17VS_OT4YVqz__Df8kQKjgPT5FehWDj1oBYtKlGyiGnWIQnvN_gEhiSq_WObWZ5mHJAvTS93tdR-do2gY3MKGrNsiClZOYEdbjP4al0NxA5dYLjOPmV7FsrEr1xQtPSdVFqLw)
 
 ## GAMEPLAY VIDEO
-(put the gameplay video)
+
+[![Watch the video](https://www.youtube.com/watch?v=VAx4oo3i87c)](https://www.youtube.com/watch?v=VAx4oo3i87c)
 
 
 ## LINKS
-See our GitHub repository [HERE](https://github.com/NIKANIS/PROJECT-I-.git)
+See our GitHub repository [HERE](https://github.com/NIKANIS/PROJECT-I-.git) - https://github.com/NIKANIS/PROJECT-I-
 
-For more information see our wiki page [HERE](https://github.com/NIKANIS/PROJECT-I-/wiki)
+For more information see our wiki page [HERE](https://github.com/NIKANIS/PROJECT-I-/wiki) - https://github.com/NIKANIS/PROJECT-I-/wiki
 
 Download the last version of the game HERE(put the link of the last version)
 
-## Controls
+## Controls for keyboard
 
 					    PLAYER 1
 				
        			MOVE			 		 ATTACK
 		
-	 		W -> Jump				R -> Punch  
-	A -> Left	S -> Crouch	D  -> Right		T -> Kick
-		 						Y -> Special Attack
+	 		W -> Jump				R -> Punch  			Y -> Special Attack 1		
+	A -> Left	S -> Crouch	D  -> Right		T -> Kick			G -> Special Attack 2
+		 						F -> TakeDown			Z -> Special Attack 3
+								
 					    PLAYER 2
        			MOVE			 		 ATTACK
-	 	 	UP -> Jump				J -> Punch	 
-	LEFT  -> Left	DOWN -> Crouch	 RIGHT -> Right		K -> Kick
-								L -> Special Attack
+	 	 	UP -> Jump				J -> Punch	 		L -> Special Attack 1
+	LEFT  -> Left	DOWN -> Crouch	 RIGHT -> Right		K -> Kick			M -> Special Attack 2
+								N -> TakeDown			P -> Special Attack 3
+## Controls for GamePad
+				
+       			MOVE			 		 ATTACK
+		
+	 		UP					X -> Punch  			 		
+		LEFT	DOWN	RIGHT				A -> Kick			
+		 						B -> TakeDown			
+							     SPECIAL ATTACKS
+								  TERRY
+							L-> Special Attack 1
+							G -> Special Attack 2
+							Z -> Special Attack 3
+								   JOE
+							-> Special Attack 1
+							G -> Special Attack 2
+							Z -> Special Attack 3
+								
 					     OTHERS
-	F5 -> GodMode On/Off
-	(GodModeOn)-> 	F1-> Player 1 lose // F2-> Player 2 lose
-			F10-> Restart Game
+			F5 -> GodMode On/Off
+			(GodModeOn)-> 	F1-> Player 1 lose // F2-> Player 2 lose
+						F10-> Restart Game
 
 ## Changelist of all versions
 ### v0.1
@@ -92,8 +111,9 @@ Download the last version of the game HERE(put the link of the last version)
 	Adding Joe Higashi skills.
 	
 ### v0.9
-	GamePad input for movement, punch, kick and takedown.
+	GamePad input full implemented.
 	Added more skills for Terry and Joe.
 	Final score sum and recopilation at the end of every round.
+	State machine for combos in progress.
 	
--https://github.com/NIKANIS/PROJECT-I-
+
