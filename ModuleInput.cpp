@@ -154,7 +154,7 @@ update_status ModuleInput::PreUpdate()
 
 	if (keyboard[SDL_SCANCODE_ESCAPE])
 		return update_status::UPDATE_STOP;
-	if (keyboard[SDL_SCANCODE_ESCAPE])
+	if (App->input->controll[BUTTON_BACK] == KEY_STATE::KEY_DOWN || App->input->P2_controll[BUTTON_BACK] == KEY_STATE::KEY_DOWN)
 		return update_status::UPDATE_STOP;
 
 	return update_status::UPDATE_CONTINUE;
