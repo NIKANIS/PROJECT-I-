@@ -588,37 +588,40 @@ void ModulePlayer::LoadTerryAnimations()
 	takedown_recieved2.speed = 0.15f;
 	takedown_recieved2.loop = false;
 
-	//air punch diagonal (hacia delante y hacia atrás)
 	airpunchdiagonal.PushBack({ 1813,8,78,88 });
 	airpunchdiagonal.PushBack({ 1903,8,57,89 });
 	airpunchdiagonal.PushBack({ 1971,3,57,94 });	
 	airpunchdiagonal.speed = 0.15f;
 	airpunchdiagonal.loop = false;
 
-	//air punch saltando recto
 	airpunchstraight.PushBack({ 1802,616,51,103 });
 	airpunchstraight.PushBack({ 1877,618,83,99 });
 	airpunchstraight.PushBack({ 1802,616,51,103 });
-/*	airpunchstraight.PushBack({ 1796,728,57,103 });
-	airpunchstraight.PushBack({ 1971,3,57,94 });*/
 	airpunchstraight.speed = 0.15f;
 	airpunchstraight.loop = false;
 
 	//air kick saltando recto
 	airkickstraight.PushBack({ 1486,169,57,103 });
 	airkickstraight.PushBack({ 1556,169,72,93 });
-	/*airkickstraight.PushBack({ 1486,169,57,103 });
-	airkickstraight.PushBack({ 1641,168,57,94 });*/
 	airkickstraight.speed = 0.15f;
 	airkickstraight.loop = false;
 
 	//air kick saltando diagonal (hacia delante y hacia atrás)
 	airkickdiagonal.PushBack({ 1903,8,57,89 });
 	airkickdiagonal.PushBack({ 1458,295,113,69 });
-	/*airkickdiagonal.PushBack({ 1903,8,57,89 });
-	airkickdiagonal.PushBack({ 1641,168,57,94 });*/
 	airkickdiagonal.speed = 0.15f;
 	airkickdiagonal.loop = false;
+
+	//TerrySpecialKick
+	TerrySpecialKick.PushBack({ 12, 225, 57, 107 });
+	TerrySpecialKick.PushBack({ 76, 237, 80, 95});
+	TerrySpecialKick.PushBack({ 157, 247, 81, 85});
+	TerrySpecialKick.PushBack({ 241, 242, 102, 90});
+	TerrySpecialKick.PushBack({ 343, 237, 82, 96});
+	TerrySpecialKick.PushBack({ 439, 226, 103, 121});
+	TerrySpecialKick.speed = 0.15f;
+	TerrySpecialKick.loop = false;
+
 
 }
 void ModulePlayer::LoadAndyAnimations()
