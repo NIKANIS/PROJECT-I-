@@ -619,10 +619,22 @@ void ModulePlayer::LoadTerryAnimations()
 	TerrySpecialKick.PushBack({ 241, 242, 102, 90});
 	TerrySpecialKick.PushBack({ 343, 237, 82, 96});
 	TerrySpecialKick.PushBack({ 439, 226, 103, 121});
+	TerrySpecialKick.PushBack({ 578, 336, 57, 94 });
 	TerrySpecialKick.speed = 0.15f;
 	TerrySpecialKick.loop = false;
 
+	//TerrySpecialPunch1
+	TerrySpecialPunch1.PushBack({ 10, 356, 88, 110 });
+	TerrySpecialPunch1.PushBack({ 112, 366, 58, 98 });
+	TerrySpecialPunch1.PushBack({ 188, 381, 62, 83 });
+	TerrySpecialPunch1.speed = 0.15f;
+	TerrySpecialPunch1.loop = false;
 
+	//TerrySpecialPunch2
+	TerrySpecialPunch2.PushBack({ 257, 373, 116, 93 });
+	TerrySpecialPunch2.PushBack({ 375, 353, 110, 94 });	
+	TerrySpecialPunch2.speed = 0.15f;
+	TerrySpecialPunch2.loop = true;
 }
 void ModulePlayer::LoadAndyAnimations()
 {

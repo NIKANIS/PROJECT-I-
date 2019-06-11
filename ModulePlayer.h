@@ -78,6 +78,8 @@ public:
 	Animation JoeMultiplePunch;
 	Animation JoeYellowPunch;
 	Animation TerrySpecialKick;
+	Animation TerrySpecialPunch1;
+	Animation TerrySpecialPunch2;
 	
 
 private:
