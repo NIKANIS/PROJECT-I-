@@ -183,6 +183,9 @@
     <ClInclude Include="ModuleSceneNeoGeoIntro.h">
       <Filter>Modules\Scenes\Intro &amp; Outro</Filter>
     </ClInclude>
+    <ClInclude Include="ModuleCombos.h">
+      <Filter>Modules\Fight Management</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Core">
