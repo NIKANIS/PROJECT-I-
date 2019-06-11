@@ -78,6 +78,7 @@ public:
 	Animation JoeSpecialKick;
 	Animation JoeSpecialKick2;
 	Animation JoeSpecialKnee;
+	Animation JoeSpecialKnee2;
 	Animation JoeMultiplePunch;
 	Animation JoeYellowPunch;
 	Animation TerrySpecialKick;
