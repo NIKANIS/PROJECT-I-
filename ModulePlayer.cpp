@@ -369,6 +369,15 @@ void ModulePlayer::LoadJoeAnimations()
 	JoeSpecialKick2.PushBack({ 1526, 162, 114, 106 });
 	JoeSpecialKick2.speed = 0.15f;
 	JoeSpecialKick2.loop = false;
+
+	//JoeSpecial Knee
+	JoeSpecialKnee.PushBack({ 1046, 405, 49, 89 });
+	JoeSpecialKnee.PushBack({ 1104, 408, 50, 80 });
+	JoeSpecialKnee.PushBack({ 1166, 401, 72, 93 });
+	JoeSpecialKnee.PushBack({ 1245, 399, 92, 93 });
+	JoeSpecialKnee.PushBack({ 1346, 395, 107, 93 });
+	JoeSpecialKnee.speed = 0.15f;
+	JoeSpecialKnee.loop = false;
 }
 void ModulePlayer::LoadTerryAnimations()
 {
