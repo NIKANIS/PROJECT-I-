@@ -387,7 +387,7 @@ void ModulePlayer::LoadJoeAnimations()
 	JoeMultiplePunch.PushBack({ 1049, 281, 53, 102 });
 	JoeMultiplePunch.PushBack({ 1460, 275, 82, 108 });
 	JoeMultiplePunch.speed = 0.15f;
-	JoeMultiplePunch.loop = false;
+	JoeMultiplePunch.loop = true;
 
 	//Joe Yellow Punch
 	JoeYellowPunch.PushBack({ 1049, 281, 53, 102 });
@@ -1606,6 +1606,42 @@ void ModulePlayer::SpecialAttack2()
 			COLLIDER_ = COLLIDER_ENEMY_ATTACK;
 			source = App->enemy;
 		}
+		if (character == 1)
+		{
+			if (st2 == 1)
+			{
+				JoeMultiplePunch.Reset();
+				current_animation = &JoeMultiplePunch;
+				int f;
+				if (!fliped)
+				{
+					f = 43;
+
+				}
+				else
+				{
+					f = -20;
+
+				}
+				player_kick_col = App->collision->AddCollider({ position.x + f, position.y - 100, 35, 35 }, COLLIDER_, source);
+			}
+			if (st2 == 33)
+				already_hit = false;
+			if (st2 == 66)
+				already_hit = false;
+			if (st2 == 100)
+			{
+				specialattack_ = false;
+				if (player_kick_col != nullptr)
+					player_kick_col->to_delete = true;
+				already_hit = false;
+			}
+			if (st2 == 250)
+			{
+				sp2 = false;
+				st2 = 0;
+			}
+		}
 		if (character == 2)
 		{
 			if (st2 == 1)
@@ -1720,14 +1756,22 @@ void ModulePlayer::SpecialAttack3()
 						player_kick_col->rect.x += 5*ff;
 				}
 			}
-			if (st3 == 150 || stopsp3)
+			if (stopsp3)
 			{
 				if (player_kick_col != nullptr)
 					player_kick_col->to_delete = true;
 				specialattack_ = false;
 				already_hit = false;
-				/*sp3 = false;
-				st3 = 0;*/
+				stopsp3 = false;
+				sp3 = false;
+				st3 = 151;
+			}
+			if (st3 == 150)
+			{
+				if (player_kick_col != nullptr)
+					player_kick_col->to_delete = true;
+				specialattack_ = false;
+				already_hit = false;
 			}
 			if (st3 == 300)
 			{
@@ -2343,10 +2387,20 @@ update_status ModulePlayer::Update()
 						{
 							if (at < 30)
 							{
-								if (!fliped)
-									position.x -= 2;
+								if (stuned != 4)
+								{
+									if (!fliped)
+										position.x -= 2;
+									else
+										position.x += 2;
+								}
 								else
-									position.x += 2;
+								{
+									if (!fliped)
+										position.x -= 1;
+									else
+										position.x += 1;
+								}
 							}
 							if (current_animation != &kickstun && stuned == 2)
 							{
@@ -2354,12 +2408,16 @@ update_status ModulePlayer::Update()
 								current_animation = &kickstun;
 								at = 0;
 							}
-							if (current_animation != &punchstun && stuned == 1)
+							if (stuned == 1 || stuned == 4)
 							{
-								punchstun.Reset();
-								current_animation = &punchstun;
-								at = 0;
+								if (current_animation != &punchstun)
+								{
+									punchstun.Reset();
+									current_animation = &punchstun;
+									at = 0;
+								}
 							}
+
 							if (at == 60)
 							{
 								stuned = 0;
@@ -2907,8 +2965,16 @@ void ModulePlayer::OnCollision(Collider* a, Collider* b, bool colliding)
 				}
 				if (sp2)
 				{
-					App->enemy->Damage(40, 2);
-					score += 200;
+					if (character == 1)
+					{
+						App->enemy->Damage(20, 4);
+						score += 100;
+					}
+					if (character == 2)
+					{
+						App->enemy->Damage(40, 2);
+						score += 200;
+					}
 				}
 				if (sp3)
 				{
@@ -2916,6 +2982,7 @@ void ModulePlayer::OnCollision(Collider* a, Collider* b, bool colliding)
 					stopsp3 = true;
 					score += 200;
 				}
+
 			}
 			if (a->type == COLLIDER_PLAYER && b->type == COLLIDER_ENEMY)
 			{
@@ -2965,6 +3032,7 @@ void ModulePlayer::OnCollision(Collider* a, Collider* b, bool colliding)
 				if (sp3)
 				{
 					App->player->Damage(30, 2);
+					stopsp3 = true;
 					score += 200;
 				}
 			}

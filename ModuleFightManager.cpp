@@ -206,6 +206,7 @@ bool ModuleFightManager::CleanUp()
 	App->fight_timer->Disable();
 	App->round_pl->Disable();
 	App->round_en->Disable();
+	App->collision->Disable();
 	return true;
 }
 
