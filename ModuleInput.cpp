@@ -1,14 +1,18 @@
 #include "Globals.h"
 #include "Application.h"
 #include "ModuleInput.h"
-#include <stdio.h>
-#include <string.h>
 #include "SDL/include/SDL.h"
+#include "ModulePlayer.h"
+#include <iostream>
 
 ModuleInput::ModuleInput() : Module()
 {
 	for (uint i = 0; i < MAX_KEYS; ++i)
 		keyboard[i] = KEY_IDLE;
+	for (uint i = 0; i < MAX_BUTTONS; ++i)
+		controll[i] = KEY_IDLE;
+	for (uint i = 0; i < MAX_BUTTONS; ++i)
+		P2_controll[i] = KEY_IDLE;
 }
 
 // Destructor
@@ -22,17 +26,42 @@ bool ModuleInput::Init()
 	LOG("Init SDL input event system");
 	bool ret = true;
 	SDL_Init(0);
-
-	if (SDL_InitSubSystem(SDL_INIT_GAMECONTROLLER) < 0)
-	{
-		LOG("SDL_EVENTS could not initialize Game Controller! SDL_Error: %s\n", SDL_GetError());
-		ret = false;
-	}
-
-	if(SDL_InitSubSystem(SDL_INIT_EVENTS) < 0)
+	SDL_Init(SDL_INIT_GAMECONTROLLER);
+	if (SDL_InitSubSystem(SDL_INIT_EVENTS) < 0)
 	{
 		LOG("SDL_EVENTS could not initialize! SDL_Error: %s\n", SDL_GetError());
 		ret = false;
+	}
+
+	if (SDL_NumJoysticks() < 1)
+	{
+		LOG("Warning: No joysticks connected!\n");
+	}
+	else
+	{
+		for (int i = 0; i < SDL_NumJoysticks(); i++)
+		{
+			if (SDL_IsGameController(i))
+			{
+				if (i == 0)
+				{
+					controller = SDL_GameControllerOpen(i);
+					std::cout << SDL_GameControllerMapping(controller) << std::endl;
+				}
+
+				if (i == 1)
+				{
+					P2_controller = SDL_GameControllerOpen(i);
+					std::cout << SDL_GameControllerMapping(P2_controller) << std::endl;
+					break;
+				}
+			}
+			else
+			{
+				LOG("Warning: Unable to open game controller! SDL Error: %s\n", SDL_GetError());
+			}
+		}
+
 	}
 
 	return ret;
@@ -42,8 +71,33 @@ bool ModuleInput::Init()
 update_status ModuleInput::PreUpdate()
 {
 	SDL_PumpEvents();
-
 	const Uint8* keys = SDL_GetKeyboardState(NULL);
+	Uint8 buttons[MAX_BUTTONS];
+	Uint8 P2_buttons[MAX_BUTTONS];
+
+	buttons[0] = SDL_GameControllerGetButton(App->input->controller, SDL_CONTROLLER_BUTTON_DPAD_UP);
+	buttons[1] = SDL_GameControllerGetButton(App->input->controller, SDL_CONTROLLER_BUTTON_DPAD_DOWN);
+	buttons[2] = SDL_GameControllerGetButton(App->input->controller, SDL_CONTROLLER_BUTTON_DPAD_RIGHT);
+	buttons[3] = SDL_GameControllerGetButton(App->input->controller, SDL_CONTROLLER_BUTTON_DPAD_LEFT);
+	buttons[4] = SDL_GameControllerGetButton(App->input->controller, SDL_CONTROLLER_BUTTON_A);
+	buttons[5] = SDL_GameControllerGetButton(App->input->controller, SDL_CONTROLLER_BUTTON_B);
+	buttons[6] = SDL_GameControllerGetButton(App->input->controller, SDL_CONTROLLER_BUTTON_X);
+	buttons[7] = SDL_GameControllerGetButton(App->input->controller, SDL_CONTROLLER_BUTTON_BACK);
+
+
+	P2_buttons[0] = SDL_GameControllerGetButton(App->input->P2_controller, SDL_CONTROLLER_BUTTON_DPAD_UP);
+	P2_buttons[1] = SDL_GameControllerGetButton(App->input->P2_controller, SDL_CONTROLLER_BUTTON_DPAD_DOWN);
+	P2_buttons[2] = SDL_GameControllerGetButton(App->input->P2_controller, SDL_CONTROLLER_BUTTON_DPAD_RIGHT);
+	P2_buttons[3] = SDL_GameControllerGetButton(App->input->P2_controller, SDL_CONTROLLER_BUTTON_DPAD_LEFT);
+	P2_buttons[4] = SDL_GameControllerGetButton(App->input->P2_controller, SDL_CONTROLLER_BUTTON_A);
+	P2_buttons[5] = SDL_GameControllerGetButton(App->input->P2_controller, SDL_CONTROLLER_BUTTON_B);
+	P2_buttons[6] = SDL_GameControllerGetButton(App->input->P2_controller, SDL_CONTROLLER_BUTTON_X);
+	P2_buttons[7] = SDL_GameControllerGetButton(App->input->P2_controller, SDL_CONTROLLER_BUTTON_BACK);
+	
+
+	
+
+
 
 	for (int i = 0; i < MAX_KEYS; ++i)
 	{
@@ -63,82 +117,45 @@ update_status ModuleInput::PreUpdate()
 		}
 	}
 
-	for (int i = 0; i < MAX_BUTTONS; ++i) {
-		game_pad[i][GAME_PAD_1] = SDL_GameControllerGetButton(controller_player_1, (SDL_GameControllerButton)i);
-		game_pad[i][GAME_PAD_2] = SDL_GameControllerGetButton(controller_player_2, (SDL_GameControllerButton)i);
-	}
-
 	for (int i = 0; i < MAX_BUTTONS; ++i)
 	{
-
-		for (int j = 0; j < MAX_GAME_PAD; ++j) {
-			if (game_pad[i][j] == 1)
-			{
-				if (game_pad[i][j] == KEY_IDLE)
-					game_pad[i][j] == KEY_DOWN;
-				//break;
-
-				else {
-					game_pad[i][j] == KEY_REPEAT;
-					//break;
-				}
-			}
+		if (buttons[i] == 1)
+		{
+			if (controll[i] == KEY_IDLE)
+				controll[i] = KEY_DOWN;
 			else
-			{
-
-				if (game_pad[i][j] == KEY_REPEAT || game_pad[i][j] == KEY_DOWN) {
-					game_pad[i][j] == KEY_UP;
-					//break;
-				}
-				else {
-					game_pad[i][j] == KEY_IDLE;
-					//break;
-				}
-
-			}
+				controll[i] = KEY_REPEAT;
 		}
-
+		else
+		{
+			if (controll[i] == KEY_REPEAT || controll[i] == KEY_DOWN)
+				controll[i] = KEY_UP;
+			else
+				controll[i] = KEY_IDLE;
+		}
 	}
-	while (SDL_PollEvent(&Events) == 1) {
-
-		switch (Events.type) {
-		case SDL_CONTROLLERDEVICEADDED: {
-			int num_joystincks = SDL_NumJoysticks();
-			for (int i = 0; i < num_joystincks; ++i) {
-				if (SDL_GameControllerGetAttached(controller_player_1) == SDL_FALSE) {
-					controller_player_1 = SDL_GameControllerOpen(i);
-					break;
-				}
-				if (SDL_GameControllerGetAttached(controller_player_2) == SDL_FALSE) {
-					controller_player_2 = SDL_GameControllerOpen(i + 1);
-					break;
-				}
-			}
-
-			break; }
-		case SDL_CONTROLLERDEVICEREMOVED:
-			if (SDL_GameControllerGetAttached(controller_player_1) == SDL_FALSE) {
-				SDL_GameControllerClose(controller_player_1);
-				controller_player_1 = nullptr;
-			}
-			if (SDL_GameControllerGetAttached(controller_player_2) == SDL_FALSE) {
-				SDL_GameControllerClose(controller_player_2);
-				controller_player_2 = nullptr;
-			}
-			break;
+	for (int i = 0; i < MAX_BUTTONS; ++i)
+	{
+		if (P2_buttons[i] == 1)
+		{
+			if (P2_controll[i] == KEY_IDLE)
+				P2_controll[i] = KEY_DOWN;
+			else
+				P2_controll[i] = KEY_REPEAT;
+		}
+		else
+		{
+			if (P2_controll[i] == KEY_REPEAT || P2_controll[i] == KEY_DOWN)
+				P2_controll[i] = KEY_UP;
+			else
+				P2_controll[i] = KEY_IDLE;
 		}
 	}
 
-
-	if (keyboard[SDL_SCANCODE_ESCAPE]) {
-
+	if (keyboard[SDL_SCANCODE_ESCAPE])
 		return update_status::UPDATE_STOP;
-	}
-
-	if (App->input->game_pad[SDL_CONTROLLER_BUTTON_BACK][0] || App->input->game_pad[SDL_CONTROLLER_BUTTON_BACK][1]) {
-
+	if (App->input->controll[BUTTON_BACK] == KEY_STATE::KEY_DOWN || App->input->P2_controll[BUTTON_BACK] == KEY_STATE::KEY_DOWN)
 		return update_status::UPDATE_STOP;
-	}
 
 	return update_status::UPDATE_CONTINUE;
 }
@@ -147,26 +164,11 @@ update_status ModuleInput::PreUpdate()
 bool ModuleInput::CleanUp()
 {
 	LOG("Quitting SDL input event subsystem");
+	SDL_GameControllerClose(controller);
+	controller = NULL;
+	SDL_GameControllerClose(P2_controller);
+	P2_controller = NULL;
+
 	SDL_QuitSubSystem(SDL_INIT_EVENTS);
 	return true;
 }
-
-/* estos son los valores que hay que ponerle al segundo parametro de la función, cada uno es un boton del mando
-SDL_CONTROLLER_BUTTON_INVALID
-SDL_CONTROLLER_BUTTON_A
-SDL_CONTROLLER_BUTTON_B
-SDL_CONTROLLER_BUTTON_X
-SDL_CONTROLLER_BUTTON_Y
-SDL_CONTROLLER_BUTTON_BACK
-SDL_CONTROLLER_BUTTON_GUIDE
-SDL_CONTROLLER_BUTTON_START
-SDL_CONTROLLER_BUTTON_LEFTSTICK
-SDL_CONTROLLER_BUTTON_RIGHTSTICK
-SDL_CONTROLLER_BUTTON_LEFTSHOULDER
-SDL_CONTROLLER_BUTTON_RIGHTSHOULDER
-SDL_CONTROLLER_BUTTON_DPAD_UP
-SDL_CONTROLLER_BUTTON_DPAD_DOWN
-SDL_CONTROLLER_BUTTON_DPAD_LEFT
-SDL_CONTROLLER_BUTTON_DPAD_RIGHT
-SDL_CONTROLLER_BUTTON_MAX
-*/
