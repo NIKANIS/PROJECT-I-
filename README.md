@@ -34,7 +34,7 @@ See our GitHub repository [HERE](https://github.com/NIKANIS/PROJECT-I-.git) - ht
 
 For more information see our wiki page [HERE](https://github.com/NIKANIS/PROJECT-I-/wiki) - https://github.com/NIKANIS/PROJECT-I-/wiki
 
-Download the last version of the game HERE(put the link of the last version)
+Download the last version of the game [HERE](https://github.com/NIKANIS/PROJECT-I-/releases/tag/1.0)
 
 ## Controls for keyboard
 
