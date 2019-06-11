@@ -91,4 +91,9 @@ Download the last version of the game HERE(put the link of the last version)
 	Takedown implemented
 	Adding Joe Higashi skills.
 	
+### v0.9
+	GamePad input for movement, punch, kick and takedown.
+	Added more skills for Terry and Joe.
+	Final score sum and recopilation at the end of every round.
+	
 -https://github.com/NIKANIS/PROJECT-I-
