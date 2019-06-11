@@ -2221,11 +2221,15 @@ update_status ModulePlayer::Update()
 					if (App->input->keyboard[SDL_SCANCODE_S] == KEY_STATE::KEY_IDLE
 						&& App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_IDLE
 						&& App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_IDLE
-						&& !jumping && !punching && !kicking && !specialattack_ && !lowkicking && !takingdown 
-						&& App->input->controll[BUTTON_DPAD_DOWN] == KEY_STATE::KEY_IDLE
-						&& App->input->controll[BUTTON_DPAD_LEFT] == KEY_STATE::KEY_IDLE
-						&& App->input->controll[BUTTON_DPAD_RIGHT] == KEY_STATE::KEY_IDLE)
+						&& !jumping && !punching && !kicking && !specialattack_ && !lowkicking && !takingdown)
 						current_animation = &idle;
+
+					if (App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT
+						&& App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT
+						&& App->input->keyboard[SDL_SCANCODE_S] == KEY_STATE::KEY_IDLE
+						&& !jumping && !punching && !kicking && !specialattack_ && !lowkicking && !takingdown)
+						current_animation = &idle;
+
 
 					if (current_animation != &punchstanding && current_animation != &kickingstanding && current_animation != &crowchpunch && !lowkicking && !takingdown)
 					{
@@ -2702,10 +2706,13 @@ update_status ModulePlayer::Update()
 					if (App->input->keyboard[SDL_SCANCODE_DOWN] == KEY_STATE::KEY_IDLE
 						&& App->input->keyboard[SDL_SCANCODE_LEFT] == KEY_STATE::KEY_IDLE
 						&& App->input->keyboard[SDL_SCANCODE_RIGHT] == KEY_STATE::KEY_IDLE
-						&& !jumping && !punching && !kicking && !specialattack_ && !lowkicking && !takingdown
-						&& App->input->P2_controll[BUTTON_DPAD_DOWN] == KEY_STATE::KEY_IDLE
-						&& App->input->P2_controll[BUTTON_DPAD_LEFT] == KEY_STATE::KEY_IDLE
-						&& App->input->P2_controll[BUTTON_DPAD_RIGHT] == KEY_STATE::KEY_IDLE)
+						&& !jumping && !punching && !kicking && !specialattack_ && !lowkicking)
+						current_animation = &idle;
+
+					if (App->input->keyboard[SDL_SCANCODE_RIGHT] == KEY_STATE::KEY_REPEAT
+						&& App->input->keyboard[SDL_SCANCODE_LEFT] == KEY_STATE::KEY_REPEAT
+						&& App->input->keyboard[SDL_SCANCODE_DOWN] == KEY_STATE::KEY_IDLE
+						&& !jumping && !punching && !kicking && !specialattack_ && !lowkicking)
 						current_animation = &idle;
 
 					if (current_animation != &punchstanding && current_animation != &kickingstanding && current_animation != &crowchpunch && !lowkicking)
