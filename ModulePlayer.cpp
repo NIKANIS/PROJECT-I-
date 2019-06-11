@@ -1958,16 +1958,28 @@ update_status ModulePlayer::Update()
 								if (stuned != 4)
 								{
 									if (!fliped)
-										position.x -= 2;
+									{
+										if ((position.x*(-SCREEN_SIZE)) < App->render->camera.x && (-SCREEN_SIZE * (position.x + 60)) > (App->render->camera.x - SCREEN_SIZE * SCREEN_WIDTH))
+											position.x -= 2;
+									}
 									else
-										position.x += 2;
+									{
+										if ((position.x*(-SCREEN_SIZE)) < App->render->camera.x && (-SCREEN_SIZE * (position.x + 60)) > (App->render->camera.x - SCREEN_SIZE * SCREEN_WIDTH))
+											position.x += 2;
+									}
 								}
 								else
 								{
 									if (!fliped)
-										position.x -= 1;
+									{
+										if ((position.x*(-SCREEN_SIZE)) < App->render->camera.x && (-SCREEN_SIZE * (position.x + 60)) > (App->render->camera.x - SCREEN_SIZE * SCREEN_WIDTH))
+											position.x -= 1;
+									}
 									else
-										position.x += 1;
+									{
+										if ((position.x*(-SCREEN_SIZE)) < App->render->camera.x && (-SCREEN_SIZE * (position.x + 60)) > (App->render->camera.x - SCREEN_SIZE * SCREEN_WIDTH))
+											position.x += 1;
+									}
 								}
 							}
 							if (current_animation != &kickstun && stuned == 2)
@@ -2399,14 +2411,30 @@ update_status ModulePlayer::Update()
 						&& !jumping && !punching && !kicking && !specialattack_ && !lowkicking && !takingdown
 						&& App->input->JoystickGetPos(App->input->controller, DOWN) == false
 						&& App->input->JoystickGetPos(App->input->controller, LEFT) == false
-						&& App->input->JoystickGetPos(App->input->controller, RIGHT)== false)
+						&& App->input->JoystickGetPos(App->input->controller, RIGHT) == false)
+					{
 						current_animation = &idle;
+						jumping = false;
+						punching = false;
+						kicking = false;
+						specialattack_ = false;
+						lowkicking = false;
+						takingdown = false;
+					}
 						
 					if (App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT
 						&& App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT
 						&& App->input->keyboard[SDL_SCANCODE_S] == KEY_STATE::KEY_IDLE
 						&& !jumping && !punching && !kicking && !specialattack_ && !lowkicking && !takingdown)
+					{
 						current_animation = &idle;
+						jumping = false;
+						punching = false;
+						kicking = false;
+						specialattack_ = false;
+						lowkicking = false;
+						takingdown = false;
+					}
 
 
 					if (current_animation != &punchstanding && current_animation != &kickingstanding && current_animation != &crowchpunch && !lowkicking && !takingdown)
@@ -2528,16 +2556,28 @@ update_status ModulePlayer::Update()
 								if (stuned != 4)
 								{
 									if (!fliped)
-										position.x -= 2;
+									{
+										if ((position.x*(-SCREEN_SIZE)) < App->render->camera.x && (-SCREEN_SIZE * (position.x + 60)) > (App->render->camera.x - SCREEN_SIZE * SCREEN_WIDTH))
+											position.x -= 2;
+									}
 									else
-										position.x += 2;
+									{
+										if ((position.x*(-SCREEN_SIZE)) < App->render->camera.x && (-SCREEN_SIZE * (position.x + 60)) > (App->render->camera.x - SCREEN_SIZE * SCREEN_WIDTH))
+											position.x += 2;
+									}
 								}
 								else
 								{
 									if (!fliped)
-										position.x -= 1;
+									{
+										if ((position.x*(-SCREEN_SIZE)) < App->render->camera.x && (-SCREEN_SIZE * (position.x + 60)) > (App->render->camera.x - SCREEN_SIZE * SCREEN_WIDTH))
+											position.x -= 1;
+									}
 									else
-										position.x += 1;
+									{
+										if ((position.x*(-SCREEN_SIZE)) < App->render->camera.x && (-SCREEN_SIZE * (position.x + 60)) > (App->render->camera.x - SCREEN_SIZE * SCREEN_WIDTH))
+											position.x += 1;
+									}
 								}
 							}
 							if (current_animation != &kickstun && stuned == 2)
@@ -2642,7 +2682,7 @@ update_status ModulePlayer::Update()
 
 					if (!sp3 && !jumping && !specialattack_)
 					{
-						if (App->combos->SpecialAttack3(player))
+						if (App->combos->SpecialAttack32(player))
 						{
 							sp3 = true;
 							specialattack_ = true;
@@ -2651,7 +2691,7 @@ update_status ModulePlayer::Update()
 					}
 					if (!sp && !jumping && !specialattack_)
 					{
-						if (App->combos->SpecialAttack(player))
+						if (App->combos->SpecialAttack2(player))
 						{
 							sp = true;
 							specialattack_ = true;
@@ -2663,7 +2703,7 @@ update_status ModulePlayer::Update()
 					}
 					if (!sp2 && !jumping && !specialattack_ && character == 2)
 					{
-						if (App->combos->SpT(player))
+						if (App->combos->SpT2(player))
 						{
 							sp2 = true;
 							specialattack_ = true;
@@ -2672,7 +2712,7 @@ update_status ModulePlayer::Update()
 					}
 					if (!sp2 && !jumping && !specialattack_ && character == 1)
 					{
-						if (App->combos->SpJ(player))
+						if (App->combos->SpJ2(player))
 						{
 							punching = false;
 							sp2 = true;
@@ -2955,13 +2995,29 @@ update_status ModulePlayer::Update()
 						&& App->input->JoystickGetPos(App->input->P2_controller, DOWN) == false
 						&& App->input->JoystickGetPos(App->input->P2_controller, LEFT) == false
 						&& App->input->JoystickGetPos(App->input->P2_controller, RIGHT) == false)
+					{
 						current_animation = &idle;
+						jumping = false;
+						punching = false;
+						kicking = false;
+						specialattack_ = false;
+						lowkicking = false;
+						takingdown = false;
+					}
 
 					if (App->input->keyboard[SDL_SCANCODE_RIGHT] == KEY_STATE::KEY_REPEAT
 						&& App->input->keyboard[SDL_SCANCODE_LEFT] == KEY_STATE::KEY_REPEAT
 						&& App->input->keyboard[SDL_SCANCODE_DOWN] == KEY_STATE::KEY_IDLE
 						&& !jumping && !punching && !kicking && !specialattack_ && !lowkicking && !takingdown)
+					{
 						current_animation = &idle;
+						jumping = false;
+						punching = false;
+						kicking = false;
+						specialattack_ = false;
+						lowkicking = false;
+						takingdown = false;
+					}
 
 					if (current_animation != &punchstanding && current_animation != &kickingstanding && current_animation != &crowchpunch && !lowkicking)
 					{

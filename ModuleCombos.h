@@ -24,6 +24,11 @@ public:
 	bool SpT(int player);
 	bool SpJ(int player);
 
+	bool SpecialAttack32(int player);
+	bool SpecialAttack2(int player);
+	bool SpT2(int player);
+	bool SpJ2(int player);
+
 	/*bool CheckPunchP2();
 
 	bool CheckSplashFountP1();
@@ -44,5 +49,17 @@ public:
 
 	int SPTCount = 0;
 	int SPJCount = 0;
+
+	int actual_frameP1SF2 = 0;
+	int actual_frameSP2 = 0;
+
+	int actual_frameSPT2 = 0;
+	int actual_frameSPJ2 = 0;
+
+	int SplashFountCount2 = 0;
+	int SPCount2 = 0;
+
+	int SPTCount2 = 0;
+	int SPJCount2 = 0;
 };
 #endif // __ModuleCombos_H__
