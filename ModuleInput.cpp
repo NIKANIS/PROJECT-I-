@@ -3,7 +3,6 @@
 #include "ModuleInput.h"
 #include "SDL/include/SDL.h"
 #include "ModulePlayer.h"
-#include <iostream>
 
 ModuleInput::ModuleInput() : Module()
 {
@@ -46,13 +45,11 @@ bool ModuleInput::Init()
 				if (i == 0)
 				{
 					controller = SDL_GameControllerOpen(i);
-					std::cout << SDL_GameControllerMapping(controller) << std::endl;
 				}
 
 				if (i == 1)
 				{
 					P2_controller = SDL_GameControllerOpen(i);
-					std::cout << SDL_GameControllerMapping(P2_controller) << std::endl;
 					break;
 				}
 			}

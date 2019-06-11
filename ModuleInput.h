@@ -31,6 +31,18 @@ enum BUTTONS
 	BUTTON_BACK,
 };
 
+enum AXIS
+{
+	UP,
+	UPRIGHT,
+	RIGHT,
+	RIGHTDOWN,
+	DOWN,
+	DOWNLEFT,
+	LEFT,
+	LEFTUP
+};
+
 class ModuleInput : public Module
 {
 public:
