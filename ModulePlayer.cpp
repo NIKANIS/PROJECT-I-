@@ -2000,18 +2000,23 @@ update_status ModulePlayer::Update()
 							body_collide = false;
 						if (position.x != 0 && !body_collide && position.x*(-SCREEN_SIZE) < App->render->camera.x && current_animation != &crowchprotecc)
 							position.x -= speed;
-						if (current_animation != &forward && !jumping && current_animation != &crowch && !lowkicking && !takingdown)
-						{
-							if (fliped == true) {
+
+						if (fliped == true) {
+							if (current_animation != &forward && !jumping && current_animation != &crowch && !lowkicking && !takingdown)
+							{
 								forward.Reset();
 								current_animation = &forward;
 							}
-							else
+						}
+						else
+						{
+							if (current_animation != &backward && !jumping && current_animation != &crowch && !lowkicking && !takingdown)
 							{
 								backward.Reset();
 								current_animation = &backward;
 							}
-					}
+						}
+						
 
 
 					}
@@ -2023,19 +2028,26 @@ update_status ModulePlayer::Update()
 							body_collide = false;
 						if (position.x != 610 && !body_collide && (-SCREEN_SIZE * (position.x + 60)) > (App->render->camera.x - SCREEN_SIZE * SCREEN_WIDTH) && current_animation != &crowchprotecc)
 							position.x += speed;
-						if (current_animation != &backward && !jumping && current_animation != &crowch && !lowkicking && !takingdown)
+						
+						if (fliped == true)
 						{
-							if (fliped == true)
+							if (current_animation != &backward && !jumping && current_animation != &crowch && !lowkicking && !takingdown)
 							{
-									backward.Reset();
-									current_animation = &backward;
+								backward.Reset();
+								current_animation = &backward;
 							}
-							else
-							{
-									forward.Reset();
-									current_animation = &forward;
-							}
+
 						}
+						else
+						{
+							if (current_animation != &forward && !jumping && current_animation != &crowch && !lowkicking && !takingdown)
+							{
+								forward.Reset();
+								current_animation = &forward;
+							}
+
+						}
+						
 						
 					}
 
@@ -2513,20 +2525,24 @@ update_status ModulePlayer::Update()
 							body_collide = false;
 						if (position.x != 0 && !body_collide && position.x*(-SCREEN_SIZE) < App->render->camera.x&& current_animation != &crowchprotecc)
 							position.x -= speed;
-						if (current_animation != &forward && !jumping && current_animation != &crowch && !lowkicking)
-						{
+
 							if (fliped == true) 
 							{
-
-								forward.Reset();
-								current_animation = &forward;
+								if (current_animation != &forward && !jumping && current_animation != &crowch && !lowkicking)
+								{
+									forward.Reset();
+									current_animation = &forward;
+								}
 							}
 							else
 							{
-								backward.Reset();
-								current_animation = &backward;
+								if (current_animation != &backward && !jumping && current_animation != &crowch && !lowkicking)
+								{
+									backward.Reset();
+									current_animation = &backward;
+								}
 							}
-						}
+						
 
 					}
 
