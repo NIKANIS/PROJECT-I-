@@ -28,6 +28,7 @@ The player can choose between three fighters to play versus 8 enemy fighters tha
 
 ## GAMEPLAY VIDEO
 (put the gameplay video)
+https://www.youtube.com/watch?v=VAx4oo3i87c
 
 
 ## LINKS
@@ -70,9 +71,9 @@ Download the last version of the game HERE(put the link of the last version)
 							Z -> Special Attack 3
 								
 					     OTHERS
-	F5 -> GodMode On/Off
-	(GodModeOn)-> 	F1-> Player 1 lose // F2-> Player 2 lose
-			F10-> Restart Game
+			F5 -> GodMode On/Off
+			(GodModeOn)-> 	F1-> Player 1 lose // F2-> Player 2 lose
+						F10-> Restart Game
 
 ## Changelist of all versions
 ### v0.1
