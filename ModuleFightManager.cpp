@@ -228,6 +228,76 @@ void ModuleFightManager::Reset()
 	f = none;
 }
 
+void ModuleFightManager::Print(int num, iPoint I_pos)
+{
+	int n[5];
+	SDL_Rect r[5];
+	SDL_Rect none = {0,0,0,0};
+
+	n[4] = (int)num / 10000;
+	n[3] = (int)(num - n[4] * 10000) / 1000;
+	n[2] = (int)(num - n[4] * 10000 - n[3] * 1000) / 100;
+	n[1] = (int)(num - n[4] * 10000 - n[3] * 1000 - n[2] * 100) / 10;
+	n[0] = num - n[4] * 10000 - n[3] * 1000 - n[2] * 100 - n[1] * 10;
+
+	for (int i = 0; i < 5; i++)
+	{
+		switch (n[i])
+		{
+		case 0:
+			if (i == 0)
+				r[i] = score_numbers[0];
+			else
+			{
+				for (int y = i + 1; y < 5; y++)
+				{
+					if (n[y] != 0)
+					{
+						r[i] = score_numbers[0];
+						break;
+					}
+					r[i] = none;
+				}
+			}
+			break;
+		case 1:
+			r[i] = score_numbers[1];
+			break;
+		case 2:
+			r[i] = score_numbers[2];
+			break;
+		case 3:
+			r[i] = score_numbers[3];
+			break;
+		case 4:
+			r[i] = score_numbers[4];
+			break;
+		case 5:
+			r[i] = score_numbers[5];
+			break;
+		case 6:
+			r[i] = score_numbers[6];
+			break;
+		case 7:
+			r[i] = score_numbers[7];
+			break;
+		case 8:
+			r[i] = score_numbers[8];
+			break;
+		case 9:
+			r[i] = score_numbers[9];
+			break;
+		}
+		App->render->Blit(graphics, I_pos.x, I_pos.y, &r[4], false, 0.0f);
+		App->render->Blit(graphics, I_pos.x + 15, I_pos.y, &r[3], false, 0.0f);
+		App->render->Blit(graphics, I_pos.x + 30, I_pos.y, &r[2], false, 0.0f);
+		App->render->Blit(graphics, I_pos.x + 45, I_pos.y, &r[1], false, 0.0f);
+		App->render->Blit(graphics, I_pos.x + 60, I_pos.y, &r[0], false, 0.0f);
+	}
+
+
+}
+
 update_status ModuleFightManager::Update()
 {
 	App->render->camera.x = -SCREEN_SIZE * ((App->player->Pos_X() + App->enemy->Pos_X() + 60) / 2 - SCREEN_WIDTH / 2);
@@ -249,56 +319,129 @@ update_status ModuleFightManager::Update()
 	if (time_stop)
 	{
 		ft++;
-		if (App->enemy->Health() == 0)
-			App->render->Blit(graphicsYouWin, 0, -30, &(youWinAnim.GetCurrentFrame()), false, 0.0f);
-		if (timer_num == 0 && App->player->Health() > App->enemy->Health())
-			App->render->Blit(graphicsYouWin, 0, -30, &(youWinAnim.GetCurrentFrame()), false, 0.0f);
-
-		if (App->player->Health() == 0)
-			App->render->Blit(graphicsYouLose, 0, -30, &(youLoseAnim.GetCurrentFrame()), false, 0.0f);
-		if (timer_num == 0 && App->enemy->Health() > App->player->Health())
-			App->render->Blit(graphicsYouLose, 0, -30, &(youLoseAnim.GetCurrentFrame()), false, 0.0f);
-
-		if (timer_num == 0 && App->enemy->Health() == App->player->Health())
-			App->render->Blit(graphicsDrawGame, 0, -30, &(DrawAnim.GetCurrentFrame()), false, 0.0f);
-
-		if (ft > 120)
+		if (ft <= 120)
 		{
-			App->render->Blit(graphicsPixelFade, 0, -30, &(PixelFadeOut.GetCurrentFrame()), false, 0.0f);
-			if (pl_won_rounds >= 2 && pl_won_rounds > en_won_rounds)
-				winner = 0;
-			if (en_won_rounds >= 2 && pl_won_rounds < en_won_rounds)
-				winner = 1;
+			if (App->enemy->Health() == 0)
+				App->render->Blit(graphicsYouWin, 0, -30, &(youWinAnim.GetCurrentFrame()), false, 0.0f);
+			if (timer_num == 0 && App->player->Health() > App->enemy->Health())
+				App->render->Blit(graphicsYouWin, 0, -30, &(youWinAnim.GetCurrentFrame()), false, 0.0f);
 
-			if (winner == 0)
-			{
-				if (App->scene_map->map == 1)
-					App->fade->FadeToBlack((Module*)App->scene_paopao, (Module*)App->scene_congrats);
-				if (App->scene_map->map == 2)
-					App->fade->FadeToBlack((Module*)App->scene_soundbeach, (Module*)App->scene_congrats);
-				if (App->scene_map->map == 3)
-					App->fade->FadeToBlack((Module*)App->scene_westsubway, (Module*)App->scene_congrats);
-				if (App->scene_map->map == 4)
-					App->fade->FadeToBlack((Module*)App->scene_howardarena, (Module*)App->scene_congrats);
-			}
+			if (App->player->Health() == 0)
+				App->render->Blit(graphicsYouLose, 0, -30, &(youLoseAnim.GetCurrentFrame()), false, 0.0f);
+			if (timer_num == 0 && App->enemy->Health() > App->player->Health())
+				App->render->Blit(graphicsYouLose, 0, -30, &(youLoseAnim.GetCurrentFrame()), false, 0.0f);
 
-			if (winner == 1)
-			{
-				if (App->scene_map->map == 1)
-					App->fade->FadeToBlack((Module*)App->scene_paopao, (Module*)App->scene_gameover);
-				if (App->scene_map->map == 2)
-					App->fade->FadeToBlack((Module*)App->scene_soundbeach, (Module*)App->scene_gameover);
-				if (App->scene_map->map == 3)
-					App->fade->FadeToBlack((Module*)App->scene_westsubway, (Module*)App->scene_gameover);
-				if (App->scene_map->map == 4)
-					App->fade->FadeToBlack((Module*)App->scene_howardarena, (Module*)App->scene_gameover);
-			}
+			if (timer_num == 0 && App->enemy->Health() == App->player->Health())
+				App->render->Blit(graphicsDrawGame, 0, -30, &(DrawAnim.GetCurrentFrame()), false, 0.0f);
 		}
-		if (ft == 160 && winner != 0 && winner != 1)
-			Reset();
+
+		if (ft == 180)
+		{
+			l = { 170, 50 };
+			t = { 170, 80 };
+			tt = { 170, 110 };
+
+			if (App->enemy->Health() == 0)
+				lifei = App->player->Health() * 100;
+			if (timer_num == 0 && App->player->Health() > App->enemy->Health())
+				lifei = App->player->Health() * 100;
+
+			if (App->player->Health() == 0)
+				lifei = App->enemy->Health() * 100;
+			if (timer_num == 0 && App->enemy->Health() > App->player->Health())
+				lifei = App->enemy->Health() * 100;
+
+			timei = timer_num * 100;
+
+			totali = lifei + timei;
+		}
+		if (ft > 180)
+		{
+			App->render->Blit(graphics, 110, 20, &bonus, false, 0.0f);
+			App->render->Blit(graphics, 50, 50, &time, false, 0.0f);
+			App->render->Blit(graphics, 50, 80, &life, false, 0.0f);
+			App->render->Blit(graphics, 50, 110, &total, false, 0.0f);
+			Print(lifei, l);
+			Print(timei, t);
+			if (ft < 220)
+				Print(totali, tt);
+		}
+		if (ft > 220)
+		{
+			if (totali != 0)
+			{
+				if (totali > 100)
+					totali -= 100;
+				else
+					totali--;
+
+				if (App->enemy->Health() == 0)
+					if (totali > 100)
+						App->player->score+= 100;
+					else
+						App->player->score++;
+				if (timer_num == 0 && App->player->Health() > App->enemy->Health())
+					if (totali > 100)
+						App->player->score += 100;
+					else
+						App->player->score++;
+
+				if (App->player->Health() == 0)
+					if (totali > 100)
+						App->enemy->score += 100;
+					else
+						App->enemy->score++;
+				if (timer_num == 0 && App->enemy->Health() > App->player->Health())
+					if (totali > 100)
+						App->enemy->score += 100;
+					else
+						App->enemy->score++;
+				Print(totali, tt);
+			}
+			else
+			{
+				Print(totali, tt);
+				if (ft < 1000)
+					ft = 1001;
+			}
+			
+
+			if (ft == 1021 && winner != 0 && winner != 1)
+			{
+				App->render->Blit(graphicsPixelFade, 0, -30, &(PixelFadeOut.GetCurrentFrame()), false, 0.0f);
+				if (pl_won_rounds >= 2 && pl_won_rounds > en_won_rounds)
+					winner = 0;
+				if (en_won_rounds >= 2 && pl_won_rounds < en_won_rounds)
+					winner = 1;
+
+				if (winner == 0)
+				{
+					if (App->scene_map->map == 1)
+						App->fade->FadeToBlack((Module*)App->scene_paopao, (Module*)App->scene_congrats);
+					if (App->scene_map->map == 2)
+						App->fade->FadeToBlack((Module*)App->scene_soundbeach, (Module*)App->scene_congrats);
+					if (App->scene_map->map == 3)
+						App->fade->FadeToBlack((Module*)App->scene_westsubway, (Module*)App->scene_congrats);
+					if (App->scene_map->map == 4)
+						App->fade->FadeToBlack((Module*)App->scene_howardarena, (Module*)App->scene_congrats);
+				}
+
+				if (winner == 1)
+				{
+					if (App->scene_map->map == 1)
+						App->fade->FadeToBlack((Module*)App->scene_paopao, (Module*)App->scene_gameover);
+					if (App->scene_map->map == 2)
+						App->fade->FadeToBlack((Module*)App->scene_soundbeach, (Module*)App->scene_gameover);
+					if (App->scene_map->map == 3)
+						App->fade->FadeToBlack((Module*)App->scene_westsubway, (Module*)App->scene_gameover);
+					if (App->scene_map->map == 4)
+						App->fade->FadeToBlack((Module*)App->scene_howardarena, (Module*)App->scene_gameover);
+				}
+			}
+			if (ft == 1041 && winner != 0 && winner != 1)
+				Reset();
+		}
 	}
-
-
 	if (timer_num != 0 && !time_stop)
 	{
 		timer_counter++;
@@ -329,7 +472,6 @@ update_status ModuleFightManager::Update()
 		SDL_Rect none = { 0,0,0,0 };
 		f = none;
 	}
-
 
 	if (App->player->Health() == 0 && !blockpoints)
 	{

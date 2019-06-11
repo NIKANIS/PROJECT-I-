@@ -74,6 +74,12 @@ public:
 	Animation airpunchdiagonal;
 	Animation JoeSpecialKick;
 	Animation JoeSpecialKick2;
+	Animation JoeSpecialKnee;
+	Animation JoeMultiplePunch;
+	Animation JoeYellowPunch;
+	Animation TerrySpecialKick;
+	Animation TerrySpecialPunch1;
+	Animation TerrySpecialPunch2;
 	
 
 private:

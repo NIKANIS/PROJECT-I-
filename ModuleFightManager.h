@@ -22,6 +22,7 @@ public:
 	int Player() { return pl_won_rounds; }
 	int Enemy() { return en_won_rounds; }
 	int Winner() { return winner; }
+	void Print(int num, iPoint I_pos);
 
 
 public:
@@ -35,6 +36,10 @@ public:
 	SDL_Texture* graphicsYouLose = nullptr;
 	SDL_Texture* graphicsDrawGame = nullptr;
 	SDL_Texture* graphicsPixelFade = nullptr;
+
+	iPoint l;
+	iPoint t;
+	iPoint tt;
 
 	SDL_Rect win;
 	SDL_Rect lose;
@@ -55,6 +60,9 @@ public:
 	int timer_num;
 	int timer_counter;
 	int ft = 0; //final round counter
+	int lifei;
+	int timei;
+	int totali;
 	bool time_stop;
 	bool round_start = false;
 	bool blockpoints; 
