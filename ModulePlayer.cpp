@@ -1078,18 +1078,17 @@ void ModulePlayer::LowKick()
 	if (lowkicking == true && current_animation == &lowkick)
 	{
 		at++;
-		//if (App->scene_chooseplayer->final_player1 == 1 && at < 12|| App->scene_chooseplayer->final_player2 == 1 && at < 12)
-		//{
-		//	if (!fliped)
-		//		position.x += 3.0f;
-		//	else
-		//		position.x -= 3.0f;
-		//}
+		if (character == 1 && at < 12)
+		{
+			if (!fliped)
+				position.x += 3.0f;
+			else
+				position.x -= 3.0f;
+			player_col->SetPos(position.x, position.y);
+		}
 		if (at == 12)
 		{
-			if (player == 0)
-			{
-				if (App->scene_chooseplayer->final_player1 == 1)
+			if (character == 1)
 				{
 					if (fliped == false)
 						player_kick_col = App->collision->AddCollider({ position.x + 40, position.y - 20, 35, 12 }, COLLIDER_PLAYER_ATTACK, App->player);
@@ -1097,7 +1096,7 @@ void ModulePlayer::LowKick()
 					else	   
 						player_kick_col = App->collision->AddCollider({ position.x - 24, position.y - 20, 35, 12 }, COLLIDER_PLAYER_ATTACK, App->player);
 				}	
-				if (App->scene_chooseplayer->final_player1 == 2)
+			if (character == 2)
 				{
 					if (fliped == false)
 						player_kick_col = App->collision->AddCollider({ position.x + 46, position.y - 28, 40, 26 }, COLLIDER_PLAYER_ATTACK, App->player);
@@ -1107,44 +1106,13 @@ void ModulePlayer::LowKick()
 					
 
 				}
-				if (App->scene_chooseplayer->final_player1 == 3)
+			if (character == 3)
 				{
 					if (fliped == false)
 						player_kick_col = App->collision->AddCollider({ position.x + 46, position.y - 20, 32, 16 }, COLLIDER_PLAYER_ATTACK, App->player);
 					else																			  
 						player_kick_col = App->collision->AddCollider({ position.x - 28, position.y - 20, 32, 16 }, COLLIDER_PLAYER_ATTACK, App->player);
 				}
-				
-			}
-			if (player == 1)
-			{
-				if (App->scene_chooseplayer->final_player2 == 1)
-				{
-					if (fliped == false)
-						player_kick_col = App->collision->AddCollider({ position.x + 40, position.y - 20, 35, 12 }, COLLIDER_ENEMY_ATTACK, App->enemy);
-
-					else
-						player_kick_col = App->collision->AddCollider({ position.x - 24, position.y - 20, 35, 12 }, COLLIDER_ENEMY_ATTACK, App->enemy);
-				}
-
-				if (App->scene_chooseplayer->final_player2 == 2)
-				{
-					if (fliped == false)
-						player_kick_col = App->collision->AddCollider({ position.x + 46, position.y - 28, 40, 26 }, COLLIDER_ENEMY_ATTACK, App->enemy);
-
-					else
-						player_kick_col = App->collision->AddCollider({ position.x - 35, position.y - 28, 40, 26 }, COLLIDER_ENEMY_ATTACK, App->enemy);
-
-
-				}
-				if (App->scene_chooseplayer->final_player2 == 3)
-				{
-					if (fliped == false)
-						player_kick_col = App->collision->AddCollider({ position.x + 46, position.y - 20, 32, 16 }, COLLIDER_ENEMY_ATTACK, App->enemy);
-					else
-						player_kick_col = App->collision->AddCollider({ position.x - 28, position.y - 20, 32, 16 }, COLLIDER_ENEMY_ATTACK, App->enemy);
-				}
-			}
 		}
 		if (at == 19)
 		{
@@ -1276,7 +1244,7 @@ void ModulePlayer::AirKick()
 			player_col->rect.h = 110;
 			player_col->rect.w = 50;
 
-			if (player == 0 && App->scene_chooseplayer->final_player1 == 1 || player == 1 && App->scene_chooseplayer->final_player2 == 1)
+			if (character == 1)
 				{
 					if (fliped == false)
 					{
@@ -1301,7 +1269,7 @@ void ModulePlayer::AirKick()
 						}
 					}
 				}
-			if (player == 0 && App->scene_chooseplayer->final_player1 == 2 || player == 1 && App->scene_chooseplayer->final_player2 == 2)
+			if (character == 2)
 				{
 					if (fliped == false)
 					{
@@ -1326,7 +1294,7 @@ void ModulePlayer::AirKick()
 						}
 					}
 				}
-			if (player == 0 && App->scene_chooseplayer->final_player1 == 3 || player == 1 && App->scene_chooseplayer->final_player2 == 3)
+			if (character == 3)
 				{
 					if (fliped == false)
 					{
