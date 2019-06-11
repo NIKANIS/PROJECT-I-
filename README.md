@@ -60,13 +60,13 @@ Download the last version of the game HERE(put the link of the last version)
 		 						B -> TakeDown			
 							     SPECIAL ATTACKS
 								  TERRY
-							L-> Special Attack 1
-							G -> Special Attack 2
-							Z -> Special Attack 3
+							DOWN -> RIGHT -> X => Special Attack 1
+							LEFT -> RIGHT -> A => Special Attack 2
+							DOWN -> LEFT  -> X => Special Attack 3
 								   JOE
-							-> Special Attack 1
-							G -> Special Attack 2
-							Z -> Special Attack 3
+							DOWN -> RIGHT -> X => Special Attack 1
+							X    -> X -> 	 X => Special Attack 2
+							LEFT -> RIGHT -> A => Special Attack 3
 								
 					     OTHERS
 			F5 -> GodMode On/Off
@@ -113,5 +113,9 @@ Download the last version of the game HERE(put the link of the last version)
 	Added more skills for Terry and Joe.
 	Final score sum and recopilation at the end of every round.
 	State machine for combos in progress.
+## v1.0
+	Added State Machine for combos
+	3 combos for Terry Bogard and 3 for Joe Higashi
+	Fixed bugs
 	
 
