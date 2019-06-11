@@ -2568,9 +2568,10 @@ update_status ModulePlayer::Update()
 	
 	if (fliped)
 	{
-		App->render->Blit(graphics, position.x + width , position.y - r.h, &r, fliped);
+		App->render->Blit(graphics, position.x + width, position.y - r.h, &r, fliped);
 	}
 	else {
+
 		App->render->Blit(graphics, position.x, position.y - r.h, &r, fliped);
 	}
 	return UPDATE_CONTINUE;
