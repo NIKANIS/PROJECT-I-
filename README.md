@@ -31,9 +31,9 @@ The player can choose between three fighters to play versus 8 enemy fighters tha
 
 
 ## LINKS
-See our GitHub repository [HERE](https://github.com/NIKANIS/PROJECT-I-.git)
+See our GitHub repository [HERE](https://github.com/NIKANIS/PROJECT-I-.git) - https://github.com/NIKANIS/PROJECT-I-
 
-For more information see our wiki page [HERE](https://github.com/NIKANIS/PROJECT-I-/wiki)
+For more information see our wiki page [HERE](https://github.com/NIKANIS/PROJECT-I-/wiki) - https://github.com/NIKANIS/PROJECT-I-/wiki
 
 Download the last version of the game HERE(put the link of the last version)
 
@@ -115,4 +115,4 @@ Download the last version of the game HERE(put the link of the last version)
 	Final score sum and recopilation at the end of every round.
 	State machine for combos in progress.
 	
-https://github.com/NIKANIS/PROJECT-I-
+
