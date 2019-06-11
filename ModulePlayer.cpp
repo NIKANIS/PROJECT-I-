@@ -1891,10 +1891,20 @@ update_status ModulePlayer::Update()
 						{
 							if (at < 30)
 							{
-								if (!fliped)
-									position.x -= 2;
+								if (stuned != 4)
+								{
+									if (!fliped)
+										position.x -= 2;
+									else
+										position.x += 2;
+								}
 								else
-									position.x += 2;
+								{
+									if (!fliped)
+										position.x -= 1;
+									else
+										position.x += 1;
+								}
 							}
 							if (current_animation != &kickstun && stuned == 2)
 							{
@@ -1902,12 +1912,16 @@ update_status ModulePlayer::Update()
 								current_animation = &kickstun;
 								at = 0;
 							}
-							if (current_animation != &punchstun && stuned == 1)
+							if (stuned == 1 || stuned == 4)
 							{
-								punchstun.Reset();
-								current_animation = &punchstun;
-								at = 0;
+								if (current_animation != &punchstun)
+								{
+									punchstun.Reset();
+									current_animation = &punchstun;
+									at = 0;
+								}
 							}
+
 							if (at == 60)
 							{
 								stuned = 0;
@@ -2990,7 +3004,7 @@ void ModulePlayer::OnCollision(Collider* a, Collider* b, bool colliding)
 				{
 					if (character == 1)
 					{
-						App->enemy->Damage(20, 4);
+						App->enemy->Damage(15, 4);
 						score += 100;
 					}
 					if (character == 2)
@@ -3049,8 +3063,16 @@ void ModulePlayer::OnCollision(Collider* a, Collider* b, bool colliding)
 				}
 				if (sp2)
 				{
-					App->player->Damage(40, 2);
-					score += 200;
+					if (character == 1)
+					{
+						App->player->Damage(15, 4);
+						score += 100;
+					}
+					if (character == 2)
+					{
+						App->player->Damage(40, 2);
+						score += 200;
+					}
 				}
 				if (sp3)
 				{
