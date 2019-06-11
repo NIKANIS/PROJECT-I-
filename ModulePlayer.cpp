@@ -1050,14 +1050,14 @@ void ModulePlayer::Punch()
 			if (player_punch_col != nullptr)
 				player_punch_col->to_delete = true;
 		}
-		if (at == 13 && fliped)
+	/*	if (at == 13 && fliped)
 		{
 			position.x -= 34;
 		}
 		if (at == 19 && fliped)
 		{
 			position.x += 34;
-		}
+		}*/
 		if (at == 30)
 		{
 			punching = false;
@@ -1202,16 +1202,16 @@ void ModulePlayer::Kick()
 		
 			}
 		}
-		if (at == 25 && fliped)
+		/*if (at == 25 && fliped)
 		{
 			position.x -= 44;
-		}
+		}*/
 		if (at == 30)
 		{
-			if (fliped)
+			/*if (fliped)
 			{
 				position.x += 44;
-			}
+			}*/
 			if(player_kick_col != nullptr)
 				player_kick_col->to_delete = true;
 		}

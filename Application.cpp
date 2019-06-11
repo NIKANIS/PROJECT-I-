@@ -53,10 +53,10 @@ Application::Application()
 	modules[i++] = plscore = new ModulePlayerScore(0);
 	modules[i++] = enscore = new ModulePlayerScore(1);
 	modules[i++] = fight_timer = new ModuleFightTimer();
-	modules[i++] = fight_manager = new ModuleFightManager();
-	modules[i++] = collision = new ModuleCollision();
 	modules[i++] = round_pl = new ModuleRoundDisplay(0);
 	modules[i++] = round_en = new ModuleRoundDisplay(1);
+	modules[i++] = fight_manager = new ModuleFightManager();
+	modules[i++] = collision = new ModuleCollision();
 	modules[i++] = slowdown = new ModuleSlowdown();
 	
 }	
@@ -71,7 +71,6 @@ bool Application::Init()
 {
 	bool ret = true;
 
-	// Player will be enabled on the first update of a new scene
 	scene_neogeo->Enable();
 	scene_intro->Disable();
 	player->Disable();
