@@ -1425,8 +1425,10 @@ void ModulePlayer::SpecialAttack()
 					skillJoe.position.x = position.x;
 				}
 				App->particles->AddParticle(skillJoe, position.x, position.y - 112, COLLIDER_NONE);
-				player_skill_col = App->collision->AddCollider({ skillJoe.position.x, position.y - 52, 45, 60 }, COLLIDER_, source);
-
+				if(!fliped)
+					player_skill_col = App->collision->AddCollider({ skillJoe.position.x, position.y - 52, 45, 60 }, COLLIDER_, source);
+				else
+					player_skill_col = App->collision->AddCollider({ skillJoe.position.x - width, position.y - 52, 45, 60 }, COLLIDER_, source);
 
 			}
 			if (st >= 25 && st < 35)
@@ -1438,7 +1440,10 @@ void ModulePlayer::SpecialAttack()
 				skillJoe.Update();
 				skillJoe2.position.x = skillJoe.position.x;
 				skillJoe2.position.y = skillJoe.position.y;
-				player_skill_col->SetPos(skillJoe.position.x, skillJoe.position.y + 52);
+				if(!fliped)
+					player_skill_col->SetPos(skillJoe.position.x, skillJoe.position.y + 52);
+				else
+					player_skill_col->SetPos(skillJoe.position.x - width, skillJoe.position.y + 52);
 			}
 
 			if (st >= 35)
@@ -1447,7 +1452,11 @@ void ModulePlayer::SpecialAttack()
 				skillJoe2.Update();
 				player_skill_col->rect.h = 90;
 				player_skill_col->rect.w = 35;
-				player_skill_col->SetPos(skillJoe2.position.x + 10, skillJoe2.position.y + 20);
+				if(!fliped)
+					player_skill_col->SetPos(skillJoe2.position.x + 10, skillJoe2.position.y + 20);
+				else
+					player_skill_col->SetPos(skillJoe2.position.x + 10 - width, skillJoe2.position.y + 20);
+
 			}
 			if (st == 35)
 			{
@@ -2570,7 +2579,8 @@ update_status ModulePlayer::Update()
 						}
 					}
 
-					if (App->input->keyboard[SDL_SCANCODE_J] == KEY_STATE::KEY_DOWN && !punching && !kicking && !crowchaction && !specialattack_ && !lowkicking && !airkicking && !airpunching) {
+					if (App->input->keyboard[SDL_SCANCODE_J] == KEY_STATE::KEY_DOWN && !punching && !kicking && !crowchaction && !specialattack_ && !lowkicking && !airkicking && !airpunching
+						|| App->input->P2_controll[BUTTON_X] == KEY_STATE::KEY_DOWN & !punching && !kicking && !crowchaction && !specialattack_ && !lowkicking && !takingdown && !airkicking && !airpunching) {
 						if (current_animation != &punchstanding && !jumping && !takingdown)
 						{
 							punching = true;
@@ -2600,7 +2610,8 @@ update_status ModulePlayer::Update()
 						}
 					}
 
-					if (App->input->keyboard[SDL_SCANCODE_K] == KEY_STATE::KEY_DOWN && !punching && !crowchaction && !specialattack_ && !lowkicking && !airpunching && !airkicking && !airpunching)
+					if (App->input->keyboard[SDL_SCANCODE_K] == KEY_STATE::KEY_DOWN && !punching && !crowchaction && !specialattack_ && !lowkicking && !airpunching && !airkicking && !airpunching
+						|| App->input->P2_controll[BUTTON_A] == KEY_STATE::KEY_DOWN && !punching && !crowchaction && !specialattack_ && !lowkicking && !takingdown && !airkicking && !airpunching)
 					{
 						if (current_animation != &kickingstanding && !jumping && !crowchaction && !specialattack_ && !takingdown)
 						{
@@ -2651,7 +2662,8 @@ update_status ModulePlayer::Update()
 						st3 = 0;
 					}
 
-					if (App->input->keyboard[SDL_SCANCODE_N] == KEY_STATE::KEY_DOWN && !punching && !jumping && !crowchaction && !sp && !lowkicking && !takingdown && !specialattack_)
+					if (App->input->keyboard[SDL_SCANCODE_N] == KEY_STATE::KEY_DOWN && !punching && !jumping && !crowchaction && !sp && !lowkicking && !takingdown && !specialattack_
+						|| App->input->P2_controll[BUTTON_B] == KEY_STATE::KEY_DOWN && !punching && !jumping && !crowchaction && !sp && !lowkicking && !takingdown && !specialattack_)
 					{
 						if (current_animation != &kickingstanding && !jumping && !crowchaction && !specialattack_ && current_animation != &takedown_fail && current_animation != &takedown_done && body_collide == true)
 						{
@@ -2669,9 +2681,9 @@ update_status ModulePlayer::Update()
 						}
 					}
 
-					if (App->input->keyboard[SDL_SCANCODE_S] == KEY_STATE::KEY_IDLE
-						&& App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_IDLE
-						&& App->input->keyboard[SDL_SCANCODE_D] == KEY_STATE::KEY_IDLE
+					if (App->input->keyboard[SDL_SCANCODE_DOWN] == KEY_STATE::KEY_IDLE
+						&& App->input->keyboard[SDL_SCANCODE_LEFT] == KEY_STATE::KEY_IDLE
+						&& App->input->keyboard[SDL_SCANCODE_RIGHT] == KEY_STATE::KEY_IDLE
 						&& !jumping && !punching && !kicking && !specialattack_ && !lowkicking && !takingdown
 						&& App->input->P2_controll[BUTTON_DPAD_DOWN] == KEY_STATE::KEY_IDLE
 						&& App->input->P2_controll[BUTTON_DPAD_LEFT] == KEY_STATE::KEY_IDLE
