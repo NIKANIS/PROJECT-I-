@@ -2637,6 +2637,45 @@ update_status ModulePlayer::Update()
 					SpecialAttack2();
 					SpecialAttack3();
 
+					if (!sp3 && !jumping && !specialattack_)
+					{
+						if (App->combos->SpecialAttack3(player))
+						{
+							sp3 = true;
+							specialattack_ = true;
+							st3 = 0;
+						}
+					}
+					if (!sp && !jumping && !specialattack_)
+					{
+						if (App->combos->SpecialAttack(player))
+						{
+							sp = true;
+							specialattack_ = true;
+							st = 0;
+						}
+					}
+					if (!sp2 && !jumping && !specialattack_ && character == 2)
+					{
+						if (App->combos->SpT(player))
+						{
+							sp2 = true;
+							specialattack_ = true;
+							st2 = 0;
+						}
+					}
+					if (!sp2 && !jumping && !specialattack_ && character == 1)
+					{
+						if (App->combos->SpJ(player))
+						{
+							punching = false;
+							sp2 = true;
+							specialattack_ = true;
+							st2 = 0;
+						}
+					}
+
+
 					if (App->input->keyboard[SDL_SCANCODE_LEFT] == KEY_STATE::KEY_REPEAT && !lockX && !punching && !kicking && !specialattack_ && current_animation != &crowch && !lowkicking && !takingdown
 						|| App->input->JoystickGetPos(App->input->P2_controller, LEFT) == true && !lockX && !punching && !kicking && !specialattack_ && current_animation != &crowch && !lowkicking && !takingdown)
 					{
