@@ -135,6 +135,11 @@ update_status ModuleInput::PreUpdate()
 		return update_status::UPDATE_STOP;
 	}
 
+	if (App->input->game_pad[SDL_CONTROLLER_BUTTON_BACK][0] || App->input->game_pad[SDL_CONTROLLER_BUTTON_BACK][1]) {
+
+		return update_status::UPDATE_STOP;
+	}
+
 	return update_status::UPDATE_CONTINUE;
 }
 
