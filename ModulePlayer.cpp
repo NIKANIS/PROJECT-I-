@@ -1041,7 +1041,7 @@ void ModulePlayer::Punch()
 				if (fliped == false)
 				{
 					if (current_animation == &airpunchstraight)
-						player_punch_col = App->collision->AddCollider({ position.x + 40, position.y - 28, 40, 26 }, COLLIDER_, source);
+						player_punch_col = App->collision->AddCollider({ position.x + 43, position.y - 90, 35, 12 }, COLLIDER_, source);
 
 					if (current_animation == &airpunchdiagonal)
 						player_punch_col = App->collision->AddCollider({ position.x + 43, position.y - 60 + 50, 35, 16 }, COLLIDER_, source);
@@ -1057,7 +1057,7 @@ void ModulePlayer::Punch()
 				{
 					if (current_animation == &airpunchstraight)
 					{
-						player_punch_col = App->collision->AddCollider({ position.x - 35, position.y - 28, 40, 26 }, COLLIDER_, source);
+						player_punch_col = App->collision->AddCollider({ position.x - 24, position.y - 20, 35, 12 }, COLLIDER_, source);
 					}		
 					if (current_animation == &airpunchdiagonal)
 						player_punch_col = App->collision->AddCollider({ position.x + 43 - 70, position.y - 90 + 60, 35, 12 }, COLLIDER_, source);
