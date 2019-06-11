@@ -44,6 +44,7 @@ Application::Application()
 	modules[i++] = scene_congrats = new ModuleSceneCongrats();
 	modules[i++] = scene_gameover = new ModuleSceneGameOver();
 	modules[i++] = scene_map = new ModuleSceneMap();
+	modules[i++] = combos = new ModuleCombos();
 	modules[i++] = player = new ModulePlayer(0);
 	modules[i++] = enemy = new ModulePlayer(1);
 	modules[i++] = fade = new ModuleFadeToBlack();
@@ -59,7 +60,6 @@ Application::Application()
 	modules[i++] = fight_manager = new ModuleFightManager();
 	modules[i++] = collision = new ModuleCollision();
 	modules[i++] = slowdown = new ModuleSlowdown();
-	modules[i++] = combos = new ModuleCombos();
 	
 }	
 

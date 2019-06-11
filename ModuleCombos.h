@@ -20,13 +20,13 @@ public:
 	bool CleanUp();
 
 	bool SpecialAttack3(int player);
-	bool CheckPunchP2();
+	/*bool CheckPunchP2();
 
 	bool CheckSplashFountP1();
 	bool CheckSplashFountP2();
 
 	bool CheckPowerGraduationP1();
-	bool CheckPowerGraduationP2();
+	bool CheckPowerGraduationP2();*/
 
 public:
 	int actual_frameP1SF = 0;

@@ -17,7 +17,7 @@
 #include "ModuleSceneChoosePlayer.h"
 #include "ModuleSceneMap.h"
 #include "ModuleSlowdown.h"
-
+#include "ModuleCombos.h"
 #include "SDL/include/SDL_timer.h"
 
 ModulePlayer::ModulePlayer(int player)
@@ -2070,7 +2070,12 @@ update_status ModulePlayer::Update()
 					TakeDown();
 					SpecialAttack2();
 					SpecialAttack3();
-
+					if (App->combos->SpecialAttack3(player) && !sp3 && !jumping && specialattack_)
+					{
+						sp3 = true;
+						specialattack_ = true;
+						st3 = 0;
+					}
 
 					if (App->input->keyboard[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT && !lockX && !punching && !kicking && !specialattack_ && current_animation != &crowch && !lowkicking && !takingdown
 						|| App->input->JoystickGetPos(App->input->controller, LEFT) == true && !lockX && !punching && !kicking && !specialattack_ && current_animation != &crowch && !lowkicking && !takingdown)
@@ -2869,7 +2874,7 @@ update_status ModulePlayer::Update()
 					if (App->input->keyboard[SDL_SCANCODE_DOWN] == KEY_STATE::KEY_IDLE
 						&& App->input->keyboard[SDL_SCANCODE_LEFT] == KEY_STATE::KEY_IDLE
 						&& App->input->keyboard[SDL_SCANCODE_RIGHT] == KEY_STATE::KEY_IDLE
-						&& !jumping && !punching && !kicking && !specialattack_ && !lowkicking
+						&& !jumping && !punching && !kicking && !specialattack_ && !lowkicking && !takingdown
 						&& App->input->JoystickGetPos(App->input->P2_controller, DOWN) == false
 						&& App->input->JoystickGetPos(App->input->P2_controller, LEFT) == false
 						&& App->input->JoystickGetPos(App->input->P2_controller, RIGHT) == false)
@@ -2878,7 +2883,7 @@ update_status ModulePlayer::Update()
 					if (App->input->keyboard[SDL_SCANCODE_RIGHT] == KEY_STATE::KEY_REPEAT
 						&& App->input->keyboard[SDL_SCANCODE_LEFT] == KEY_STATE::KEY_REPEAT
 						&& App->input->keyboard[SDL_SCANCODE_DOWN] == KEY_STATE::KEY_IDLE
-						&& !jumping && !punching && !kicking && !specialattack_ && !lowkicking)
+						&& !jumping && !punching && !kicking && !specialattack_ && !lowkicking && !takingdown)
 						current_animation = &idle;
 
 					if (current_animation != &punchstanding && current_animation != &kickingstanding && current_animation != &crowchpunch && !lowkicking)
