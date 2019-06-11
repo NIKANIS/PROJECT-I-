@@ -887,7 +887,7 @@ int ModulePlayer::Pos_X()
 void ModulePlayer::Jump() {
 	if (jumping) {
 		lockX = true;
-		if ((position.x*(-SCREEN_SIZE)) < App->render->camera.x || (-SCREEN_SIZE * (position.x + 60)) > (App->render->camera.x - SCREEN_SIZE * SCREEN_WIDTH))
+		if ((position.x*(-SCREEN_SIZE)) < App->render->camera.x && (-SCREEN_SIZE * (position.x + 60)) > (App->render->camera.x - SCREEN_SIZE * SCREEN_WIDTH))
 			position.x += jumpspeed;
 		t++;
 		position.y = 220 - 7 * t + 0.12*(t*t);

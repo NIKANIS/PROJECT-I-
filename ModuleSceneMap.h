@@ -29,6 +29,7 @@ public:
 	iPoint position;
 
 	int map;
+	int fadetoblack = 0;
 	bool map_chosen = false;
 	SDL_Rect pao_pao;
 	SDL_Rect sound_beach;
